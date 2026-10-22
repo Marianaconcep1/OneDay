@@ -2,7 +2,7 @@
 
 Live app: https://marianaconcep1.github.io/OneDay/
 
-The site is served from `docs/` (GitHub Pages). Source is in `src/`; run `python3 build.py` and copy `dist/` into `docs/` to publish changes. Tests: `node test/accept.js`.
+The site is served from the repository root (GitHub Pages: `index.html`, `manifest.webmanifest`, `sw.js`, `mindset.json`, `icons/`). Source is in `src/`; run `python3 build.py` and copy `dist/*` to the root to publish changes. Tests: `node test/accept.js`.
 
 A personal, local-first accountability app: one clear next action, quick logging, a two-minute evening check-in, and a short weekly review.
 
