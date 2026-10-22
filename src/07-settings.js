@@ -147,23 +147,24 @@ function renderOnboarding() {
   const s = S.settings;
   if (!s.welcomeDone) return renderWelcome();
   if (ONB.step <= 1) return renderProfileSetup();
-  const n = ONB.step;
-  const mins = [['15', '15 min'], ['30', '30 min'], ['45', '45 min'], ['60', '1 h'], ['90', '1.5 h'], ['120', '2 h+'], ['', 'Not sure']];
+  const n = ONB.step; const C = OC();
+  const h15 = (x) => new Intl.NumberFormat(locale()).format(x) + ' h';
+  const mins = [['15', '15 min'], ['30', '30 min'], ['45', '45 min'], ['60', h15(1)], ['90', h15(1.5)], ['120', h15(2) + '+'], ['', C.notSure]];
   const wd = s.availability[1] == null ? '' : String(s.availability[1]); const we = s.availability[6] == null ? '' : String(s.availability[6]);
   const steps = {
-    2: `<div class="h2">How much time do you usually have?</div><p class="small muted">For all five areas together, training included. A rough guess is fine, and you can set each day later.</p>
-      <div class="stack-s"><div class="h3">Workdays (Mon–Fri)</div>${chips('obWd', mins, wd)}</div>
-      <div class="stack-s"><div class="h3">Weekends</div>${chips('obWe', mins, we)}</div>
-      <label class="f">Anything about your workday? <span class="hint">Optional</span><input class="inp" id="obNote" maxlength="200" value="${esc(s.workdayNote)}" placeholder="e.g. Work 8–5, free after 6"></label>`,
-    3: `<div class="h2">When should the evening check-in be?</div><p class="small muted">About two minutes. It’s a time to aim for, not a deadline.</p><label class="f">Check-in time<input class="inp" id="obCi" type="time" value="${esc(s.checkinTime)}"></label>`,
-    4: `<div class="h2">Choose a first weekly focus</div><p class="small muted">It decides which action is shown first. The other areas stay visible.</p>${chips('obFocus', [['money', 'Financial clarity (suggested)'], ['business', 'Business'], ['training', 'Training consistency'], ['art', 'Art'], ['mind', 'Mind']], s.focus)}`,
-    5: `<div class="h2">Confirm your five areas</div><p class="small muted">Small starting commitments, all editable. Nothing here is a fixed target, and nothing rises automatically.</p>
-      <div class="area-list">${[['money', 'Record spending, about 2 minutes a day. “No spending today” is one tap.'], ['business', 'A 15-minute block, Monday to Friday, with one specific next action.'], ['training', 'Nothing scheduled until you enter the plan you’re following.'], ['art', 'A 5-minute invitation each day. One minute counts.'], ['mind', 'A few short prompts inside the evening check-in.']].map(([a, d]) => `<div class="area"><span class="dot ${a}"></span><div class="area-body"><span class="area-name">${t('area.' + a)}</span><span class="small">${d}</span></div></div>`).join('')}</div>
-      <p class="small">The first seven days are a calibration period. ${t('calib')}</p>`
+    2: `<h1 class="h2">${esc(C.timeH)}</h1><p class="small muted">${esc(C.timeSub)}</p>
+      <div class="stack-s"><div class="h3">${esc(C.wd)}</div>${chips('obWd', mins, wd)}</div>
+      <div class="stack-s"><div class="h3">${esc(C.we)}</div>${chips('obWe', mins, we)}</div>
+      <label class="f">${esc(C.note)} <span class="hint">${esc(C.opt)}</span><input class="inp" id="obNote" maxlength="200" value="${esc(s.workdayNote)}" placeholder="${esc(C.notePh)}"></label>`,
+    3: `<h1 class="h2">${esc(C.ciH)}</h1><p class="small muted">${esc(C.ciSub)}</p><label class="f">${esc(C.ciLab)}<input class="inp" id="obCi" type="time" value="${esc(s.checkinTime)}"></label>`,
+    4: `<h1 class="h2">${esc(C.focusH)}</h1><p class="small muted">${esc(C.focusSub)}</p>${chips('obFocus', AREAS.map((a) => [a, C.focus[a]]), s.focus)}`,
+    5: `<h1 class="h2">${esc(C.areasH)}</h1><p class="small muted">${esc(C.areasSub)}</p>
+      <div class="area-list">${AREAS.map((a) => `<div class="area"><span class="dot ${a}"></span><div class="area-body"><span class="area-name">${t('area.' + a)}</span><span class="small">${esc(C.areas[a])}</span></div></div>`).join('')}</div>
+      <p class="small">${esc(C.calib)} ${t('calib')}</p>`
   };
-  return `<main class="wrap"><div class="onb"><div class="steps" aria-hidden="true">${[1, 2, 3, 4, 5].map((i) => `<span class="${i <= n ? 'on' : ''}"></span>`).join('')}</div>
+  return `<main class="wrap" lang="${lang()}">${onbTop()}<div class="onb"><div class="steps" aria-hidden="true">${[1, 2, 3, 4, 5].map((i) => `<span class="${i <= n ? 'on' : ''}"></span>`).join('')}</div>
     <div class="stack">${steps[n]}</div>
-    <div class="btn-row">${n > 1 ? `<button class="btn" data-act="obBack">${t('btn.back')}</button>` : ''}<button class="btn primary" data-act="obNext">${n === 5 ? 'Confirm and start' : t('btn.next')}</button></div>
+    <div class="btn-row">${n > 1 ? `<button class="btn" data-act="obBack">${t('btn.back')}</button>` : ''}<button class="btn primary" data-act="obNext">${n === 5 ? esc(C.start) : t('btn.next')}</button></div>
     </div></main>`;
 }
 function obCapture() {
@@ -181,7 +182,7 @@ A.obNext = () => {
   S.settings.areasConfirmed = true; S.settings.onboarded = true; S.settings.calibrationStart = td; S.settings.lastOpened = td;
   S.weeks[weekStart(td)] = { main: S.settings.focus, mainOutcome: '', maintain: AREAS.filter((a) => a !== S.settings.focus), confirmedAt: nowISO() };
   if (!S.business.block.versions.length) pushVersion(S.business.block, { days: [1, 2, 3, 4, 5], minutes: 15 }, td);
-  if (!S.tasks.some((x) => x.area === 'art')) { const a = { id: uid('task'), area: 'art', createdAt: nowISO(), versions: [] }; pushVersion(a, { title: '5 minutes of drawing', finish: 'Any marks made. Unfinished is fine.', minutes: 5, minTitle: '1 minute of drawing', minMinutes: 1, medium: 'drawing', days: [0, 1, 2, 3, 4, 5, 6], date: null, cue: '' }, td); S.tasks.push(a); }
+  if (!S.tasks.some((x) => x.area === 'art')) { const a = { id: uid('task'), area: 'art', createdAt: nowISO(), versions: [] }; const AT = OC().art; pushVersion(a, { title: AT[0], finish: AT[1], minutes: 5, minTitle: AT[2], minMinutes: 1, medium: 'drawing', days: [0, 1, 2, 3, 4, 5, 6], date: null, cue: '' }, td); S.tasks.push(a); }
   save(); TAB = 'today'; render(); window.scrollTo(0, 0);
 };
 
@@ -257,7 +258,8 @@ async function boot() {
   if (RETURN_GAP >= 3 && !S.returns.some((r) => r.date === td)) S.returns.push({ date: td, missed: RETURN_GAP - 1 });
   lastDay = td;
   ONB.step = S.settings.onbStep || 1;
-  if (!S.settings.welcomeDone && S.settings.letterLang) WEL = { stage: 'letter', lang: S.settings.letterLang };
+  if (!S.settings.welcomeDone && S.settings.envOpened) WEL = { stage: 'letter' };
+  applyLangAttr();
   try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) { }
   applyTheme(); render();
   document.addEventListener('click', onClick);

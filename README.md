@@ -8,7 +8,7 @@ A personal, local-first accountability app: one clear next action, quick logging
 
 ## First open
 
-A first-time visitor sees a sealed envelope with a letter from Mariana (English or Spanish), then a short profile setup: name (required, never prefilled), timezone (Puerto Rico by default, any IANA zone searchable) and app language (English, Español, Italiano, Français). Progress is saved if the page is refreshed, and returning users go straight to Today. The letter can be reread from Settings › About. Italian and French cover navigation, setup, settings titles and notices; some detailed screens are still in English.
+A first-time visitor chooses a language first (English, Español, Italiano or Français; nothing is preselected). The sealed envelope, Mariana's letter and every onboarding step then appear in that language, with a small language switch on each screen that keeps your answers. Next comes name (required, never prefilled) and timezone (Puerto Rico by default, any IANA zone searchable), then time available, check-in time, weekly focus and the five areas. Language never changes timezone or currency (always USD). Progress survives a refresh, and returning users go straight to Today. The letter can be reread from Settings › About. Screens after onboarding are only partly translated so far.
 
 ## Put it on your iPhone
 

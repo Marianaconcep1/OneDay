@@ -132,7 +132,8 @@ function parseCents(str) {
 function money(c) {
   if (c == null || Number.isNaN(c)) return t('unknown');
   const neg = c < 0; const a = Math.abs(c);
-  const s = '$' + Math.floor(a / 100).toLocaleString('en-US') + '.' + String(a % 100).padStart(2, '0');
+  // Currency stays USD whatever the language; only the number format follows the language
+  const s = new Intl.NumberFormat(locale(), { style: 'currency', currency: 'USD', currencyDisplay: 'narrowSymbol' }).format(a / 100);
   return neg ? '−' + s : s;
 }
 const centsToInput = (c) => (c == null ? '' : (c / 100).toFixed(2));
@@ -161,7 +162,10 @@ function dFmt(ds, opts) { return new Intl.DateTimeFormat(locale(), Object.assign
 const dLong = (ds) => dFmt(ds, { weekday: 'long', month: 'long', day: 'numeric' });
 const dShort = (ds) => dFmt(ds, { weekday: 'short', month: 'short', day: 'numeric' });
 const dMD = (ds) => dFmt(ds, { month: 'short', day: 'numeric' });
-const DOW_SHORT = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+/* Short weekday names in the app language (index 0 = Sunday) */
+const DOW_CACHE = {};
+function dowShort() { const l = locale(); if (!DOW_CACHE[l]) { const f = new Intl.DateTimeFormat(l, { weekday: 'short', timeZone: 'UTC' }); DOW_CACHE[l] = [0, 1, 2, 3, 4, 5, 6].map((i) => f.format(new Date(Date.UTC(2023, 0, 1 + i, 12)))); } return DOW_CACHE[l]; }
+const DOW_SHORT = new Proxy([], { get: (_, k) => { const a = dowShort(); const v = a[k]; return typeof v === 'function' ? v.bind(a) : v; } });
 const DOW_LETTER = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 const DOW_ORDER = [1, 2, 3, 4, 5, 6, 0];
 const isDate = (s) => typeof s === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(s);
@@ -234,7 +238,7 @@ function defaultState() {
   return {
     schema: SCHEMA, app: 'one-day', createdAt: nowISO(), updatedAt: nowISO(),
     settings: {
-      name: '', timezone: 'America/Puerto_Rico', language: 'en', welcomeDone: false, letterLang: null, languageChosen: false, onbStep: 1, workdayNote: '',
+      name: '', timezone: 'America/Puerto_Rico', language: 'en', welcomeDone: false, letterLang: null, languageChosen: false, envOpened: false, onbStep: 1, workdayNote: '',
       availability: { 0: null, 1: null, 2: null, 3: null, 4: null, 5: null, 6: null },
       checkinTime: '21:00', focus: 'money', areasConfirmed: false, onboarded: false,
       calibrationStart: null, skipThreshold: 3, reviewDay: 0, reminders: false,

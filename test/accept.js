@@ -27,16 +27,17 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
 
   await page.goto('http://localhost:8765/');
   await setNow('2026-10-22T14:00:00Z'); await page.reload(); await page.waitForTimeout(400);
+  await shot('00-language');
+  // W. Language first, then the founder letter, then name and timezone
+  ok('W0 Language screen comes first, four native options, none preselected', (await page.locator('.envelope').count()) === 0 && (await page.locator('[data-act="langPick"]').allInnerTexts()).join('|') === 'English|Español|Italiano|Français' && (await page.locator('[data-act="langPick"][aria-pressed="true"], [data-act="langPick"].on').count()) === 0 && (await st('S.settings.languageChosen')) === false);
+  await click('[data-act="langPick"][data-l="en"]');
+  ok('W0b Choice saved immediately', (await st('S.settings.language')) === 'en' && (await st('S.settings.languageChosen')) === true);
   await shot('01-envelope');
-  // W. Founder letter welcome and profile setup
-  ok('W1 Closed envelope is an accessible button', (await page.locator('button.envelope[aria-label*="A little letter for you"]').count()) === 1 && (await page.locator('text=Tap to open · Toca para abrir').count()) === 1);
-  await page.focus('button.envelope'); await page.keyboard.press('Enter'); await page.waitForTimeout(300);
-  ok('W2 Envelope opens the language choice (keyboard)', (await page.locator('text=How would you like to read your letter?').count()) === 1 && (await page.locator('text=¿En qué idioma quieres leer tu carta?').count()) === 1);
-  ok('W2b Focus moves to the language buttons', await st('document.activeElement && document.activeElement.dataset.act === "welLang"'));
-  await shot('01b-lang-choice');
-  await click('[data-act="welLang"][data-l="en"]');
+  ok('W1 Closed envelope is an accessible button in the chosen language', (await page.locator('button.envelope[aria-label*="A little letter for you"]').count()) === 1 && (await page.locator('text=Tap to open').count()) === 1 && (await page.locator('text=Una cartita').count()) === 0);
+  ok('W2 No separate letter-language question', (await page.locator('text=How would you like to read your letter?').count()) === 0);
+  await page.focus('button.envelope'); await page.keyboard.press('Enter'); await page.waitForTimeout(100);
   ok('W3 Opening animation plays (flap opens)', (await page.locator('.env-wrap.opening').count()) === 1);
-  await page.waitForTimeout(500); await shot('01c-opening');
+  await page.waitForTimeout(400); await shot('01c-opening');
   await page.waitForTimeout(1500);
   const enTxt = await page.locator('.letter-page').innerText();
   ok('W4 English letter complete', enTxt.includes('You know that life you keep saying') && enTxt.includes('I’ll be growing right alongside you.') && enTxt.includes('With love,') && enTxt.includes('CEO of One Day') && enTxt.includes('Mariana'));
@@ -44,14 +45,15 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
   ok('W4c Handwritten font only on the signature', await st('getComputedStyle(document.querySelector(".letter-sign")).fontFamily.includes("Dancing") && !getComputedStyle(document.querySelector(".letter-page p")).fontFamily.includes("Dancing")'));
   await shot('01d-letter-en'); await noHScroll('letter');
   await page.reload(); await page.waitForTimeout(500);
-  ok('W5 Refresh resumes at the letter', (await page.locator('.letter-page').count()) === 1);
-  await click('[data-act="letterLang"]');
+  ok('W5 Refresh resumes at the letter, language kept', (await page.locator('.letter-page[lang="en"]').count()) === 1);
+  await page.selectOption('#onbLang', 'es'); await page.waitForTimeout(200);
   const esTxt = await page.locator('.letter-page').innerText();
-  ok('W6 Spanish letter complete, switch while reading', esTxt.includes('¿Sabes esa vida que siempre dices') && esTxt.includes('Yo también estaré creciendo contigo.') && esTxt.includes('Con cariño,') && esTxt.includes('CEO de One Day') && esTxt.includes('¿Comenzamos?') && esTxt.includes('Vamos a comenzar'));
-  await click('[data-act="letterLang"]');
+  ok('W6 Language switch while reading: Spanish letter complete', esTxt.includes('¿Sabes esa vida que siempre dices') && esTxt.includes('Yo también estaré creciendo contigo.') && esTxt.includes('Con cariño,') && esTxt.includes('CEO de One Day') && esTxt.includes('¿Comenzamos?') && esTxt.includes('Vamos a comenzar') && (await st('S.settings.language')) === 'es');
+  await page.selectOption('#onbLang', 'en'); await page.waitForTimeout(200);
   ok('W7 Invitation in English', (await page.locator('text=Ready to begin?').count()) === 1);
   await page.locator('[data-act="welBegin"]').scrollIntoViewIfNeeded(); await click('[data-act="welBegin"]');
-  ok('W8 Invitation opens profile setup', (await page.locator('text=Let’s make this yours.').count()) === 1);
+  ok('W8 Invitation opens name and timezone setup', (await page.locator('text=Let’s make this yours.').count()) === 1);
+  ok('W8b Setup has no language field', (await page.locator('[data-group="suLang"]').count()) === 0 && (await page.locator('#onbLang').count()) === 1);
   ok('W9 Name starts empty (never prefilled)', (await page.inputValue('#suName')) === '' && (await page.getAttribute('#suName', 'placeholder')) === 'Your name' && (await page.locator('text=What should we call you?').count()) === 1);
   await shot('01e-setup');
   await page.fill('#suName', '   '); await click('[data-act="setupSave"]');
@@ -66,13 +68,9 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
   ok('W12c DST-aware offset (New York in October is UTC−4)', ny.includes('UTC−4'), ny);
   await page.fill('#suTzQ', ''); await page.waitForTimeout(150);
   await page.fill('#suName', 'Mariana');
-  await click('[data-group="suLang"][data-val="it"]');
-  ok('W13 Italian setup, name kept', (await page.locator('text=Rendiamo questo spazio tuo.').count()) === 1 && (await page.inputValue('#suName')) === 'Mariana');
-  await click('[data-group="suLang"][data-val="fr"]');
-  ok('W14 French setup', (await page.locator('text=Faisons de cet espace le tien.').count()) === 1 && (await page.locator('text=Continuer').count()) >= 1);
-  await click('[data-group="suLang"][data-val="es"]');
-  ok('W15 Spanish setup', (await page.locator('text=Hagamos este espacio tuyo.').count()) === 1);
-  await click('[data-group="suLang"][data-val="en"]');
+  await page.selectOption('#onbLang', 'it'); await page.waitForTimeout(200);
+  ok('W13 Switching to Italian keeps the name and step', (await page.locator('text=Rendiamo questo spazio tuo.').count()) === 1 && (await page.inputValue('#suName')) === 'Mariana' && (await page.locator('#suTzCur').innerText()) === 'Porto Rico — Ora standard dell’Atlantico');
+  await page.selectOption('#onbLang', 'en'); await page.waitForTimeout(200);
   await shot('01f-setup-filled');
   await click('[data-act="setupSave"]');
   ok('W16 Continue goes to the next onboarding step and saves', (await st('ONB.step')) === 2 && (await st('S.settings.name')) === 'Mariana' && (await st('S.settings.timezone')) === 'America/Puerto_Rico' && (await st('S.settings.language')) === 'en');
@@ -506,14 +504,49 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
   ok('W24 Timezone changeable later in Settings', (await st('S.settings.timezone')) === 'Europe/Madrid');
   await page.fill('#stTzQ', 'puerto'); await page.waitForTimeout(150); await click('#stTzList .tz-opt'); await page.selectOption('#stLang', 'en'); await click('[data-act="settingsSave"]');
   ok('W25 Back to Puerto Rico and English', (await st('S.settings.timezone')) === 'America/Puerto_Rico' && (await st('S.settings.language')) === 'en');
-  // Reduced motion: a fresh visitor sees the letter right away
-  const ctx2 = await browser.newContext({ ...devices['iPhone SE'], reducedMotion: 'reduce' });
-  const p2 = await ctx2.newPage(); await p2.goto('http://localhost:8765/'); await p2.waitForTimeout(500);
-  await p2.locator('button.envelope').click(); await p2.waitForTimeout(200); await p2.locator('[data-act="welLang"][data-l="es"]').click(); await p2.waitForTimeout(150);
-  ok('W26 Reduced motion shows the letter immediately', (await p2.locator('.env-wrap.opening').count()) === 0 && (await p2.locator('.letter-page').count()) === 1 && (await p2.locator('text=¿Comenzamos?').count()) === 1);
-  await p2.locator('[data-act="welBegin"]').click(); await p2.waitForTimeout(200);
-  ok('W27 Spanish letter sets Spanish as the starting app language', (await p2.locator('text=Hagamos este espacio tuyo.').count()) === 1 && (await p2.inputValue('#suName')) === '');
-  await ctx2.close();
+  // Full onboarding in each language: nothing reverts to English
+  const englishLeaks = async (p, lng) => p.evaluate((lng) => {
+    if (lng === 'en') return [];
+    const flat = (o) => (typeof o === 'string' ? [o] : Array.isArray(o) ? o.flatMap(flat) : o && typeof o === 'object' ? Object.values(o).flatMap(flat) : []);
+    const tr = new Set([...flat(ONBC[lng]), ...flat(SETUP[lng]), ...flat(ENV[lng]), ...flat(LETTER[lng]), ...flat(STRINGS[lng])]);
+    const en = [...flat(ONBC.en), ...flat(SETUP.en), ...flat(ENV.en), ...flat(LETTER.en), ...flat(STRINGS.en), 'Next', 'Back', 'Tap to open'].filter((x) => x.length > 3 && !tr.has(x));
+    const body = document.body.innerText;
+    const esc2 = (x) => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return [...new Set(en.filter((x) => new RegExp('(^|[^\\p{L}])' + esc2(x) + '($|[^\\p{L}])', 'u').test(body)))];
+  }, lng);
+  for (const [lng, rm] of [['es', true], ['it', false], ['fr', true], ['en', true]]) {
+    const c = await browser.newContext({ ...devices['iPhone SE'], reducedMotion: rm ? 'reduce' : 'no-preference', timezoneId: 'America/New_York' });
+    const p = await c.newPage(); const errs = []; p.on('pageerror', (e) => errs.push(e.message));
+    await p.goto('http://localhost:8765/'); await p.waitForTimeout(500);
+    const leaks = [];
+    const step = async (sel, wait) => { leaks.push(...await englishLeaks(p, lng)); await p.locator(sel).first().click(); await p.waitForTimeout(wait || 300); };
+    await p.locator(`[data-act="langPick"][data-l="${lng}"]`).click(); await p.waitForTimeout(200);
+    const envTxt = await p.locator('.env-hint').innerText();
+    await step('button.envelope', rm ? 200 : 2000);
+    if (rm) ok(`W26-${lng} Reduced motion shows the letter immediately`, (await p.locator('.letter-page').count()) === 1 && (await p.locator('.env-wrap.opening').count()) === 0);
+    const lt = await p.locator('.letter-page').innerText();
+    const L = await p.evaluate((l) => LETTER[l], lng);
+    ok(`W27-${lng} Letter complete in ${lng}`, L.paras.every((x) => lt.includes(x)) && lt.includes(L.closing) && lt.includes(L.role) && lt.includes(L.go) && lt.includes('Mariana') && lt.includes('One Day'), envTxt);
+    await p.screenshot({ path: path.join(OUT, `70-letter-${lng}.png`) });
+    await step('[data-act="welBegin"]');
+    await p.fill('#suName', 'Ana'); await p.fill('#suTzQ', lng === 'fr' ? 'paris' : lng === 'it' ? 'rome' : 'puerto'); await p.waitForTimeout(150);
+    await p.screenshot({ path: path.join(OUT, `71-setup-${lng}.png`) });
+    await p.locator('#suTzList .tz-opt').first().click(); await p.waitForTimeout(100);
+    await step('[data-act="setupSave"]');
+    await p.locator('[data-group="obWd"][data-val="60"]').click(); await p.waitForTimeout(150);
+    await p.screenshot({ path: path.join(OUT, `72-time-${lng}.png`) });
+    await step('[data-act="obNext"]'); await step('[data-act="obNext"]'); await step('[data-act="obNext"]');
+    await p.screenshot({ path: path.join(OUT, `73-areas-${lng}.png`) });
+    await step('[data-act="obNext"]');
+    const st2 = await p.evaluate(() => [S.settings.onboarded, S.settings.language, S.settings.timezone, S.tasks.find((x) => x.area === 'art').versions[0].title, document.documentElement.lang]);
+    const tz2 = { es: 'America/Puerto_Rico', it: 'Europe/Rome', fr: 'Europe/Paris', en: 'America/Puerto_Rico' }[lng];
+    ok(`W28-${lng} Onboarding completes in ${lng}; timezone chosen separately`, st2[0] && st2[1] === lng && st2[2] === tz2 && st2[4] === lng, st2.join(' | '));
+    ok(`W29-${lng} No English text on any onboarding screen`, leaks.length === 0, leaks.slice(0, 4).join(' / '));
+    await p.reload(); await p.waitForTimeout(500);
+    ok(`W30-${lng} Returning user is not asked for language again`, (await p.locator('[data-act="langPick"]').count()) === 0 && (await p.locator('.envelope').count()) === 0);
+    ok(`W31-${lng} No script errors`, errs.length === 0, errs.join(' | '));
+    await c.close();
+  }
 
   // Dark mode screenshot
   await page.emulateMedia({ colorScheme: 'dark' }); await click('[data-act="tab"][data-tab="today"]'); await shot('18-today-dark');

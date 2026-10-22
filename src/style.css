@@ -351,7 +351,7 @@ input[type="range"] { width: 100%; min-height: 36px; accent-color: var(--slate);
 .tab span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 /* ---------- Welcome: envelope, letter, profile setup ---------- */
-.welcome { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px; padding-block: 32px; }
+.welcome { position: relative; min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px; padding-block: 32px; }
 .env-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; }
 .envelope { --paper: #F6EEDC; --paper-2: #EFE4CC; --paper-3: #E7D9BC; --env-ink: #4A3B2E;
   position: relative; width: min(330px, 88vw); aspect-ratio: 3 / 2; border: 0; padding: 0; background: transparent; cursor: pointer; border-radius: 8px; perspective: 900px;
@@ -414,3 +414,18 @@ input[type="range"] { width: 100%; min-height: 36px; accent-color: var(--slate);
 .tz-opt:focus-visible { outline: 3px solid var(--slate); outline-offset: -3px; }
 .reduce-motion .letter-page.unfold, .reduce-motion .wel-lang { animation: none; }
 @media (prefers-reduced-motion: reduce) { .letter-page.unfold, .wel-lang, .opening .env-letter { animation: none; } .env-flap { transition: none; } }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.onb-top { display: flex; justify-content: flex-end; width: 100%; max-width: 560px; margin-inline: auto; }
+.welcome .onb-top { position: absolute; top: max(14px, env(safe-area-inset-top)); right: 16px; width: auto; }
+.lang-switch { position: relative; display: inline-flex; align-items: center; gap: 6px; padding: 0 4px 0 12px; min-height: 40px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink); font-size: 14px; }
+.lang-switch svg { width: 16px; height: 16px; flex: none; color: var(--muted); }
+.lang-switch select { appearance: none; -webkit-appearance: none; border: 0; background: transparent; color: inherit; font: inherit; padding: 8px 12px 8px 0; min-height: 40px; cursor: pointer; }
+.lang-switch:focus-within { outline: 3px solid var(--slate); outline-offset: 2px; }
+.letter-page .lang-switch { background: transparent; border-color: rgba(46, 38, 32, .25); color: #2E2620; }
+.letter-page .lang-switch svg { color: #6A5D52; }
+.lang-pick { width: 100%; max-width: 380px; text-align: center; align-items: stretch; }
+.brand-mark { font-family: var(--f-display); font-size: 40px; font-style: italic; color: var(--pink-ink); }
+.pick-q { display: flex; flex-direction: column; gap: 2px; margin: 0; font-family: var(--f-display); font-weight: 500; font-size: 22px; line-height: 1.3; }
+.pick-q span + span { font-size: 17px; color: var(--muted); font-style: italic; }
+.pick-list { display: grid; gap: 10px; margin-top: 8px; }
+.pick-btn { min-height: 56px; font-size: 19px; background: var(--surface); }
