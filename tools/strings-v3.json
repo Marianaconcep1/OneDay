@@ -1,0 +1,118 @@
+[
+ {
+  "s": "Money: confirm what’s available and what’s due before payday",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Business: who you help, and one outcome for the next four weeks",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Training: what you know so far, and the plan you’re following",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Recorded: no spending today.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "{0}: remaining {1}",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Modified: {0}. Skipped: {1}.{2}",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Outlined: planned distance ({0}). Filled: logged distance. Rest days are listed separately above, not as distance.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Overall: completed as planned {0} of {1} scheduled; modified {2}; skipped {3}; no record {4}.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Money: spending log complete {0}/{1} days (incomplete {2}, not recorded {3}).",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Business: {0} of {1} sessions as planned, {2} five-minute versions, {3} outputs noted. Stage: {4}. Four-week outcome: {5}. This week's outcome: {6}.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Training: {0} completed as planned, {1} modified, {2} skipped, {3}/{4} rest days followed, of {5} scheduled. Distance logged {6} {7} vs {8} planned.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Art: {0} of {1} scheduled days{2}.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Check-ins: {0} of {1} days. Mood (1-5, \"-\" = not recorded): {2}. Energy: {3}.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Suggested: financial clarity. Confirm it or pick another.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Modified: {0}. Skipped: {1}.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Sample: small local service businesses",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Sample: they have data in spreadsheets but no clear weekly view",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Sample: three conversations with potential clients",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Sample: a one-paragraph offer I could send",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Rest: emotional strain",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Rest: fatigue, illness or pain",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Measured: {0} → {1}.",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "{0}: {1} completed, {2} smaller, {3} skipped, {4} no record{5}",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "{0}: {1} of {2} followed{3}",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "Business: about {0} logged against {1} planned.",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "Training: {0} of {1} sessions done or modified.",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "Running: {0} of {1} {2} planned{3}.",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "Art: {0} of {1} invitations taken.",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "Measured: {0} → {1} (target {2})",
+  "f": "15-report.js"
+ }
+]

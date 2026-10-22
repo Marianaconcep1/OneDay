@@ -1,0 +1,150 @@
+0	Carrera suave	Corsa leggera	Course facile
+1	Carrera larga	Corsa lunga	Sortie longue
+2	Otra carrera planificada	Altra corsa in programma	Autre course prévue
+3	Fuerza	Forza	Renforcement
+4	Entrenamiento cruzado	Allenamento incrociato	Entraînement croisé
+5	Movilidad	Mobilità	Mobilité
+6	Descanso	Riposo	Repos
+7	{0} min	{0} min	{0} min
+8	Todas las compras anotadas, o “Hoy no gasté”.	Ogni acquisto inserito, oppure “Oggi nessuna spesa”.	Chaque achat noté, ou « Aucune dépense aujourd’hui ».
+9	Cinco minutos en la misma tarea	Cinque minuti sullo stesso compito	Cinq minutes sur la même tâche
+10	Elige la próxima acción del negocio	Scegli la prossima azione per l’attività	Choisis la prochaine action pour l’entreprise
+11	Actividad no planificada	Attività non pianificata	Activité non prévue
+12	Sin gastos (confirmado)	Nessuna spesa (confermato)	Aucune dépense (confirmé)
+13	Registrado	Registrato	Noté
+14	Registro incompleto	Registrazione incompleta	Saisie incomplète
+15	Gastos anotados, sin confirmar que estén completos	Spese inserite, completezza non confermata	Dépenses notées, sans confirmation qu’elles soient complètes
+16	Descansé por síntomas	Riposo per sintomi	Repos pour symptômes
+17	Aún no has añadido una cuenta de ahorros.	Non hai ancora aggiunto un conto di risparmio.	Aucun compte d’épargne ajouté pour l’instant.
+18	No hay saldo confirmado para {0}.	Nessun saldo confermato per {0}.	Aucun solde confirmé pour {0}.
+19	Añade la cuenta desde la que gastas y confirma su saldo.	Aggiungi il conto da cui spendi e conferma il saldo.	Ajoute le compte avec lequel tu dépenses et confirme son solde.
+20	Confirma el saldo actual de {0}.	Conferma il saldo attuale di {0}.	Confirme le solde actuel de {0}.
+21	{0} (confirmado {1}{2})	{0} (confermato {1}{2})	{0} (confirmé {1}{2})
+22	Ingresa la fecha de tu próximo ingreso.	Inserisci la data della prossima entrata.	Saisis la date de ton prochain revenu.
+23	El monto de {0} (vence {1}) es desconocido.	L’importo di {0} (scadenza {1}) è sconosciuto.	Le montant de {0} (échéance {1}) est inconnu.
+24	El estimado de {0} es desconocido.	La stima di {0} è sconosciuta.	L’estimation de {0} est inconnue.
+25	{0} (estimado de lo esencial)	{0} (stima delle spese essenziali)	{0} (estimation des dépenses essentielles)
+26	Sin categoría	Senza categoria	Sans catégorie
+27	Modo demo: solo datos de ejemplo. Tus datos reales no se tocan.	Modalità demo: solo dati di esempio. I tuoi dati reali restano intatti.	Mode démo : données d’exemple uniquement. Tes vraies données ne sont pas touchées.
+28	Salir del demo	Esci dalla demo	Quitter la démo
+29	Principal	Principale	Principal
+30	Confirma, por favor	Conferma, per favore	Confirme, s’il te plaît
+31	Descartar temporizador	Scarta il timer	Annuler le minuteur
+32	Detener y registrar	Ferma e registra	Arrêter et noter
+33	Temporizador descartado. La tarea sigue marcada como empezada.	Timer scartato. Il compito resta segnato come iniziato.	Minuteur annulé. La tâche reste marquée comme commencée.
+34	Se me olvidó	Ho dimenticato	J’ai oublié
+35	Tarea poco clara	Compito poco chiaro	Tâche pas claire
+36	Demasiado grande	Troppo grande	Trop grande
+37	Conflicto de horario	Conflitto di orario	Conflit d’horaire
+38	Poca motivación	Poca motivazione	Peu de motivation
+39	Carga emocional	Peso emotivo	Charge émotionnelle
+40	Cansancio/enfermedad/dolor	Stanchezza/malattia/dolore	Fatigue/maladie/douleur
+41	Cambiaron las prioridades	Le priorità sono cambiate	Les priorités ont changé
+42	Otro	Altro	Autre
+43	Prefiero no decirlo	Preferisco non dirlo	Je préfère ne pas le dire
+44	Conocer a clientes	Conoscere i clienti	Comprendre les clients
+45	Oferta	Offerta	Offre
+46	Contacto/ventas	Contatti/vendite	Prospection/ventes
+47	Entrega/portafolio	Consegna/portfolio	Livraison/portfolio
+48	Contenido	Contenuti	Contenu
+49	Administración	Amministrazione	Administration
+50	Planificación	Pianificazione	Planification
+51	Escribir tres oraciones que describan un problema de un cliente	Scrivere tre frasi che descrivono un problema di un cliente	Écrire trois phrases qui décrivent un problème d’un client
+52	Tres oraciones en mis notas	Tre frasi nelle mie note	Trois phrases dans mes notes
+53	Redactar los tres puntos que explican tu servicio de dashboards	Scrivere i tre punti che spiegano il tuo servizio di dashboard	Rédiger les trois points qui expliquent ton service de tableaux de bord
+54	Tres puntos guardados en un borrador	Tre punti salvati in una bozza	Trois points enregistrés dans un brouillon
+55	Identificar un posible cliente adecuado	Individuare un potenziale cliente adatto	Repérer un client potentiel adapté
+56	El nombre de un negocio y por qué encaja	Il nome di un’attività e perché è adatta	Le nom d’une entreprise et pourquoi elle convient
+57	Redactar un mensaje de contacto	Scrivere un messaggio di contatto	Rédiger un message de prospection
+58	Un mensaje listo para enviar	Un messaggio pronto da inviare	Un message prêt à envoyer
+59	Crear una gráfica para un ejemplo de portafolio con datos públicos	Creare un grafico per un esempio di portfolio con dati pubblici	Créer un graphique pour un exemple de portfolio avec des données publiques
+60	Una gráfica exportada o en captura de pantalla	Un grafico esportato o in uno screenshot	Un graphique exporté ou en capture d’écran
+61	Redactar una publicación educativa ligada a un problema de un cliente	Scrivere un post educativo legato a un problema di un cliente	Rédiger une publication pédagogique liée à un problème client
+62	Un borrador de 100 a 150 palabras	Una bozza di 100–150 parole	Un brouillon de 100 à 150 mots
+63	Mejorar la sección de precios de la propuesta	Migliorare la sezione prezzi della proposta	Améliorer la partie tarifs de la proposition
+64	La sección reescrita y guardada	La sezione riscritta e salvata	La partie réécrite et enregistrée
+65	Elige una acción	Scegli un’azione	Choisis une action
+66	Descanso cumplido	Giorno di riposo rispettato	Jour de repos respecté
+67	Hacer más fácil empezar	Rendere più facile iniziare	Rendre le démarrage plus facile
+68	Lo hice	Fatto	Je l’ai fait
+69	Versión de 1 minuto	Versione da 1 minuto	Version d’une minute
+70	Versión más pequeña	Versione più piccola	Version plus petite
+71	No hace falta llenar nada de los días intermedios. Tu historial y tu progreso siguen aquí.	Non devi compilare nulla dei giorni in mezzo. La tua cronologia e i tuoi progressi sono ancora qui.	Rien à remplir pour les jours entre-temps. Ton historique et tes progrès sont toujours là.
+72	Seguir con el plan actual	Continua con il piano attuale	Continuer le plan actuel
+73	Hacer hoy más pequeño	Rendi oggi più leggero	Alléger la journée
+74	Revisar lo que ya no encaja	Rivedi ciò che non va più bene	Revoir ce qui ne convient plus
+75	Calibración · día {0} de 7	Calibrazione · giorno {0} di 7	Calibrage · jour {0} sur 7
+76	{0} Registra lo que realmente pasa. Las metas no cambian esta semana.	{0} Registra ciò che succede davvero. Gli obiettivi restano invariati questa settimana.	{0} Note ce qui se passe vraiment. Les objectifs ne changent pas cette semaine.
+77	La revisión semanal está lista	La revisione settimanale è pronta	Le bilan de la semaine est prêt
+78	De 10 a 15 minutos para ajustar la próxima semana. Un cambio como máximo.	10–15 minuti per regolare la prossima settimana. Al massimo una modifica.	10 à 15 minutes pour ajuster la semaine prochaine. Un changement au maximum.
+79	Empezar la revisión	Inizia la revisione	Commencer le bilan
+80	Revisión de la noche	Check-in serale	Bilan du soir
+81	Unos dos minutos. Todo lo que registraste hoy ya está incluido.	Circa due minuti. Tutto ciò che hai registrato oggi è già inserito.	Environ deux minutes. Tout ce que tu as noté aujourd’hui est déjà rempli.
+82	Empezar la revisión	Inizia il check-in	Commencer le bilan
+83	Unos 2 min	Circa 2 min	Environ 2 min
+84	· Empezado	· Iniziato	· Commencé
+85	¿Cómo me siento?	Come mi sento?	Comment je me sens ?
+86	Me atasqué	Non riesco a partire	Je bloque
+87	Revisión guardada. Mañana aparece abajo.	Check-in salvato. Qui sotto un’anteprima di domani.	Bilan enregistré. Demain est présenté ci-dessous.
+88	Cuando quieras, cierra el día con la revisión.	Quando vuoi, chiudi la giornata con il check-in.	Quand tu veux, termine la journée avec le bilan.
+89	(algunos horarios sin definir)	(alcuni orari non impostati)	(certains horaires non définis)
+90	Definir tiempo disponible	Imposta il tempo disponibile	Définir le temps disponible
+91	{0} disponibles	{0} disponibili	{0} disponibles
+92	Tu plan necesita un ajuste.	Il tuo piano ha bisogno di una modifica.	Ton plan a besoin d’un ajustement.
+93	El tiempo planificado supera en {0} lo que tienes hoy. Nada cambia hasta que elijas.	Il tempo pianificato supera di {0} quello che hai oggi. Non cambia nulla finché non scegli.	Le temps prévu dépasse de {0} ce que tu as aujourd’hui. Rien ne change tant que tu n’as pas choisi.
+94	Ver ajustes	Vedi le modifiche	Voir les ajustements
+95	Áreas	Aree	Domaines
+96	Revisión guardada	Check-in salvato	Bilan enregistré
+97	En pausa. No hay nada programado ni pendiente.	In pausa. Niente in programma e niente in sospeso.	En pause. Rien n’est prévu ni dû.
+98	Guardado. Si editas, se reemplaza; nunca se duplica.	Salvato. Le modifiche lo sostituiscono, non lo duplicano mai.	Enregistré. Les modifications le remplacent, sans jamais le dupliquer.
+99	Despejar el camino (2–5 min)	Libera la strada (2–5 min)	Dégager le terrain (2–5 min)
+100	Despejado hoy: {0}.	Liberato oggi: {0}.	Dégagé aujourd’hui : {0}.
+101	Aún no hay plan de entrenamiento.	Nessun piano di allenamento ancora.	Aucun programme d’entraînement pour l’instant.
+102	Añadir tu plan	Aggiungi il tuo piano	Ajouter ton programme
+103	Registrar una actividad	Registra un’attività	Noter une activité
+104	{0}. Un día no programado no es un día perdido.	{0}. Un giorno non in programma non è un giorno mancato.	{0}. Un jour non prévu n’est pas un jour manqué.
+105	Registrar una actividad de todos modos	Registra comunque un’attività	Noter quand même une activité
+106	Hice arte de todos modos	Ho fatto arte comunque	J’ai fait de l’art quand même
+107	Solo está programado el registro de gastos.	È in programma solo la registrazione delle spese.	Seul le suivi des dépenses est prévu.
+108	de {0} disponibles	su {0} disponibili	sur {0} disponibles
+109	{0}{1} planificado{2}.	{0}{1} pianificati{2}.	{0}{1} prévu{2}.
+110	Configura un área a la vez	Imposta un’area alla volta	Configure un domaine à la fois
+111	Los valores desconocidos pueden quedarse así.	I valori sconosciuti possono restare tali.	Les valeurs inconnues peuvent le rester.
+112	Empezado. El temporizador es opcional.	Iniziato. Il timer è facoltativo.	Commencé. Le minuteur est facultatif.
+113	Registrado.	Registrato.	Noté.
+114	Versión más pequeña para hoy. La original queda registrada.	Versione più piccola per oggi. L’originale resta registrato.	Version plus petite pour aujourd’hui. L’originale reste enregistrée.
+115	Registrado como arte no programado.	Registrato come arte non in programma.	Noté comme art non prévu.
+116	Descanso cumplido.	Giorno di riposo rispettato.	Jour de repos respecté.
+117	El entrenamiento no cambia.	L’allenamento resta invariato.	L’entraînement ne change pas.
+118	Hoy no hay nada abierto que reducir.	Oggi non c’è nulla di aperto da ridurre.	Rien d’ouvert à alléger aujourd’hui.
+119	Usar la versión más pequeña de “{0}”	Usa la versione più piccola di “{0}”	Utiliser la version plus petite de « {0} »
+120	{0} tiene espacio	{0} ha spazio	{0} a de la place
+121	Día de carrera larga: usa la versión de negocio de 5 minutos	Giorno di corsa lunga: usa la versione da 5 minuti per l’attività	Jour de sortie longue : utilise la version entreprise de 5 minutes
+122	Mantiene el negocio visible sin competir con la carrera	Mantiene l’attività visibile senza competere con la corsa	Garde l’entreprise visible sans concurrencer la course
+123	Revisar la sesión de entrenamiento de hoy	Rivedi la sessione di allenamento di oggi	Revoir la séance d’entraînement du jour
+124	Abre tu plan. La app no cambia el entrenamiento por ti.	Apre il tuo piano. L’app non modifica l’allenamento al posto tuo.	Ouvre ton programme. L’app ne modifie pas l’entraînement à ta place.
+125	{0} planificado · {1} disponible	{0} pianificati · {1} disponibili	{0} prévu · {1} disponible
+126	Ningún ajuste automático encaja. Puedes bajar el tiempo de una tarea en Plan o actualizar tu tiempo disponible de hoy.	Nessuna modifica automatica funziona. Puoi ridurre il tempo di un compito in Piano o aggiornare il tempo disponibile di oggi.	Aucun ajustement automatique ne convient. Tu peux réduire la durée d’une tâche dans Plan ou mettre à jour ton temps disponible du jour.
+127	Acepta o rechaza cada uno. Nada cambia si no lo aceptas.	Accetta o rifiuta ciascuna. Non cambia nulla se non accetti.	Accepte ou refuse chacun. Rien ne change sans ton accord.
+128	Despejar suficiente espacio en el escritorio para trabajar	Liberare abbastanza spazio sulla scrivania per lavorare	Libérer assez de place sur le bureau pour travailler
+129	Poner la ropa de correr donde la vea	Mettere i vestiti da corsa dove li vedo	Mettre mes affaires de course bien en vue
+130	Poner los materiales de arte a la mano	Tenere i materiali d’arte a portata di mano	Mettre le matériel d’art à portée de main
+131	Despejar mi cama	Liberare il letto	Dégager mon lit
+132	Despejar el camino	Libera la strada	Dégager le terrain
+133	De dos a cinco minutos de preparación. Opcional.	Da due a cinque minuti di preparazione. Facoltativo.	Deux à cinq minutes de préparation. Facultatif.
+134	p. ej., cargar los audífonos	es. caricare le cuffie	ex. recharger les écouteurs
+135	Otra cosa	Altro	Autre chose
+136	Listo	Fatto	Fait
+137	Elige un paso o cierra esto.	Scegli un passo oppure chiudi.	Choisis une étape, ou ferme ceci.
+138	El camino está más despejado.	La strada è più libera.	Le terrain est plus dégagé.
+139	Cinco minutos en esto	Cinque minuti su questo	Cinq minutes dessus
+140	Hecho según el plan	Fatto come previsto	Fait comme prévu
+141	Omitido	Saltato	Sauté
+142	p. ej., borrador en Notas	es. bozza in Note	ex. brouillon dans Notes
+143	Nota del resultado o enlace	Nota del risultato o link	Note sur le résultat ou lien
+144	Opcional	Facoltativo	Facultatif
+145	Borrar este registro	Cancella questa registrazione	Effacer cette saisie
+146	Minutos dedicados	Minuti dedicati	Minutes passées
+147	Nota	Nota	Note
+148	¿Qué se interpuso?	Cosa si è messo di mezzo?	Qu’est-ce qui a gêné ?
+149	Opcional, un toque	Facoltativo, un tocco	Facultatif, en un geste

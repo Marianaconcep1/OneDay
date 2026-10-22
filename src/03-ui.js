@@ -114,7 +114,7 @@ A.timerStop = () => {
 /* ---------- Status helpers ---------- */
 function pill(it) { return `<span class="pill ${pillClass(it.status)}">${esc(itemStatusLabel(it))}</span>`; }
 const REASONS = [['forgot', 'Forgot'], ['unclear', 'Task unclear'], ['large', 'Too large'], ['time', 'Time conflict'], ['lowmot', 'Low motivation'], ['emotional', 'Emotional strain'], ['physical', 'Fatigue/illness/pain'], ['priorities', 'Priorities changed'], ['other', 'Other'], ['prefer', 'Prefer not to say']];
-const reasonLabel = (r) => (REASONS.find((x) => x[0] === r) || [, ''])[1];
+const reasonLabel = (r) => trText((REASONS.find((x) => x[0] === r) || [, ''])[1]);
 const BIZ_CATS = ['Customer learning', 'Offer', 'Outreach/sales', 'Delivery/portfolio', 'Content', 'Administration', 'Planning'];
 const BIZ_EXAMPLES = [
   ['Write three sentences describing one customer problem', 'Three sentences in my notes', 15, 'Customer learning'],

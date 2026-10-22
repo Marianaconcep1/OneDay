@@ -72,17 +72,18 @@ function itemRelevance(it) { const mine = msState().interests; return (it.topics
 function msCard(it, isNew) {
   const m = msState(); const rel = itemRelevance(it); const saved = !!m.saved[it.id];
   return `<article class="card stack-s ms-card"><div class="row-between"><span class="eyebrow">${esc(MINDSET_TYPES[it.type])} · ${esc(it.creator)}</span>${isNew ? '<span class="pill started">New</span>' : ''}</div>
-    <div class="h3">${esc(it.title)}</div>
+    <div class="h3" lang="${esc(it.lang || 'en')}">${esc(it.title)}</div>
     <div class="tiny muted">Published ${esc(dFmt(it.published, { month: 'short', day: 'numeric', year: 'numeric' }))}${it.duration ? ' · ' + esc(it.duration) : ''}</div>
-    <p class="small">${esc(it.summary)}</p>
-    ${rel.length ? `<p class="small"><b>Why it may help:</b> ${esc(it.why || 'Relates to ' + rel.map(topicLabel).join(', ').toLowerCase() + '.')}</p>` : '<p class="tiny muted">Outside the interests you chose.</p>'}
-    ${(it.claims || []).map((c) => `<p class="small claim claim-${c.kind}"><span class="pill">${esc(CLAIM_KIND[c.kind])}</span> ${esc(c.text)}${c.source ? ` <a href="${esc(c.source)}" target="_blank" rel="noopener noreferrer">Source</a>` : ''}</p>`).join('')}
-    ${it.disclosure ? `<p class="tiny muted">Disclosure: ${esc(it.disclosure)}</p>` : ''}
-    <div class="row" style="flex-wrap:wrap;gap:6px"><span class="pill done">Free</span>${it.access === 'free-signup' ? `<span class="pill modified">${esc(it.signup)}</span>` : ''}</div>
+    <p class="small" lang="${esc(it.lang || 'en')}">${esc(it.summary)}</p>
+    ${rel.length ? `<p class="small"><b>Why it may help:</b> ${it.why ? `<span lang="${esc(it.lang || 'en')}">${esc(it.why)}</span>` : esc('Relates to ' + rel.map((x) => tr(topicLabel(x))).join(', ').toLowerCase() + '.')}</p>` : '<p class="tiny muted">Outside the interests you chose.</p>'}
+    ${(it.claims || []).map((c) => `<p class="small claim claim-${c.kind}"><span class="pill">${esc(CLAIM_KIND[c.kind])}</span> <span lang="${esc(it.lang || 'en')}">${esc(c.text)}</span>${c.source ? ` <a href="${esc(c.source)}" target="_blank" rel="noopener noreferrer">Source</a>` : ''}</p>`).join('')}
+    ${it.disclosure ? `<p class="tiny muted">Disclosure: <span lang="${esc(it.lang || 'en')}">${esc(it.disclosure)}</span></p>` : ''}
+    <div class="row" style="flex-wrap:wrap;gap:6px"><span class="pill done">Free</span>${it.access === 'free-signup' ? `<span class="pill modified" lang="${esc(it.lang || 'en')}">${esc(it.signup)}</span>` : ''}${lang() !== (it.lang || 'en') ? `<span class="pill">${esc(tr('Original language: {0}').replace('{0}', langName(it.lang || 'en')))}</span>` : ''}</div>
     <div class="btn-row"><a class="btn primary sm" href="${esc(it.url)}" target="_blank" rel="noopener noreferrer">Open source ↗</a>
       <button class="btn sm" data-act="msSave" data-id="${esc(it.id)}" aria-pressed="${saved}">${saved ? 'Saved' : 'Save'}</button>
       <button class="btn ghost sm" data-act="msHide" data-id="${esc(it.id)}">Hide</button></div></article>`;
 }
+function langName(code) { try { const n = new Intl.DisplayNames([locale()], { type: 'language' }).of(code); return n.charAt(0).toLocaleUpperCase(locale()) + n.slice(1); } catch (e) { return code; } }
 function renderMindset() {
   const m = msState(); const e = latestEdition();
   let h = `<header class="topbar"><div><div class="eyebrow">Updated weekly</div><h1 class="view-h">Mindset</h1></div></header><div class="stack-l">`;
@@ -124,7 +125,7 @@ function renderTryOne(e) {
   const m = msState(); const tr = e.tryOne; const res = e.items.find((x) => x.id === tr.resourceId);
   const done = m.tryOne[e.id] || {};
   return `<section class="card tint stack-s" id="tryOne"><div class="eyebrow">Try one thing this week · optional</div>
-    <div class="h3">${esc(tr.title || tr.text)}</div>${tr.title ? `<p class="small">${esc(tr.text)}</p>` : ''}
+    <div class="h3" lang="en">${esc(tr.title || tr.text)}</div>${tr.title ? `<p class="small" lang="en">${esc(tr.text)}</p>` : ''}
     <p class="tiny muted">${tr.by === 'creator' ? 'Instructions from the creator' : 'An exercise written for this app, not by the creator'}${res ? `, connected to “${esc(res.title)}” (${esc(res.creator)})` : ''}. ${esc(tr.connection || '')} It may or may not help; try it and see.</p>
     <label class="f">What is one thing you want to apply before consuming more?<input class="inp" id="tryApply" maxlength="160" value="${esc(done.apply || '')}"></label>
     ${done.status ? `<p class="small"><b>${esc({ later: 'Saved for later', planned: 'Added to your plan', replaced: 'Replaced an optional task' }[done.status])}</b>${done.date ? ' · ' + esc(dShort(done.date)) : ''}</p>` : ''}

@@ -65,7 +65,7 @@ const STRINGS = {
     'ms.orig': 'Los recursos se muestran en su idioma original; no han sido traducidos.', 'ci.reminder': 'Son las {time}. Hora de la revisión.', 'ms.notice': 'Hay una nueva edición de Mindset.'
   },
   it: {
-    'tab.today': 'Oggi', 'tab.plan': 'Piano', 'tab.progress': 'Progressi', 'tab.mindset': 'Mindset', 'tab.settings': 'Impostazioni',
+    'tab.today': 'Oggi', 'tab.plan': 'Piano', 'tab.progress': 'Progressi', 'tab.mindset': 'Mindset', 'tab.settings': 'Opzioni',
     'area.money': 'Denaro', 'area.business': 'Attività', 'area.training': 'Allenamento', 'area.art': 'Arte', 'area.mind': 'Mente',
     'btn.start': 'Inizia', 'btn.log': 'Registra', 'btn.smaller': 'Rendi oggi più leggero', 'btn.save': 'Salva', 'btn.cancel': 'Annulla',
     'btn.next': 'Avanti', 'btn.back': 'Indietro', 'btn.done': 'Fatto', 'btn.edit': 'Modifica', 'btn.delete': 'Elimina', 'btn.close': 'Chiudi',
@@ -118,7 +118,7 @@ const uid = (p) => p + '_' + Date.now().toString(36) + Math.random().toString(36
 const nowMs = () => (typeof window.__oneDayNow === 'number' ? window.__oneDayNow : Date.now());
 const nowISO = () => new Date(nowMs()).toISOString();
 const clone = (o) => JSON.parse(JSON.stringify(o));
-const plural = (n, one, many) => n + ' ' + (n === 1 ? one : (many || one + 's'));
+const plural = (n, one, many) => new Intl.NumberFormat(locale()).format(n) + ' ' + (typeof trText === 'function' ? trText(n === 1 ? one : (many || one + 's')) : (n === 1 ? one : (many || one + 's')));
 
 /* Money is stored as integer cents. */
 function parseCents(str) {

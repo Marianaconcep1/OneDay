@@ -186,7 +186,7 @@ function renderMoneyPlan() {
   return `<p class="small muted">${t('not.advice')}</p>
     <div class="card tint stack-s"><div class="h3">Savings</div>
       <div class="kv"><span>Confirmed savings</span><span>${sv.value == null ? 'Not confirmed yet' : money(sv.value)}</span><span>First buffer goal</span><span>${m.buffer.amount == null ? t('notset') : money(m.buffer.amount)}</span></div>
-      ${sv.parts.map((x) => `<p class="tiny muted">${esc(x.account.name)}: ${x.pos.balance ? `confirmed ${money(x.pos.balance.amount)} on ${esc(dMD(x.pos.balance.date))}${x.pos.afterCount ? `, ${x.pos.after >= 0 ? '+' : ''}${money(x.pos.after)} from ${plural(x.pos.afterCount, 'transfer')} recorded after that` : ''}` : 'no confirmed balance yet'}.</p>`).join('')}
+      ${sv.parts.map((x) => `<p class="tiny muted">${esc(x.account.name)}: ${x.pos.balance ? `confirmed ${money(x.pos.balance.amount)} on ${esc(dMD(x.pos.balance.date))}${x.pos.afterCount ? `<span>, ${x.pos.after >= 0 ? '+' : ''}${money(x.pos.after)} from ${plural(x.pos.afterCount, 'transfer')} recorded after that</span>` : ''}` : 'no confirmed balance yet'}.</p>`).join('')}
       <p class="tiny muted">A confirmed balance already includes transfers dated on or before it, so nothing is counted twice. Planned transfers don’t count until they’re marked done.</p>
       <div class="row"><input class="inp num grow" id="bufAmt" inputmode="decimal" placeholder="Buffer goal, e.g. 500.00" value="${esc(centsToInput(m.buffer.amount))}" aria-label="Buffer goal"><button class="btn sm" data-act="bufSave">Set goal</button></div></div>
 

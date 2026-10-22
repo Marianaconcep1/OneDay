@@ -1,0 +1,29 @@
+0	Dinero: confirma lo disponible y lo que vence antes del día de pago	Denaro: conferma cosa è disponibile e cosa scade prima del giorno di paga	Argent : confirme ce qui est disponible et ce qui est dû avant le jour de paie
+1	Negocio: a quién ayudas y un resultado para las próximas cuatro semanas	Attività: chi aiuti e un risultato per le prossime quattro settimane	Entreprise : qui tu aides, et un résultat pour les quatre prochaines semaines
+2	Entrenamiento: lo que sabes hasta ahora y el plan que sigues	Allenamento: cosa sai finora e il piano che segui	Entraînement : ce que tu sais pour l’instant, et le programme que tu suis
+3	Registrado: hoy no gasté.	Registrato: oggi nessuna spesa.	Noté : aucune dépense aujourd’hui.
+4	{0}: quedan {1}	{0}: restano {1}	{0} : reste {1}
+5	Modificado: {0}. Omitido: {1}.{2}	Modificati: {0}. Saltati: {1}.{2}	Modifié : {0}. Sauté : {1}.{2}
+6	Contorno: distancia planificada ({0}). Relleno: distancia registrada. Los días de descanso se listan aparte arriba, no como distancia.	Contorno: distanza pianificata ({0}). Pieno: distanza registrata. I giorni di riposo sono elencati sopra a parte, non come distanza.	Contour : distance prévue ({0}). Plein : distance notée. Les jours de repos sont listés à part ci-dessus, pas comme distance.
+7	En general: completado según el plan {0} de {1} programados; modificados {2}; omitidos {3}; sin registro {4}.	In generale: completati come previsto {0} su {1} in programma; modificati {2}; saltati {3}; senza registrazione {4}.	Global : faits comme prévu {0} sur {1} prévus ; modifiés {2} ; sautés {3} ; sans saisie {4}.
+8	Dinero: registro de gastos completo {0}/{1} días (incompletos {2}, sin registro {3}).	Denaro: registrazione spese completa {0}/{1} giorni (incompleti {2}, non registrati {3}).	Argent : suivi des dépenses complet {0}/{1} jours (incomplets {2}, non notés {3}).
+9	Negocio: {0} de {1} sesiones según el plan, {2} versiones de cinco minutos, {3} resultados anotados. Etapa: {4}. Resultado a cuatro semanas: {5}. Resultado de esta semana: {6}.	Attività: {0} su {1} sessioni come previsto, {2} versioni da cinque minuti, {3} risultati annotati. Fase: {4}. Risultato a quattro settimane: {5}. Risultato di questa settimana: {6}.	Entreprise : {0} sur {1} séances comme prévu, {2} versions de cinq minutes, {3} productions notées. Étape : {4}. Résultat à quatre semaines : {5}. Résultat de la semaine : {6}.
+10	Entrenamiento: {0} completados según el plan, {1} modificados, {2} omitidos, {3}/{4} días de descanso cumplidos, de {5} programados. Distancia registrada {6} {7} frente a {8} planificados.	Allenamento: {0} completati come previsto, {1} modificati, {2} saltati, {3}/{4} giorni di riposo rispettati, su {5} in programma. Distanza registrata {6} {7} contro {8} pianificati.	Entraînement : {0} faits comme prévu, {1} modifiés, {2} sautés, {3}/{4} jours de repos respectés, sur {5} prévus. Distance notée {6} {7} contre {8} prévus.
+11	Arte: {0} de {1} días programados{2}.	Arte: {0} su {1} giorni in programma{2}.	Art : {0} sur {1} jours prévus{2}.
+12	Revisiones: {0} de {1} días. Ánimo (1-5, "-" = sin registro): {2}. Energía: {3}.	Check-in: {0} su {1} giorni. Umore (1-5, "-" = non registrato): {2}. Energia: {3}.	Bilans : {0} sur {1} jours. Humeur (1-5, "-" = non noté) : {2}. Énergie : {3}.
+13	Sugerido: claridad financiera. Confírmalo o elige otro.	Suggerito: chiarezza finanziaria. Confermalo o scegline un altro.	Suggéré : clarté financière. Confirme-le ou choisis-en un autre.
+14	Modificado: {0}. Omitido: {1}.	Modificati: {0}. Saltati: {1}.	Modifié : {0}. Sauté : {1}.
+15	Ejemplo: pequeños negocios de servicios locales	Esempio: piccole attività locali di servizi	Exemple : petites entreprises de services locales
+16	Ejemplo: tienen datos en hojas de cálculo pero ninguna vista semanal clara	Esempio: hanno i dati in fogli di calcolo ma nessuna vista settimanale chiara	Exemple : leurs données sont dans des tableurs, sans vue hebdomadaire claire
+17	Ejemplo: tres conversaciones con posibles clientes	Esempio: tre conversazioni con potenziali clienti	Exemple : trois conversations avec des clients potentiels
+18	Ejemplo: una oferta de un párrafo que podría enviar	Esempio: un’offerta di un paragrafo che potrei inviare	Exemple : une offre d’un paragraphe que je pourrais envoyer
+19	Descanso: carga emocional	Riposo: peso emotivo	Repos : charge émotionnelle
+20	Descanso: cansancio, enfermedad o dolor	Riposo: stanchezza, malattia o dolore	Repos : fatigue, maladie ou douleur
+21	Medido: {0} → {1}.	Misurato: {0} → {1}.	Mesuré : {0} → {1}.
+22	{0}: {1} completadas, {2} más pequeñas, {3} omitidas, {4} sin registro{5}	{0}: {1} completate, {2} ridotte, {3} saltate, {4} senza registrazione{5}	{0} : {1} faites, {2} allégées, {3} sautées, {4} sans saisie{5}
+23	{0}: {1} de {2} cumplidas{3}	{0}: {1} su {2} rispettate{3}	{0} : {1} sur {2} suivies{3}
+24	Negocio: unos {0} registrados frente a {1} planificados.	Attività: circa {0} registrati contro {1} pianificati.	Entreprise : environ {0} notés contre {1} prévus.
+25	Entrenamiento: {0} de {1} sesiones hechas o modificadas.	Allenamento: {0} su {1} sessioni fatte o modificate.	Entraînement : {0} sur {1} séances faites ou modifiées.
+26	Carrera: {0} de {1} {2} planificados{3}.	Corsa: {0} su {1} {2} pianificati{3}.	Course : {0} sur {1} {2} prévus{3}.
+27	Arte: {0} de {1} invitaciones aceptadas.	Arte: {0} su {1} inviti accolti.	Art : {0} invitations saisies sur {1}.
+28	Medido: {0} → {1} (objetivo {2})	Misurato: {0} → {1} (traguardo {2})	Mesuré : {0} → {1} (cible {2})

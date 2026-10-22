@@ -1,0 +1,482 @@
+{
+"account balance": [
+"saldo de cuenta",
+"saldo del conto",
+"solde de compte"
+],
+"account balances": [
+"saldos de cuenta",
+"saldi dei conti",
+"soldes de compte"
+],
+"action": [
+"acción",
+"azione",
+"action"
+],
+"actions": [
+"acciones",
+"azioni",
+"actions"
+],
+"active goal": [
+"meta activa",
+"obiettivo attivo",
+"objectif actif"
+],
+"active goals": [
+"metas activas",
+"obiettivi attivi",
+"objectifs actifs"
+],
+"active or maintained goal": [
+"meta activa o en mantenimiento",
+"obiettivo attivo o in mantenimento",
+"objectif actif ou en entretien"
+],
+"active or maintained goals": [
+"metas activas o en mantenimiento",
+"obiettivi attivi o in mantenimento",
+"objectifs actifs ou en entretien"
+],
+"attempt": [
+"intento",
+"tentativo",
+"tentative"
+],
+"attempts": [
+"intentos",
+"tentativi",
+"tentatives"
+],
+"bill": [
+"factura",
+"bolletta",
+"facture"
+],
+"bills": [
+"facturas",
+"bollette",
+"factures"
+],
+"day": [
+"día",
+"giorno",
+"jour"
+],
+"days": [
+"días",
+"giorni",
+"jours"
+],
+"day was": [
+"día estuvo",
+"giorno è stato",
+"jour a été"
+],
+"days were": [
+"días estuvieron",
+"giorni sono stati",
+"jours ont été"
+],
+"entry": [
+"registro",
+"voce",
+"saisie"
+],
+"entries": [
+"registros",
+"voci",
+"saisies"
+],
+"evening": [
+"noche",
+"sera",
+"soir"
+],
+"evenings": [
+"noches",
+"sere",
+"soirs"
+],
+"expense": [
+"gasto",
+"spesa",
+"dépense"
+],
+"expenses": [
+"gastos",
+"spese",
+"dépenses"
+],
+"hidden item": [
+"elemento oculto",
+"elemento nascosto",
+"élément masqué"
+],
+"hidden items": [
+"elementos ocultos",
+"elementi nascosti",
+"éléments masqués"
+],
+"item": [
+"elemento",
+"elemento",
+"élément"
+],
+"items": [
+"elementos",
+"elementi",
+"éléments"
+],
+"later entry": [
+"registro posterior",
+"voce successiva",
+"saisie ultérieure"
+],
+"later entries": [
+"registros posteriores",
+"voci successive",
+"saisies ultérieures"
+],
+"linked task": [
+"tarea vinculada",
+"compito collegato",
+"tâche liée"
+],
+"linked tasks": [
+"tareas vinculadas",
+"compiti collegati",
+"tâches liées"
+],
+"milestone": [
+"hito",
+"traguardo",
+"étape"
+],
+"milestones": [
+"hitos",
+"traguardi",
+"étapes"
+],
+"missed day": [
+"día perdido",
+"giorno mancato",
+"jour manqué"
+],
+"missed days": [
+"días perdidos",
+"giorni mancati",
+"jours manqués"
+],
+"modified session": [
+"sesión modificada",
+"sessione modificata",
+"séance modifiée"
+],
+"modified sessions": [
+"sesiones modificadas",
+"sessioni modificate",
+"séances modifiées"
+],
+"no confirmed balance yet": [
+"aún sin saldo confirmado",
+"ancora senza saldo confermato",
+"pas encore de solde confirmé"
+],
+"paused day": [
+"día en pausa",
+"giorno in pausa",
+"jour en pause"
+],
+"paused days": [
+"días en pausa",
+"giorni in pausa",
+"jours en pause"
+],
+"personal commitment": [
+"compromiso personal",
+"impegno personale",
+"engagement personnel"
+],
+"personal commitments": [
+"compromisos personales",
+"impegni personali",
+"engagements personnels"
+],
+"planned rest day": [
+"día de descanso planificado",
+"giorno di riposo pianificato",
+"jour de repos prévu"
+],
+"planned rest days": [
+"días de descanso planificados",
+"giorni di riposo pianificati",
+"jours de repos prévus"
+],
+"planned training session": [
+"sesión de entrenamiento planificada",
+"sessione di allenamento pianificata",
+"séance d’entraînement prévue"
+],
+"planned training sessions": [
+"sesiones de entrenamiento planificadas",
+"sessioni di allenamento pianificate",
+"séances d’entraînement prévues"
+],
+"planning session": [
+"sesión de planificación",
+"sessione di pianificazione",
+"séance de planification"
+],
+"planning sessions": [
+"sesiones de planificación",
+"sessioni di pianificazione",
+"séances de planification"
+],
+"run": [
+"carrera",
+"corsa",
+"course"
+],
+"runs": [
+"carreras",
+"corse",
+"courses"
+],
+"skipped day": [
+"día omitido",
+"giorno saltato",
+"jour sauté"
+],
+"skipped days": [
+"días omitidos",
+"giorni saltati",
+"jours sautés"
+],
+"time": [
+"vez",
+"volta",
+"fois"
+],
+"times": [
+"veces",
+"volte",
+"fois"
+],
+"transfer": [
+"transferencia",
+"trasferimento",
+"virement"
+],
+"transfers": [
+"transferencias",
+"trasferimenti",
+"virements"
+],
+"Original language: {0}": [
+"Idioma original: {0}",
+"Lingua originale: {0}",
+"Langue d’origine : {0}"
+],
+"From": [
+"Desde",
+"Da",
+"De"
+],
+"To": [
+"Hacia",
+"A",
+"Vers"
+],
+"not set": [
+"sin definir",
+"non impostato",
+"non défini"
+],
+"not confirmed": [
+"sin confirmar",
+"non confermato",
+"non confirmé"
+],
+"not reviewed yet": [
+"aún sin revisar",
+"non ancora rivisto",
+"pas encore revu"
+],
+"Yes": [
+"Sí",
+"Sì",
+"Oui"
+],
+"planned today": [
+"planificado hoy",
+"pianificati oggi",
+"prévu aujourd’hui"
+],
+"planned today (some times not set)": [
+"planificado hoy (algunos horarios sin definir)",
+"pianificati oggi (alcuni orari non impostati)",
+"prévu aujourd’hui (certains horaires non définis)"
+],
+"Planned: {0}": [
+"Planificado: {0}",
+"Pianificato: {0}",
+"Prévu : {0}"
+],
+"Smaller version: {0}": [
+"Versión más pequeña: {0}",
+"Versione più piccola: {0}",
+"Version plus petite : {0}"
+],
+"Connects to: {0}": [
+"Se conecta con: {0}",
+"Collegato a: {0}",
+"Lié à : {0}"
+],
+"Planned smaller today: {0}": [
+"Hoy, más pequeño de lo planificado: {0}",
+"Oggi in versione ridotta: {0}",
+"Prévu en plus petit aujourd’hui : {0}"
+],
+"From your weekly plan": [
+"Según tu plan semanal",
+"Dal tuo piano settimanale",
+"D’après ton programme de la semaine"
+],
+"Changed for this date only": [
+"Cambiado solo para esta fecha",
+"Modificato solo per questa data",
+"Modifié uniquement pour cette date"
+],
+"What repeatedly got in the way?": [
+"¿Qué se interpuso una y otra vez?",
+"Cosa si è messo di mezzo più volte?",
+"Qu’est-ce qui a gêné à plusieurs reprises ?"
+],
+"Noted: {0}": [
+"Anotado: {0}",
+"Annotato: {0}",
+"Noté : {0}"
+],
+"a period that starts once you add a payday": [
+"un periodo que empieza cuando añadas un día de pago",
+"un periodo che inizia quando aggiungi un giorno di paga",
+"une période qui commence quand tu ajoutes un jour de paie"
+],
+"{0}: confirmed {1} on {2}{3}.": [
+"{0}: confirmado {1} el {2}{3}.",
+"{0}: confermato {1} il {2}{3}.",
+"{0} : confirmé {1} le {2}{3}."
+],
+", {0} from {1} recorded after that": [
+", {0} de {1} registrada después",
+", {0} da {1} registrato dopo",
+", {0} de {1} noté ensuite"
+],
+"{0}: no confirmed balance yet.": [
+"{0}: aún sin saldo confirmado.",
+"{0}: ancora senza saldo confermato.",
+"{0} : pas encore de solde confirmé."
+],
+"monthly on day {0}": [
+"cada mes el día {0}",
+"ogni mese il giorno {0}",
+"chaque mois le {0}"
+],
+"minimum": [
+"mínimo",
+"minimo",
+"minimum"
+],
+"essential": [
+"esencial",
+"essenziale",
+"essentiel"
+],
+"{0} (demo data, kept separately).": [
+"{0} (datos de demo, guardados aparte).",
+"{0} (dati demo, conservati separatamente).",
+"{0} (données de démo, gardées à part)."
+],
+"localStorage in this browser": [
+"localStorage en este navegador",
+"localStorage in questo browser",
+"localStorage dans ce navigateur"
+],
+"Daily spending log": [
+"Registro diario de gastos",
+"Registrazione quotidiana delle spese",
+"Suivi quotidien des dépenses"
+],
+"A realistic business block": [
+"Un bloque de negocio realista",
+"Un blocco realistico per l’attività",
+"Un créneau entreprise réaliste"
+],
+"Planned sessions and rest": [
+"Sesiones planificadas y descanso",
+"Sessioni pianificate e riposo",
+"Séances prévues et repos"
+],
+"Small art invitations": [
+"Pequeñas invitaciones al arte",
+"Piccoli inviti all’arte",
+"Petites invitations à l’art"
+],
+"Evening check-in": [
+"Revisión de la noche",
+"Check-in serale",
+"Bilan du soir"
+],
+"Plan": [
+"Plan",
+"Piano",
+"Plan"
+],
+"{0}: confirmed {1} on {2}": [
+"{0}: confirmado {1} el {2}",
+"{0}: confermato {1} il {2}",
+"{0} : confirmé {1} le {2}"
+],
+"exploring": [
+"explorando",
+"esplorazione",
+"exploration"
+],
+"validating": [
+"validando",
+"validazione",
+"validation"
+],
+"building an offer": [
+"armando una oferta",
+"costruzione di un’offerta",
+"construction d’une offre"
+],
+"finding clients": [
+"buscando clientes",
+"ricerca clienti",
+"recherche de clients"
+],
+"delivering": [
+"entregando",
+"consegna",
+"livraison"
+],
+"inquiry": [
+"consulta",
+"richiesta",
+"demande"
+],
+"client": [
+"cliente",
+"cliente",
+"client"
+],
+"revenue": [
+"ingresos",
+"entrate",
+"revenus"
+]
+}

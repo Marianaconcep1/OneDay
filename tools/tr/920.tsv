@@ -1,0 +1,200 @@
+920	Cumpliste: {0}.	Mantenuto: {0}.	Tenu : {0}.
+921	Registraste un resultado del negocio: {0}{1}.	Hai registrato un risultato dell’attività: {0}{1}.	Résultat d’entreprise noté : {0}{1}.
+922	Revisiones hechas: {0}.	Check-in fatti: {0}.	Bilans faits : {0}.
+923	Aún no hay nada registrado esta semana.	Ancora nulla di registrato questa settimana.	Rien de noté cette semaine pour l’instant.
+924	¿Entiendo rápido el plan de hoy?	Capisco subito il piano di oggi?	Est-ce que je comprends vite le plan du jour ?
+925	¿Encaja en mi tiempo disponible?	Rientra nel mio tempo disponibile?	Est-ce qu’il tient dans mon temps disponible ?
+926	¿Puedo registrar con honestidad sin mucho esfuerzo?	Riesco a registrare con onestà senza troppa fatica?	Est-ce que je peux noter honnêtement sans trop d’effort ?
+927	¿Puedo volver después de un día perdido?	Riesco a riprendere dopo un giorno mancato?	Est-ce que je peux reprendre après un jour manqué ?
+928	Lo que responde esta primera semana	A cosa risponde questa prima settimana	Ce à quoi répond cette première semaine
+929	¿Qué acciones necesitan ser más claras o más pequeñas?	Quali azioni devono diventare più chiare o più piccole?	Quelles actions doivent devenir plus claires ou plus petites ?
+930	No ahorros, ingresos, forma física ni ánimo. Eso toma más de una semana.	Non risparmi, entrate, forma fisica o umore. Per quelli serve più di una settimana.	Pas l’épargne, les revenus, la forme ou l’humeur. Ça prend plus d’une semaine.
+931	Revisión de la primera semana · 2 minutos	Controllo della prima settimana · 2 minuti	Point de la première semaine · 2 minutes
+932	Cinco preguntas sobre si la app encaja con tu vida.	Cinque domande per capire se l’app si adatta alla tua vita.	Cinq questions pour savoir si l’app colle à ta vie.
+933	Responder	Rispondi	Répondre
+934	Revisión de la primera semana	Controllo della prima settimana	Point de la première semaine
+935	Sobre la app, no sobre ti	Sull’app, non su di te	Sur l’app, pas sur toi
+936	Los ahorros, ingresos, forma física y ánimo no forman parte de esta revisión.	Risparmi, entrate, forma fisica e umore non fanno parte di questo controllo.	L’épargne, les revenus, la forme et l’humeur ne font pas partie de ce point.
+937	Guardado. Cualquier “todavía no” es algo que corregir en el diseño, no en ti.	Salvato. Ogni “non ancora” è un problema di design, non personale.	Enregistré. Chaque « pas encore » est à corriger dans l’app, pas chez toi.
+938	Semana de prueba, día {0} de 7. Anota aquí ideas para la app y sigue usando el flujo actual. Los errores y problemas de accesibilidad se pueden corregir en cualquier momento.	Settimana di prova, giorno {0} di 7. Annota qui le idee per l’app e continua a usare il flusso attuale. Bug e problemi di accessibilità si possono correggere in qualsiasi momento.	Semaine d’essai, jour {0} sur 7. Note ici tes idées pour l’app et continue d’utiliser le fonctionnement actuel. Les bugs et problèmes d’accessibilité peuvent être corrigés à tout moment.
+939	Anota aquí ideas para la app en lugar de rediseñar en el momento. Los errores y problemas de accesibilidad se pueden corregir en cualquier momento.	Annota qui le idee per l’app invece di riprogettarla sul momento. Bug e problemi di accessibilità si possono correggere in qualsiasi momento.	Note ici tes idées pour l’app au lieu de tout refaire sur le moment. Les bugs et problèmes d’accessibilité peuvent être corrigés à tout moment.
+940	Una idea para la app	Un’idea per l’app	Une idée pour l’app
+941	Mejoras para después	Miglioramenti futuri	Améliorations pour plus tard
+942	Usa exactamente 6 dígitos.	Usa esattamente 6 cifre.	Utilise exactement 6 chiffres.
+943	Evita repetir un solo dígito.	Evita una sola cifra ripetuta.	Évite un seul chiffre répété.
+944	Evita una secuencia como 123456.	Evita una sequenza come 123456.	Évite une suite comme 123456.
+945	Evita un patrón repetido.	Evita uno schema ripetuto.	Évite un motif répété.
+946	Demasiados intentos. Inténtalo de nuevo en {0} segundos.	Troppi tentativi. Riprova tra {0} secondi.	Trop de tentatives. Réessaie dans {0} secondes.
+947	Mostrar	Mostra	Afficher
+948	Nuevo PIN de 6 dígitos	Nuovo PIN a 6 cifre	Nouveau code à 6 chiffres
+949	Repite el nuevo PIN	Ripeti il nuovo PIN	Répète le nouveau code
+950	Restablecer tu PIN	Reimposta il PIN	Réinitialiser ton code
+951	Ingresa el código de recuperación que guardaste al configurar el PIN y luego elige un PIN nuevo.	Inserisci il codice di recupero che hai salvato quando hai impostato il PIN, poi scegli un nuovo PIN.	Saisis le code de récupération gardé lors de la création du code, puis choisis-en un nouveau.
+952	Código de recuperación	Codice di recupero	Code de récupération
+953	Restablecer PIN y desbloquear	Reimposta il PIN e sblocca	Réinitialiser le code et déverrouiller
+954	Volver al PIN	Torna al PIN	Retour au code
+955	¿También perdiste el código de recuperación?	Hai perso anche il codice di recupero?	Tu as aussi perdu le code de récupération ?
+956	Sin el PIN ni el código, la única opción es borrar los datos de este dispositivo y empezar de nuevo. Luego se puede restaurar una copia JSON.	Senza PIN né codice, l’unica opzione è cancellare i dati su questo dispositivo e ricominciare. Dopo puoi ripristinare un backup JSON.	Sans le code ni le code de récupération, la seule option est d’effacer les données de cet appareil et de recommencer. Une sauvegarde JSON peut être restaurée ensuite.
+957	Borrar los datos de este dispositivo	Cancella i dati di questo dispositivo	Effacer les données de cet appareil
+958	Borrar y empezar de nuevo	Cancella e ricomincia	Effacer et recommencer
+959	Esto borra todos los registros y el PIN de este dispositivo. No se puede deshacer. Si tienes un archivo de copia, puedes restaurarlo después.	Questo elimina ogni voce e il PIN su questo dispositivo. Non si può annullare. Se hai un file di backup puoi ripristinarlo dopo.	Cela supprime toutes les saisies et le code sur cet appareil. C’est irréversible. Si tu as un fichier de sauvegarde, tu pourras le restaurer ensuite.
+960	Escribe ERASE para confirmar	Scrivi ERASE per confermare	Tape ERASE pour confirmer
+961	Borrar todo	Cancella tutto	Tout effacer
+962	Cancelar	Annulla	Annuler
+963	Quedan {0} antes de una breve espera.	Ne restano {0} prima di una breve attesa.	Encore {0} avant une courte attente.
+964	Desbloquear	Sblocca	Déverrouiller
+965	¿Olvidaste el PIN?	PIN dimenticato?	Code oublié ?
+966	Este PIN es un bloqueo de conveniencia para este dispositivo. Oculta la app de miradas casuales, pero no cifra tus registros ni los protege de alguien con acceso completo al teléfono.	Questo PIN è un blocco di comodità per questo dispositivo. Nasconde l’app agli sguardi casuali ma non cifra i tuoi dati né li protegge da chi ha pieno accesso al telefono.	Ce code est un verrou pratique pour cet appareil. Il cache l’app des regards curieux, mais ne chiffre pas tes données et ne les protège pas de quelqu’un ayant un accès complet au téléphone.
+967	Ocultar	Nascondi	Masquer
+968	Ingresa tus 6 dígitos.	Inserisci le tue 6 cifre.	Saisis tes 6 chiffres.
+969	Ese PIN no coincide. Quedan {0} antes de una breve espera.	Il PIN non corrisponde. Ne restano {0} prima di una breve attesa.	Ce code ne correspond pas. Encore {0} avant une courte attente.
+970	Los dos PIN nuevos no coinciden.	I due nuovi PIN non corrispondono.	Les deux nouveaux codes ne correspondent pas.
+971	Ese código de recuperación no coincide.	Il codice di recupero non corrisponde.	Ce code de récupération ne correspond pas.
+972	PIN restablecido. Tu código de recuperación anterior ya no funciona; aquí tienes uno nuevo.	PIN reimpostato. Il vecchio codice di recupero non funziona più; eccone uno nuovo.	Code réinitialisé. Ton ancien code de récupération ne fonctionne plus ; en voici un nouveau.
+973	Escribe ERASE para confirmar.	Scrivi ERASE per confermare.	Tape ERASE pour confirmer.
+974	Este navegador no puede crear aquí un hash seguro del PIN (necesita una página https segura). El bloqueo no está disponible en esta copia.	Questo browser non può creare qui un hash sicuro del PIN (serve una pagina https sicura). Il blocco non è disponibile in questa copia.	Ce navigateur ne peut pas créer ici une empreinte sécurisée du code (il faut une page https sécurisée). Le verrou n’est pas disponible dans cette copie.
+975	Añade un PIN de 6 dígitos para abrir la app en este dispositivo. Mantiene la app privada ante miradas casuales.	Aggiungi un PIN a 6 cifre per aprire l’app su questo dispositivo. Protegge l’app dagli sguardi casuali.	Ajoute un code à 6 chiffres pour ouvrir l’app sur cet appareil. Il protège l’app des regards curieux.
+976	No es una cuenta en línea y no cifra tus registros. Iniciar sesión desde otros dispositivos necesitaría un servidor, que esta versión no tiene.	Non è un account online e non cifra i tuoi dati. Accedere da altri dispositivi richiederebbe un server, che questa versione non ha.	Ce n’est pas un compte en ligne et il ne chiffre pas tes données. Se connecter depuis d’autres appareils nécessiterait un serveur, que cette version n’a pas.
+977	Configurar un PIN	Imposta un PIN	Créer un code
+978	1 minuto	1 minuto	1 minute
+979	5 minutos	5 minuti	5 minutes
+980	15 minutos	15 minuti	15 minutes
+981	30 minutos	30 minuti	30 minutes
+982	Solo cuando lo bloquee	Solo quando lo blocco	Seulement quand je verrouille
+983	Bloqueo con PIN activado para	Blocco PIN attivo per	Verrouillage par code activé pour
+984	en este dispositivo.	su questo dispositivo.	sur cet appareil.
+985	Bloquear tras inactividad de	Blocca dopo inattività di	Verrouiller après une inactivité de
+986	Bloquear al salir de la app	Blocca quando esco dall’app	Verrouiller quand je quitte l’app
+987	Bloquear ahora	Blocca ora	Verrouiller maintenant
+988	Cambiar PIN	Cambia PIN	Changer le code
+989	Nuevo código de recuperación	Nuovo codice di recupero	Nouveau code de récupération
+990	Desactivar PIN	Disattiva PIN	Désactiver le code
+991	Tras {0} intentos fallidos el bloqueo espera 30 segundos, y más cada vez. Solo se guarda un hash con sal del PIN, nunca el PIN, y no se incluye en las copias.	Dopo {0} tentativi errati il blocco attende 30 secondi, poi sempre di più. Si conserva solo un hash con sale del PIN, mai il PIN, e non è incluso nei backup.	Après {0} tentatives erronées, le verrou attend 30 secondes, puis de plus en plus longtemps. Seule une empreinte salée du code est gardée, jamais le code, et elle n’est pas incluse dans les sauvegardes.
+992	Ajustes de bloqueo guardados.	Impostazioni di blocco salvate.	Réglages du verrou enregistrés.
+993	Nombre de usuario	Nome utente	Nom d’utilisateur
+994	Se muestra en la pantalla de bloqueo. Es un nombre de perfil local, no una cuenta en línea.	Appare nella schermata di blocco. È un nome di profilo locale, non un account online.	Affiché sur l’écran de verrouillage. Un nom de profil local, pas un compte en ligne.
+995	PIN actual	PIN attuale	Code actuel
+996	Repite el PIN	Ripeti il PIN	Répète le code
+997	Crear un código nuevo	Crea un nuovo codice	Créer un nouveau code
+998	Guardar PIN	Salva PIN	Enregistrer le code
+999	Demasiados intentos. Espera {0} segundos.	Troppi tentativi. Attendi {0} secondi.	Trop de tentatives. Attends {0} secondes.
+1000	El PIN actual no coincide.	Il PIN attuale non corrisponde.	Le code actuel ne correspond pas.
+1001	Bloqueo con PIN desactivado.	Blocco PIN disattivato.	Verrouillage par code désactivé.
+1002	Tu código de recuperación anterior ya no funciona.	Il vecchio codice di recupero non funziona più.	Ton ancien code de récupération ne fonctionne plus.
+1003	Añade un nombre de usuario.	Aggiungi un nome utente.	Ajoute un nom d’utilisateur.
+1004	Los dos PIN no coinciden.	I due PIN non corrispondono.	Les deux codes ne correspondent pas.
+1005	PIN guardado.	PIN salvato.	Code enregistré.
+1006	PIN cambiado.	PIN cambiato.	Code changé.
+1007	Guarda tu código de recuperación	Salva il codice di recupero	Garde ton code de récupération
+1008	{0} Si olvidas tu PIN, este código te permite crear uno nuevo. Solo se muestra ahora.	{0} Se dimentichi il PIN, questo codice ti permette di impostarne uno nuovo. Viene mostrato solo ora.	{0} Si tu oublies ton code, celui-ci te permet d’en créer un nouveau. Il n’est affiché que maintenant.
+1009	Guárdalo fuera de esta app, como en un gestor de contraseñas o una nota en otro dispositivo.	Conservalo fuori da questa app, per esempio in un gestore di password o in una nota su un altro dispositivo.	Garde-le ailleurs que dans cette app, par exemple dans un gestionnaire de mots de passe ou une note sur un autre appareil.
+1010	Guardé el código	Ho salvato il codice	J’ai gardé le code
+1011	Marca primero “Guardé el código”.	Spunta prima “Ho salvato il codice”.	Coche d’abord « J’ai gardé le code ».
+1012	Ahorros confirmados ($)	Risparmi confermati ($)	Épargne confirmée ($)
+1013	Ingresos del negocio ($)	Entrate dell’attività ($)	Revenus de l’entreprise ($)
+1014	Un número que actualizo	Un numero che aggiorno io	Un nombre que je mets à jour
+1015	Activa	Attivo	Actif
+1016	Más adelante	Più avanti	Plus tard
+1017	En mantenimiento	In mantenimento	En entretien
+1018	Terminada	Concluso	Terminé
+1019	Valor actual aún sin registrar	Valore attuale non ancora registrato	Valeur actuelle pas encore notée
+1020	{0} de {1} hitos	{0} su {1} traguardi	{0} étapes sur {1}
+1021	Continua · {0} alcanzado	Continuo · {0} raggiunti	En continu · {0} atteint
+1022	Continua · sin línea de meta	Continuo · senza traguardo finale	En continu · sans ligne d’arrivée
+1023	{0}% del camino desde el inicio hasta la meta	{0}% del percorso dall’inizio all’obiettivo	{0} % du chemin entre le départ et l’objectif
+1024	Proyectos archivados	Progetti archiviati	Projets archivés
+1025	Una meta puede ser el enfoque de esta semana. Las demás mantienen rutinas pequeñas, y lo que espera va a Más adelante.	Un obiettivo può essere il focus di questa settimana. Gli altri mantengono piccole routine, e ciò che aspetta va in Più avanti.	Un objectif peut être le focus de la semaine. Les autres gardent de petites routines, et ce qui attend va dans Plus tard.
+1026	Es más de lo que tienes. Considera mover una meta a Más adelante.	È più di quanto hai. Valuta di spostare un obiettivo in Più avanti.	C’est plus que ce que tu as. Pense à déplacer un objectif dans Plus tard.
+1027	Aún no hay metas. Una meta puede ser un número (ahorros, ingresos, distancia), algunos hitos o algo que sigues haciendo.	Nessun obiettivo ancora. Un obiettivo può essere un numero (risparmi, entrate, distanza), qualche traguardo o qualcosa che continui a fare.	Aucun objectif pour l’instant. Un objectif peut être un nombre (épargne, revenus, distance), quelques étapes ou quelque chose que tu continues de faire.
+1028	Añadir una meta	Aggiungi un obiettivo	Ajouter un objectif
+1029	Editar meta	Modifica obiettivo	Modifier l’objectif
+1030	Un número	Un numero	Un nombre
+1031	Hitos	Traguardi	Étapes
+1032	Continua	Continuo	En continu
+1033	p. ej., crear un colchón de ahorros de $1,000	es. creare un cuscinetto di risparmi di 1.000 $	ex. constituer une réserve d’épargne de 1 000 $
+1034	p. ej., aún no tengo colchón de ahorros	es. nessun cuscinetto di risparmi ancora	ex. pas encore de réserve d’épargne
+1035	p. ej., páginas, clientes	es. pagine, clienti	ex. pages, clients
+1036	p. ej., primer cliente que paga	es. primo cliente pagante	ex. premier client payant
+1037	Meta	Obiettivo	Objectif
+1038	Desde dónde empiezas	Da dove parti	D’où tu pars
+1039	Opcional. Se guarda para el informe final.	Facoltativo. Conservato per il resoconto finale.	Facultatif. Gardé pour le bilan final.
+1040	Cómo lo sabrás	Come lo saprai	Comment tu le sauras
+1041	Objetivo	Traguardo	Cible
+1042	Valor inicial	Valore iniziale	Valeur de départ
+1043	Unidad	Unità	Unité
+1044	Los ahorros usan tus saldos confirmados. Los ingresos y la distancia cuentan lo que registres desde la fecha de inicio.	I risparmi usano i saldi confermati. Entrate e distanza contano ciò che registri dalla data di inizio.	L’épargne utilise tes soldes confirmés. Les revenus et la distance comptent ce que tu notes à partir de la date de début.
+1045	Hitos, uno por línea	Traguardi, uno per riga	Étapes, une par ligne
+1046	Las metas continuas no tienen línea de meta. Los hitos del camino igual se celebran.	Gli obiettivi continui non hanno un traguardo finale. I traguardi lungo la strada si festeggiano comunque.	Les objectifs en continu n’ont pas de ligne d’arrivée. Les étapes en chemin sont quand même célébrées.
+1047	Estado	Stato	Statut
+1048	Hacerla el enfoque de esta semana	Rendilo il focus di questa settimana	En faire le focus de la semaine
+1049	Ponle nombre a la meta.	Dai un nome all’obiettivo.	Donne un nom à l’objectif.
+1050	Ingresa un objetivo mayor que cero, o elige Hitos.	Inserisci un traguardo maggiore di zero, oppure scegli Traguardi.	Saisis une cible supérieure à zéro, ou choisis Étapes.
+1051	Añade al menos un hito, o elige Continua.	Aggiungi almeno un traguardo, oppure scegli Continuo.	Ajoute au moins une étape, ou choisis En continu.
+1052	Guardado. Confirma un saldo de ahorros en Plan › Dinero para poder medir el progreso.	Salvato. Conferma un saldo dei risparmi in Piano › Denaro per misurare i progressi.	Enregistré. Confirme un solde d’épargne dans Plan › Argent pour mesurer les progrès.
+1053	Meta guardada.	Obiettivo salvato.	Objectif enregistré.
+1054	¿Borrar esta meta? Tus registros se quedan; solo se quitan la meta y sus hitos.	Eliminare questo obiettivo? Le tue registrazioni restano; vengono rimossi solo l’obiettivo e i suoi traguardi.	Supprimer cet objectif ? Tes saisies restent ; seuls l’objectif et ses étapes sont retirés.
+1055	Borrar meta	Elimina obiettivo	Supprimer l’objectif
+1056	No hay porcentaje hasta registrar el valor inicial y el actual.	Nessuna percentuale finché non sono registrati il valore iniziale e quello attuale.	Pas de pourcentage tant que les valeurs de départ et actuelle ne sont pas notées.
+1057	Inicio	Inizio	Départ
+1058	Ahora	Ora	Maintenant
+1059	Actualizar el número	Aggiorna il numero	Mettre à jour le nombre
+1060	Registrar	Registra	Noter
+1061	Ninguno todavía.	Ancora nessuno.	Aucun pour l’instant.
+1062	Añadir un hito	Aggiungi un traguardo	Ajouter une étape
+1063	Lograste lo que esta meta se propuso.	Hai raggiunto ciò che questo obiettivo si proponeva.	Tu as atteint ce que cet objectif visait.
+1064	Márcala como completa cuando se sienta terminada. Nada cambia hasta que lo hagas.	Segnalo come completato quando ti sembra finito. Non cambia nulla finché non lo fai.	Marque-le terminé quand tu le sens fini. Rien ne change tant que tu ne l’as pas fait.
+1065	Marcar como completa	Segna come completato	Marquer terminé
+1066	Reabrir con un horario nuevo	Riapri con un nuovo programma	Rouvrir avec un nouveau programme
+1067	Reabrir empieza desde hoy. Los días en que estuvo terminada siguen sin programar, así que no se debe nada.	La riapertura parte da oggi. I giorni in cui era concluso restano senza programma, quindi non c’è nulla in sospeso.	La réouverture part d’aujourd’hui. Les jours où il était terminé restent sans programme, donc rien n’est dû.
+1068	Informe de cierre	Resoconto finale	Bilan final
+1069	Marcar como completa de todos modos	Segna comunque come completato	Marquer terminé quand même
+1070	Activar	Rendi attivo	Rendre actif
+1071	Mover a Más adelante	Sposta in Più avanti	Déplacer dans Plus tard
+1072	Más opciones	Altre opzioni	Plus d’options
+1073	Terminar este proyecto	Concludi questo progetto	Terminer ce projet
+1074	Terminar conserva todo el historial. Borrar es aparte, en Editar.	Concludere conserva tutta la cronologia. L’eliminazione è separata, in Modifica.	Terminer garde tout l’historique. Supprimer est à part, dans Modifier.
+1075	Ingresa un número.	Inserisci un numero.	Saisis un nombre.
+1076	Registrado.	Registrato.	Noté.
+1077	Hito alcanzado. La meta continúa.	Traguardo raggiunto. L’obiettivo continua.	Étape atteinte. L’objectif continue.
+1078	Hito alcanzado.	Traguardo raggiunto.	Étape atteinte.
+1079	¿Marcar “{0}” como completa? Pasa a Completas y verás un informe de cómo llegaste aquí.	Segnare “{0}” come completato? Passa tra i completati e vedrai un resoconto del percorso fatto.	Marquer «\u202f{0}\u202f» comme terminé\u202f? Il passe dans Terminés et tu verras un bilan du chemin parcouru.
+1080	Mis prioridades cambiaron.	Le mie priorità sono cambiate.	Mes priorités ont changé.
+1081	Esta meta ya no encaja.	Questo obiettivo non è più adatto.	Cet objectif ne convient plus.
+1082	El tiempo o los recursos que requiere son demasiados.	Il tempo o le risorse necessarie sono troppi.	Le temps ou les moyens nécessaires sont trop importants.
+1083	Quiero intentar un enfoque distinto.	Voglio provare un approccio diverso.	Je veux essayer une autre approche.
+1084	Otro.	Altro.	Autre.
+1085	Prefiero no decirlo.	Preferisco non dirlo.	Je préfère ne pas le dire.
+1086	Trabajada del {0} al {1}.	Seguito dal {0} al {1}.	Travaillé du {0} au {1}.
+1087	{0} completadas y {1} acciones más pequeñas en {2}.	{0} completate e {1} azioni più piccole in {2}.	{0} terminées et {1} actions plus petites en {2}.
+1088	{0} alcanzado.	{0} raggiunto.	{0} atteint.
+1089	{0} ya no está programado.	{0} non è più in programma.	{0} n’est plus programmé.
+1090	¿Todo listo para terminar este proyecto?	Vuoi concludere questo progetto?	Envie de terminer ce projet\u202f?
+1091	Tus prioridades pueden cambiar. Puedes pausar, ajustar la meta o terminar este proyecto conservando tu progreso.	Le tue priorità possono cambiare. Puoi mettere in pausa, modificare l’obiettivo o concludere questo progetto mantenendo i tuoi progressi.	Tes priorités peuvent changer. Tu peux mettre en pause, ajuster l’objectif ou terminer ce projet en gardant tes progrès.
+1092	Seguir trabajando	Continua a lavorarci	Continuer
+1093	Ajustar la meta	Modifica l’obiettivo	Ajuster l’objectif
+1094	Pausar	Pausa	Pause
+1095	Terminar proyecto	Concludi progetto	Terminer le projet
+1096	¿Qué influyó en tu decisión?	Cosa ha influito sulla tua decisione?	Qu’est-ce qui a influencé ta décision ?
+1097	Continuar	Continua	Continuer
+1098	Omitir	Salta	Passer
+1099	¿De verdad quieres terminar este proyecto?	Vuoi davvero concludere questo progetto?	Veux-tu vraiment terminer ce projet\u202f?
+1100	Esto detendrá sus tareas y recordatorios futuros. Tu historial y progreso seguirán disponibles, y puedes reabrirlo más adelante.	Questo fermerà i compiti e i promemoria futuri. La cronologia e i progressi resteranno disponibili, e potrai riaprirlo più avanti.	Cela arrêtera ses tâches et rappels à venir. Ton historique et tes progrès resteront disponibles, et tu pourras le rouvrir plus tard.
+1101	Conservar proyecto	Mantieni il progetto	Garder le projet
+1102	Confirmar y terminar	Conferma e concludi	Confirmer et terminer
+1103	Proyecto terminado y archivado. Su historial se conserva.	Progetto concluso e archiviato. La cronologia è conservata.	Projet terminé et archivé. Son historique est gardé.
+1104	Reabierto desde hoy. No se debe nada de los días en que estuvo terminado.	Riaperto da oggi. Nulla è dovuto per i giorni in cui era concluso.	Rouvert à partir d’aujourd’hui. Rien n’est dû pour les jours où il était terminé.
+1105	Rango	Periodo	Période
+1106	Acciones programadas completadas, más pequeñas y omitidas a lo largo del tiempo	Azioni in programma completate, ridotte e saltate nel tempo	Actions prévues faites, allégées et sautées au fil du temps
+1107	Completadas	Completate	Faites
+1108	Sin registro	Nessuna registrazione	Sans saisie
+1109	· nada programado	· niente in programma	· rien de prévu
+1110	P en pausa	P in pausa	P en pause
+1111	Toca una barra para ver sus números.	Tocca una barra per vederne i numeri.	Touche une barre pour voir ses chiffres.
+1112	, y {0} en pausa.	, e {0} in pausa.	, et {0} en pause.
+1113	El periodo más cumplido fue {0}.	Il periodo più rispettato è stato {0}.	La période la mieux suivie a été {0}.
+1114	Nada programado	Niente in programma	Rien de prévu
+1115	, {0} sin registro	, {0} senza registrazione	, {0} sans saisie
+1116	Se muestran los últimos 8 periodos.	Vengono mostrati gli ultimi 8 periodi.	Affichage des 8 dernières périodes.
+1117	Ningún área tenía nada programado en este rango.	Nessuna area aveva qualcosa in programma in questo periodo.	Aucun domaine n’avait rien de prévu sur cette période.
+1118	Sin registro: {0}.	Senza registrazione: {0}.	Sans saisie : {0}.
+1119	Nada planificado ni registrado.	Niente pianificato o registrato.	Rien de prévu ni de noté.

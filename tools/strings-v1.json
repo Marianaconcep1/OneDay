@@ -1,0 +1,5974 @@
+[
+ {
+  "s": "Easy run",
+  "f": "02-model.js"
+ },
+ {
+  "s": "Long run",
+  "f": "02-model.js"
+ },
+ {
+  "s": "Other planned run",
+  "f": "02-model.js"
+ },
+ {
+  "s": "Strength",
+  "f": "02-model.js"
+ },
+ {
+  "s": "Cross-training",
+  "f": "02-model.js"
+ },
+ {
+  "s": "Mobility",
+  "f": "02-model.js"
+ },
+ {
+  "s": "Rest",
+  "f": "02-model.js,06-progress.js"
+ },
+ {
+  "s": "{0} min",
+  "f": "02-model.js"
+ },
+ {
+  "s": "Every purchase entered, or “No spending today”.",
+  "f": "02-model.js"
+ },
+ {
+  "s": "Five minutes on the same task",
+  "f": "02-model.js,04-daily.js,07-settings.js"
+ },
+ {
+  "s": "Choose the next business action",
+  "f": "02-model.js"
+ },
+ {
+  "s": "Unplanned activity",
+  "f": "02-model.js,03-ui.js"
+ },
+ {
+  "s": "No spending (confirmed)",
+  "f": "02-model.js,04-daily.js"
+ },
+ {
+  "s": "Recorded",
+  "f": "02-model.js"
+ },
+ {
+  "s": "Log incomplete",
+  "f": "02-model.js"
+ },
+ {
+  "s": "Entries recorded, not confirmed complete",
+  "f": "02-model.js"
+ },
+ {
+  "s": "Rested for symptoms",
+  "f": "02-model.js"
+ },
+ {
+  "s": "No savings account added yet.",
+  "f": "02-model.js"
+ },
+ {
+  "s": "No confirmed balance for {0}.",
+  "f": "02-model.js"
+ },
+ {
+  "s": "Add the account you spend from and confirm its balance.",
+  "f": "02-model.js"
+ },
+ {
+  "s": "Confirm the current balance of {0}.",
+  "f": "02-model.js"
+ },
+ {
+  "s": "{0} (confirmed {1}{2})",
+  "f": "02-model.js"
+ },
+ {
+  "s": "Enter your next expected income date.",
+  "f": "02-model.js"
+ },
+ {
+  "s": "Amount for {0} (due {1}) is unknown.",
+  "f": "02-model.js"
+ },
+ {
+  "s": "Estimate for {0} is unknown.",
+  "f": "02-model.js"
+ },
+ {
+  "s": "{0} (essential estimate)",
+  "f": "02-model.js"
+ },
+ {
+  "s": "Uncategorized",
+  "f": "02-model.js"
+ },
+ {
+  "s": "Demo mode: sample data only. Your real data is untouched.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Exit demo",
+  "f": "03-ui.js,07-settings.js"
+ },
+ {
+  "s": "Main",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Please confirm",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Discard timer",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Stop & log",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Timer discarded. The task is still marked started.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Forgot",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Task unclear",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Too large",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Time conflict",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Low motivation",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Emotional strain",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Fatigue/illness/pain",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Priorities changed",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Other",
+  "f": "03-ui.js,04-daily.js"
+ },
+ {
+  "s": "Prefer not to say",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Customer learning",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Offer",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Outreach/sales",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Delivery/portfolio",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Content",
+  "f": "03-ui.js,04-daily.js"
+ },
+ {
+  "s": "Administration",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Planning",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Write three sentences describing one customer problem",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Three sentences in my notes",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Draft the three bullets explaining your dashboard service",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Three bullets saved in a draft",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Identify one suitable potential customer",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "One business name and why it fits",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Draft one outreach message",
+  "f": "03-ui.js,04-daily.js"
+ },
+ {
+  "s": "A message ready to send",
+  "f": "03-ui.js,04-daily.js"
+ },
+ {
+  "s": "Build one chart for a portfolio example using public data",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "One chart exported or screenshotted",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Draft one educational post tied to a customer problem",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "A draft of 100–150 words",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Improve the pricing section of the proposal",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "The section rewritten and saved",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Choose an action",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Rest day followed",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Make starting easier",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Did it",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "1-minute version",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Smaller version",
+  "f": "03-ui.js,04-daily.js,05-plan.js,08-rules.js,11-analytics.js,15-report.js"
+ },
+ {
+  "s": "Nothing from the days in between needs to be filled in. Your history and progress are still here.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Continue the current plan",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Make today smaller",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Review what no longer fits",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Calibration · day {0} of 7",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "{0} Log what actually happens. Targets stay where they are this week.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Weekly review is ready",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "10–15 minutes to adjust next week. One change at most.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Start review",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Evening check-in",
+  "f": "03-ui.js,07-settings.js,08-rules.js"
+ },
+ {
+  "s": "About two minutes. Everything you logged today is already filled in.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Start check-in",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "About 2 min",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "· Started",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "How am I feeling?",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "I’m stuck",
+  "f": "03-ui.js,08-rules.js"
+ },
+ {
+  "s": "Check-in saved. Tomorrow is previewed below.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "When you’re ready, close the day with the check-in.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "(some times not set)",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Set available time",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "{0} available",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Your plan needs an adjustment.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Planned time is {0} over what you have today. Nothing changes until you choose.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "See adjustments",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Areas",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Check-in saved",
+  "f": "03-ui.js,04-daily.js"
+ },
+ {
+  "s": "Paused. Nothing is scheduled or owed.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Saved. Edits replace it, never duplicate it.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Clear the way (2–5 min)",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Cleared today: {0}.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "No training plan entered yet.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Add your plan",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Log an activity",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "{0}. An unscheduled day is not a missed one.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Log an activity anyway",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Made art anyway",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Only the spending log is scheduled.",
+  "f": "03-ui.js,04-daily.js"
+ },
+ {
+  "s": "of {0} available",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "{0}{1} planned{2}.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Set up one area at a time",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Unknown values can stay unknown.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Started. The timer is optional.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Logged.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Smaller version for today. The original stays on record.",
+  "f": "03-ui.js,08-rules.js"
+ },
+ {
+  "s": "Logged as unscheduled art.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Rest day followed.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Training is unchanged.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Nothing open to shrink today.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Use the smaller version of “{0}”",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "{0} has room for it",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Long-run day: use the 5-minute business version",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Keeps business visible without competing with the run",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Review today’s training session",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Opens your plan. The app does not change training for you.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "{0} planned · {1} available",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "No automatic adjustment fits. You could lower a task’s time in Plan, or update today’s available time.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Accept or reject each one. Nothing changes unless you accept it.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Clear enough desk space to work",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Put running clothes where I can see them",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Put art supplies within reach",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Clear my bed",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Clear the way",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Two to five minutes of preparation. Optional.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "e.g. Charge headphones",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Something else",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Done",
+  "f": "03-ui.js,09-lock.js"
+ },
+ {
+  "s": "Pick one step, or close this.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "The way is clearer.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Five minutes on it",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Done as planned",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Skipped",
+  "f": "03-ui.js,04-daily.js,06-progress.js,11-analytics.js,15-report.js"
+ },
+ {
+  "s": "e.g. Draft in Notes",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Output note or link",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Optional",
+  "f": "03-ui.js,04-daily.js,05-plan.js,08-rules.js,10-goals.js,13-garden.js"
+ },
+ {
+  "s": "Clear this record",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Minutes spent",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Note",
+  "f": "03-ui.js,04-daily.js,05-plan.js"
+ },
+ {
+  "s": "What got in the way?",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Optional, one tap",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "e.g. pour my morning coffee",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Attach a cue",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "After I…",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Save cue",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Rewrite the first action",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Start with a verb",
+  "f": "03-ui.js,05-plan.js,08-rules.js"
+ },
+ {
+  "s": "Done when",
+  "f": "03-ui.js,04-daily.js,05-plan.js"
+ },
+ {
+  "s": "Save for next time",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Shrink the finish line",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Minutes",
+  "f": "03-ui.js,04-daily.js,05-plan.js,08-rules.js"
+ },
+ {
+  "s": "{0} has room.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "No day this week has room by your available-time settings. You could lower the time in Plan.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Reschedule within available time",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Offer a smaller start",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Next time, start with: {0}.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Use the smaller version tomorrow",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Make tomorrow’s task smaller",
+  "f": "03-ui.js,04-daily.js"
+ },
+ {
+  "s": "Rest or review the plan",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Rest is a legitimate choice. If symptoms continue, a qualified professional can help.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Open Plan",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Cue saved.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Saved. Past records keep the original.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Moved to {0}.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Tomorrow uses the smaller version.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Choose done, smaller, or skipped.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Record cleared.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Logged as completed.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Planned {0} min, completed {1}. That counts as participation.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Logged as the smaller version.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Logged as skipped. The plan is still here tomorrow.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Started. Timer is optional.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Did something else",
+  "f": "03-ui.js,04-daily.js"
+ },
+ {
+  "s": "Completed as planned",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Modified",
+  "f": "03-ui.js,04-daily.js"
+ },
+ {
+  "s": "What you actually did",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Walk",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Duration (min)",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Distance ({0})",
+  "f": "03-ui.js,05-plan.js"
+ },
+ {
+  "s": "If it applies",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Effort",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "1 very easy",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "5 very hard",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Pain, illness or unusual exhaustion",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Fatigue or pain note",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Missed distance is never added to a later workout. A shorter or different session is recorded as modified, next to the original plan.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Choose how the session went.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Saved. With pain, illness or unusual exhaustion, rest or a plan review comes first.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Saved as modified. The original plan stays visible.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Saved.",
+  "f": "03-ui.js,05-plan.js,07-settings.js,13-garden.js"
+ },
+ {
+  "s": "First, a quick check: any pain, illness, or unusual exhaustion today?",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "No. I’ll start small",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Yes",
+  "f": "03-ui.js,05-plan.js,06-progress.js"
+ },
+ {
+  "s": "Prepare your gear and begin the planned warm-up, then reassess.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "If you stop after the warm-up, log it as modified. That still counts as participation.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Start the warm-up",
+  "f": "03-ui.js,08-rules.js"
+ },
+ {
+  "s": "Rest, or review the plan.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Pushing through isn’t the goal today. If it continues, a qualified professional can help.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Log rest instead",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Review training plan",
+  "f": "03-ui.js,08-rules.js"
+ },
+ {
+  "s": "Logged. Resting for symptoms is part of training.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Groceries",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Dining out",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Transport",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Housing & utilities",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Bills & debt",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Health",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Household",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Personal care",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Fun & hobbies",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Gifts",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Paycheck",
+  "f": "04-daily.js,05-plan.js"
+ },
+ {
+  "s": "Business income",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Refund",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Other income",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Expense",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Income",
+  "f": "04-daily.js,05-plan.js"
+ },
+ {
+  "s": "Transfer",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Amount",
+  "f": "04-daily.js,05-plan.js"
+ },
+ {
+  "s": "Date",
+  "f": "04-daily.js,05-plan.js,08-rules.js"
+ },
+ {
+  "s": "A transfer moves money between two of your own accounts. It is never counted as spending or income. Add two accounts first.",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Add “Checking” and “Savings”",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Transfers between your own accounts don’t count as spending or income.",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Category",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Not specified",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Account",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Save changes",
+  "f": "04-daily.js,14-pause.js"
+ },
+ {
+  "s": "Add entry",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Record it in about two minutes.",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "No entries yet.",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Is this day’s record complete?",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "That’s everything",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Mark incomplete",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "“No spending today” and “not recorded” are kept separate. A day without a record is never treated as $0.",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Complete",
+  "f": "04-daily.js,10-goals.js"
+ },
+ {
+  "s": "Incomplete",
+  "f": "04-daily.js,05-plan.js"
+ },
+ {
+  "s": "Not confirmed complete",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Not recorded",
+  "f": "04-daily.js,06-progress.js,10-goals.js"
+ },
+ {
+  "s": "Enter an amount like 12.50",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Choose a date.",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Choose two different accounts.",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Entry updated.",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Entry added.",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Delete this entry? This can’t be undone.",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Entry deleted.",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Checking",
+  "f": "04-daily.js,05-plan.js"
+ },
+ {
+  "s": "Savings",
+  "f": "04-daily.js,05-plan.js"
+ },
+ {
+  "s": "Calm",
+  "f": "04-daily.js,07-settings.js"
+ },
+ {
+  "s": "Hopeful",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Proud",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Tired",
+  "f": "04-daily.js,07-settings.js"
+ },
+ {
+  "s": "Anxious",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Overwhelmed",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Frustrated",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Sad",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Lonely",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Restless",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Numb",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Prepare what I need tonight",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Ask someone for practical support",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Take a break",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Return to the plan tomorrow",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Rest followed",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "As planned",
+  "f": "04-daily.js,06-progress.js"
+ },
+ {
+  "s": "Smaller",
+  "f": "04-daily.js,06-progress.js"
+ },
+ {
+  "s": "· editing saved check-in",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Checking in for",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "What happened today",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Already-logged items are filled in. Change anything that’s off.",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Nothing besides the spending log was scheduled. An unscheduled day is not a missed one.",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Spending",
+  "f": "04-daily.js,06-progress.js"
+ },
+ {
+  "s": ": {0} in expenses",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "{0} recorded{1}.",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Nothing recorded yet for this day.",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "No spending",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Add an expense",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Add",
+  "f": "04-daily.js,08-rules.js"
+ },
+ {
+  "s": "If you’re not sure, mark it incomplete. Missing days are shown as missing, not $0.",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Mood and energy",
+  "f": "04-daily.js,06-progress.js"
+ },
+ {
+  "s": "Both optional. A low number is as useful as a high one.",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Mood",
+  "f": "04-daily.js,06-progress.js"
+ },
+ {
+  "s": "Energy",
+  "f": "04-daily.js,06-progress.js"
+ },
+ {
+  "s": "A brief reflection",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Or write your own",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Your own response",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "What am I feeling?",
+  "f": "04-daily.js,08-rules.js"
+ },
+ {
+  "s": "What contributed?",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Optional, one sentence",
+  "f": "04-daily.js,08-rules.js"
+ },
+ {
+  "s": "What would be a kind and useful response?",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "One thing I give myself credit for today",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Business isn’t scheduled tomorrow. Choosing an action here schedules it.",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Write a new action",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Leave tomorrow unscheduled",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Next business action",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Action (start with a verb)",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Scheduled training",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Change tomorrow’s session",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Only if your plan calls for it",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Keep as planned",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Save check-in",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Drafts save automatically. Optional fields can stay empty.",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Added. {0} today: {1}.",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Add what “done” looks like for the new action.",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "{0} completed as planned",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "{0} modified",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "{0} skipped",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "{0} without a record",
+  "f": "04-daily.js"
+ },
+ {
+  "s": ", and",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "You planned {0} minutes and completed {1}. What would make the next session easier to finish?",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "“{0}” felt too large. A smaller finish line is ready to set in Plan.",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Tomorrow",
+  "f": "04-daily.js,08-rules.js"
+ },
+ {
+  "s": "Edit business action",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Pick a starting example",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Set a weekly outcome in Plan",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Action",
+  "f": "04-daily.js,08-rules.js"
+ },
+ {
+  "s": "Start with a clear verb: draft, list, send, build",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "What will exist afterward",
+  "f": "04-daily.js,08-rules.js"
+ },
+ {
+  "s": "Something you could point to when it’s done",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Specific date",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Optional. Helps you see where time goes.",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Connects to this week’s outcome",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Add the action and what will exist afterward.",
+  "f": "04-daily.js,08-rules.js"
+ },
+ {
+  "s": "“{0}” is hard to finish. Try something like “Draft the three bullets explaining your dashboard service”.",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Action saved.",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "This action has history. It will be archived so past records stay intact.",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Delete this action?",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Archive",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Done.",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Plan",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "This week",
+  "f": "05-plan.js,08-rules.js"
+ },
+ {
+  "s": "Previous week",
+  "f": "05-plan.js,06-progress.js"
+ },
+ {
+  "s": "Next week",
+  "f": "05-plan.js,06-progress.js"
+ },
+ {
+  "s": "Minutes planned each day, in amber when it’s more than your available time. Tap a day to adjust just that day.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Goals",
+  "f": "05-plan.js,07-settings.js"
+ },
+ {
+  "s": "Savings, revenue, distance, milestones",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Direction, schedule and next actions",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Weekly plan entered",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Not set up yet",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Payday plan, bills and savings",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Small, private, allowed to be unfinished",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Other scheduled tasks",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Recurring or one-off",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "· {0} available",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Add a training session on this date",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Not scheduled this day",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Use the weekly plan for training on this date",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Not scheduled on {0}. It won’t count as missed.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Session for {0} only",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Save for this date",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Changed for {0} only.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "From your plan",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Type",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Not scheduled",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Detail",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "No actions yet. Add one with a visible finish line.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Finished actions ({0})",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Nothing recorded yet.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "e.g. Local service businesses with 2–20 staff",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "e.g. Three conversations with potential clients",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Direction",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Who I want to help",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "What problem I solve",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "My offer or current hypothesis",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Stage",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "One outcome for the next four weeks",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Save direction",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Business block schedule",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "A short, regular block. One next action per block.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Minutes per block",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Save schedule",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Schedule changes apply from today. Past days keep their schedule.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Next actions, in order",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Results",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Milestones, inquiries, clients and revenue, recorded separately from effort.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Direction saved.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Schedule saved from today on.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Record a business result",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Results, not effort",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Milestone",
+  "f": "05-plan.js,13-garden.js"
+ },
+ {
+  "s": "Inquiry",
+  "f": "05-plan.js,07-settings.js"
+ },
+ {
+  "s": "Client",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Revenue",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Revenue only",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Enter an amount like 250.00",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Result recorded.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Delete this result?",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Not yet",
+  "f": "05-plan.js,08-rules.js"
+ },
+ {
+  "s": "Scheduled change: a new weekly plan starts {0}.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Date-specific changes",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "e.g. 2 runs a week for the last month",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "This app records the plan you choose and how training actually went. It doesn’t create a personalized marathon schedule, pace or mileage progression.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "What you know so far",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Leave anything you don’t know blank. It stays unknown.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Race date",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Units",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Miles",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Kilometers",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Current weekly distance",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Longest recent run",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Recent consistency",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Running days available",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Strength-training schedule",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Injury, pain or other limitations",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Do you already have a training plan?",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Plan source",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "e.g. coach, app or book",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Save",
+  "f": "05-plan.js,08-rules.js,16-mindset.js"
+ },
+ {
+  "s": "Weekly plan",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Enter the sessions from the plan you’re following. Rest days count as following the plan.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Applies from",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Save weekly plan",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Earlier days keep the plan they had. Missed sessions are never added to later ones.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Add at least one session or rest day.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Weekly plan saved from {0}.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Not confirmed yet",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "No spending account yet.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "None entered.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Nothing due in this period.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Edit list",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Missing inputs",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Some inputs are missing, so the app can’t check whether a transfer would leave obligations uncovered.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Known obligations aren’t covered yet, so a savings transfer isn’t suggested this period.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Transfer done",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "{0} counted in savings.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Planned, not done yet. It isn’t counted as savings.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Mark transfer completed",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Contribution",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Plan it",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Add your next expected income first.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Call to ask about moving one due date",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Ask to move a due date",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Confirm one unknown amount",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Confirm an unknown amount",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Review one subscription",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Lower one essential estimate",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Lower this period’s savings contribution",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Lower the contribution",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "6. The plan doesn’t balance. Choose one concrete action.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Add it to tomorrow",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "No accounts. You can log spending without them.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "No entries.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Buffer goal, e.g. 500.00",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Buffer goal",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Account name",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Confirmed savings",
+  "f": "05-plan.js,11-analytics.js"
+ },
+ {
+  "s": "First buffer goal",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "A confirmed balance already includes transfers dated on or before it, so nothing is counted twice. Planned transfers don’t count until they’re marked done.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Set goal",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Payday plan",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Work through it on payday or once a week.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "1. Money available now",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Confirm a balance",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "2. Upcoming income",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Add expected income",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "3. Bills, minimum payments and essentials",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Add bill or essential",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "An estimate from what you entered, for {0}. It is not a guaranteed “safe to spend” amount.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "5. Savings contribution for this period",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Accounts",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Cash",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Credit card",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Small money tasks",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Adds it to today as a one-off task.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Recent entries",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Enter an amount like 500.00",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Goal cleared.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Buffer goal set.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Name the account.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Remove this account? Past entries stay in your history.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Remove",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Add an account first.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "What the account shows right now",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Balance",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "As of",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "This replaces earlier estimates for this account. Transfers dated on or before this date are treated as already included.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Enter the balance, e.g. 1250.00",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Balance confirmed.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Expected income",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Unknown",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Name",
+  "f": "05-plan.js,13-garden.js"
+ },
+ {
+  "s": "Expected date",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Add the expected date.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Enter an amount like 1200.00, or leave it blank.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Marked received. Record the deposit as income if you want it in your entries.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Edit",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Add a bill or essential",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Bill",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Minimum payment",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Essential",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Rent, phone, card minimum, groceries…",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Leave blank if unknown",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Due date",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Blank for essentials per period",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Repeats monthly",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Name it.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Enter an amount like 85.00, or leave it blank.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Delete this item? Paid records stay in history.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Bills and essentials",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Marked paid.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Enter an amount, or 0.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "This period’s transfer is already done.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "This would leave known obligations uncovered. You can lower it anytime.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Planned. It counts as savings only once the transfer is done.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Add a checking and a savings account to record the transfer.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Planned savings contribution",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Transfer recorded. Savings updated.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Choose one action.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Done and noted",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Added to tomorrow.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Added to today.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Do the first two minutes of it",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "drawing, painting, crafts…",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Private, unfinished and unrelated to income is all allowed. Logging takes one tap.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Medium",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Days",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Smallest version (min)",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Save from today",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Any marks made. Unfinished is fine.",
+  "f": "05-plan.js,07-settings.js"
+ },
+ {
+  "s": "Art schedule saved from today.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "No other tasks.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Each task needs a verb, a finish line and a time estimate.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Add a task",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Edit task",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "New task",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Part of a goal",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Optional. Ending the goal stops this task.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "None",
+  "f": "05-plan.js,11-analytics.js"
+ },
+ {
+  "s": "Repeats weekly",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "One date",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Changes apply from",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Earlier days keep what was planned.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Stop this task",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "After lunch",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "First two minutes",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Area",
+  "f": "05-plan.js,10-goals.js"
+ },
+ {
+  "s": "Task",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Cue",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Its minutes",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Add the task and what “done” looks like.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Pick at least one day.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Task saved.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Stop scheduling this task from today? Its history stays.",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Delete this task?",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Stop task",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Progress",
+  "f": "06-progress.js,11-analytics.js"
+ },
+ {
+  "s": "This week has been paused so far. Nothing is counted.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "This week hasn’t started.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "What moved forward",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Only what you logged. No interpretation.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Goals · outcomes",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "No record: {0}.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "{0} left out.",
+  "f": "06-progress.js,11-analytics.js"
+ },
+ {
+  "s": "This week so far · scheduled items only",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Completed as planned: {0} of {1} scheduled.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Marked incomplete",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Entries, not confirmed complete",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Five-minute versions",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Planning sessions → scheduled action → done",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Modified sessions",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Skipped sessions",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "+ {0} extra",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Actions",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Spending logs completed",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "{0} of {1} days",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Business sessions as planned",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Business outputs noted",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Training sessions followed",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Art",
+  "f": "06-progress.js,08-rules.js"
+ },
+ {
+  "s": "Check-ins submitted",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Not enough confirmed data",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Not confirmed",
+  "f": "06-progress.js,11-analytics.js"
+ },
+ {
+  "s": "None entered",
+  "f": "06-progress.js,11-analytics.js"
+ },
+ {
+  "s": "Revenue entered",
+  "f": "06-progress.js,11-analytics.js"
+ },
+ {
+  "s": "of {0} planned",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "{0} logged without a distance, so the total is incomplete.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Outcomes",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Confirmed savings change",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Confirmed savings now",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Bills marked paid",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Business results",
+  "f": "06-progress.js,11-analytics.js"
+ },
+ {
+  "s": "Running distance",
+  "f": "06-progress.js,10-goals.js,11-analytics.js"
+ },
+ {
+  "s": "Rest days followed",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Logged effort doesn’t automatically produce these outcomes, and time spent isn’t revenue. Both are shown so you can see each honestly.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Training by day",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Reasons noted",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Business time by category",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "{0} · about {1} total",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "{0} not recorded, so this is not a full-week total.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Details",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Spending recorded",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "{0} in expenses across the days with entries. {1} Transfers between your accounts are excluded.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Day",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Planned",
+  "f": "06-progress.js,11-analytics.js"
+ },
+ {
+  "s": "Check-in",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Copy weekly report for ChatGPT",
+  "f": "06-progress.js,07-settings.js"
+ },
+ {
+  "s": "Weekly review",
+  "f": "06-progress.js,08-rules.js"
+ },
+ {
+  "s": "Planned versus logged distance by day",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Rest ✓",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "(Personal accountability log. Descriptive counts only; please don't infer causes from them.)",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "What moved forward (logged facts):",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "This week's experiment: because I noticed {0}, I changed {1}. Result: {2}.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Expenses recorded: {0} (partial if days are missing).",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Confirmed savings: {0}. Buffer goal: {1}.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Business results: {0}.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": ", plus {0} unscheduled",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Reasons noted for skipped/modified items: {0}.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Weekly review answers:",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "What got in the way",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Smaller/clearer/better scheduled",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Coming financial obligations",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Time for art and enjoyment",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Question for you: based only on this, what is one small, specific change to next week that keeps the plan realistic?",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Weekly report",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Plain text to paste into ChatGPT",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "No",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Include money amounts?",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Nothing is sent anywhere. You choose where to paste it.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Copied.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Selected. Use Copy from the menu.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Shorten the business block from {0} to {1} minutes",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Business sessions were skipped {0} times on scheduled days in the last four weeks.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Make “{0}” smaller",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Skipped {0} times on scheduled days in the last four weeks.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Attach a cue to the spending log",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "“Forgot” came up {0} times.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Attach the spending log to a daily cue",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "{0} days had no spending record.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Remove {0} from the business block",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "{0} had more planned than available time.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "{0} – {1} · 10–15 minutes",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Helped",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Didn’t help",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Not sure",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Didn’t try it",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Last week’s experiment",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Because I noticed {0}, I changed {1}.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Did it help?",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Changes to your commitments",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "The original and the change are both kept. Which explanation fits? Your call; none is assumed.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "No bills entered for the next two weeks.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "No sessions entered.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "My own change",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "No change this week",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Applied",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "What will exist by the end of next week?",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Main outcome",
+  "f": "06-progress.js,08-rules.js"
+ },
+ {
+  "s": "One visible result, e.g. Offer draft shared with one person",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Anything else?",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "What should become smaller, clearer, or better scheduled?",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "What financial obligations are coming?",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Next week’s one main outcome",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Keep going at a maintenance level",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Next week’s one business outcome",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Training scheduled next week",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Edit training plan",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Where is time for art, people and enjoyment?",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Postpone an idea to Later",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Optional. It won’t be scheduled.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "One change for next week",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "One manageable experiment, chosen by default. Suggestions follow simple rules (for example, {0} skips on scheduled days). Targets never rise automatically.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Because I noticed",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "next week I will change",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "An experiment. Next week’s review asks whether it helped.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Save review",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Review saved. One change starts {0}.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Review saved.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "America/Puerto_Rico",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "America/New_York",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "America/Chicago",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "America/Denver",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "America/Los_Angeles",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "America/Santo_Domingo",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "America/Bogota",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "America/Mexico_City",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Europe/Madrid",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "IndexedDB in this browser",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Memory only. Changes will be lost when this page closes.",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "One Day",
+  "f": "07-settings.js,09-lock.js"
+ },
+ {
+  "s": "Settings",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "PIN lock on",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Name, timezone, language, PIN",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Days you’ve already recorded keep their dates if you change this.",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "PIN lock",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Check-in time, weekly review, available time",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "e.g. Work 8–5, free after 6",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Weekly review day",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Suggest a smaller task after this many skips",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "A product rule of thumb, not a scientific threshold. Suggestions appear only in the weekly review and need your OK.",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Available time per day",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Minutes you can realistically give these areas, including training. Leave blank if you don’t know yet.",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Typical workday notes",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Save available time",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "In-app check-in reminder on",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Off",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Show a check-in reminder inside the app",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "This reminder appears only while the app is open, and never during a pause. The app can’t notify you when it’s closed; for that, set a repeating iPhone alarm or Reminder for {0}.",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Email and text reminders aren’t available in this version. They need a server and a verified address, so none are set or simulated.",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Background, font, text color, theme, dimming, blur, text size and motion. You see a preview before anything is saved.",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Personalize",
+  "f": "07-settings.js,12-look.js"
+ },
+ {
+  "s": "{0} on Today",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Hidden",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Paused now",
+  "f": "07-settings.js,14-pause.js"
+ },
+ {
+  "s": "Pause scheduled",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "For trips, illness or a break",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Backup, restore and exports",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "(demo data, kept separately)",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Preview note:",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "this copy runs inside a preview frame. Use the hosted, installed version for daily use, and back up often.",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Last saved {0}.",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "The last save failed. Export a backup now.",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Last backup {0}.",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "No backup yet.",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Where it lives:",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Back up (JSON)",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Restore from backup",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Backups include goals, pauses and companion growth. They don’t include your PIN or your own background photo.",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Spreadsheet exports (CSV)",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Money entries",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Task log",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Training log",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Check-ins",
+  "f": "07-settings.js,11-analytics.js"
+ },
+ {
+  "s": "What stays on this device",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Your records stay on this device, in this browser. They don’t sync to other devices. There is no online account, no tracking, no analytics and no bank connection.",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Clearing this browser’s website data can erase them, and private browsing may not keep them. Back up regularly.",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "The PIN lock keeps the app private from casual viewing. It doesn’t encrypt the stored records; anyone with full access to this phone’s browser data could still read them.",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "This is a single-person app, so there are no other users and no administrator. A shared, multi-user version would need a server with sign-in and roles.",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Open demo mode",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Explore the app with clearly labeled sample data. Your real records are kept apart and untouched.",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "One Day keeps a daily loop: a specific next action, a quick log, a two-minute evening check-in and a short weekly review. Feedback is rule-based and shown openly. It isn’t therapy, financial advice or athletic coaching.",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Reset demo data",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Erase everything on this device",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Deletes every record, goal, pause, companion growth, your PIN and your background photo from this device. It can’t be undone. Export a backup first if you might want it.",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Type DELETE to confirm",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Delete everything",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "That timezone isn’t recognized.",
+  "f": "07-settings.js,14-pause.js"
+ },
+ {
+  "s": "Saved. Recorded days keep their dates.",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Available time saved.",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "The file should be in your Downloads (on iPhone: Files › Downloads). If not, copy the text below and save it in Notes or Files.",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "If no download started, copy the text below and save it somewhere safe, such as a note or a file in iCloud Drive.",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Backup",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "CSV export",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Replaces the data on this device",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Choose a backup file",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Or paste the backup text",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Check backup",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "This isn’t valid JSON. Make sure the whole backup was copied.",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "This backup can’t be restored",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Backup looks good",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Exported {0}. Contains {1} money entries, {2} task records, {3} training logs, {4} check-ins, {5} weekly reviews.",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Restoring replaces everything currently on this device.",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Restoring the same backup twice won’t create duplicates.",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Replace my data with this backup",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Replace all data on this device with the backup? Consider backing up the current data first.",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Replace data",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Backup restored.",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Type DELETE to confirm.",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Reset the demo data?",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Delete every record, your PIN and your photo from this device? This can’t be undone.",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Reset demo",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Demo mode. Sample data only.",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Back to your data.",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "15 min",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "30 min",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "45 min",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Demo",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "5 minutes of drawing",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "1 minute of drawing",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Sample long run",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Checking (sample)",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Savings (sample)",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Paycheck (sample)",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Phone (sample)",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Card minimum (sample)",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Groceries (sample)",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Sample transfer",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Sample note",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Sample inquiry",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "Three offer bullets",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "A draft",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "A chart",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "An outreach message",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "A finished portfolio section",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Daily spending log",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "A realistic business block",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Planned sessions and rest",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Small art invitations",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Financial clarity",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Business",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Training consistency",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Mind",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Made smaller",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Rescheduled",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Taken off that day",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Swapped for an alternative",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Consciously let go",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "First step rewritten",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "A realistic adjustment",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "A recurring scheduling mismatch",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "The task needs clarifying",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "I keep postponing it; worth reconsidering",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "This week:",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Suggested:",
+  "f": "08-rules.js"
+ },
+ {
+  "s": ". Confirm it or pick another.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "What will exist by the end of the week?",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "e.g. Three offer bullets I could send",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Postpone an idea",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "{0} · in this order",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "1 · Your own life first",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Personal plans go in before optional work, so the week’s tradeoffs are visible.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Add a personal commitment",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "2 · One main outcome to move forward",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "3 · Keep going at a maintenance level",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "This week’s one business outcome",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "4 · Later",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Ideas you’re deliberately postponing. They’re never scheduled and never overdue.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Save the week",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Week saved.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Saved to Later.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Saved for after the trial week.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "What action does this make possible?",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Planning counts when it leads somewhere visible.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Draft the three bullets for my dashboard service",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "List bills due before payday",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Prepare what I need",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Next business block",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "When",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Today",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Schedule it",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Progress will show whether planning sessions led to finished actions.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Scheduled{0}.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Your own life today",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Personal commitment",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Friends, dates, family, rest, anything that matters to you",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Dinner with a friend",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "What",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Time",
+  "f": "08-rules.js,14-pause.js"
+ },
+ {
+  "s": "Minutes it takes",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Counts toward that day’s time",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Add what and when.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Added. Optional plans fit around it.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Reschedule",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Reduce",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Let it go",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "e.g. A call instead of dinner",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Reschedule this, reduce it, or consciously let it go?",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "New date",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "It stays in your history as a choice you made, not a miss.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Saved, with the original kept.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Before you start",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Start with the warm-up",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Start the smaller version",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "What action feels possible alongside that feeling?",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Start as planned",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Get support",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Rest instead",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "You don’t need to feel calm or confident to begin. Resting is also a real choice.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Ask a friend to check in after my run",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "What support would help, and from whom?",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Save note",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Noted.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Record today honestly as rest. The plan is still here tomorrow.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Logged as rest.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "I don’t know where to start.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "This feels too big.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "I’m afraid I won’t do it well.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "My attention is caught somewhere else.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "I don’t have the time or resources.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "I’m physically or emotionally depleted.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "What is making this hard right now?",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "First visible action",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Put on your running clothes and begin the planned warm-up. Then decide.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Open a blank doc titled ‘Offer’",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "A doc with one sentence in it",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Define the first visible action",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "First action (a verb)",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Use as today’s first step",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Smaller version: {0}.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Do the warm-up only, then reassess.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Use the smaller version today",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Reduce the scope",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Create a private rough version",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "No one sees it. Done when something messy exists.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Start a rough version",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "What’s occupying me?",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Begin now",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Not now",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Sketch the chart on paper instead",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Alternative for today",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Do this instead today",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "No day this week has room by your available-time settings.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "A feasible alternative, or a new time",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "A smaller commitment",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Choose what you need",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Support",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Private rough version",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Add the first action and what will exist afterward.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "First step added to today.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Done as an alternative",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Alternative added. The original stays on record.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Finished “{0}”{1}.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": ", {0} already done",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "{0} led to a scheduled action{1}.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Marked {0} paid.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Confirmed {0}.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Moved {0} into savings.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Recorded spending on {0}.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Completed {0}.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Followed {0}.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Showed up for {0}.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Made time for art on {0}.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Returned after {0}.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Kept {0}.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Recorded a business result: {0}{1}.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Checked in on {0}.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Nothing logged yet this week.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Can I understand today’s plan quickly?",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Does it fit my available time?",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Can I log honestly without much effort?",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Can I return after a missed day?",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "What this first week answers",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Which actions need to become clearer or smaller?",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Not savings, revenue, fitness or mood. Those take longer than a week.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "First-week check · 2 minutes",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Five questions about whether the app fits your life.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Answer",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "First-week check",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "About the app, not about you",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Savings, revenue, fitness and mood aren’t part of this check.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Saved. Any “not yet” is a design fix, not a personal one.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Trial week, day {0} of 7. Capture ideas for the app here and keep using the current workflow. Bugs and accessibility problems can be fixed anytime.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Capture app ideas here instead of redesigning in the moment. Bugs and accessibility problems can be fixed anytime.",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "An idea for the app",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Later improvements",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Use exactly 6 digits.",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Avoid one repeated digit.",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Avoid a straight run like 123456.",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Avoid a repeating pattern.",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Too many attempts. Try again in {0} seconds.",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Show",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "New 6-digit PIN",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Repeat new PIN",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Reset your PIN",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Enter the recovery code you saved when you set up the PIN, then choose a new PIN.",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Recovery code",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Reset PIN and unlock",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Back to PIN",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Lost the recovery code too?",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Without the PIN or the code, the only option is to erase the data on this device and start over. A JSON backup can be restored afterward.",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Erase this device’s data",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Erase and start over",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "This deletes every record and the PIN on this device. It can’t be undone. If you have a backup file you can restore it afterward.",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Type ERASE to confirm",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Erase everything",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Cancel",
+  "f": "09-lock.js,12-look.js"
+ },
+ {
+  "s": "{0} left before a short wait.",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Unlock",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Forgot PIN?",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "This PIN is a convenience lock for this device. It hides the app from casual viewing but doesn’t encrypt your records or protect them from someone with full access to the phone.",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Hide",
+  "f": "09-lock.js,16-mindset.js"
+ },
+ {
+  "s": "Enter your 6 digits.",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "That PIN didn’t match. {0} left before a short wait.",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "The two new PINs don’t match.",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "That recovery code didn’t match.",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "PIN reset. Your old recovery code no longer works; here is a new one.",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Type ERASE to confirm.",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "This browser can’t create a secure PIN hash here (it needs a secure https page). The lock is unavailable in this copy.",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Add a 6-digit PIN to open the app on this device. It keeps the app private from casual viewing.",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "It is not an online account and doesn’t encrypt your records. Signing in from other devices would need a server, which this version doesn’t have.",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Set up a PIN",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "1 minute",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "5 minutes",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "15 minutes",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "30 minutes",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Only when I lock it",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "PIN lock is on for",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "on this device.",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Lock after no activity for",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Lock when I leave the app",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Lock now",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Change PIN",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "New recovery code",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Turn off PIN",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "After {0} wrong attempts the lock waits 30 seconds, then longer each time. Only a salted hash of the PIN is stored, never the PIN, and it isn’t included in backups.",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Lock settings saved.",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Username",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Shown on the lock screen. A local profile name, not an online account.",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Current PIN",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Repeat PIN",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Make a new code",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Save PIN",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Too many attempts. Wait {0} seconds.",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "The current PIN didn’t match.",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "PIN lock turned off.",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Your old recovery code no longer works.",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Add a username.",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "The two PINs don’t match.",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "PIN saved.",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "PIN changed.",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Save your recovery code",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "{0} If you forget your PIN, this code lets you set a new one. It’s shown only now.",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Keep it somewhere other than this app, such as a password manager or a note on another device.",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "I saved the code",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Tick “I saved the code” first.",
+  "f": "09-lock.js"
+ },
+ {
+  "s": "Confirmed savings ($)",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Business revenue ($)",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "A number I update",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Active",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Later",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Maintaining",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Ended",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Current value not recorded yet",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "{0} of {1} milestones",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Ongoing · {0} reached",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Ongoing · no finish line",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "{0}% of the way from start to target",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Archived projects",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "One goal can be this week’s focus. The others keep small, maintained routines, and anything waiting goes to Later.",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "That’s more than you have. Consider moving a goal to Later.",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "No goals yet. A goal can be a number (savings, revenue, distance), a few milestones, or something you keep doing.",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Add a goal",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Edit goal",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "A number",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Milestones",
+  "f": "10-goals.js,15-report.js"
+ },
+ {
+  "s": "Ongoing",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "e.g. Build a $1,000 savings buffer",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "e.g. No savings buffer yet",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "e.g. pages, clients",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "e.g. First paid client",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Goal",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Where you’re starting from",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Optional. Kept for the completion report.",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "How you’ll know",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Target",
+  "f": "10-goals.js,11-analytics.js"
+ },
+ {
+  "s": "Starting value",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Unit",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Savings use your confirmed balances. Revenue and distance count what you log from the start date.",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Milestones, one per line",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Ongoing goals have no finish line. Milestones along the way are still celebrated.",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Status",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Make this week’s focus",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Name the goal.",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Enter a target above zero, or choose Milestones.",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Add at least one milestone, or choose Ongoing.",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Saved. Confirm a savings balance in Plan › Money so progress can be measured.",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Goal saved.",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Delete this goal? Your logged records stay; only the goal and its milestones are removed.",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Delete goal",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "No percentage until both the start and current values are recorded.",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Start",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Now",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Update the number",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Record",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "None yet.",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Add a milestone",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "You’ve reached what this goal set out to do.",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Mark it complete when it feels finished. Nothing changes until you do.",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Mark complete",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Reopen with a fresh schedule",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Reopening starts from today. Days while it was ended stay unscheduled, so nothing is owed.",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Completion report",
+  "f": "10-goals.js,15-report.js"
+ },
+ {
+  "s": "Mark complete anyway",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Make active",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Move to Later",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "More options",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "End this project",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Ending keeps all history. Deleting is separate, under Edit.",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Enter a number.",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Recorded.",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Milestone reached. The goal keeps going.",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Milestone reached.",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Mark “{0}” complete? It moves to Complete, and you’ll see a report of how you got here.",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "My priorities changed.",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "This goal no longer fits.",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "The time or resources required are too much.",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "I want to pursue a different approach.",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Other.",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Prefer not to say.",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Worked on from {0} to {1}.",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "{0} completed and {1} smaller actions in {2}.",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "{0} reached.",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "{0} no longer scheduled.",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Ready to end this project?",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Your priorities can change. You can pause, adjust the goal, or end this project while keeping your progress.",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Keep working",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Adjust the goal",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Pause",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "End project",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "What influenced your decision?",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Continue",
+  "f": "10-goals.js,15-report.js,16-mindset.js"
+ },
+ {
+  "s": "Skip",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Are you sure you want to end this project?",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "This will stop its future tasks and reminders. Your history and progress will remain available, and you can reopen it later.",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Keep project",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Confirm and end",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Project ended and archived. Its history is kept.",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Reopened from today. Nothing from the ended days is owed.",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Range",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "Completed, smaller and skipped scheduled actions over time",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "Completed",
+  "f": "11-analytics.js,15-report.js"
+ },
+ {
+  "s": "No record",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "· nothing scheduled",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "P paused",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "Tap a bar for its numbers.",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": ", and {0} paused.",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "The most followed period was {0}.",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "Nothing scheduled",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": ", {0} no record",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "Showing the last 8 periods.",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "No area had anything scheduled in this range.",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "Without a record: {0}.",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "Nothing planned or logged.",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "{0} logged · {1} planned",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "; {0} had no distance entered",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "Business time",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "Training sessions",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "Art sessions",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "Nothing planned or logged in this range.",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "Logged",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "No goals yet. Add one in Plan to see progress toward it here.",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "Milestones reached",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "Goals completed",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "Confirmed savings changed by {0} in this range.",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "Savings change can’t be measured without a confirmed balance before and after.",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "Confirmed savings at the end of each period",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "Gaps mean no confirmed balance for that period.",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "Confirmed savings went from {0} ({1}) to {2} ({3}){4}.",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "Previous month",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "Next month",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "This period hasn’t started.",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "Outcomes · what changed",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "Savings toward your target",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "Activity · what you did",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "Scheduled actions over time",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "Consistency by goal",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "Planned and logged effort",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "Water lilies",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Original study in the style of Claude Monet, made for this app",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Afternoon by the river",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Original pointillist study in the style of Georges Seurat, made for this app",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Swirling night",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Original study in the style of Vincent van Gogh, made for this app",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Plain lavender",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Morning mist",
+  "f": "12-look.js"
+ },
+ {
+  "s": "linear-gradient(160deg,#F3EEF8,#E3ECF2 60%,#F2E6EE)",
+  "f": "12-look.js"
+ },
+ {
+  "s": "linear-gradient(160deg,#1F1B2B,#1B2230 60%,#261C27)",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Paper",
+  "f": "12-look.js"
+ },
+ {
+  "s": "My own photo",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Your image, stored only on this device",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Atkinson Hyperlegible",
+  "f": "12-look.js"
+ },
+ {
+  "s": "\"Atkinson Hyperlegible\"",
+  "f": "12-look.js"
+ },
+ {
+  "s": "-apple-system, \"SF Pro Text\", system-ui",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Lexend",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Lexend:wght@400;700",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Inter",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Inter:wght@400;700",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Nunito",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Nunito:wght@400;700",
+  "f": "12-look.js"
+ },
+ {
+  "s": "IBM Plex Sans",
+  "f": "12-look.js"
+ },
+ {
+  "s": "\"IBM Plex Sans\"",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Lora",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Lora:wght@400;700",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Literata",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Literata:opsz,wght@7..72,400;7..72,700",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Source Serif",
+  "f": "12-look.js"
+ },
+ {
+  "s": "\"Source Serif 4\"",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Source+Serif+4:opsz,wght@8..60,400;8..60,700",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Fraunces",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Default plum-gray",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Deep plum",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Charcoal",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Midnight blue",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Forest",
+  "f": "12-look.js"
+ },
+ {
+  "s": "{0}, -apple-system, \"Segoe UI\", system-ui, sans-serif",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Match device",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Light",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Dark",
+  "f": "12-look.js"
+ },
+ {
+  "s": "{0} · {1} · {2} · {3}% text",
+  "f": "12-look.js"
+ },
+ {
+  "s": "A plain background, easiest to read.",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Preview live. Nothing is kept until you apply.",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Choose a different photo",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Soften the background",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Blur the background",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Text size",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Reduce motion",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Preview",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Record today’s spending",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Done when: every purchase is entered.",
+  "f": "12-look.js"
+ },
+ {
+  "s": "About 2 min.",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Background",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Theme",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Font",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Fonts other than the first, second and last download from Google Fonts the first time you pick them.",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Text color",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Only colors with strong contrast on the cards (7:1 or better, in light and dark) are offered.",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Motion",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Apply",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Restore default",
+  "f": "12-look.js"
+ },
+ {
+  "s": "That image couldn’t be read. Try a JPEG or PNG.",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Look saved.",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Default restored in the preview. Tap Apply to keep it.",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Bonsai",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Garden",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Farm",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "A seed in its pot",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "First sprout",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Two leaves",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "A small stem",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "First branch",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Second branch",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "A young trunk",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Fuller canopy",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "A third branch",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Shaped crown",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Thick trunk",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Moss at the base",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "First blossoms",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Mature bonsai",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Old, steady bonsai",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Turned soil",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "First shoots",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Seedlings",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Green rows",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "First bud",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "First flower",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "A few blooms",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "A border",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Climbing vine",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Full beds",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "A small path",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Bees visiting",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "A bench",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Overflowing garden",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "A garden that knows you",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "A cleared field",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "First furrow",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Seeds planted",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Sprouts",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "One green row",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Two rows",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "A fence",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Three rows",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "A small barn",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Golden crop",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "An orchard tree",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "A second field",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "A windmill",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "A full harvest",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "A farm with history",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "First chapter",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Every record is a leaf, even the small ones.",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Smaller versions still feed the roots.",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Rest days count. Roots grow in the quiet.",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "One action today is enough to grow.",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Nothing here needs to be perfect to grow.",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "A five-minute version is still water and light.",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "What you logged this week is already part of the plant.",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Steady beats big. The trunk thickens slowly.",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Coming back is part of growing.",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "The plan bends; the plant keeps every ring.",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Growth from today stays, whatever tomorrow looks like.",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "You only need to begin the next small thing.",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Resting with you during the pause.",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Resting. It will be here when you are.",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Your garden is ready when you are. Continue growing, or begin a new chapter?",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Continue growing",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Begin a new chapter",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Everything grown so far is kept",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "A new season for the same plant",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "A new plot beside it",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "e.g. Winter chapter",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Kind",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Begin",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "A new season begins. Everything grown is still here.",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "A new plot. The first one is kept in your history.",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Daily records",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Business result",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Goal completed",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "{0} growth so far. The next stage comes at {1}.",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "{0} growth. Fully grown, and it keeps every ring.",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Earlier chapters",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Completed actions give 2, smaller versions and rest days 1, a check-in 1, up to {0} a day. Milestones, business results and finished goals add more. Growth is never taken away; quiet days only let it rest, and paused days don’t count.",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Show the companion on Today",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Show a daily message",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Gentle movement",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "A small living companion on Today that grows from what you record. It never dies or shames; quiet days only let it rest.",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Kind for this chapter",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Save companion",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Everything",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "Welcome back. Resume your plan or adjust your first day?",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "Your pause ended {0}. Nothing from the paused days is owed, and everything you recorded is still here. The plan stays paused until you choose.",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "Resume my plan",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "Adjust my first day",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "Extend the pause",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "Nothing is scheduled and nothing is owed. Your companion rests too.",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "Paused areas have nothing scheduled. Everything else continues.",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "{0} You can still log anything you feel like.",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "Extend or change",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "End now",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "Pause scheduled: {0}, {1} to {2}.",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "Change",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "Scheduled",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "Cancel pause",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "End early",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "Plan a pause",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "Pause the whole routine or selected areas for a trip, illness or a break. Paused days have no reminders, build no backlog and aren’t counted in your progress. Records are kept.",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "Reminder when a pause ends",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "An email or text at the end of a pause isn’t available in this version. Sending one needs a server and a verified email address or phone number, and this app has neither, so no reminder is set or pretended. When you open the app after the pause, it asks before anything resumes.",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "Change pause",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "Selected areas",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "Start pause",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "What to pause",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "The evening check-in continues unless you pause everything.",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "Starts",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "Ends",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "Timezone for these times",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "Use the timezone you’ll be in when the pause ends.",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "If a pause starts after noon, that day stays scheduled. The day it ends is yours to start fresh.",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "Pick at least one area, or pause everything.",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "Choose a start and end date.",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "The end needs to be after the start.",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "The end time has already passed. Choose a later time, or end the pause instead.",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "This overlaps another pause. Change that one instead.",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "Paused. Nothing is owed while you’re away.",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "Pause scheduled.",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "End the pause now and go back to your plan from today?",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "End pause",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "Pause cancelled.",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "Welcome back. Today is ready.",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "You began “{0}” on {1}{2}.",
+  "f": "15-report.js"
+ },
+ {
+  "s": ", and {0} of those were smaller versions you chose instead of skipping",
+  "f": "15-report.js"
+ },
+ {
+  "s": "Over {0} you showed up {1} in {2}{3}.",
+  "f": "15-report.js"
+ },
+ {
+  "s": "There were {0}, and you came back after them.",
+  "f": "15-report.js"
+ },
+ {
+  "s": "You adjusted the plan {0} rather than abandoning it.",
+  "f": "15-report.js"
+ },
+ {
+  "s": "You reached {0}, the first on {1}.",
+  "f": "15-report.js"
+ },
+ {
+  "s": "The number moved from {0} to {1}.",
+  "f": "15-report.js"
+ },
+ {
+  "s": "This happened because of those actions, one record at a time.",
+  "f": "15-report.js"
+ },
+ {
+  "s": "This report only shows what was recorded, so some of your work may not appear here.",
+  "f": "15-report.js"
+ },
+ {
+  "s": "You named this intention clearly, and then you acted on it {0}. Clarity pointed the way; the actions got you here.",
+  "f": "15-report.js"
+ },
+ {
+  "s": "Completed, smaller and skipped actions by week during this goal",
+  "f": "15-report.js"
+ },
+ {
+  "s": "P marks a week that was mostly paused.",
+  "f": "15-report.js"
+ },
+ {
+  "s": ", {0} paused",
+  "f": "15-report.js"
+ },
+ {
+  "s": "{0} · {1} to {2} ({3}{4})",
+  "f": "15-report.js"
+ },
+ {
+  "s": "Milestones:",
+  "f": "15-report.js"
+ },
+ {
+  "s": "Actions in {0}: {1} completed, {2} smaller versions, {3} skipped",
+  "f": "15-report.js"
+ },
+ {
+  "s": "Adjustments:",
+  "f": "15-report.js"
+ },
+ {
+  "s": "({0} paused)",
+  "f": "15-report.js"
+ },
+ {
+  "s": "Starting point",
+  "f": "15-report.js"
+ },
+ {
+  "s": "Measured change",
+  "f": "15-report.js"
+ },
+ {
+  "s": "Obstacles and adjustments",
+  "f": "15-report.js"
+ },
+ {
+  "s": "Maintain what you built",
+  "f": "15-report.js"
+ },
+ {
+  "s": "Set a new milestone",
+  "f": "15-report.js"
+ },
+ {
+  "s": "Rest and celebrate",
+  "f": "15-report.js"
+ },
+ {
+  "s": "Started",
+  "f": "15-report.js"
+ },
+ {
+  "s": "Elapsed",
+  "f": "15-report.js"
+ },
+ {
+  "s": "Completed actions",
+  "f": "15-report.js"
+ },
+ {
+  "s": "Smaller versions",
+  "f": "15-report.js"
+ },
+ {
+  "s": "Check-ins in this period",
+  "f": "15-report.js"
+ },
+ {
+  "s": "Week by week",
+  "f": "15-report.js"
+ },
+ {
+  "s": "Include intention language",
+  "f": "15-report.js"
+ },
+ {
+  "s": "What next?",
+  "f": "15-report.js"
+ },
+ {
+  "s": "Nothing is created unless you choose it.",
+  "f": "15-report.js"
+ },
+ {
+  "s": "Export report",
+  "f": "15-report.js"
+ },
+ {
+  "s": "Emailing the report isn’t available in this version; it would need a sending service. Export it and share it however you like.",
+  "f": "15-report.js"
+ },
+ {
+  "s": "Choose one, or close the report.",
+  "f": "15-report.js"
+ },
+ {
+  "s": "Enjoy it. Nothing new is scheduled.",
+  "f": "15-report.js"
+ },
+ {
+  "s": "Name the next milestone",
+  "f": "15-report.js"
+ },
+ {
+  "s": "Tony Robbins",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Mel Robbins",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Jay Shetty",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Alex Hormozi",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Joe Dispenza",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Dr. Nicole LePera",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "James Clear",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Rob Dial",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Steven Bartlett",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Lewis Howes",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Simon Sinek",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Gary Vaynerchuk",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Tim Ferriss",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Brendon Burchard",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Robin Sharma",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Podcast",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Interview",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Video",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Article",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Exercise",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Newsletter",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Free webinar",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Free event",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Free course",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Free book or excerpt",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Following through when motivation drops",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Building a data analytics business",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Financial habits",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Managing competing goals",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Sustainable discipline",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Creativity and enjoyment",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Emotional well-being",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Habits",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Business in general",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Creator’s opinion or framework",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Promotional claim",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Supported by cited research",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Evidence uncertain",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Not a Mindset edition file.",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Edition id missing.",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Edition update time missing.",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Items missing.",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "{0} is from a creator not on the roster.",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "{0} needs a direct https source link.",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "{0} needs its original publication date.",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "{0} isn’t marked as free.",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "{0} needs its signup requirement described.",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "{0} has an unknown type.",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "{0} needs a short factual summary.",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "{0} has a claim without a valid label or research source.",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "“Try one thing” needs text and who wrote it.",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "The edition file couldn’t be reached ({0}).",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "No new edition. You have the latest one.",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "This week’s edition was corrected by the curator.",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "New edition loaded.",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "The check failed.",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Update failed. The previous edition is kept.",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "New",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Relates to {0}.",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Why it may help:",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Outside the interests you chose.",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Saved",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Free",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Open source ↗",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Updated weekly",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Mindset",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "None yet",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Last check failed:",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "The previous edition is kept.",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Last successful update:",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Next scheduled update:",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Not scheduled. Automatic weekly updates need a server, which this app doesn’t have yet.",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Check for a new edition (manual)",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "No edition has been loaded yet. Each edition is curated by the app owner from the creators below, with free resources only, real dates and direct links.",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "No relevant new resources this week. Nothing older is relabeled as new.",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "New this week",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Worth revisiting",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Your interests",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "{0} chosen",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Save interests",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Interests change the order and the “why it may help” notes. They don’t change who is curated.",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Nothing saved yet.",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Show {0} again",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Saved and hidden",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "{0} saved · {1} hidden",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Curated creators",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "{0} chosen by the app owner",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "This list is set by the app owner and can’t be changed in the app. Research cited to check a claim is linked as a source, never added as a creator. Popularity isn’t evidence: claims are labeled as opinion, promotion or research-supported.",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Tell me on Today when a new edition is loaded",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Off unless you turn it on, and shown once per edition. It appears inside the app only; a phone notification while the app is closed would need a push server.",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Instructions from the creator",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "An exercise written for this app, not by the creator",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": ", connected to “{0}” ({1})",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Saved for later",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Added to your plan",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Replaced an optional task",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Try one thing this week · optional",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "{0}{1}. {2} It may or may not help; try it and see.",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "What is one thing you want to apply before consuming more?",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Save for later",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Add to my weekly plan",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Replace an optional task",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Hidden. You can show it again below.",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Interests saved.",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Open Mindset",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Dismiss",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Saved to Later. Nothing was scheduled.",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Add “{0}” to your plan on {1}, about {2} minutes? Nothing else changes.",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Add to my plan",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Tried once, any amount.",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Added to {0}.",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Choose one this week",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "There are no optional tasks left this week to replace. You can add it to your plan instead.",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "The original stays in your history as replaced, and the exercise takes its place that day.",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Choose a task first.",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Replace “{0}” on {1} with “{2}”?",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Replace task",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Replaced for {0}.",
+  "f": "16-mindset.js"
+ }
+]

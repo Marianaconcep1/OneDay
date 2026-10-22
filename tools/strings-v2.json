@@ -1,0 +1,278 @@
+[
+ {
+  "s": ", plus {0}",
+  "f": "02-model.js"
+ },
+ {
+  "s": "{0} due {1}",
+  "f": "02-model.js"
+ },
+ {
+  "s": "Smaller version of: {0}",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Done when: {0}",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "About 2 minutes · usually around {0}",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Tomorrow · {0}",
+  "f": "03-ui.js,04-daily.js"
+ },
+ {
+  "s": "Set up {0}",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Today uses the smaller versions.{0}",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "{0} · saves {1}",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Move “{0}” to {1}",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "· Smaller version: {0}",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "· Connects to: {0}",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Move to {0}",
+  "f": "03-ui.js,08-rules.js"
+ },
+ {
+  "s": "Training · {0}",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "From{0}",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "To{0}",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Money · {0}",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Entries for {0}",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Yesterday · {0}",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Today · {0}",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "Week of {0}",
+  "f": "05-plan.js,08-rules.js"
+ },
+ {
+  "s": "{0}{1} planned{2}",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "− Planned savings contribution{0}",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "today through the day before {0}",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "4. What must be covered before {0}",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Account{0}",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "{0} minutes of {1}",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "{0} minute{1} of {2}",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Unscheduled days aren’t counted. A followed rest day counts as following the plan.{0}",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "{0} of {1}",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "{0} of {1} days{2}",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Top row mood, bottom row energy, 1–5. “—” means no value was recorded, which is different from a low score. “P” is a paused day. {0}",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "One Day weekly report · {0} to {1}",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "- Chosen adjustment for next week: {0}",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Due in the next two weeks: {0}",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Check-ins {0}/{1} · Spending logs {2}/{3} · Training followed {4}/{5}",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "What repeatedly got in the way? {0}",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "{0}. Areas: {1}",
+  "f": "07-settings.js"
+ },
+ {
+  "s": "for {0}",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "{0} of {1}{2}",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "This week: {0} planned of {1} available.{2}",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "{0} · {1} · since {2}",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Ended {0}",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Nothing was scheduled in this range{0}",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "{0} of {1} scheduled items were completed as planned and {2} in a smaller version. {3} were skipped and {4} have no record.{5}{6}",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "Followed (completed or smaller) of scheduled. “·” means nothing was scheduled, which isn’t a miss.{0}",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "{0} {1} of {2}",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": ", toward a target of {0}",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "Since {0}",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "Activity and outcomes are shown separately: effort doesn’t automatically produce results, and results can lag behind effort. Paused days and unscheduled days are left out. {0}",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "{0}px",
+  "f": "12-look.js"
+ },
+ {
+  "s": "Open your {0}",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Season {0}",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Plot {0}",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Paused · {0}",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "Resting until {0}",
+  "f": "14-pause.js"
+ },
+ {
+  "s": "{0}, {1} to {2}",
+  "f": "14-pause.js"
+ },
+ {
+  "s": ", starting from: {0}",
+  "f": "15-report.js"
+ },
+ {
+  "s": "Week of {0}: {1} {2}",
+  "f": "15-report.js"
+ },
+ {
+  "s": "GOAL COMPLETED: {0}",
+  "f": "15-report.js"
+ },
+ {
+  "s": "Starting point: {0}",
+  "f": "15-report.js"
+ },
+ {
+  "s": "Obstacles noted: {0}",
+  "f": "15-report.js"
+ },
+ {
+  "s": "{0} · completed {1}",
+  "f": "15-report.js"
+ },
+ {
+  "s": "Duplicate or missing id: {0}",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "The edition file didn’t pass checks: {0}",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Disclosure:",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Published {0}{1}",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Edition {0} · {1}",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "That’s the whole edition. {0}",
+  "f": "16-mindset.js"
+ }
+]

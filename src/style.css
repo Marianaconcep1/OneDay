@@ -349,6 +349,8 @@ input[type="range"] { width: 100%; min-height: 36px; accent-color: var(--slate);
 .claim-promotional .pill { background: var(--mod-soft); color: var(--mod); }
 .ms-end { text-align: center; padding-block: 8px; }
 .tab span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+html:not([lang="en"]) .tab { font-size: 10.5px; letter-spacing: -.02em; padding: 0 1px; min-width: 0; }
+html:not([lang="en"]) .tab span { overflow: visible; text-overflow: clip; white-space: normal; text-align: center; line-height: 1.1; }
 
 /* ---------- Welcome: envelope, letter, profile setup ---------- */
 .welcome { position: relative; min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px; padding-block: 32px; }

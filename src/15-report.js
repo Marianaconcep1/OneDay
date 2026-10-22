@@ -43,7 +43,7 @@ function reportMessage(g, r) {
   if (g.kind === 'target') { const p = goalProgress(g); if (p.cur != null && p.st != null) parts.push(`The number moved from ${goalFmt(g, p.st)} to ${goalFmt(g, p.cur)}.`); }
   parts.push(shown ? 'This happened because of those actions, one record at a time.' : 'This report only shows what was recorded, so some of your work may not appear here.');
   if (S.settings.manifest) parts.push(`You named this intention clearly, and then you acted on it ${plural(shown, 'time')}. Clarity pointed the way; the actions got you here.`);
-  return parts.join(' ');
+  return parts.map((x) => trText(x)).join(' ');
 }
 function reportChart(r) {
   const W = 320, H = 110, padL = 22, padB = 18, gap = 2;
@@ -78,7 +78,7 @@ function reportText(g, r) {
   if (r.changes.length) { L.push('Adjustments:'); r.changes.slice(0, 12).forEach((c) => L.push(`  - ${c.title}: ${CHANGE_KIND[c.kind] || c.kind}${c.to ? ' → ' + c.to : ''} (${dMD(c.date)})`)); }
   L.push('', reportMessage(g, r));
   if (g.next) L.push('', 'Next: ' + g.next);
-  return L.join('\n');
+  return L.map((x) => { const m = /^(\s*- )?([\s\S]*)$/.exec(x); return (m[1] || '') + trText(m[2]); }).join('\n');
 }
 A.reportOpen = (el) => openReport(el.dataset.id);
 function openReport(id) {

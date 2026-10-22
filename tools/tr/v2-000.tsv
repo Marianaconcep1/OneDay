@@ -1,0 +1,69 @@
+0	, más {0}	, più {0}	, plus {0}
+1	{0} vence el {1}	{0} scade il {1}	{0} dû le {1}
+2	Versión más pequeña de: {0}	Versione più piccola di: {0}	Version plus petite de : {0}
+3	Listo cuando: {0}	Fatto quando: {0}	Terminé quand : {0}
+4	Unos 2 minutos · normalmente cerca de las {0}	Circa 2 minuti · di solito verso le {0}	Environ 2 minutes · en général vers {0}
+5	Mañana · {0}	Domani · {0}	Demain · {0}
+6	Configurar {0}	Imposta {0}	Configurer {0}
+7	Hoy usa las versiones más pequeñas.{0}	Oggi usa le versioni più piccole.{0}	Aujourd’hui utilise les versions plus petites.{0}
+8	{0} · ahorra {1}	{0} · risparmia {1}	{0} · fait gagner {1}
+9	Mover “{0}” al {1}	Sposta “{0}” a {1}	Déplacer « {0} » au {1}
+10	· Versión más pequeña: {0}	· Versione più piccola: {0}	· Version plus petite : {0}
+11	· Se conecta con: {0}	· Collegato a: {0}	· Lié à : {0}
+12	Mover al {0}	Sposta a {0}	Déplacer au {0}
+13	Entrenamiento · {0}	Allenamento · {0}	Entraînement · {0}
+14	=	=	=
+15	=	=	=
+16	Dinero · {0}	Denaro · {0}	Argent · {0}
+17	Registros del {0}	Voci del {0}	Saisies du {0}
+18	Ayer · {0}	Ieri · {0}	Hier · {0}
+19	Hoy · {0}	Oggi · {0}	Aujourd’hui · {0}
+20	Semana del {0}	Settimana del {0}	Semaine du {0}
+21	{0}{1} planificado{2}	{0}{1} pianificati{2}	{0}{1} prévu{2}
+22	− Aporte a ahorros planificado{0}	− Contributo ai risparmi pianificato{0}	− Versement d’épargne prévu{0}
+23	desde hoy hasta el día antes del {0}	da oggi fino al giorno prima del {0}	d’aujourd’hui à la veille du {0}
+24	4. Lo que debe cubrirse antes del {0}	4. Cosa va coperto prima del {0}	4. Ce qui doit être couvert avant le {0}
+25	=	=	=
+26	{0} minutos de {1}	{0} minuti di {1}	{0} minutes de {1}
+27	=	=	=
+28	Los días no programados no cuentan. Un día de descanso cumplido cuenta como seguir el plan.{0}	I giorni non in programma non contano. Un giorno di riposo rispettato conta come rispetto del piano.{0}	Les jours non prévus ne comptent pas. Un jour de repos respecté compte comme suivre le plan.{0}
+29	{0} de {1}	{0} su {1}	{0} sur {1}
+30	{0} de {1} días{2}	{0} su {1} giorni{2}	{0} sur {1} jours{2}
+31	Fila de arriba, ánimo; fila de abajo, energía; de 1 a 5. “—” significa que no se registró un valor, que no es lo mismo que una puntuación baja. “P” es un día en pausa. {0}	Riga in alto umore, riga in basso energia, da 1 a 5. “—” significa nessun valore registrato, diverso da un punteggio basso. “P” è un giorno in pausa. {0}	Ligne du haut l’humeur, ligne du bas l’énergie, de 1 à 5. « — » signifie aucune valeur notée, ce qui n’est pas une note basse. « P » est un jour en pause. {0}
+32	Informe semanal de One Day · {0} al {1}	Resoconto settimanale di One Day · dal {0} al {1}	Bilan hebdomadaire One Day · du {0} au {1}
+33	- Ajuste elegido para la próxima semana: {0}	- Modifica scelta per la prossima settimana: {0}	- Ajustement choisi pour la semaine prochaine : {0}
+34	Vence en las próximas dos semanas: {0}	In scadenza nelle prossime due settimane: {0}	À payer dans les deux prochaines semaines : {0}
+35	Revisiones {0}/{1} · Registros de gastos {2}/{3} · Entrenamiento cumplido {4}/{5}	Check-in {0}/{1} · Registrazioni spese {2}/{3} · Allenamento rispettato {4}/{5}	Bilans {0}/{1} · Suivis des dépenses {2}/{3} · Entraînement suivi {4}/{5}
+36	¿Qué se interpuso una y otra vez? {0}	Cosa si è messo di mezzo più volte? {0}	Qu’est-ce qui a gêné à plusieurs reprises ? {0}
+37	{0}. Áreas: {1}	{0}. Aree: {1}	{0}. Domaines : {1}
+38	para {0}	per {0}	pour {0}
+39	{0} de {1}{2}	{0} su {1}{2}	{0} sur {1}{2}
+40	Esta semana: {0} planificado de {1} disponibles.{2}	Questa settimana: {0} pianificati su {1} disponibili.{2}	Cette semaine : {0} prévu sur {1} disponible.{2}
+41	{0} · {1} · desde el {2}	{0} · {1} · dal {2}	{0} · {1} · depuis le {2}
+42	Terminado el {0}	Concluso il {0}	Terminé le {0}
+43	No había nada programado en este rango{0}	Niente era in programma in questo periodo{0}	Rien n’était prévu sur cette période{0}
+44	{0} de {1} acciones programadas se completaron según el plan y {2} en una versión más pequeña. {3} se omitieron y {4} no tienen registro.{5}{6}	{0} su {1} azioni in programma sono state completate come previsto e {2} in una versione più piccola. {3} sono state saltate e {4} non hanno registrazione.{5}{6}	{0} sur {1} éléments prévus ont été faits comme prévu et {2} en version plus petite. {3} ont été sautés et {4} n’ont pas de saisie.{5}{6}
+45	Cumplido (completado o más pequeño) de lo programado. “·” significa que no había nada programado, lo cual no es una falta.{0}	Rispettati (completati o ridotti) su quelli in programma. “·” significa niente in programma, che non è una mancanza.{0}	Suivis (faits ou allégés) sur les éléments prévus. « · » signifie rien de prévu, ce qui n’est pas un manqué.{0}
+46	{0} {1} de {2}	{0} {1} su {2}	{0} {1} sur {2}
+47	, hacia un objetivo de {0}	, verso un traguardo di {0}	, vers une cible de {0}
+48	Desde el {0}	Dal {0}	Depuis le {0}
+49	La actividad y los resultados se muestran por separado: el esfuerzo no produce resultados automáticamente, y los resultados pueden tardar más que el esfuerzo. Los días en pausa y los no programados se dejan fuera. {0}	Attività e risultati sono mostrati separatamente: l’impegno non produce risultati automaticamente, e i risultati possono arrivare dopo. I giorni in pausa e quelli non in programma sono esclusi. {0}	L’activité et les résultats sont affichés séparément : l’effort ne produit pas automatiquement de résultats, et les résultats peuvent arriver après l’effort. Les jours en pause et non prévus sont exclus. {0}
+50	=	=	=
+51	Abrir tu {0}	Apri il tuo {0}	Ouvrir ton {0}
+52	Temporada {0}	Stagione {0}	Saison {0}
+53	Parcela {0}	Appezzamento {0}	Parcelle {0}
+54	En pausa · {0}	In pausa · {0}	En pause · {0}
+55	Descansando hasta el {0}	In riposo fino al {0}	Au repos jusqu’au {0}
+56	{0}, del {1} al {2}	{0}, dal {1} al {2}	{0}, du {1} au {2}
+57	, partiendo de: {0}	, partendo da: {0}	, en partant de : {0}
+58	Semana del {0}: {1} {2}	Settimana del {0}: {1} {2}	Semaine du {0} : {1} {2}
+59	META COMPLETADA: {0}	OBIETTIVO COMPLETATO: {0}	OBJECTIF ATTEINT : {0}
+60	Punto de partida: {0}	Punto di partenza: {0}	Point de départ : {0}
+61	Obstáculos anotados: {0}	Ostacoli annotati: {0}	Obstacles notés : {0}
+62	{0} · completada el {1}	{0} · completato il {1}	{0} · terminé le {1}
+63	Id duplicado o faltante: {0}	Id duplicato o mancante: {0}	Identifiant en double ou manquant : {0}
+64	El archivo de la edición no pasó las comprobaciones: {0}	Il file dell’edizione non ha superato i controlli: {0}	Le fichier de l’édition n’a pas passé les vérifications : {0}
+65	Divulgación:	Informativa:	Mention :
+66	Publicado el {0}{1}	Pubblicato il {0}{1}	Publié le {0}{1}
+67	Edición {0} · {1}	Edizione {0} · {1}	Édition {0} · {1}
+68	Esa es toda la edición. {0}	Questa è l’intera edizione. {0}	C’est toute l’édition. {0}

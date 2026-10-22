@@ -1,0 +1,200 @@
+520	dibujo, pintura, manualidades…	disegno, pittura, lavori manuali…	dessin, peinture, loisirs créatifs…
+521	Lo privado, lo inacabado y lo que no tiene que ver con ingresos está permitido. Registrarlo toma un toque.	Privato, incompiuto e non legato al guadagno: va tutto bene. Registrarlo richiede un tocco.	Privé, inachevé, sans lien avec les revenus : tout est permis. Le noter prend un geste.
+522	Medio	Tecnica	Technique
+523	Días	Giorni	Jours
+524	Versión más pequeña (min)	Versione più piccola (min)	Plus petite version (min)
+525	Guardar desde hoy	Salva da oggi	Enregistrer dès aujourd’hui
+526	Cualquier trazo cuenta. Sin terminar está bien.	Qualsiasi segno va bene. Anche non finito.	N’importe quel trait compte. Inachevé, c’est très bien.
+527	Horario de arte guardado desde hoy.	Programma d’arte salvato da oggi.	Programme d’art enregistré dès aujourd’hui.
+528	No hay otras tareas.	Nessun altro compito.	Aucune autre tâche.
+529	Cada tarea necesita un verbo, una meta y un tiempo estimado.	Ogni compito ha bisogno di un verbo, un traguardo e una stima del tempo.	Chaque tâche a besoin d’un verbe, d’une ligne d’arrivée et d’une durée estimée.
+530	Añadir una tarea	Aggiungi un compito	Ajouter une tâche
+531	Editar tarea	Modifica compito	Modifier la tâche
+532	Tarea nueva	Nuovo compito	Nouvelle tâche
+533	Parte de una meta	Parte di un obiettivo	Lié à un objectif
+534	Opcional. Terminar la meta detiene esta tarea.	Facoltativo. Concludere l’obiettivo ferma questo compito.	Facultatif. Terminer l’objectif arrête cette tâche.
+535	Ninguna	Nessuno	Aucun
+536	Se repite cada semana	Si ripete ogni settimana	Se répète chaque semaine
+537	Una fecha	Una data	Une date
+538	Los cambios aplican desde	Le modifiche valgono dal	Les changements s’appliquent à partir du
+539	Los días anteriores conservan lo planificado.	I giorni precedenti mantengono ciò che era previsto.	Les jours précédents gardent ce qui était prévu.
+540	Detener esta tarea	Ferma questo compito	Arrêter cette tâche
+541	Después del almuerzo	Dopo pranzo	Après le déjeuner
+542	Los primeros dos minutos	I primi due minuti	Les deux premières minutes
+543	Área	Area	Domaine
+544	Tarea	Compito	Tâche
+545	Señal	Segnale	Déclencheur
+546	Sus minutos	I suoi minuti	Ses minutes
+547	Añade la tarea y cómo se ve “listo”.	Aggiungi il compito e cosa significa “fatto”.	Ajoute la tâche et à quoi ressemble « fait ».
+548	Elige al menos un día.	Scegli almeno un giorno.	Choisis au moins un jour.
+549	Tarea guardada.	Compito salvato.	Tâche enregistrée.
+550	¿Dejar de programar esta tarea desde hoy? Su historial se queda.	Smettere di programmare questo compito da oggi? La cronologia resta.	Arrêter de programmer cette tâche dès aujourd’hui ? Son historique reste.
+551	¿Borrar esta tarea?	Eliminare questo compito?	Supprimer cette tâche ?
+552	Detener tarea	Ferma compito	Arrêter la tâche
+553	Progreso	Progressi	Progrès
+554	Esta semana ha estado en pausa hasta ahora. No se cuenta nada.	Questa settimana finora è stata in pausa. Non si conta nulla.	Cette semaine a été en pause jusqu’ici. Rien n’est compté.
+555	Esta semana aún no ha empezado.	Questa settimana non è ancora iniziata.	Cette semaine n’a pas encore commencé.
+556	Lo que avanzó	Cosa è andato avanti	Ce qui a avancé
+557	Solo lo que registraste. Sin interpretaciones.	Solo ciò che hai registrato. Nessuna interpretazione.	Seulement ce que tu as noté. Sans interprétation.
+558	Metas · resultados	Obiettivi · risultati	Objectifs · résultats
+559	Sin registro: {0}.	Nessuna registrazione: {0}.	Aucune saisie : {0}.
+560	{0} sin incluir.	{0} esclusi.	{0} non inclus.
+561	Esta semana hasta ahora · solo lo programado	Questa settimana finora · solo ciò che era in programma	Cette semaine jusqu’ici · éléments prévus uniquement
+562	Completado según el plan: {0} de {1} programados.	Completati come previsto: {0} su {1} in programma.	Fait comme prévu : {0} sur {1} prévus.
+563	Marcado incompleto	Segnato come incompleto	Marqué incomplet
+564	Registros, sin confirmar que estén completos	Voci, completezza non confermata	Saisies, sans confirmation de complétude
+565	Versiones de cinco minutos	Versioni da cinque minuti	Versions de cinq minutes
+566	Sesiones de planificación → acción programada → hecha	Sessioni di pianificazione → azione programmata → fatta	Séances de planification → action prévue → faite
+567	Sesiones modificadas	Sessioni modificate	Séances modifiées
+568	Sesiones omitidas	Sessioni saltate	Séances sautées
+569	+ {0} extra	+ {0} extra	+ {0} en plus
+570	Acciones	Azioni	Actions
+571	Registros de gastos completos	Registrazioni delle spese completate	Suivis des dépenses complétés
+572	{0} de {1} días	{0} su {1} giorni	{0} sur {1} jours
+573	Sesiones de negocio según el plan	Sessioni per l’attività come previsto	Séances entreprise comme prévu
+574	Resultados de negocio anotados	Risultati dell’attività annotati	Productions de l’entreprise notées
+575	Sesiones de entrenamiento cumplidas	Sessioni di allenamento rispettate	Séances d’entraînement suivies
+576	Arte	Arte	Art
+577	Revisiones enviadas	Check-in inviati	Bilans envoyés
+578	No hay suficientes datos confirmados	Dati confermati insufficienti	Pas assez de données confirmées
+579	Sin confirmar	Non confermato	Non confirmé
+580	Nada ingresado	Niente inserito	Rien de saisi
+581	Ingresos registrados	Entrate inserite	Revenus saisis
+582	de {0} planificados	su {0} pianificati	sur {0} prévus
+583	{0} registrado sin distancia, así que el total está incompleto.	{0} registrati senza distanza, quindi il totale è incompleto.	{0} noté sans distance, donc le total est incomplet.
+584	Resultados	Risultati	Résultats
+585	Cambio en ahorros confirmados	Variazione dei risparmi confermati	Évolution de l’épargne confirmée
+586	Ahorros confirmados ahora	Risparmi confermati ora	Épargne confirmée actuelle
+587	Facturas marcadas como pagadas	Bollette segnate come pagate	Factures marquées payées
+588	Resultados del negocio	Risultati dell’attività	Résultats de l’entreprise
+589	Distancia corrida	Distanza di corsa	Distance courue
+590	Días de descanso cumplidos	Giorni di riposo rispettati	Jours de repos respectés
+591	El esfuerzo registrado no produce estos resultados automáticamente, y el tiempo dedicado no es ingreso. Se muestran ambos para que veas cada uno con honestidad.	L’impegno registrato non produce automaticamente questi risultati, e il tempo dedicato non è guadagno. Li vedi entrambi per valutarli con onestà.	L’effort noté ne produit pas automatiquement ces résultats, et le temps passé n’est pas un revenu. Les deux sont affichés pour que tu voies chacun honnêtement.
+592	Entrenamiento por día	Allenamento per giorno	Entraînement par jour
+593	Motivos anotados	Motivi annotati	Raisons notées
+594	Tiempo de negocio por categoría	Tempo per l’attività per categoria	Temps entreprise par catégorie
+595	{0} · unos {1} en total	{0} · circa {1} in totale	{0} · environ {1} au total
+596	{0} sin registro, así que no es el total de la semana completa.	{0} non registrati, quindi non è il totale dell’intera settimana.	{0} non noté, donc ce n’est pas le total de toute la semaine.
+597	Detalles	Dettagli	Détails
+598	Gastos registrados	Spese registrate	Dépenses notées
+599	{0} en gastos en los días con registros. {1} Las transferencias entre tus cuentas no se incluyen.	{0} di spese nei giorni con voci. {1} I trasferimenti tra i tuoi conti sono esclusi.	{0} de dépenses sur les jours avec saisies. {1} Les virements entre tes comptes sont exclus.
+600	Día	Giorno	Jour
+601	Planificado	Pianificato	Prévu
+602	Revisión	Check-in	Bilan
+603	Copiar el informe semanal para ChatGPT	Copia il resoconto settimanale per ChatGPT	Copier le bilan hebdomadaire pour ChatGPT
+604	Revisión semanal	Revisione settimanale	Bilan de la semaine
+605	Distancia planificada frente a registrada por día	Distanza pianificata e registrata per giorno	Distance prévue et notée par jour
+606	Descanso ✓	Riposo ✓	Repos ✓
+607	(Registro personal de compromisos. Solo conteos descriptivos; por favor no deduzcas causas a partir de ellos.)	(Registro personale degli impegni. Solo conteggi descrittivi; per favore non dedurne le cause.)	(Journal personnel d’engagements. Comptes descriptifs uniquement ; merci de ne pas en déduire de causes.)
+608	Lo que avanzó (hechos registrados):	Cosa è andato avanti (fatti registrati):	Ce qui a avancé (faits notés) :
+609	El experimento de esta semana: como noté {0}, cambié {1}. Resultado: {2}.	L’esperimento di questa settimana: poiché ho notato {0}, ho cambiato {1}. Risultato: {2}.	L’expérience de la semaine : comme j’ai remarqué {0}, j’ai changé {1}. Résultat : {2}.
+610	Gastos registrados: {0} (parcial si faltan días).	Spese registrate: {0} (parziale se mancano giorni).	Dépenses notées : {0} (partiel s’il manque des jours).
+611	Ahorros confirmados: {0}. Meta del colchón: {1}.	Risparmi confermati: {0}. Obiettivo cuscinetto: {1}.	Épargne confirmée : {0}. Objectif de réserve : {1}.
+612	Resultados del negocio: {0}.	Risultati dell’attività: {0}.	Résultats de l’entreprise : {0}.
+613	, más {0} no programados	, più {0} non in programma	, plus {0} non prévus
+614	Motivos anotados para lo omitido/modificado: {0}.	Motivi annotati per ciò che è stato saltato/modificato: {0}.	Raisons notées pour les éléments sautés/modifiés : {0}.
+615	Respuestas de la revisión semanal:	Risposte della revisione settimanale:	Réponses du bilan de la semaine :
+616	Lo que se interpuso	Cosa si è messo di mezzo	Ce qui a gêné
+617	Más pequeño/más claro/mejor programado	Più piccolo/più chiaro/programmato meglio	Plus petit/plus clair/mieux programmé
+618	Obligaciones financieras próximas	Impegni finanziari in arrivo	Obligations financières à venir
+619	Tiempo para el arte y el disfrute	Tempo per l’arte e il piacere	Temps pour l’art et le plaisir
+620	Pregunta para ti: basándote solo en esto, ¿qué cambio pequeño y concreto para la próxima semana mantiene el plan realista?	Domanda per te: basandoti solo su questo, qual è una piccola modifica concreta alla prossima settimana che mantiene il piano realistico?	Question pour toi : en te basant uniquement sur ceci, quel petit changement précis pour la semaine prochaine garde le plan réaliste ?
+621	Informe semanal	Resoconto settimanale	Bilan hebdomadaire
+622	Texto simple para pegar en ChatGPT	Testo semplice da incollare in ChatGPT	Texte brut à coller dans ChatGPT
+623	No	No	Non
+624	¿Incluir montos de dinero?	Includere gli importi?	Inclure les montants ?
+625	No se envía nada a ningún lado. Tú eliges dónde pegarlo.	Non viene inviato nulla. Scegli tu dove incollarlo.	Rien n’est envoyé nulle part. Tu choisis où le coller.
+626	Copiado.	Copiato.	Copié.
+627	Seleccionado. Usa Copiar en el menú.	Selezionato. Usa Copia dal menu.	Sélectionné. Utilise Copier dans le menu.
+628	Acortar el bloque de negocio de {0} a {1} minutos	Accorcia il blocco per l’attività da {0} a {1} minuti	Raccourcir le créneau entreprise de {0} à {1} minutes
+629	Las sesiones de negocio se omitieron {0} veces en días programados en las últimas cuatro semanas.	Le sessioni per l’attività sono state saltate {0} volte nei giorni in programma nelle ultime quattro settimane.	Les séances entreprise ont été sautées {0} fois les jours prévus ces quatre dernières semaines.
+630	Hacer más pequeño “{0}”	Rendi più piccolo “{0}”	Alléger « {0} »
+631	Omitido {0} veces en días programados en las últimas cuatro semanas.	Saltato {0} volte nei giorni in programma nelle ultime quattro settimane.	Sauté {0} fois les jours prévus ces quatre dernières semaines.
+632	Vincular una señal al registro de gastos	Collega un segnale alla registrazione delle spese	Associer un déclencheur au suivi des dépenses
+633	“Se me olvidó” apareció {0} veces.	“Ho dimenticato” è comparso {0} volte.	« J’ai oublié » est revenu {0} fois.
+634	Vincular el registro de gastos a una señal diaria	Collega la registrazione delle spese a un segnale quotidiano	Associer le suivi des dépenses à un déclencheur quotidien
+635	{0} días no tuvieron registro de gastos.	{0} giorni senza registrazione delle spese.	{0} jours sans suivi des dépenses.
+636	Quitar {0} del bloque de negocio	Togli {0} dal blocco per l’attività	Retirer {0} du créneau entreprise
+637	{0} tuvo más planificado que tiempo disponible.	{0}: più tempo pianificato che disponibile.	{0} : plus de prévu que de temps disponible.
+638	{0} – {1} · 10–15 minutos	{0} – {1} · 10–15 minuti	{0} – {1} · 10 à 15 minutes
+639	Ayudó	Ha aiutato	Ça a aidé
+640	No ayudó	Non ha aiutato	Ça n’a pas aidé
+641	No sé	Non so	Je ne sais pas
+642	No lo intenté	Non ci ho provato	Je n’ai pas essayé
+643	El experimento de la semana pasada	L’esperimento della settimana scorsa	L’expérience de la semaine dernière
+644	Como noté {0}, cambié {1}.	Poiché ho notato {0}, ho cambiato {1}.	Comme j’ai remarqué {0}, j’ai changé {1}.
+645	¿Ayudó?	Ha aiutato?	Ça a aidé ?
+646	Cambios en tus compromisos	Modifiche ai tuoi impegni	Changements dans tes engagements
+647	Se guardan el original y el cambio. ¿Qué explicación encaja? Tú decides; no se supone ninguna.	Restano sia l’originale sia la modifica. Quale spiegazione è giusta? Decidi tu; nessuna è data per scontata.	L’original et le changement sont gardés. Quelle explication convient ? À toi de voir ; aucune n’est supposée.
+648	No hay facturas ingresadas para las próximas dos semanas.	Nessuna bolletta inserita per le prossime due settimane.	Aucune facture saisie pour les deux prochaines semaines.
+649	No hay sesiones ingresadas.	Nessuna sessione inserita.	Aucune séance saisie.
+650	Mi propio cambio	La mia modifica	Mon propre changement
+651	Sin cambios esta semana	Nessuna modifica questa settimana	Aucun changement cette semaine
+652	Aplicado	Applicato	Appliqué
+653	¿Qué existirá al final de la próxima semana?	Cosa esisterà alla fine della prossima settimana?	Qu’est-ce qui existera à la fin de la semaine prochaine ?
+654	Resultado principal	Risultato principale	Résultat principal
+655	Un resultado visible, p. ej., borrador de oferta compartido con una persona	Un risultato visibile, es. bozza dell’offerta condivisa con una persona	Un résultat visible, ex. brouillon d’offre partagé avec une personne
+656	¿Algo más?	Altro?	Autre chose ?
+657	¿Qué debería ser más pequeño, más claro o estar mejor programado?	Cosa dovrebbe diventare più piccolo, più chiaro o programmato meglio?	Qu’est-ce qui devrait devenir plus petit, plus clair ou mieux programmé ?
+658	¿Qué obligaciones financieras vienen?	Quali impegni finanziari sono in arrivo?	Quelles obligations financières arrivent ?
+659	El resultado principal de la próxima semana	Il risultato principale della prossima settimana	Le résultat principal de la semaine prochaine
+660	Seguir a nivel de mantenimiento	Continua a livello di mantenimento	Continuer en mode entretien
+661	El resultado de negocio de la próxima semana	Il risultato per l’attività della prossima settimana	Le résultat entreprise de la semaine prochaine
+662	Entrenamiento programado la próxima semana	Allenamento in programma la prossima settimana	Entraînement prévu la semaine prochaine
+663	Editar plan de entrenamiento	Modifica il piano di allenamento	Modifier le programme d’entraînement
+664	¿Dónde hay tiempo para el arte, la gente y el disfrute?	Dov’è il tempo per l’arte, le persone e il piacere?	Où est le temps pour l’art, les gens et le plaisir ?
+665	Posponer una idea para Más adelante	Rimanda un’idea a Più avanti	Reporter une idée à Plus tard
+666	Opcional. No se programará.	Facoltativo. Non verrà programmata.	Facultatif. Elle ne sera pas programmée.
+667	Un cambio para la próxima semana	Una modifica per la prossima settimana	Un changement pour la semaine prochaine
+668	Un experimento manejable, elegido por defecto. Las sugerencias siguen reglas simples (por ejemplo, {0} omisiones en días programados). Las metas nunca suben automáticamente.	Un esperimento gestibile, scelto in automatico. I suggerimenti seguono regole semplici (per esempio, {0} salti nei giorni in programma). Gli obiettivi non aumentano mai da soli.	Une expérience réaliste, choisie par défaut. Les suggestions suivent des règles simples (par exemple, {0} oublis les jours prévus). Les objectifs n’augmentent jamais automatiquement.
+669	Como noté	Poiché ho notato	Comme j’ai remarqué
+670	la próxima semana cambiaré	la prossima settimana cambierò	la semaine prochaine je changerai
+671	Un experimento. La revisión de la próxima semana pregunta si ayudó.	Un esperimento. La revisione della prossima settimana chiederà se ha aiutato.	Une expérience. Le bilan de la semaine prochaine demandera si ça a aidé.
+672	Guardar revisión	Salva la revisione	Enregistrer le bilan
+673	Revisión guardada. Un cambio empieza el {0}.	Revisione salvata. Una modifica inizia il {0}.	Bilan enregistré. Un changement commence le {0}.
+674	Revisión guardada.	Revisione salvata.	Bilan enregistré.
+675	=	=	=
+676	=	=	=
+677	=	=	=
+678	=	=	=
+679	=	=	=
+680	=	=	=
+681	=	=	=
+682	=	=	=
+683	=	=	=
+684	IndexedDB en este navegador	IndexedDB in questo browser	IndexedDB dans ce navigateur
+685	Solo en memoria. Los cambios se perderán al cerrar esta página.	Solo in memoria. Le modifiche andranno perse alla chiusura della pagina.	En mémoire seulement. Les changements seront perdus à la fermeture de la page.
+686	=	=	=
+687	Ajustes	Impostazioni	Réglages
+688	Bloqueo con PIN activado	Blocco PIN attivo	Verrouillage par code activé
+689	Nombre, zona horaria, idioma, PIN	Nome, fuso orario, lingua, PIN	Nom, fuseau horaire, langue, code
+690	Los días que ya registraste conservan sus fechas si cambias esto.	I giorni già registrati mantengono le loro date se cambi questa impostazione.	Les jours déjà notés gardent leurs dates si tu changes ceci.
+691	Bloqueo con PIN	Blocco PIN	Verrouillage par code
+692	Hora de la revisión, revisión semanal, tiempo disponible	Ora del check-in, revisione settimanale, tempo disponibile	Heure du bilan, bilan de la semaine, temps disponible
+693	p. ej., trabajo de 8 a 5, libre después de las 6	es. lavoro dalle 8 alle 17, tempo libero dopo le 18	ex. travail de 8 h à 17 h, libre après 18 h
+694	Día de la revisión semanal	Giorno della revisione settimanale	Jour du bilan de la semaine
+695	Sugerir una tarea más pequeña después de esta cantidad de omisiones	Suggerisci un compito più piccolo dopo questo numero di salti	Suggérer une tâche plus petite après ce nombre d’oublis
+696	Una regla práctica del producto, no un umbral científico. Las sugerencias solo aparecen en la revisión semanal y necesitan tu visto bueno.	Una regola pratica, non una soglia scientifica. I suggerimenti compaiono solo nella revisione settimanale e richiedono il tuo consenso.	Une règle pratique, pas un seuil scientifique. Les suggestions n’apparaissent que dans le bilan de la semaine et demandent ton accord.
+697	Tiempo disponible por día	Tempo disponibile al giorno	Temps disponible par jour
+698	Minutos que puedes dar de verdad a estas áreas, incluido el entrenamiento. Déjalo en blanco si aún no lo sabes.	Minuti che puoi realisticamente dedicare a queste aree, allenamento compreso. Lascia vuoto se non lo sai ancora.	Minutes que tu peux vraiment consacrer à ces domaines, entraînement compris. Laisse vide si tu ne sais pas encore.
+699	Notas sobre un día laboral típico	Note su una giornata lavorativa tipo	Notes sur une journée de travail type
+700	Guardar tiempo disponible	Salva il tempo disponibile	Enregistrer le temps disponible
+701	Recordatorio de revisión en la app activado	Promemoria del check-in nell’app attivo	Rappel du bilan dans l’app activé
+702	Desactivado	Disattivato	Désactivé
+703	Mostrar un recordatorio de revisión dentro de la app	Mostra un promemoria del check-in nell’app	Afficher un rappel du bilan dans l’app
+704	Este recordatorio solo aparece con la app abierta, y nunca durante una pausa. La app no puede avisarte cuando está cerrada; para eso, pon una alarma o un Recordatorio repetitivo en el iPhone a las {0}.	Questo promemoria appare solo con l’app aperta e mai durante una pausa. L’app non può avvisarti quando è chiusa; per questo, imposta una sveglia o un Promemoria ricorrente sull’iPhone alle {0}.	Ce rappel n’apparaît que quand l’app est ouverte, et jamais pendant une pause. L’app ne peut pas te prévenir quand elle est fermée ; pour ça, règle une alarme ou un Rappel récurrent sur l’iPhone à {0}.
+705	Los recordatorios por correo y mensaje de texto no están disponibles en esta versión. Necesitan un servidor y una dirección verificada, así que no hay ninguno configurado ni simulado.	I promemoria via email e SMS non sono disponibili in questa versione. Richiedono un server e un indirizzo verificato, quindi nessuno è impostato o simulato.	Les rappels par e-mail et SMS ne sont pas disponibles dans cette version. Ils nécessitent un serveur et une adresse vérifiée, donc aucun n’est configuré ni simulé.
+706	Fondo, fuente, color del texto, tema, atenuación, desenfoque, tamaño del texto y movimiento. Ves una vista previa antes de guardar.	Sfondo, carattere, colore del testo, tema, oscuramento, sfocatura, dimensione del testo e movimento. Vedi un’anteprima prima di salvare.	Fond, police, couleur du texte, thème, assombrissement, flou, taille du texte et animations. Tu vois un aperçu avant d’enregistrer.
+707	Personalizar	Personalizza	Personnaliser
+708	{0} en Hoy	{0} in Oggi	{0} dans Aujourd’hui
+709	Oculto	Nascosto	Masqué
+710	En pausa ahora	In pausa ora	En pause en ce moment
+711	Pausa programada	Pausa programmata	Pause prévue
+712	Para viajes, enfermedad o un descanso	Per viaggi, malattia o una pausa	Pour un voyage, une maladie ou une pause
+713	Copia de seguridad, restauración y exportaciones	Backup, ripristino ed esportazioni	Sauvegarde, restauration et exports
+714	(datos de demo, guardados aparte)	(dati demo, conservati separatamente)	(données de démo, gardées à part)
+715	Nota sobre la vista previa:	Nota sull’anteprima:	Note sur l’aperçu :
+716	esta copia funciona dentro de un marco de vista previa. Usa la versión instalada para el día a día y haz copias de seguridad a menudo.	questa copia funziona dentro una cornice di anteprima. Usa la versione installata per l’uso quotidiano e fai spesso il backup.	cette copie tourne dans un cadre d’aperçu. Utilise la version installée au quotidien, et sauvegarde souvent.
+717	Último guardado: {0}.	Ultimo salvataggio: {0}.	Dernier enregistrement : {0}.
+718	El último guardado falló. Exporta una copia de seguridad ahora.	L’ultimo salvataggio non è riuscito. Esporta subito un backup.	Le dernier enregistrement a échoué. Exporte une sauvegarde maintenant.
+719	Última copia de seguridad: {0}.	Ultimo backup: {0}.	Dernière sauvegarde : {0}.

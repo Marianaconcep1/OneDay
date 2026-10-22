@@ -1,0 +1,49 @@
+0	Registrado durante una pausa. Se conserva, no se cuenta.	Registrato durante una pausa. Conservato, non contato.	Noté pendant une pause. Gardé, non compté.
+1	{0} hoy	{0} oggi	{0} aujourd’hui
+2	Aceptado	Accettato	Accepté
+3	Rechazado	Rifiutato	Refusé
+4	Abrir plan de entrenamiento	Apri il piano di allenamento	Ouvrir le programme d’entraînement
+5	Aceptar	Accetta	Accepter
+6	Rechazar	Rifiuta	Refuser
+7	Motivo (opcional)	Motivo (facoltativo)	Raison (facultatif)
+8	=	=	=
+9	Abrir registro	Apri la registrazione	Ouvrir la saisie
+10	Registrar	Registra	Noter
+11	Este día no	Non questo giorno	Pas ce jour-là
+12	Cambiar esta fecha	Cambia questa data	Modifier cette date
+13	Bloque de negocio	Blocco per l’attività	Créneau entreprise
+14	Restaurar	Ripristina	Restaurer
+15	Subir	Sposta su	Monter
+16	Listo cuando: {0} · {1}{2}{3}	Fatto quando: {0} · {1}{2}{3}	Terminé quand : {0} · {1}{2}{3}
+17	, {0}{1} de {2} registrada después	, {0}{1} da {2} registrato dopo	, {0}{1} de {2} noté ensuite
+18	confirmado {0} el {1}{2}	confermato {0} il {1}{2}	confirmé {0} le {1}{2}
+19	Borrar	Elimina	Supprimer
+20	Recibido	Ricevuto	Reçu
+21	Pagado	Pagato	Payé
+22	Marcar pagado	Segna come pagato	Marquer payé
+23	{0} · vence el {1}	{0} · scade il {1}	{0} · dû le {1}
+24	{0} (esencial)	{0} (essenziale)	{0} (essentiel)
+25	Listar las facturas que vencen antes del próximo día de pago	Elencare le bollette in scadenza prima del prossimo giorno di paga	Lister les factures dues avant le prochain jour de paie
+26	Una lista con fechas y montos, con lo desconocido marcado	Un elenco con date e importi, con le incognite segnate	Une liste avec dates et montants, inconnues signalées
+27	Confirmar un pago mínimo desconocido	Confermare un pagamento minimo sconosciuto	Confirmer un paiement minimum inconnu
+28	Un monto confirmado e ingresado	Un importo confermato e inserito	Un montant confirmé et saisi
+29	Decidido: conservar, pausar o cancelar	Deciso se tenere, sospendere o annullare	Décidé : garder, suspendre ou résilier
+30	Completar una transferencia planificada	Completare un trasferimento pianificato	Effectuer un virement prévu
+31	Transferencia hecha y marcada	Trasferimento fatto e segnato	Virement effectué et marqué
+32	Diario	Ogni giorno	Tous les jours
+33	{0} x{1}	{0} x{1}	{0} x{1}
+34	· movido o quitado {0} veces en cuatro semanas	· spostato o tolto {0} volte in quattro settimane	· déplacé ou retiré {0} fois en quatre semaines
+35	Nueva versión	Nuova versione	Nouvelle version
+36	Aplica desde el {0}. Los registros anteriores conservan el original.	Valido dal {0}. Le registrazioni precedenti mantengono l’originale.	S’applique à partir du {0}. Les saisies précédentes gardent l’original.
+37	· ahora: {0}	· ora: {0}	· maintenant : {0}
+38	Cumplido	Mantenuto	Tenu
+39	Lo cumplí	L’ho mantenuto	Je l’ai tenu
+40	En parte	In parte	En partie
+41	Enfoque de esta semana	Focus di questa settimana	Focus de la semaine
+42	Semana	Settimana	Semaine
+43	Mes	Mese	Mois
+44	Todo	Sempre	Depuis le début
+45	· completada el {0}	· completato il {0}	· terminé le {0}
+46	{0} · {1} · {2}–{3} · {4} de crecimiento	{0} · {1} · {2}–{3} · {4} di crescita	{0} · {1} · {2}–{3} · {4} de croissance
+47	Fuente	Fonte	Source
+48	Quitar de guardados	Rimuovi dai salvati	Retirer des enregistrés

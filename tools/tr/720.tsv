@@ -1,0 +1,200 @@
+720	Aún no hay copia de seguridad.	Nessun backup ancora.	Aucune sauvegarde pour l’instant.
+721	Dónde se guarda:	Dove si trova:	Où elles sont :
+722	Copia de seguridad (JSON)	Backup (JSON)	Sauvegarder (JSON)
+723	Restaurar una copia	Ripristina da backup	Restaurer une sauvegarde
+724	Las copias incluyen metas, pausas y el crecimiento del compañero. No incluyen tu PIN ni tu foto de fondo.	I backup includono obiettivi, pause e la crescita del compagno. Non includono il PIN né la tua foto di sfondo.	Les sauvegardes incluent objectifs, pauses et croissance du compagnon. Elles n’incluent ni ton code ni ta photo de fond.
+725	Exportaciones para hojas de cálculo (CSV)	Esportazioni per fogli di calcolo (CSV)	Exports pour tableur (CSV)
+726	Registros de dinero	Voci di denaro	Saisies d’argent
+727	Registro de tareas	Registro dei compiti	Journal des tâches
+728	Registro de entrenamiento	Registro degli allenamenti	Journal d’entraînement
+729	Revisiones	Check-in	Bilans
+730	Lo que se queda en este dispositivo	Cosa resta su questo dispositivo	Ce qui reste sur cet appareil
+731	Tus registros se quedan en este dispositivo, en este navegador. No se sincronizan con otros dispositivos. No hay cuenta en línea, ni rastreo, ni analíticas, ni conexión bancaria.	I tuoi dati restano su questo dispositivo, in questo browser. Non si sincronizzano con altri dispositivi. Nessun account online, nessun tracciamento, nessuna analisi e nessun collegamento bancario.	Tes données restent sur cet appareil, dans ce navigateur. Elles ne se synchronisent pas avec d’autres appareils. Pas de compte en ligne, pas de pistage, pas de statistiques, pas de connexion bancaire.
+732	Borrar los datos de sitios web de este navegador puede eliminarlos, y la navegación privada puede no conservarlos. Haz copias de seguridad con regularidad.	Cancellare i dati dei siti di questo browser può eliminarli, e la navigazione privata potrebbe non conservarli. Fai il backup regolarmente.	Effacer les données de sites de ce navigateur peut les supprimer, et la navigation privée peut ne pas les garder. Sauvegarde régulièrement.
+733	El bloqueo con PIN mantiene la app privada ante miradas casuales. No cifra los registros guardados; alguien con acceso completo a los datos del navegador de este teléfono aún podría leerlos.	Il blocco PIN protegge l’app da sguardi casuali. Non cifra i dati salvati; chi ha accesso completo ai dati del browser di questo telefono potrebbe comunque leggerli.	Le verrouillage par code protège l’app des regards curieux. Il ne chiffre pas les données enregistrées ; quelqu’un ayant un accès complet aux données du navigateur de ce téléphone pourrait encore les lire.
+734	Esta es una app para una sola persona, así que no hay otros usuarios ni administrador. Una versión compartida necesitaría un servidor con inicio de sesión y roles.	È un’app per una sola persona, quindi non ci sono altri utenti né amministratori. Una versione condivisa richiederebbe un server con accesso e ruoli.	C’est une app pour une seule personne, donc il n’y a ni autres utilisateurs ni administrateur. Une version partagée nécessiterait un serveur avec connexion et rôles.
+735	Abrir modo demo	Apri la modalità demo	Ouvrir le mode démo
+736	Explora la app con datos de ejemplo claramente marcados. Tus registros reales se mantienen aparte y sin tocar.	Esplora l’app con dati di esempio chiaramente indicati. I tuoi dati reali restano separati e intatti.	Explore l’app avec des données d’exemple clairement signalées. Tes vraies données restent à part, intactes.
+737	One Day mantiene un ciclo diario: una próxima acción concreta, un registro rápido, una revisión de dos minutos en la noche y una breve revisión semanal. Las sugerencias se basan en reglas y se muestran abiertamente. No es terapia, ni asesoría financiera, ni entrenamiento deportivo.	One Day segue un ciclo quotidiano: una prossima azione precisa, una registrazione veloce, un check-in serale di due minuti e una breve revisione settimanale. I suggerimenti seguono regole e sono mostrati apertamente. Non è terapia, consulenza finanziaria o coaching sportivo.	One Day suit une boucle quotidienne : une prochaine action précise, une saisie rapide, un bilan du soir de deux minutes et un court bilan de la semaine. Les retours suivent des règles et sont affichés ouvertement. Ce n’est ni une thérapie, ni du conseil financier, ni du coaching sportif.
+738	Restablecer datos de demo	Reimposta i dati demo	Réinitialiser les données de démo
+739	Borrar todo en este dispositivo	Cancella tutto su questo dispositivo	Tout effacer sur cet appareil
+740	Borra todos los registros, metas, pausas, el crecimiento del compañero, tu PIN y tu foto de fondo de este dispositivo. No se puede deshacer. Exporta una copia primero si podrías quererla.	Elimina da questo dispositivo ogni voce, obiettivo, pausa, la crescita del compagno, il PIN e la foto di sfondo. Non si può annullare. Esporta prima un backup se potrebbe servirti.	Supprime de cet appareil chaque saisie, objectif, pause, la croissance du compagnon, ton code et ta photo de fond. C’est irréversible. Exporte d’abord une sauvegarde si tu pourrais en avoir besoin.
+741	Escribe DELETE para confirmar	Scrivi DELETE per confermare	Tape DELETE pour confirmer
+742	Borrar todo	Elimina tutto	Tout supprimer
+743	Esa zona horaria no se reconoce.	Fuso orario non riconosciuto.	Ce fuseau horaire n’est pas reconnu.
+744	Guardado. Los días registrados conservan sus fechas.	Salvato. I giorni registrati mantengono le loro date.	Enregistré. Les jours notés gardent leurs dates.
+745	Tiempo disponible guardado.	Tempo disponibile salvato.	Temps disponible enregistré.
+746	El archivo debería estar en Descargas (en iPhone: Archivos › Descargas). Si no, copia el texto de abajo y guárdalo en Notas o Archivos.	Il file dovrebbe essere in Download (su iPhone: File › Download). Altrimenti copia il testo qui sotto e salvalo in Note o File.	Le fichier devrait être dans Téléchargements (sur iPhone : Fichiers › Téléchargements). Sinon, copie le texte ci-dessous et garde-le dans Notes ou Fichiers.
+747	Si no empezó ninguna descarga, copia el texto de abajo y guárdalo en un lugar seguro, como una nota o un archivo en iCloud Drive.	Se non è partito nessun download, copia il testo qui sotto e salvalo in un posto sicuro, come una nota o un file su iCloud Drive.	Si aucun téléchargement n’a démarré, copie le texte ci-dessous et garde-le en lieu sûr, comme une note ou un fichier sur iCloud Drive.
+748	Copia de seguridad	Backup	Sauvegarde
+749	Exportación CSV	Esportazione CSV	Export CSV
+750	Reemplaza los datos de este dispositivo	Sostituisce i dati su questo dispositivo	Remplace les données de cet appareil
+751	Elige un archivo de copia	Scegli un file di backup	Choisis un fichier de sauvegarde
+752	O pega el texto de la copia	Oppure incolla il testo del backup	Ou colle le texte de la sauvegarde
+753	Revisar la copia	Controlla il backup	Vérifier la sauvegarde
+754	Esto no es JSON válido. Asegúrate de haber copiado la copia completa.	Non è un JSON valido. Assicurati di aver copiato tutto il backup.	Ce n’est pas un JSON valide. Vérifie que toute la sauvegarde a été copiée.
+755	Esta copia no se puede restaurar	Questo backup non può essere ripristinato	Cette sauvegarde ne peut pas être restaurée
+756	La copia se ve bien	Il backup è a posto	La sauvegarde a l’air bonne
+757	Exportada el {0}. Contiene {1} registros de dinero, {2} registros de tareas, {3} registros de entrenamiento, {4} revisiones y {5} revisiones semanales.	Esportato il {0}. Contiene {1} voci di denaro, {2} registrazioni di compiti, {3} registri di allenamento, {4} check-in, {5} revisioni settimanali.	Exportée le {0}. Contient {1} saisies d’argent, {2} saisies de tâches, {3} séances notées, {4} bilans, {5} bilans de la semaine.
+758	Restaurar reemplaza todo lo que hay ahora en este dispositivo.	Il ripristino sostituisce tutto ciò che c’è ora su questo dispositivo.	La restauration remplace tout ce qui se trouve sur cet appareil.
+759	Restaurar la misma copia dos veces no crea duplicados.	Ripristinare lo stesso backup due volte non crea duplicati.	Restaurer deux fois la même sauvegarde ne crée pas de doublons.
+760	Reemplazar mis datos con esta copia	Sostituisci i miei dati con questo backup	Remplacer mes données par cette sauvegarde
+761	¿Reemplazar todos los datos de este dispositivo con la copia? Considera hacer primero una copia de los datos actuales.	Sostituire tutti i dati su questo dispositivo con il backup? Valuta di fare prima un backup dei dati attuali.	Remplacer toutes les données de cet appareil par la sauvegarde ? Pense à sauvegarder d’abord les données actuelles.
+762	Reemplazar datos	Sostituisci i dati	Remplacer les données
+763	Copia restaurada.	Backup ripristinato.	Sauvegarde restaurée.
+764	Escribe DELETE para confirmar.	Scrivi DELETE per confermare.	Tape DELETE pour confirmer.
+765	¿Restablecer los datos de demo?	Reimpostare i dati demo?	Réinitialiser les données de démo ?
+766	¿Borrar todos los registros, tu PIN y tu foto de este dispositivo? No se puede deshacer.	Eliminare da questo dispositivo ogni voce, il PIN e la foto? Non si può annullare.	Supprimer de cet appareil toutes les saisies, ton code et ta photo ? C’est irréversible.
+767	Restablecer demo	Reimposta demo	Réinitialiser la démo
+768	Modo demo. Solo datos de ejemplo.	Modalità demo. Solo dati di esempio.	Mode démo. Données d’exemple uniquement.
+769	De vuelta a tus datos.	Di nuovo ai tuoi dati.	Retour à tes données.
+770	=	=	=
+771	=	=	=
+772	=	=	=
+773	Demo	Demo	Démo
+774	5 minutos de dibujo	5 minuti di disegno	5 minutes de dessin
+775	1 minuto de dibujo	1 minuto di disegno	1 minute de dessin
+776	Carrera larga de ejemplo	Corsa lunga di esempio	Sortie longue d’exemple
+777	Corriente (ejemplo)	Conto corrente (esempio)	Compte courant (exemple)
+778	Ahorros (ejemplo)	Risparmi (esempio)	Épargne (exemple)
+779	Salario (ejemplo)	Stipendio (esempio)	Salaire (exemple)
+780	Teléfono (ejemplo)	Telefono (esempio)	Téléphone (exemple)
+781	Mínimo de tarjeta (ejemplo)	Minimo della carta (esempio)	Minimum de carte (exemple)
+782	Supermercado (ejemplo)	Spesa (esempio)	Courses (exemple)
+783	Transferencia de ejemplo	Trasferimento di esempio	Virement d’exemple
+784	Nota de ejemplo	Nota di esempio	Note d’exemple
+785	Consulta de ejemplo	Richiesta di esempio	Demande d’exemple
+786	Tres puntos de la oferta	Tre punti dell’offerta	Trois points de l’offre
+787	Un borrador	Una bozza	Un brouillon
+788	Una gráfica	Un grafico	Un graphique
+789	Un mensaje de contacto	Un messaggio di contatto	Un message de prospection
+790	Una sección terminada del portafolio	Una sezione del portfolio completata	Une partie de portfolio terminée
+791	Registro diario de gastos	Registrazione quotidiana delle spese	Suivi quotidien des dépenses
+792	Un bloque de negocio realista	Un blocco realistico per l’attività	Un créneau entreprise réaliste
+793	Sesiones planificadas y descanso	Sessioni pianificate e riposo	Séances prévues et repos
+794	Pequeñas invitaciones al arte	Piccoli inviti all’arte	Petites invitations à l’art
+795	Claridad financiera	Chiarezza finanziaria	Clarté financière
+796	Negocio	Attività	Entreprise
+797	Constancia en el entrenamiento	Costanza negli allenamenti	Régularité de l’entraînement
+798	Mente	Mente	Esprit
+799	Hecho más pequeño	Reso più piccolo	Allégé
+800	Reprogramado	Riprogrammato	Reprogrammé
+801	Quitado de ese día	Tolto da quel giorno	Retiré de ce jour-là
+802	Cambiado por una alternativa	Sostituito con un’alternativa	Remplacé par une alternative
+803	Soltado a conciencia	Lasciato andare consapevolmente	Lâché consciemment
+804	Primer paso reescrito	Primo passo riscritto	Première étape réécrite
+805	Un ajuste realista	Una modifica realistica	Un ajustement réaliste
+806	Un desajuste de horario que se repite	Un problema di orario ricorrente	Un décalage d’horaire récurrent
+807	La tarea necesita aclararse	Il compito va chiarito	La tâche doit être clarifiée
+808	La sigo posponiendo; vale la pena replantearla	Continuo a rimandarlo; vale la pena ripensarci	Je la repousse sans cesse ; à reconsidérer
+809	Esta semana:	Questa settimana:	Cette semaine :
+810	Sugerido:	Suggerito:	Suggéré :
+811	. Confírmalo o elige otro.	. Confermalo o scegline un altro.	. Confirme-le ou choisis-en un autre.
+812	¿Qué existirá al final de la semana?	Cosa esisterà alla fine della settimana?	Qu’est-ce qui existera à la fin de la semaine ?
+813	p. ej., tres puntos de la oferta que podría enviar	es. tre punti dell’offerta che potrei inviare	ex. trois points de l’offre que je pourrais envoyer
+814	Posponer una idea	Rimanda un’idea	Reporter une idée
+815	{0} · en este orden	{0} · in quest’ordine	{0} · dans cet ordre
+816	1 · Tu propia vida primero	1 · Prima la tua vita	1 · Ta vie d’abord
+817	Los planes personales van antes que el trabajo opcional, para que se vean las decisiones de la semana.	I piani personali vengono prima del lavoro facoltativo, così i compromessi della settimana sono visibili.	Les projets personnels passent avant le travail facultatif, pour que les arbitrages de la semaine soient visibles.
+818	Añadir un compromiso personal	Aggiungi un impegno personale	Ajouter un engagement personnel
+819	2 · Un resultado principal para avanzar	2 · Un risultato principale da portare avanti	2 · Un résultat principal à faire avancer
+820	3 · Seguir a nivel de mantenimiento	3 · Continua a livello di mantenimento	3 · Continuer en mode entretien
+821	El resultado de negocio de esta semana	Il risultato per l’attività di questa settimana	Le résultat entreprise de cette semaine
+822	4 · Más adelante	4 · Più avanti	4 · Plus tard
+823	Ideas que pospones a propósito. Nunca se programan ni se vencen.	Idee che rimandi di proposito. Non vengono mai programmate e non scadono mai.	Des idées que tu reportes volontairement. Jamais programmées, jamais en retard.
+824	Guardar la semana	Salva la settimana	Enregistrer la semaine
+825	Semana guardada.	Settimana salvata.	Semaine enregistrée.
+826	Guardado en Más adelante.	Salvato in Più avanti.	Enregistré dans Plus tard.
+827	Guardado para después de la semana de prueba.	Salvato per dopo la settimana di prova.	Enregistré pour après la semaine d’essai.
+828	¿Qué acción hace posible esto?	Quale azione rende possibile?	Quelle action cela rend-il possible ?
+829	Planificar cuenta cuando lleva a algo visible.	Pianificare conta quando porta a qualcosa di visibile.	Planifier compte quand ça mène à quelque chose de visible.
+830	Redactar los tres puntos de mi servicio de dashboards	Scrivere i tre punti del mio servizio di dashboard	Rédiger les trois points de mon service de tableaux de bord
+831	Listar las facturas que vencen antes del día de pago	Elencare le bollette in scadenza prima del giorno di paga	Lister les factures dues avant le jour de paie
+832	Preparar lo que necesito	Preparare ciò che mi serve	Préparer ce dont j’ai besoin
+833	Próximo bloque de negocio	Prossimo blocco per l’attività	Prochain créneau entreprise
+834	Cuándo	Quando	Quand
+835	Hoy	Oggi	Aujourd’hui
+836	Programarlo	Programmalo	Le programmer
+837	Progreso mostrará si las sesiones de planificación llevaron a acciones terminadas.	Progressi mostrerà se le sessioni di pianificazione hanno portato ad azioni completate.	Progrès montrera si les séances de planification ont mené à des actions terminées.
+838	Programado{0}.	Programmato{0}.	Programmé{0}.
+839	Tu propia vida hoy	La tua vita oggi	Ta vie aujourd’hui
+840	Compromiso personal	Impegno personale	Engagement personnel
+841	Amistades, citas, familia, descanso, lo que te importe	Amici, appuntamenti, famiglia, riposo, tutto ciò che conta per te	Amis, rendez-vous, famille, repos, tout ce qui compte pour toi
+842	Cena con una amistad	Cena con un’amica o un amico	Dîner avec un ami
+843	Qué	Cosa	Quoi
+844	Hora	Ora	Heure
+845	Minutos que toma	Minuti necessari	Minutes nécessaires
+846	Cuenta para el tiempo de ese día	Conta nel tempo di quel giorno	Compte dans le temps de ce jour-là
+847	Añade qué y cuándo.	Aggiungi cosa e quando.	Ajoute quoi et quand.
+848	Añadido. Los planes opcionales se acomodan alrededor.	Aggiunto. I piani facoltativi si adattano intorno.	Ajouté. Les projets facultatifs s’organisent autour.
+849	Reprogramar	Riprogramma	Reprogrammer
+850	Reducir	Riduci	Réduire
+851	Soltarlo	Lascialo andare	Laisser tomber
+852	p. ej., una llamada en vez de una cena	es. una telefonata invece di una cena	ex. un appel au lieu d’un dîner
+853	¿Reprogramarlo, reducirlo o soltarlo a conciencia?	Riprogrammarlo, ridurlo o lasciarlo andare consapevolmente?	Le reprogrammer, le réduire ou le lâcher consciemment ?
+854	Nueva fecha	Nuova data	Nouvelle date
+855	Se queda en tu historial como una decisión tuya, no como una falta.	Resta nella cronologia come una tua scelta, non come una mancanza.	Ça reste dans ton historique comme un choix, pas comme un manqué.
+856	Guardado, conservando el original.	Salvato, con l’originale conservato.	Enregistré, avec l’original conservé.
+857	Antes de empezar	Prima di iniziare	Avant de commencer
+858	Empieza con el calentamiento	Inizia con il riscaldamento	Commence par l’échauffement
+859	Empezar la versión más pequeña	Inizia la versione più piccola	Commencer la version plus petite
+860	¿Qué acción parece posible junto a ese sentimiento?	Quale azione sembra possibile insieme a questa sensazione?	Quelle action semble possible avec ce ressenti ?
+861	Empezar según el plan	Inizia come previsto	Commencer comme prévu
+862	Buscar apoyo	Cerca supporto	Chercher du soutien
+863	Descansar en su lugar	Riposa invece	Me reposer plutôt
+864	No necesitas sentir calma ni confianza para empezar. Descansar también es una opción real.	Non serve sentirsi calmi o sicuri per iniziare. Anche riposare è una scelta reale.	Pas besoin de calme ou de confiance pour commencer. Te reposer est aussi un vrai choix.
+865	Pedirle a una amistad que me escriba después de correr	Chiedere a qualcuno di sentirci dopo la corsa	Demander à quelqu’un de prendre de mes nouvelles après ma course
+866	¿Qué apoyo ayudaría, y de quién?	Quale supporto aiuterebbe, e da chi?	Quel soutien aiderait, et de qui ?
+867	Guardar nota	Salva nota	Enregistrer la note
+868	Anotado.	Annotato.	Noté.
+869	Registra hoy con honestidad como descanso. El plan sigue aquí mañana.	Registra oggi con onestà come riposo. Il piano è ancora qui domani.	Note aujourd’hui honnêtement comme du repos. Le plan est toujours là demain.
+870	Registrado como descanso.	Registrato come riposo.	Noté comme repos.
+871	No sé por dónde empezar.	Non so da dove iniziare.	Je ne sais pas par où commencer.
+872	Esto se siente demasiado grande.	Mi sembra troppo grande.	Ça me paraît trop gros.
+873	Me da miedo no hacerlo bien.	Ho paura di non farlo bene.	J’ai peur de mal le faire.
+874	Mi atención está en otra parte.	La mia attenzione è altrove.	Mon attention est ailleurs.
+875	No tengo el tiempo ni los recursos.	Non ho il tempo o le risorse.	Je n’ai pas le temps ou les moyens.
+876	Estoy sin energía física o emocional.	Non ho più energie fisiche o emotive.	Je suis à plat physiquement ou émotionnellement.
+877	¿Qué lo hace difícil ahora mismo?	Cosa lo rende difficile in questo momento?	Qu’est-ce qui rend ça difficile en ce moment ?
+878	Primera acción visible	Prima azione visibile	Première action visible
+879	Ponte la ropa de correr y empieza el calentamiento planificado. Luego decide.	Mettiti i vestiti da corsa e inizia il riscaldamento previsto. Poi decidi.	Mets tes affaires de course et commence l’échauffement prévu. Ensuite, décide.
+880	Abrir un documento en blanco titulado ‘Oferta’	Aprire un documento vuoto intitolato ‘Offerta’	Ouvrir un document vierge intitulé « Offre »
+881	Un documento con una oración	Un documento con una frase	Un document avec une phrase
+882	Definir la primera acción visible	Definisci la prima azione visibile	Définir la première action visible
+883	Primera acción (un verbo)	Prima azione (un verbo)	Première action (un verbe)
+884	Usar como primer paso de hoy	Usala come primo passo di oggi	Utiliser comme première étape du jour
+885	Versión más pequeña: {0}.	Versione più piccola: {0}.	Version plus petite : {0}.
+886	Haz solo el calentamiento y luego vuelve a evaluar.	Fai solo il riscaldamento, poi valuta di nuovo.	Fais seulement l’échauffement, puis réévalue.
+887	Usar la versión más pequeña hoy	Usa la versione più piccola oggi	Utiliser la version plus petite aujourd’hui
+888	Reducir el alcance	Riduci la portata	Réduire l’ampleur
+889	Crear una versión borrador privada	Crea una versione grezza privata	Créer une version brouillon privée
+890	Nadie la ve. Lista cuando exista algo desordenado.	Nessuno la vede. Fatto quando esiste qualcosa di disordinato.	Personne ne la voit. Fini quand quelque chose de brouillon existe.
+891	Empezar una versión borrador	Inizia una versione grezza	Commencer une version brouillon
+892	¿Qué me ocupa la mente?	Cosa mi occupa la mente?	Qu’est-ce qui m’occupe l’esprit\u202f?
+893	Empezar ahora	Inizia ora	Commencer maintenant
+894	Ahora no	Non ora	Pas maintenant
+895	Bosquejar la gráfica en papel	Abbozza il grafico su carta	Esquisser le graphique sur papier
+896	Alternativa para hoy	Alternativa per oggi	Alternative pour aujourd’hui
+897	Hacer esto hoy en su lugar	Fai questo oggi invece	Faire ceci aujourd’hui à la place
+898	Ningún día de esta semana tiene espacio según tu tiempo disponible.	Nessun giorno di questa settimana ha spazio in base al tempo disponibile.	Aucun jour de cette semaine n’a de place selon ton temps disponible.
+899	Una alternativa posible, o una nueva hora	Un’alternativa fattibile, o un nuovo orario	Une alternative faisable, ou un nouvel horaire
+900	Un compromiso más pequeño	Un impegno più piccolo	Un engagement plus petit
+901	Elige lo que necesitas	Scegli ciò di cui hai bisogno	Choisis ce dont tu as besoin
+902	Apoyo	Supporto	Soutien
+903	Versión borrador privada	Versione grezza privata	Version brouillon privée
+904	Añade la primera acción y lo que existirá después.	Aggiungi la prima azione e cosa esisterà dopo.	Ajoute la première action et ce qui existera ensuite.
+905	Primer paso añadido a hoy.	Primo passo aggiunto a oggi.	Première étape ajoutée à aujourd’hui.
+906	Hecho como alternativa	Fatto come alternativa	Fait comme alternative
+907	Alternativa añadida. La original queda registrada.	Alternativa aggiunta. L’originale resta registrato.	Alternative ajoutée. L’originale reste enregistrée.
+908	Terminaste “{0}”{1}.	Hai completato “{0}”{1}.	Tu as terminé « {0} »{1}.
+909	, {0} ya hecho	, {0} già fatti	, {0} déjà fait
+910	{0} llevó a una acción programada{1}.	{0} ha portato a un’azione programmata{1}.	{0} a mené à une action prévue{1}.
+911	Marcado como pagado: {0}.	Segnato come pagato: {0}.	Marqué payé : {0}.
+912	Confirmado: {0}.	Confermato: {0}.	Confirmé : {0}.
+913	Pasado a ahorros: {0}.	Spostati nei risparmi: {0}.	Mis en épargne : {0}.
+914	Gastos registrados: {0}.	Spese registrate: {0}.	Dépenses notées : {0}.
+915	Completado: {0}.	Completato: {0}.	Terminé : {0}.
+916	Cumplido: {0}.	Rispettato: {0}.	Suivi : {0}.
+917	Participaste en {0}.	Hai partecipato a {0}.	Présence pour {0}.
+918	Hiciste tiempo para el arte: {0}.	Tempo per l’arte: {0}.	Du temps pour l’art : {0}.
+919	Volviste después de {0}.	Di ritorno dopo {0}.	De retour après {0}.

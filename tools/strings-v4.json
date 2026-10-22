@@ -1,0 +1,198 @@
+[
+ {
+  "s": "Logged during a pause. Kept, not counted.",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "{0} today",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Accepted",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Rejected",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Open training plan",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Accept",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Reject",
+  "f": "03-ui.js"
+ },
+ {
+  "s": "Reason (optional)",
+  "f": "04-daily.js"
+ },
+ {
+  "s": "{0}m",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Open record",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Log",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Not this day",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Change this date",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Business block",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Restore",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Move up",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Done when: {0} · {1}{2}{3}",
+  "f": "05-plan.js"
+ },
+ {
+  "s": ", {0}{1} from {2} recorded after that",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "confirmed {0} on {1}{2}",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Delete",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Received",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Paid",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Mark paid",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "{0} · due {1}",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "{0} (essential)",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "List bills due before the next payday",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "A list with dates and amounts, unknowns marked",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Confirm one unknown minimum payment",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "One amount confirmed and entered",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Keep, pause or cancel decided",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Complete a planned transfer",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Transfer made and marked done",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "Daily",
+  "f": "05-plan.js"
+ },
+ {
+  "s": "{0} x{1}",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "· moved or dropped {0} times in four weeks",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "New version",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "Takes effect {0}. Earlier records keep the original.",
+  "f": "06-progress.js"
+ },
+ {
+  "s": "· now: {0}",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Kept",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Kept it",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "Partly",
+  "f": "08-rules.js"
+ },
+ {
+  "s": "This week’s focus",
+  "f": "10-goals.js"
+ },
+ {
+  "s": "Week",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "Month",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "All time",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "· completed {0}",
+  "f": "11-analytics.js"
+ },
+ {
+  "s": "{0} · {1} · {2}–{3} · {4} growth",
+  "f": "13-garden.js"
+ },
+ {
+  "s": "Source",
+  "f": "16-mindset.js"
+ },
+ {
+  "s": "Unsave",
+  "f": "16-mindset.js"
+ }
+]

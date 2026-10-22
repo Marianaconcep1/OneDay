@@ -1,0 +1,173 @@
+1320	La revisión de la noche continúa a menos que pauses todo.	Il check-in serale continua a meno che non metti in pausa tutto.	Le bilan du soir continue sauf si tu mets tout en pause.
+1321	Empieza	Inizia	Début
+1322	Termina	Finisce	Fin
+1323	Zona horaria de estas horas	Fuso orario di questi orari	Fuseau horaire de ces horaires
+1324	Usa la zona horaria en la que estarás cuando termine la pausa.	Usa il fuso orario in cui ti troverai alla fine della pausa.	Utilise le fuseau horaire où tu seras à la fin de la pause.
+1325	Si una pausa empieza después del mediodía, ese día sigue programado. El día en que termina es tuyo para empezar de nuevo.	Se una pausa inizia dopo mezzogiorno, quel giorno resta in programma. Il giorno in cui finisce è tuo per ripartire da capo.	Si une pause commence après midi, ce jour reste prévu. Le jour où elle se termine, tu repars à neuf.
+1326	Elige al menos un área, o pausa todo.	Scegli almeno un’area, oppure metti in pausa tutto.	Choisis au moins un domaine, ou mets tout en pause.
+1327	Elige una fecha de inicio y de fin.	Scegli una data di inizio e di fine.	Choisis une date de début et de fin.
+1328	El fin tiene que ser después del inicio.	La fine deve essere dopo l’inizio.	La fin doit être après le début.
+1329	La hora de fin ya pasó. Elige una más tarde, o termina la pausa.	L’ora di fine è già passata. Scegline una più tardi, oppure termina la pausa.	L’heure de fin est déjà passée. Choisis plus tard, ou termine la pause.
+1330	Esto se cruza con otra pausa. Cambia esa en su lugar.	Si sovrappone a un’altra pausa. Modifica quella invece.	Cela chevauche une autre pause. Modifie plutôt celle-là.
+1331	En pausa. No se debe nada mientras no estás.	In pausa. Nulla è dovuto mentre sei via.	En pause. Rien n’est dû pendant ton absence.
+1332	Pausa programada.	Pausa programmata.	Pause prévue.
+1333	¿Terminar la pausa ahora y volver a tu plan desde hoy?	Terminare ora la pausa e tornare al piano da oggi?	Terminer la pause maintenant et reprendre ton plan dès aujourd’hui ?
+1334	Terminar pausa	Termina la pausa	Terminer la pause
+1335	Pausa cancelada.	Pausa annullata.	Pause annulée.
+1336	Qué bueno verte. Hoy está listo.	Che bello rivederti. Oggi è pronto.	Bon retour. Aujourd’hui est prêt.
+1337	Empezaste “{0}” el {1}{2}.	Hai iniziato “{0}” il {1}{2}.	Tu as commencé « {0} » le {1}{2}.
+1338	, y {0} fueron versiones más pequeñas que elegiste en vez de omitir	, e {0} erano versioni più piccole che hai scelto invece di saltare	, et {0} étaient des versions plus petites choisies au lieu de sauter
+1339	Durante {0} te presentaste {1} en {2}{3}.	In {0} hai partecipato {1} in {2}{3}.	Sur {0}, tu as été là {1} en {2}{3}.
+1340	Hubo {0}, y volviste después.	Ci sono stati {0}, e dopo hai ripreso.	Il y a eu {0}, et tu as repris ensuite.
+1341	Ajustaste el plan {0} en lugar de abandonarlo.	Hai modificato il piano {0} invece di abbandonarlo.	Tu as ajusté le plan {0} au lieu de l’abandonner.
+1342	Alcanzaste {0}, el primero el {1}.	Hai raggiunto {0}, il primo il {1}.	Tu as atteint {0}, la première le {1}.
+1343	El número pasó de {0} a {1}.	Il numero è passato da {0} a {1}.	Le nombre est passé de {0} à {1}.
+1344	Esto pasó gracias a esas acciones, un registro a la vez.	È successo grazie a quelle azioni, una registrazione alla volta.	C’est arrivé grâce à ces actions, une saisie à la fois.
+1345	Este informe solo muestra lo registrado, así que parte de tu trabajo puede no aparecer aquí.	Questo resoconto mostra solo ciò che è stato registrato, quindi parte del tuo lavoro potrebbe non comparire.	Ce bilan ne montre que ce qui a été noté, donc une partie de ton travail peut ne pas y apparaître.
+1346	Nombraste esta intención con claridad y luego actuaste {0}. La claridad marcó el camino; las acciones te trajeron aquí.	Hai dato un nome chiaro a questa intenzione e poi hai agito {0}. La chiarezza ha indicato la strada; le azioni hanno fatto il resto.	Tu as nommé clairement cette intention, puis tu as agi {0}. La clarté a montré le chemin ; les actions ont fait le reste.
+1347	Acciones completadas, más pequeñas y omitidas por semana durante esta meta	Azioni completate, ridotte e saltate per settimana durante questo obiettivo	Actions faites, allégées et sautées par semaine pendant cet objectif
+1348	P marca una semana mayormente en pausa.	P indica una settimana per lo più in pausa.	P marque une semaine surtout en pause.
+1349	, {0} en pausa	, {0} in pausa	, {0} en pause
+1350	{0} · {1} al {2} ({3}{4})	{0} · dal {1} al {2} ({3}{4})	{0} · du {1} au {2} ({3}{4})
+1351	Hitos:	Traguardi:	Étapes :
+1352	Acciones en {0}: {1} completadas, {2} versiones más pequeñas, {3} omitidas	Azioni in {0}: {1} completate, {2} versioni più piccole, {3} saltate	Actions en {0} : {1} faites, {2} versions plus petites, {3} sautées
+1353	Ajustes:	Modifiche:	Ajustements :
+1354	({0} en pausa)	({0} in pausa)	({0} en pause)
+1355	Punto de partida	Punto di partenza	Point de départ
+1356	Cambio medido	Variazione misurata	Changement mesuré
+1357	Obstáculos y ajustes	Ostacoli e modifiche	Obstacles et ajustements
+1358	Mantener lo que construiste	Mantieni ciò che hai costruito	Entretenir ce que tu as construit
+1359	Fijar un nuevo hito	Imposta un nuovo traguardo	Fixer une nouvelle étape
+1360	Descansar y celebrar	Riposa e festeggia	Se reposer et célébrer
+1361	Inicio	Inizio	Début
+1362	Duración	Durata	Durée
+1363	Acciones completadas	Azioni completate	Actions faites
+1364	Versiones más pequeñas	Versioni più piccole	Versions plus petites
+1365	Revisiones en este periodo	Check-in in questo periodo	Bilans sur cette période
+1366	Semana a semana	Settimana per settimana	Semaine après semaine
+1367	Incluir el lenguaje de intención	Includi il linguaggio dell’intenzione	Inclure le langage d’intention
+1368	¿Y ahora qué?	E adesso?	Et maintenant ?
+1369	No se crea nada a menos que lo elijas.	Non viene creato nulla se non lo scegli.	Rien n’est créé sans ton choix.
+1370	Exportar informe	Esporta il resoconto	Exporter le bilan
+1371	Enviar el informe por correo no está disponible en esta versión; necesitaría un servicio de envío. Expórtalo y compártelo como quieras.	Inviare il resoconto via email non è disponibile in questa versione; servirebbe un servizio di invio. Esportalo e condividilo come preferisci.	L’envoi du bilan par e-mail n’est pas disponible dans cette version ; il faudrait un service d’envoi. Exporte-le et partage-le comme tu veux.
+1372	Elige uno, o cierra el informe.	Scegline uno, oppure chiudi il resoconto.	Choisis-en un, ou ferme le bilan.
+1373	Disfrútalo. No se programa nada nuevo.	Goditelo. Nulla di nuovo viene programmato.	Profite. Rien de nouveau n’est programmé.
+1374	Nombra el próximo hito	Dai un nome al prossimo traguardo	Nomme la prochaine étape
+1375	=	=	=
+1376	=	=	=
+1377	=	=	=
+1378	=	=	=
+1379	=	=	=
+1380	=	=	=
+1381	=	=	=
+1382	=	=	=
+1383	=	=	=
+1384	=	=	=
+1385	=	=	=
+1386	=	=	=
+1387	=	=	=
+1388	=	=	=
+1389	=	=	=
+1390	Pódcast	Podcast	Podcast
+1391	Entrevista	Intervista	Interview
+1392	Video	Video	Vidéo
+1393	Artículo	Articolo	Article
+1394	Ejercicio	Esercizio	Exercice
+1395	Boletín	Newsletter	Newsletter
+1396	Seminario web gratis	Webinar gratuito	Webinaire gratuit
+1397	Evento gratis	Evento gratuito	Événement gratuit
+1398	Curso gratis	Corso gratuito	Cours gratuit
+1399	Libro o extracto gratis	Libro o estratto gratuito	Livre ou extrait gratuit
+1400	Cumplir cuando baja la motivación	Andare avanti quando cala la motivazione	Tenir bon quand la motivation baisse
+1401	Crear un negocio de análisis de datos	Costruire un’attività di analisi dei dati	Créer une entreprise d’analyse de données
+1402	Hábitos financieros	Abitudini finanziarie	Habitudes financières
+1403	Manejar metas que compiten	Gestire obiettivi in competizione	Gérer des objectifs concurrents
+1404	Disciplina sostenible	Disciplina sostenibile	Discipline durable
+1405	Creatividad y disfrute	Creatività e piacere	Créativité et plaisir
+1406	Bienestar emocional	Benessere emotivo	Bien-être émotionnel
+1407	Hábitos	Abitudini	Habitudes
+1408	Negocios en general	Business in generale	Entreprise en général
+1409	Opinión o modelo del creador	Opinione o modello dell’autore	Opinion ou méthode du créateur
+1410	Afirmación promocional	Affermazione promozionale	Affirmation promotionnelle
+1411	Respaldado por investigación citada	Supportato da ricerche citate	Appuyé par des recherches citées
+1412	Evidencia incierta	Prove incerte	Preuves incertaines
+1413	No es un archivo de edición de Mindset.	Non è un file di edizione Mindset.	Ce n’est pas un fichier d’édition Mindset.
+1414	Falta el id de la edición.	Manca l’id dell’edizione.	Identifiant de l’édition manquant.
+1415	Falta la hora de actualización de la edición.	Manca l’ora di aggiornamento dell’edizione.	Heure de mise à jour de l’édition manquante.
+1416	Faltan los elementos.	Mancano gli elementi.	Éléments manquants.
+1417	{0} es de un creador que no está en la lista.	{0} è di un autore che non è nell’elenco.	{0} vient d’un créateur hors de la liste.
+1418	{0} necesita un enlace directo https a la fuente.	{0} richiede un link diretto https alla fonte.	{0} doit avoir un lien direct https vers la source.
+1419	{0} necesita su fecha de publicación original.	{0} richiede la data di pubblicazione originale.	{0} doit avoir sa date de publication d’origine.
+1420	{0} no está marcado como gratis.	{0} non è indicato come gratuito.	{0} n’est pas indiqué comme gratuit.
+1421	{0} necesita describir si pide registro.	{0} deve indicare se richiede la registrazione.	{0} doit préciser si une inscription est demandée.
+1422	{0} tiene un tipo desconocido.	{0} ha un tipo sconosciuto.	{0} a un type inconnu.
+1423	{0} necesita un resumen breve y objetivo.	{0} richiede un breve riassunto oggettivo.	{0} doit avoir un court résumé factuel.
+1424	{0} tiene una afirmación sin etiqueta válida ni fuente de investigación.	{0} ha un’affermazione senza etichetta valida o fonte di ricerca.	{0} contient une affirmation sans étiquette valide ni source de recherche.
+1425	“Prueba una cosa” necesita texto y quién lo escribió.	“Prova una cosa” richiede un testo e chi l’ha scritto.	« Essaie une chose » a besoin d’un texte et de son auteur.
+1426	No se pudo acceder al archivo de la edición ({0}).	Impossibile raggiungere il file dell’edizione ({0}).	Le fichier de l’édition est inaccessible ({0}).
+1427	No hay edición nueva. Tienes la más reciente.	Nessuna nuova edizione. Hai la più recente.	Pas de nouvelle édition. Tu as la plus récente.
+1428	El curador corrigió la edición de esta semana.	L’edizione di questa settimana è stata corretta dal curatore.	L’édition de cette semaine a été corrigée par la personne qui la prépare.
+1429	Nueva edición cargada.	Nuova edizione caricata.	Nouvelle édition chargée.
+1430	La comprobación falló.	Il controllo non è riuscito.	La vérification a échoué.
+1431	La actualización falló. Se conserva la edición anterior.	Aggiornamento non riuscito. Resta l’edizione precedente.	La mise à jour a échoué. L’édition précédente est gardée.
+1432	Nuevo	Nuovo	Nouveau
+1433	Relacionado con {0}.	Riguarda {0}.	Lié à {0}.
+1434	Por qué puede ayudar:	Perché può aiutare:	Pourquoi ça peut aider :
+1435	Fuera de los intereses que elegiste.	Fuori dagli interessi che hai scelto.	En dehors des centres d’intérêt choisis.
+1436	Guardado	Salvato	Enregistré
+1437	Gratis	Gratuito	Gratuit
+1438	Abrir fuente ↗	Apri la fonte ↗	Ouvrir la source ↗
+1439	Se actualiza cada semana	Aggiornato ogni settimana	Mis à jour chaque semaine
+1440	Mentalidad	Mindset	Mindset
+1441	Ninguna todavía	Ancora nessuno	Aucune pour l’instant
+1442	La última comprobación falló:	L’ultimo controllo non è riuscito:	La dernière vérification a échoué :
+1443	Se conserva la edición anterior.	Resta l’edizione precedente.	L’édition précédente est gardée.
+1444	Última actualización correcta:	Ultimo aggiornamento riuscito:	Dernière mise à jour réussie :
+1445	Próxima actualización programada:	Prossimo aggiornamento programmato:	Prochaine mise à jour prévue :
+1446	No programada. Las actualizaciones semanales automáticas necesitan un servidor, que esta app aún no tiene.	Non programmato. Gli aggiornamenti settimanali automatici richiedono un server, che questa app non ha ancora.	Non prévue. Les mises à jour hebdomadaires automatiques nécessitent un serveur, que cette app n’a pas encore.
+1447	Buscar una edición nueva (manual)	Cerca una nuova edizione (manuale)	Chercher une nouvelle édition (manuel)
+1448	Aún no se ha cargado ninguna edición. Cada edición la selecciona la dueña de la app entre los creadores de abajo, solo con recursos gratis, fechas reales y enlaces directos.	Nessuna edizione caricata ancora. Ogni edizione è curata dalla titolare dell’app tra gli autori qui sotto, solo con risorse gratuite, date reali e link diretti.	Aucune édition chargée pour l’instant. Chaque édition est préparée par la propriétaire de l’app à partir des créateurs ci-dessous, avec uniquement des ressources gratuites, des dates réelles et des liens directs.
+1449	No hay recursos nuevos relevantes esta semana. Nada antiguo se vuelve a marcar como nuevo.	Nessuna nuova risorsa pertinente questa settimana. Nulla di vecchio viene rietichettato come nuovo.	Pas de nouvelle ressource pertinente cette semaine. Rien d’ancien n’est réétiqueté comme nouveau.
+1450	Nuevo esta semana	Novità della settimana	Nouveau cette semaine
+1451	Vale la pena volver a ver	Da rivedere	À revoir
+1452	Tus intereses	I tuoi interessi	Tes centres d’intérêt
+1453	{0} elegidos	{0} scelti	{0} choisis
+1454	Guardar intereses	Salva gli interessi	Enregistrer les centres d’intérêt
+1455	Los intereses cambian el orden y las notas de “por qué puede ayudar”. No cambian a quién se selecciona.	Gli interessi cambiano l’ordine e le note “perché può aiutare”. Non cambiano gli autori selezionati.	Les centres d’intérêt changent l’ordre et les notes « pourquoi ça peut aider ». Ils ne changent pas les créateurs retenus.
+1456	Nada guardado todavía.	Nulla di salvato ancora.	Rien d’enregistré pour l’instant.
+1457	Mostrar {0} de nuevo	Mostra di nuovo {0}	Réafficher {0}
+1458	Guardados y ocultos	Salvati e nascosti	Enregistrés et masqués
+1459	{0} guardados · {1} ocultos	{0} salvati · {1} nascosti	{0} enregistrés · {1} masqués
+1460	Creadores seleccionados	Autori selezionati	Créateurs retenus
+1461	{0} elegidos por la dueña de la app	{0} scelti dalla titolare dell’app	{0} choisis par la propriétaire de l’app
+1462	Esta lista la fija la dueña de la app y no se puede cambiar dentro de la app. La investigación citada para comprobar una afirmación se enlaza como fuente, nunca se añade como creador. La popularidad no es evidencia: las afirmaciones se marcan como opinión, promoción o respaldadas por investigación.	Questo elenco è stabilito dalla titolare dell’app e non si può modificare nell’app. Le ricerche citate per verificare un’affermazione sono collegate come fonte, mai aggiunte come autori. La popolarità non è una prova: le affermazioni sono etichettate come opinione, promozione o supportate da ricerche.	Cette liste est fixée par la propriétaire de l’app et ne peut pas être modifiée dans l’app. Les recherches citées pour vérifier une affirmation sont liées comme source, jamais ajoutées comme créateurs. La popularité n’est pas une preuve : les affirmations sont étiquetées comme opinion, promotion ou appuyées par la recherche.
+1463	Avisarme en Hoy cuando se cargue una edición nueva	Avvisami in Oggi quando viene caricata una nuova edizione	Me prévenir dans Aujourd’hui quand une nouvelle édition est chargée
+1464	Desactivado a menos que lo actives, y se muestra una vez por edición. Solo aparece dentro de la app; una notificación con la app cerrada necesitaría un servidor de notificaciones.	Disattivato finché non lo attivi, e mostrato una volta per edizione. Appare solo nell’app; una notifica con l’app chiusa richiederebbe un server di notifiche.	Désactivé sauf si tu l’actives, et affiché une fois par édition. Il apparaît seulement dans l’app ; une notification app fermée nécessiterait un serveur de notifications.
+1465	Instrucciones del creador	Istruzioni dell’autore	Consignes du créateur
+1466	Un ejercicio escrito para esta app, no por el creador	Un esercizio scritto per questa app, non dall’autore	Un exercice écrit pour cette app, pas par le créateur
+1467	, relacionado con “{0}” ({1})	, collegato a “{0}” ({1})	, lié à « {0} » ({1})
+1468	Guardado para después	Salvato per dopo	Gardé pour plus tard
+1469	Añadido a tu plan	Aggiunto al tuo piano	Ajouté à ton plan
+1470	Reemplazó una tarea opcional	Ha sostituito un compito facoltativo	A remplacé une tâche facultative
+1471	Prueba una cosa esta semana · opcional	Prova una cosa questa settimana · facoltativo	Essaie une chose cette semaine · facultatif
+1472	{0}{1}. {2} Puede que ayude o no; pruébalo y verás.	{0}{1}. {2} Può aiutare oppure no; provalo e vedi.	{0}{1}. {2} Ça peut aider ou non ; essaie et vois.
+1473	¿Qué es algo que quieres aplicar antes de consumir más?	Qual è una cosa che vuoi applicare prima di consumare altro?	Quelle chose veux-tu appliquer avant de consommer davantage ?
+1474	Guardar para después	Salva per dopo	Garder pour plus tard
+1475	Añadir a mi plan semanal	Aggiungi al mio piano settimanale	Ajouter à mon plan de la semaine
+1476	Reemplazar una tarea opcional	Sostituisci un compito facoltativo	Remplacer une tâche facultative
+1477	Oculto. Puedes mostrarlo de nuevo abajo.	Nascosto. Puoi mostrarlo di nuovo qui sotto.	Masqué. Tu peux le réafficher ci-dessous.
+1478	Intereses guardados.	Interessi salvati.	Centres d’intérêt enregistrés.
+1479	Abrir Mentalidad	Apri Mindset	Ouvrir Mindset
+1480	Descartar	Ignora	Ignorer
+1481	Guardado en Más adelante. No se programó nada.	Salvato in Più avanti. Nulla è stato programmato.	Enregistré dans Plus tard. Rien n’a été programmé.
+1482	¿Añadir “{0}” a tu plan el {1}, unos {2} minutos? Nada más cambia.	Aggiungere “{0}” al tuo piano il {1}, circa {2} minuti? Nient’altro cambia.	Ajouter « {0} » à ton plan le {1}, environ {2} minutes ? Rien d’autre ne change.
+1483	Añadir a mi plan	Aggiungi al mio piano	Ajouter à mon plan
+1484	Probado una vez, en cualquier medida.	Provato una volta, in qualsiasi misura.	Essayé une fois, peu importe combien.
+1485	Añadido a {0}.	Aggiunto a {0}.	Ajouté à {0}.
+1486	Elige una esta semana	Scegline uno questa settimana	Choisis-en une cette semaine
+1487	No quedan tareas opcionales esta semana para reemplazar. Puedes añadirlo a tu plan en su lugar.	Non restano compiti facoltativi da sostituire questa settimana. Puoi aggiungerlo al tuo piano invece.	Il ne reste aucune tâche facultative à remplacer cette semaine. Tu peux plutôt l’ajouter à ton plan.
+1488	La original se queda en tu historial como reemplazada, y el ejercicio ocupa su lugar ese día.	L’originale resta nella cronologia come sostituito, e l’esercizio prende il suo posto quel giorno.	L’originale reste dans ton historique comme remplacée, et l’exercice prend sa place ce jour-là.
+1489	Elige una tarea primero.	Scegli prima un compito.	Choisis d’abord une tâche.
+1490	¿Reemplazar “{0}” el {1} por “{2}”?	Sostituire “{0}” il {1} con “{2}”?	Remplacer « {0} » le {1} par « {2} » ?
+1491	Reemplazar tarea	Sostituisci compito	Remplacer la tâche
+1492	Reemplazado para el {0}.	Sostituito per il {0}.	Remplacé pour le {0}.

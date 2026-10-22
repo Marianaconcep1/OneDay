@@ -121,7 +121,8 @@ function weeklyReport(ws, withMoney) {
     if (rv.adjustmentLabel) L.push(`- Chosen adjustment for next week: ${rv.adjustmentLabel}`);
   }
   L.push(''); L.push('Question for you: based only on this, what is one small, specific change to next week that keeps the plan realistic?');
-  return L.join('\n');
+  // The report is plain text, so each line is translated here rather than on the page
+  return L.map((x) => (x.startsWith('- ') ? '- ' + trText(x.slice(2)) : trText(x))).join('\n');
 }
 A.openReport = (el) => {
   const ws = el.dataset.ws || weekStart(today());

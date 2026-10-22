@@ -1,0 +1,180 @@
+150	p. ej., servir mi café de la mañana	es. versare il caffè del mattino	ex. me servir mon café du matin
+151	Vincular una señal	Collega un segnale	Associer un déclencheur
+152	Después de…	Dopo che…	Après avoir…
+153	Guardar señal	Salva il segnale	Enregistrer le déclencheur
+154	Reescribir la primera acción	Riscrivi la prima azione	Réécrire la première action
+155	Empieza con un verbo	Inizia con un verbo	Commence par un verbe
+156	Listo cuando	Fatto quando	Terminé quand
+157	Guardar para la próxima vez	Salva per la prossima volta	Garder pour la prochaine fois
+158	Achicar la meta	Riduci il traguardo	Rapprocher la ligne d’arrivée
+159	Minutos	Minuti	Minutes
+160	{0} tiene espacio.	{0} ha spazio.	{0} a de la place.
+161	Ningún día de esta semana tiene espacio según tu tiempo disponible. Puedes bajar el tiempo en Plan.	Nessun giorno di questa settimana ha spazio in base al tempo disponibile. Puoi ridurre il tempo in Piano.	Aucun jour de cette semaine n’a de place selon ton temps disponible. Tu peux réduire la durée dans Plan.
+162	Reprogramar dentro del tiempo disponible	Riprogramma nel tempo disponibile	Reprogrammer dans le temps disponible
+163	Ofrecer un comienzo más pequeño	Proponi un inizio più piccolo	Proposer un début plus petit
+164	La próxima vez, empieza con: {0}.	La prossima volta, inizia con: {0}.	La prochaine fois, commence par : {0}.
+165	Usar la versión más pequeña mañana	Usa la versione più piccola domani	Utiliser la version plus petite demain
+166	Hacer más pequeña la tarea de mañana	Rendi più piccolo il compito di domani	Alléger la tâche de demain
+167	Descansar o revisar el plan	Riposa o rivedi il piano	Se reposer ou revoir le programme
+168	Descansar es una opción legítima. Si los síntomas siguen, un profesional cualificado puede ayudarte.	Riposare è una scelta legittima. Se i sintomi continuano, un professionista qualificato può aiutarti.	Se reposer est un choix légitime. Si les symptômes persistent, un professionnel qualifié peut t’aider.
+169	Abrir Plan	Apri Piano	Ouvrir Plan
+170	Señal guardada.	Segnale salvato.	Déclencheur enregistré.
+171	Guardado. Los registros anteriores conservan el original.	Salvato. Le registrazioni passate mantengono l’originale.	Enregistré. Les saisies passées gardent l’original.
+172	Movido a {0}.	Spostato a {0}.	Déplacé à {0}.
+173	Mañana se usa la versión más pequeña.	Domani si usa la versione più piccola.	Demain, c’est la version plus petite.
+174	Elige hecho, más pequeño u omitido.	Scegli fatto, più piccolo o saltato.	Choisis fait, plus petit ou sauté.
+175	Registro borrado.	Registrazione cancellata.	Saisie effacée.
+176	Registrado como completado.	Registrato come completato.	Noté comme terminé.
+177	Planificaste {0} min y completaste {1}. Eso cuenta como participación.	Avevi pianificato {0} min e ne hai completati {1}. Conta come partecipazione.	Prévu {0} min, fait {1}. Ça compte comme une participation.
+178	Registrado como la versión más pequeña.	Registrato come versione più piccola.	Noté comme version plus petite.
+179	Registrado como omitido. El plan sigue aquí mañana.	Registrato come saltato. Il piano è ancora qui domani.	Noté comme sauté. Le plan est toujours là demain.
+180	Empezado. El temporizador es opcional.	Iniziato. Il timer è facoltativo.	Commencé. Le minuteur est facultatif.
+181	Hice otra cosa	Ho fatto altro	J’ai fait autre chose
+182	Completado según el plan	Completato come previsto	Fait comme prévu
+183	Modificado	Modificato	Modifié
+184	Lo que hiciste realmente	Cosa hai fatto davvero	Ce que tu as vraiment fait
+185	Caminata	Camminata	Marche
+186	Duración (min)	Durata (min)	Durée (min)
+187	Distancia ({0})	Distanza ({0})	Distance ({0})
+188	Si aplica	Se pertinente	Si besoin
+189	Esfuerzo	Sforzo	Effort
+190	1 muy fácil	1 molto facile	1 très facile
+191	5 muy difícil	5 molto difficile	5 très difficile
+192	Dolor, enfermedad o agotamiento inusual	Dolore, malattia o stanchezza insolita	Douleur, maladie ou épuisement inhabituel
+193	Nota sobre cansancio o dolor	Nota su stanchezza o dolore	Note sur la fatigue ou la douleur
+194	La distancia que falte nunca se suma a un entrenamiento posterior. Una sesión más corta o distinta se registra como modificada, junto al plan original.	La distanza mancata non viene mai aggiunta a un allenamento successivo. Una sessione più corta o diversa viene registrata come modificata, accanto al piano originale.	La distance manquée n’est jamais ajoutée à une séance suivante. Une séance plus courte ou différente est notée comme modifiée, à côté du programme initial.
+195	Elige cómo fue la sesión.	Scegli com’è andata la sessione.	Choisis comment s’est passée la séance.
+196	Guardado. Con dolor, enfermedad o agotamiento inusual, lo primero es descansar o revisar el plan.	Salvato. Con dolore, malattia o stanchezza insolita, vengono prima il riposo o una revisione del piano.	Enregistré. En cas de douleur, de maladie ou d’épuisement inhabituel, le repos ou une révision du programme passent d’abord.
+197	Guardado como modificado. El plan original sigue visible.	Salvato come modificato. Il piano originale resta visibile.	Enregistré comme modifié. Le programme initial reste visible.
+198	Guardado.	Salvato.	Enregistré.
+199	Primero, una pregunta rápida: ¿hoy tienes dolor, alguna enfermedad o un agotamiento inusual?	Prima, una domanda veloce: oggi hai dolore, malattia o una stanchezza insolita?	D’abord, une petite question : as-tu aujourd’hui une douleur, une maladie ou un épuisement inhabituel ?
+200	No. Empezaré con poco	No. Inizio piano	Non. Je commence doucement
+201	Sí	Sì	Oui
+202	Prepara tu equipo y empieza el calentamiento planificado; luego vuelve a evaluar.	Prepara l’attrezzatura e inizia il riscaldamento previsto, poi valuta di nuovo.	Prépare ton équipement et commence l’échauffement prévu, puis réévalue.
+203	Si paras después del calentamiento, regístralo como modificado. Igual cuenta como participación.	Se ti fermi dopo il riscaldamento, registralo come modificato. Conta comunque come partecipazione.	Si tu t’arrêtes après l’échauffement, note-le comme modifié. Ça compte quand même comme une participation.
+204	Empezar el calentamiento	Inizia il riscaldamento	Commencer l’échauffement
+205	Descansa o revisa el plan.	Riposa o rivedi il piano.	Repose-toi ou revois le programme.
+206	Hoy la meta no es forzarte. Si sigue, un profesional cualificado puede ayudarte.	Oggi l’obiettivo non è stringere i denti. Se continua, un professionista qualificato può aiutarti.	Forcer n’est pas l’objectif aujourd’hui. Si ça continue, un professionnel qualifié peut t’aider.
+207	Registrar descanso	Registra riposo	Noter du repos
+208	Revisar el plan de entrenamiento	Rivedi il piano di allenamento	Revoir le programme d’entraînement
+209	Registrado. Descansar por síntomas es parte del entrenamiento.	Registrato. Riposare per i sintomi fa parte dell’allenamento.	Noté. Se reposer à cause de symptômes fait partie de l’entraînement.
+210	Supermercado	Spesa alimentare	Courses
+211	Comer fuera	Mangiare fuori	Restaurants
+212	Transporte	Trasporti	Transport
+213	Vivienda y servicios	Casa e utenze	Logement et charges
+214	Facturas y deudas	Bollette e debiti	Factures et dettes
+215	Salud	Salute	Santé
+216	Hogar	Casa	Maison
+217	Cuidado personal	Cura personale	Soins personnels
+218	Diversión y pasatiempos	Svago e hobby	Loisirs
+219	Regalos	Regali	Cadeaux
+220	Salario	Stipendio	Salaire
+221	Ingresos del negocio	Entrate dell’attività	Revenus de l’entreprise
+222	Reembolso	Rimborso	Remboursement
+223	Otros ingresos	Altre entrate	Autres revenus
+224	Gasto	Spesa	Dépense
+225	Ingreso	Entrata	Revenu
+226	Transferencia	Trasferimento	Virement
+227	Monto	Importo	Montant
+228	Fecha	Data	Date
+229	Una transferencia mueve dinero entre dos de tus cuentas. Nunca cuenta como gasto ni como ingreso. Añade dos cuentas primero.	Un trasferimento sposta denaro tra due tuoi conti. Non conta mai come spesa o entrata. Aggiungi prima due conti.	Un virement déplace de l’argent entre deux de tes comptes. Il n’est jamais compté comme dépense ni comme revenu. Ajoute d’abord deux comptes.
+230	Añadir “Corriente” y “Ahorros”	Aggiungi “Conto corrente” e “Risparmi”	Ajouter « Compte courant » et « Épargne »
+231	Las transferencias entre tus cuentas no cuentan como gasto ni como ingreso.	I trasferimenti tra i tuoi conti non contano come spese o entrate.	Les virements entre tes comptes ne comptent ni comme dépenses ni comme revenus.
+232	Categoría	Categoria	Catégorie
+233	Sin especificar	Non specificato	Non précisé
+234	Cuenta	Conto	Compte
+235	Guardar cambios	Salva le modifiche	Enregistrer les modifications
+236	Añadir registro	Aggiungi voce	Ajouter une saisie
+237	Regístralo en unos dos minutos.	Registralo in circa due minuti.	Note-le en deux minutes environ.
+238	Aún no hay registros.	Nessuna voce ancora.	Aucune saisie pour l’instant.
+239	¿Está completo el registro de este día?	La registrazione di questo giorno è completa?	La saisie de ce jour est-elle complète ?
+240	Eso es todo	È tutto	C’est tout
+241	Marcar incompleto	Segna come incompleto	Marquer incomplet
+242	“Hoy no gasté” y “sin registro” se guardan por separado. Un día sin registro nunca se trata como $0.	“Oggi nessuna spesa” e “non registrato” restano separati. Un giorno senza registrazione non vale mai come 0 $.	« Aucune dépense aujourd’hui » et « non noté » restent distincts. Un jour sans saisie n’est jamais compté comme 0 $.
+243	Completo	Completo	Complet
+244	Incompleto	Incompleto	Incomplet
+245	Sin confirmar que esté completo	Completezza non confermata	Complétude non confirmée
+246	Sin registro	Non registrato	Non noté
+247	Ingresa un monto como 12.50	Inserisci un importo come 12.50	Saisis un montant comme 12.50
+248	Elige una fecha.	Scegli una data.	Choisis une date.
+249	Elige dos cuentas distintas.	Scegli due conti diversi.	Choisis deux comptes différents.
+250	Registro actualizado.	Voce aggiornata.	Saisie mise à jour.
+251	Registro añadido.	Voce aggiunta.	Saisie ajoutée.
+252	¿Borrar este registro? No se puede deshacer.	Eliminare questa voce? Non si può annullare.	Supprimer cette saisie ? C’est irréversible.
+253	Registro borrado.	Voce eliminata.	Saisie supprimée.
+254	Corriente	Conto corrente	Compte courant
+255	Ahorros	Risparmi	Épargne
+256	En calma	Calma	Calme
+257	Esperanza	Fiducia	Espoir
+258	Orgullo	Orgoglio	Fierté
+259	Cansancio	Stanchezza	Fatigue
+260	Ansiedad	Ansia	Anxiété
+261	Agobio	Sopraffazione	Débordement
+262	Frustración	Frustrazione	Frustration
+263	Tristeza	Tristezza	Tristesse
+264	Soledad	Solitudine	Solitude
+265	Inquietud	Irrequietezza	Agitation
+266	Insensibilidad	Torpore	Engourdissement
+267	Preparar esta noche lo que necesito	Preparare stasera ciò che mi serve	Préparer ce soir ce dont j’ai besoin
+268	Pedirle a alguien apoyo práctico	Chiedere a qualcuno un aiuto pratico	Demander un soutien concret à quelqu’un
+269	Tomar un descanso	Fare una pausa	Faire une pause
+270	Volver al plan mañana	Tornare al piano domani	Reprendre le plan demain
+271	Descanso cumplido	Riposo rispettato	Repos respecté
+272	Según el plan	Come previsto	Comme prévu
+273	Más pequeño	Più piccolo	Plus petit
+274	· editando la revisión guardada	· modifica del check-in salvato	· modification du bilan enregistré
+275	Revisión del	Check-in per	Bilan du
+276	Lo que pasó hoy	Cosa è successo oggi	Ce qui s’est passé aujourd’hui
+277	Lo que ya registraste está incluido. Cambia lo que no esté bien.	Ciò che hai già registrato è inserito. Cambia ciò che non va.	Ce qui est déjà noté est rempli. Modifie ce qui ne va pas.
+278	Solo estaba programado el registro de gastos. Un día no programado no es un día perdido.	Era in programma solo la registrazione delle spese. Un giorno non in programma non è un giorno mancato.	Seul le suivi des dépenses était prévu. Un jour non prévu n’est pas un jour manqué.
+279	Gastos	Spese	Dépenses
+280	: {0} en gastos	: {0} di spese	 : {0} de dépenses
+281	{0} registrado{1}.	{0} registrati{1}.	{0} noté{1}.
+282	Aún no hay nada registrado para este día.	Ancora nulla di registrato per questo giorno.	Rien de noté pour ce jour pour l’instant.
+283	Sin gastos	Nessuna spesa	Aucune dépense
+284	Añadir un gasto	Aggiungi una spesa	Ajouter une dépense
+285	Añadir	Aggiungi	Ajouter
+286	Si tienes dudas, márcalo incompleto. Los días que faltan se muestran como faltantes, no como $0.	Se hai dubbi, segnalo come incompleto. I giorni mancanti appaiono come mancanti, non come 0 $.	En cas de doute, marque-le incomplet. Les jours manquants apparaissent comme manquants, pas comme 0 $.
+287	Ánimo y energía	Umore ed energia	Humeur et énergie
+288	Ambos opcionales. Un número bajo es tan útil como uno alto.	Entrambi facoltativi. Un numero basso è utile quanto uno alto.	Les deux sont facultatifs. Un chiffre bas est aussi utile qu’un chiffre haut.
+289	Ánimo	Umore	Humeur
+290	Energía	Energia	Énergie
+291	Una breve reflexión	Una breve riflessione	Une courte réflexion
+292	O escribe la tuya	Oppure scrivi la tua	Ou écris la tienne
+293	Tu propia respuesta	La tua risposta	Ta propre réponse
+294	¿Qué estoy sintiendo?	Cosa sto provando?	Qu’est-ce que je ressens ?
+295	¿Qué influyó?	Cosa ha contribuito?	Qu’est-ce qui a joué ?
+296	Opcional, una oración	Facoltativo, una frase	Facultatif, une phrase
+297	¿Qué respuesta sería amable y útil?	Quale risposta sarebbe gentile e utile?	Quelle réponse serait bienveillante et utile ?
+298	Algo por lo que me doy crédito hoy	Una cosa per cui oggi mi do merito	Une chose dont je me félicite aujourd’hui
+299	Mañana no hay negocio programado. Si eliges una acción aquí, queda programada.	Domani l’attività non è in programma. Scegliere un’azione qui la mette in programma.	L’entreprise n’est pas prévue demain. Choisir une action ici la programme.
+300	Escribir una acción nueva	Scrivi una nuova azione	Écrire une nouvelle action
+301	Dejar mañana sin programar	Lascia domani senza programma	Laisser demain sans programme
+302	Próxima acción del negocio	Prossima azione per l’attività	Prochaine action pour l’entreprise
+303	Acción (empieza con un verbo)	Azione (inizia con un verbo)	Action (commence par un verbe)
+304	Entrenamiento programado	Allenamento in programma	Entraînement prévu
+305	Cambiar la sesión de mañana	Cambia la sessione di domani	Modifier la séance de demain
+306	Solo si tu plan lo indica	Solo se il tuo piano lo prevede	Seulement si ton programme le prévoit
+307	Mantener según el plan	Mantieni come previsto	Garder comme prévu
+308	Guardar revisión	Salva il check-in	Enregistrer le bilan
+309	Los borradores se guardan solos. Los campos opcionales pueden quedar vacíos.	Le bozze si salvano da sole. I campi facoltativi possono restare vuoti.	Les brouillons s’enregistrent tout seuls. Les champs facultatifs peuvent rester vides.
+310	Añadido. {0} hoy: {1}.	Aggiunto. {0} oggi: {1}.	Ajouté. {0} aujourd’hui : {1}.
+311	Añade cómo se ve “listo” para la acción nueva.	Aggiungi cosa significa “fatto” per la nuova azione.	Ajoute à quoi ressemble « fait » pour la nouvelle action.
+312	{0} completado según el plan	{0} completati come previsto	{0} fait comme prévu
+313	{0} modificado	{0} modificati	{0} modifié
+314	{0} omitido	{0} saltati	{0} sauté
+315	{0} sin registro	{0} senza registrazione	{0} sans saisie
+316	, y	, e	, et
+317	Planificaste {0} minutos y completaste {1}. ¿Qué haría más fácil terminar la próxima sesión?	Avevi pianificato {0} minuti e ne hai completati {1}. Cosa renderebbe più facile finire la prossima sessione?	Tu avais prévu {0} minutes et tu en as fait {1}. Qu’est-ce qui rendrait la prochaine séance plus facile à terminer ?
+318	“{0}” se sintió demasiado grande. Una meta más pequeña está lista para fijarse en Plan.	“{0}” sembrava troppo grande. Un traguardo più piccolo è pronto da impostare in Piano.	« {0} » semblait trop grand. Une ligne d’arrivée plus proche est prête à être définie dans Plan.
+319	Mañana	Domani	Demain
+320	Editar la acción del negocio	Modifica l’azione per l’attività	Modifier l’action pour l’entreprise
+321	Elige un ejemplo para empezar	Scegli un esempio da cui partire	Choisis un exemple pour commencer
+322	Fija un resultado semanal en Plan	Imposta un risultato settimanale in Piano	Définis un résultat de la semaine dans Plan
+323	Acción	Azione	Action
+324	Empieza con un verbo claro: redactar, listar, enviar, crear	Inizia con un verbo chiaro: scrivere, elencare, inviare, costruire	Commence par un verbe clair : rédiger, lister, envoyer, créer
+325	Lo que existirá después	Cosa esisterà dopo	Ce qui existera ensuite
+326	Algo que puedas señalar cuando esté listo	Qualcosa che potrai mostrare quando è fatto	Quelque chose que tu pourras montrer une fois fini
+327	Fecha específica	Data precisa	Date précise
+328	Opcional. Te ayuda a ver a dónde se va el tiempo.	Facoltativo. Ti aiuta a vedere dove va il tempo.	Facultatif. Ça t’aide à voir où passe le temps.
+329	Se conecta con el resultado de esta semana	Collegato al risultato di questa settimana	Lié au résultat de cette semaine
