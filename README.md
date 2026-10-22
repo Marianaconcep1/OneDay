@@ -1,6 +1,6 @@
 # One Day — Mariana
 
-Live app: https://marianaconcep1.github.io/OneDay/
+Live app: https://marianaconcep1.github.io/OneDay/ (install from Safari: Share › Add to Home Screen)
 
 The site is served from the repository root (GitHub Pages: `index.html`, `manifest.webmanifest`, `sw.js`, `mindset.json`, `icons/`). Source is in `src/`; run `python3 build.py` and copy `dist/*` to the root to publish changes. Tests: `node test/accept.js`.
 
