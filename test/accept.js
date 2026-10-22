@@ -187,7 +187,7 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
 
   // 12. Return after several missed days
   await st('(() => { S.settings.lastOpened = dAdd(today(), -5); return flush(); })()');
-  await page.reload(); await page.waitForTimeout(500);
+  await page.goto('http://localhost:8765/#today'); await page.reload(); await page.waitForTimeout(500);
   const welcome = await page.locator('text=Welcome back. Start with today.').count();
   const occBefore = await st('Object.keys(S.occ).length');
   await shot('11-welcome-back');
@@ -401,20 +401,20 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
   const td0 = await st('today()');
   await page.fill('#psSd', td0); await page.fill('#psSt', '00:00'); await page.fill('#psEd', await st('dAdd(today(), 3)')); await page.fill('#psEt', '09:00');
   await shot('44-pause-form'); await click('[data-act="pauseSave"]');
-  await click('[data-act="tab"][data-tab="today"]'); await shot('45-today-paused');
-  ok('V1 During a pause: nothing scheduled, nothing owed', await st('pausedAll(today()) && itemsFor(today()).every(i => i.paused)') && (await page.locator('text=Resting until').count()) === 1 && await st('!featuredItem(itemsFor(today())) || !featuredItem(itemsFor(today())).checkin'));
+  await shot('45-rest-mode');
+  ok('V1 Pausing everything opens Rest Mode: nothing scheduled, nothing owed', await st('pausedAll(today()) && itemsFor(today()).every(i => i.paused)') && (await page.locator('main.rest').count()) === 1 && (await page.locator('.tabbar').count()) === 0);
   ok('V2 Paused days are excluded from adherence', await st('weekStats(weekStart(today())).pausedDays >= 1'));
   const occN = await st('Object.keys(S.occ).length');
-  await click('[data-act="pauseForm"]'); await page.fill('#psEd', await st('dAdd(today(), 4)')); await click('[data-act="pauseSave"]');
-  ok('V3 Extending a pause updates the end time', await st('S.pauses[0].end.startsWith(dAdd(today(), 4))'));
+  await click('[data-act="restMenu"]'); await click('.sheet [data-act="pauseForm"]'); await page.fill('#psEd', await st('dAdd(today(), 4)')); await click('[data-act="pauseSave"]');
+  ok('V3 Extending a pause from the Rest Mode menu updates the end time', await st('S.pauses[0].end.startsWith(dAdd(today(), 4))') && (await page.locator('main.rest').count()) === 1);
   await setNow(new Date(Date.parse(td0 + 'T14:00:00Z') + 6 * 86400000).toISOString()); await page.reload(); await page.waitForTimeout(600);
-  await shot('46-welcome-back');
-  ok('V4 After the end: “Welcome back. Resume your plan or adjust your first day?” and it waits', (await page.locator('text=Welcome back. Resume your plan or adjust your first day?').count()) === 1 && await st('pauseState(S.pauses[0]) === "ended"'));
+  await shot('46-still-resting');
+  ok('V4 After the planned end it waits in Rest Mode until you choose', (await page.locator('main.rest').count()) === 1 && await st('pauseState(S.pauses[0]) === "ended" && pausedAll(today())'));
   ok('V5 No backlog from paused days, records preserved', await st(`itemsFor(dAdd(today(), -2)).filter(i => !i.paused).length === 0`) && (await st('Object.keys(S.occ).length')) === occN);
   await page.reload(); await page.waitForTimeout(500);
-  ok('V6 Without confirmation it stays paused, one quiet card, no repeated prompts', (await page.locator('#welcomeBack').count()) === 1 && (await page.locator('.toast').count()) === 0);
-  await click('[data-act="pauseResume"]');
-  ok('V7 Resuming needs your confirmation', await st('S.pauses[0].resumedOn === today() && pauseState(S.pauses[0]) === "over"') && (await page.locator('#welcomeBack').count()) === 0);
+  ok('V6 Without confirmation it stays paused, no repeated prompts', (await page.locator('main.rest').count()) === 1 && (await page.locator('.toast').count()) === 0);
+  await click('[data-act="restReturn"]');
+  ok('V7 Resuming needs your choice, then opens Today', await st('S.pauses[0].resumedOn === today() && pauseState(S.pauses[0]) === "over"') && (await page.locator('#restBack').count()) === 1 && (await page.locator('.tabbar').count()) === 1);
   await noHScroll('round 4');
 
   // ---------- Project ending ----------
@@ -481,7 +481,7 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
   await noHScroll('mindset');
 
   // W. Returning users, language switch, letter in Settings
-  await page.reload(); await page.waitForTimeout(500);
+  await page.goto('http://localhost:8765/#today'); await page.reload(); await page.waitForTimeout(500);
   ok('W18 Returning users skip the welcome', (await page.locator('.envelope').count()) === 0 && (await page.locator('.date-h').count()) === 1);
   const recBefore = await st('JSON.stringify([S.tasks.length, Object.keys(S.checkins).length, S.money.tx.length, S.goals.length])');
   await click('[data-act="tab"][data-tab="settings"]');

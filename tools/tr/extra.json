@@ -478,5 +478,25 @@
 "ingresos",
 "entrate",
 "revenus"
+],
+"Show one note in the app when my planned return arrives": [
+"Mostrar una nota en la app cuando llegue mi regreso previsto",
+"Mostra una nota nell’app quando arriva il rientro previsto",
+"Afficher une note dans l’app quand arrive mon retour prévu"
+],
+"For a pause of everything. It appears once, the first time you open the app on or after the end, and is cancelled if you return earlier. Email, text and phone notifications aren’t available in this version.": [
+"Para una pausa de todo. Aparece una sola vez, la primera vez que abras la app en la fecha de fin o después, y se cancela si vuelves antes. Los avisos por correo, SMS o del teléfono no están disponibles en esta versión.",
+"Per una pausa di tutto. Appare una sola volta, la prima volta che apri l’app alla data di fine o dopo, e viene annullata se torni prima. Le notifiche via email, SMS o telefono non sono disponibili in questa versione.",
+"Pour une pause de tout. Elle apparaît une seule fois, la première fois que tu ouvres l’app à la date de fin ou après, et elle est annulée si tu reviens avant. Les notifications par e-mail, SMS ou téléphone ne sont pas disponibles dans cette version."
+],
+"Pausing everything opens Rest Mode: a quiet page with a daily quotation and your companion. The rest of the app waits until you choose to return.": [
+"Pausar todo abre el modo descanso: una página tranquila con una cita diaria y tu compañero. El resto de la app espera hasta que decidas volver.",
+"Mettere in pausa tutto apre la modalità riposo: una pagina tranquilla con una citazione del giorno e il tuo compagno. Il resto dell’app aspetta finché non decidi di tornare.",
+"Mettre tout en pause ouvre le mode repos : une page calme avec une citation du jour et ton compagnon. Le reste de l’app attend jusqu’à ce que tu décides de revenir."
+],
+"When you pause everything, you can ask for one note inside the app when your planned return arrives. It appears once, the first time you open the app on or after that date, and is cancelled if you return earlier. Email, text and phone notifications aren’t available in this version; they need a server, which this app doesn’t have.": [
+"Cuando pausas todo, puedes pedir una nota dentro de la app cuando llegue tu regreso previsto. Aparece una sola vez, la primera vez que abras la app en esa fecha o después, y se cancela si vuelves antes. Los avisos por correo, SMS o del teléfono no están disponibles en esta versión; necesitan un servidor, y esta app no lo tiene.",
+"Quando metti in pausa tutto, puoi chiedere una nota nell’app quando arriva il rientro previsto. Appare una sola volta, la prima volta che apri l’app in quella data o dopo, e viene annullata se torni prima. Le notifiche via email, SMS o telefono non sono disponibili in questa versione; richiedono un server, che questa app non ha.",
+"Quand tu mets tout en pause, tu peux demander une note dans l’app quand arrive ton retour prévu. Elle apparaît une seule fois, la première fois que tu ouvres l’app à cette date ou après, et elle est annulée si tu reviens avant. Les notifications par e-mail, SMS ou téléphone ne sont pas disponibles dans cette version ; elles nécessitent un serveur, que cette app n’a pas."
 ]
 }

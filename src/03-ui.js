@@ -17,6 +17,7 @@ function render() {
   const root = $('#app');
   if (LOCKED) { root.innerHTML = renderLock(); return; }
   if (!S.settings.onboarded) { root.innerHTML = renderOnboarding(); bindSetup(); return; }
+  if (restPause()) { closeSheetIfStale(); root.innerHTML = renderRest(); syncHash(true); restWas = true; return; }
   const views = { today: renderToday, plan: renderPlan, progress: renderProgress, mindset: renderMindset, settings: renderSettings };
   root.innerHTML =
     (DEMO ? '<div class="wrap" style="padding-bottom:0"><div class="demo-flag">Demo mode: sample data only. Your real data is untouched. <button class="btn ghost sm" data-act="exitDemo" style="min-height:32px;color:inherit;text-decoration:underline">Exit demo</button></div></div>' : '') +
@@ -25,7 +26,10 @@ function render() {
       `<button class="tab" data-act="tab" data-tab="${k}" ${TAB === k ? 'aria-current="page"' : ''}>${ICONS[k]}<span>${t('tab.' + k)}</span></button>`).join('') + '</nav>' +
     renderTimerBar();
   if (TAB === 'settings') bindTzPicker('stTz', () => SH.tzSel, SETUP[S.settings.language] || SETUP.en);
+  syncHash(false); restWas = false;
 }
+/* Sheets from the regular app don't stay open over Rest Mode */
+function closeSheetIfStale() { if (restWas === false && $('.sheet')) closeSheet(true); }
 A.tab = (el) => { TAB = el.dataset.tab; render(); window.scrollTo(0, 0); };
 
 function toast(msg) {
@@ -191,6 +195,7 @@ function renderToday() {
   let h = `<header class="topbar"><div><div class="eyebrow">${esc(dFmt(td, { weekday: 'long' }))}</div><h1 class="date-h">${esc(dFmt(td, { month: 'long', day: 'numeric', year: 'numeric' }))}</h1>${mainOutcomeLine(td)}</div></header><div class="stack-l">`;
 
   const fullPause = pausedAll(td);
+  h += renderRestBack(td);
   h += renderPauseToday(td);
   h += mindsetNotice();
   if (RETURN_GAP >= 3 && S.dismissed.returnOn !== td && !currentPause() && !S.pauses.some((p) => p.resumedOn === td)) {
@@ -199,9 +204,10 @@ function renderToday() {
   }
   const cd = calibrationDay();
   if (cd) h += `<section class="banner"><div class="row-between"><div class="h3">Calibration · day ${cd} of 7</div></div><p class="small">${t('calib')} Log what actually happens. Targets stay where they are this week.</p>${firstWeekQuestions()}</section>`;
-  h += firstWeekBanner(td);
+  const justBack = S.pauses.some((p) => p.resumedOn === td && p.scope === 'all');  // no reviews or catching up on the day you return
+  if (!justBack) h += firstWeekBanner(td);
   if (S.settings.reminders && !currentPause() && nowHM() >= S.settings.checkinTime && !S.checkins[td]) h += `<section class="banner pink"><div class="h3">${esc(t('ci.reminder', { time: fmtTime(S.settings.checkinTime) }))}</div></section>`;
-  if (reviewDue()) h += `<section class="banner"><div class="h3">Weekly review is ready</div><p class="small">10–15 minutes to adjust next week. One change at most.</p><div><button class="btn primary sm" data-act="openReview">Start review</button></div></section>`;
+  if (reviewDue() && !justBack) h += `<section class="banner"><div class="h3">Weekly review is ready</div><p class="small">10–15 minutes to adjust next week. One change at most.</p><div><button class="btn primary sm" data-act="openReview">Start review</button></div></section>`;
 
   // Featured next action
   if (f && f.checkin) {

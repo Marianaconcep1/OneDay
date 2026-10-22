@@ -1,0 +1,390 @@
+{
+  "about": "Rest Mode quotations. Maintained by the app's administrator in this file. Only entries with status \"approved\" are shown. Every approved entry was checked word for word against the linked source on the date in verification.checked. Translations marked \"app\" were written for One Day and are labeled as such in the app; translations marked \"published\" are from the named public-domain edition.",
+  "quotes": [
+    {
+      "id": "q01-thoreau-margin",
+      "author": "Henry David Thoreau",
+      "lang": "en",
+      "text": {
+        "en": "There were times when I could not afford to sacrifice the bloom of the present moment to any work, whether of the head or hands. I love a broad margin to my life.",
+        "es": "Había momentos en que no podía permitirme sacrificar la flor del momento presente a ningún trabajo, ni de la cabeza ni de las manos. Me gusta un margen amplio en mi vida.",
+        "it": "C’erano momenti in cui non potevo permettermi di sacrificare il fiore del momento presente a nessun lavoro, né della testa né delle mani. Amo un ampio margine nella mia vita.",
+        "fr": "Il y avait des moments où je ne pouvais me permettre de sacrifier la fleur de l’instant présent à aucun travail, ni de la tête ni des mains. J’aime laisser une large marge à ma vie."
+      },
+      "source": {
+        "title": "Walden; or, Life in the Woods",
+        "detail": "chapter “Sounds”",
+        "year": 1854,
+        "publisher": "Ticknor and Fields, Boston",
+        "url": "https://etc.usf.edu/lit2go/90/walden-or-life-in-the-woods/1542/sounds"
+      },
+      "translations": {
+        "es": {
+          "type": "app"
+        },
+        "it": {
+          "type": "app"
+        },
+        "fr": {
+          "type": "app"
+        }
+      },
+      "rights": "Public domain (published 1854).",
+      "verification": {
+        "status": "verified",
+        "checked": "2026-10-22",
+        "against": "https://etc.usf.edu/lit2go/90/walden-or-life-in-the-woods/1542/sounds",
+        "note": "Two consecutive sentences, unchanged."
+      },
+      "status": "approved",
+      "cite": "Walden, 1854"
+    },
+    {
+      "id": "q02-whitman-loafe",
+      "author": "Walt Whitman",
+      "lang": "en",
+      "text": {
+        "en": "I loafe and invite my soul,\nI lean and loafe at my ease observing a spear of summer grass.",
+        "es": "Holgazaneo e invito a mi alma,\nme recuesto y holgazaneo a mis anchas observando una brizna de hierba de verano.",
+        "it": "Ozio e invito la mia anima,\nmi appoggio e ozio a mio agio osservando un filo d’erba d’estate.",
+        "fr": "Je flâne et j’invite mon âme,\nje m’accoude et flâne à mon aise en observant un brin d’herbe d’été."
+      },
+      "source": {
+        "title": "Leaves of Grass",
+        "detail": "“Song of Myself”, section 1",
+        "year": 1892,
+        "publisher": "Deathbed edition (1891–92)",
+        "url": "https://www.gutenberg.org/cache/epub/1322/pg1322-images.html"
+      },
+      "translations": {
+        "es": {
+          "type": "app"
+        },
+        "it": {
+          "type": "app"
+        },
+        "fr": {
+          "type": "app"
+        }
+      },
+      "rights": "Public domain.",
+      "verification": {
+        "status": "verified",
+        "checked": "2026-10-22",
+        "against": "https://www.gutenberg.org/cache/epub/1322/pg1322-images.html",
+        "note": "Spelling “loafe” is Whitman’s. The 1856 edition has a comma after “ease”; this entry follows the final edition."
+      },
+      "status": "approved",
+      "cite": "Leaves of Grass, 1891–92"
+    },
+    {
+      "id": "q03-wordsworth-light",
+      "author": "William Wordsworth",
+      "lang": "en",
+      "text": {
+        "en": "Come forth into the light of things,\nLet Nature be your teacher.",
+        "es": "Sal a la luz de las cosas,\ndeja que la Naturaleza sea tu maestra.",
+        "it": "Vieni fuori nella luce delle cose,\nlascia che la Natura sia la tua maestra.",
+        "fr": "Sors dans la lumière des choses,\nque la Nature soit ton maître."
+      },
+      "source": {
+        "title": "Lyrical Ballads",
+        "detail": "“The Tables Turned”, lines 15–16",
+        "year": 1798,
+        "publisher": "J. and A. Arch, London",
+        "url": "https://rpo.library.utoronto.ca/poems/tables-turned"
+      },
+      "translations": {
+        "es": {
+          "type": "app"
+        },
+        "it": {
+          "type": "app"
+        },
+        "fr": {
+          "type": "app"
+        }
+      },
+      "rights": "Public domain (published 1798).",
+      "verification": {
+        "status": "verified",
+        "checked": "2026-10-22",
+        "against": "https://rpo.library.utoronto.ca/poems/tables-turned",
+        "note": "Representative Poetry Online, from the 1798 first edition. The poem invites the reader to leave their books and go outdoors."
+      },
+      "status": "approved",
+      "cite": "Lyrical Ballads, 1798"
+    },
+    {
+      "id": "q04-psalm-23",
+      "author": "Psalm 23:2",
+      "authorNote": "Hebrew Bible",
+      "lang": "he",
+      "text": {
+        "en": "He maketh me to lie down in green pastures: he leadeth me beside the still waters.",
+        "es": "En lugares de delicados pastos me hará yacer: Junto á aguas de reposo me pastoreará.",
+        "it": "Egli mi fa giacere in verdeggianti paschi, mi guida lungo le acque chete.",
+        "fr": "Il me fait reposer dans de verts pâturages, Il me dirige près des eaux paisibles."
+      },
+      "source": {
+        "title": "The Book of Psalms",
+        "detail": "Psalm 23, verse 2",
+        "year": null,
+        "publisher": "",
+        "url": "https://thebible.ch/KJV/PSA/23/2"
+      },
+      "translations": {
+        "en": {
+          "type": "published",
+          "name": "King James Version (1611)",
+          "url": "https://thebible.ch/KJV/PSA/23/2"
+        },
+        "es": {
+          "type": "published",
+          "name": "Reina-Valera Antigua (1909)",
+          "url": "https://www.biblegateway.com/passage/?search=Psalm+23%3A2&version=RVA"
+        },
+        "it": {
+          "type": "published",
+          "name": "Riveduta (1927)",
+          "url": "https://www.biblestudytools.com/riv/salmi/23-2.html"
+        },
+        "fr": {
+          "type": "published",
+          "name": "Louis Segond (1910)",
+          "url": "https://www.biblegateway.com/passage/?search=Psalm+23%3A2&version=LSG"
+        }
+      },
+      "rights": "All four translations are in the public domain.",
+      "verification": {
+        "status": "verified",
+        "checked": "2026-10-22",
+        "against": "Each translation’s link",
+        "note": "Full verse in each translation, unchanged."
+      },
+      "status": "approved",
+      "authorL": {
+        "en": "Psalm 23:2",
+        "es": "Salmo 23:2",
+        "it": "Salmo 23:2",
+        "fr": "Psaume 23:2"
+      }
+    },
+    {
+      "id": "q05-seneca-rest",
+      "author": "Seneca",
+      "lang": "la",
+      "original": "Danda est animis remissio",
+      "text": {
+        "en": "Minds must be given rest.",
+        "es": "Hay que dar descanso a la mente.",
+        "it": "Bisogna concedere riposo all’animo.",
+        "fr": "Il faut accorder du repos à l’esprit."
+      },
+      "source": {
+        "title": "De Tranquillitate Animi (On Tranquillity of Mind)",
+        "detail": "17.5",
+        "year": null,
+        "publisher": "",
+        "url": "https://www.thelatinlibrary.com/sen/sen.tranq.shtml"
+      },
+      "translations": {
+        "en": {
+          "type": "app"
+        },
+        "es": {
+          "type": "app"
+        },
+        "it": {
+          "type": "app"
+        },
+        "fr": {
+          "type": "app"
+        }
+      },
+      "rights": "Public domain (1st century).",
+      "verification": {
+        "status": "verified",
+        "checked": "2026-10-22",
+        "against": "https://www.thelatinlibrary.com/sen/sen.tranq.shtml",
+        "note": "First clause of the sentence. The rest of the sentence says rested minds rise better and keener; it is left out so the app makes no promise about results."
+      },
+      "status": "approved",
+      "cite": "De Tranquillitate Animi, 17.5",
+      "authorL": {
+        "en": "Seneca",
+        "es": "Séneca",
+        "it": "Seneca",
+        "fr": "Sénèque"
+      }
+    },
+    {
+      "id": "q06-thoreau-deliberately",
+      "author": "Henry David Thoreau",
+      "lang": "en",
+      "text": {
+        "en": "Let us spend one day as deliberately as Nature, and not be thrown off the track by every nutshell and mosquito’s wing that falls on the rails.",
+        "es": "Pasemos un día tan deliberadamente como la Naturaleza, sin que nos saque del camino cada cáscara de nuez o ala de mosquito que cae sobre los rieles.",
+        "it": "Trascorriamo un giorno con la stessa calma della Natura, senza farci sviare da ogni guscio di noce o ala di zanzara che cade sui binari.",
+        "fr": "Passons une journée aussi posément que la Nature, sans nous laisser dérailler par chaque coquille de noix ou aile de moustique qui tombe sur les rails."
+      },
+      "source": {
+        "title": "Walden; or, Life in the Woods",
+        "detail": "chapter “Where I Lived, and What I Lived For”",
+        "year": 1854,
+        "publisher": "Ticknor and Fields, Boston",
+        "url": "https://etc.usf.edu/lit2go/90/walden-or-life-in-the-woods/1538/where-i-lived-and-what-i-lived-for"
+      },
+      "translations": {
+        "es": {
+          "type": "app"
+        },
+        "it": {
+          "type": "app"
+        },
+        "fr": {
+          "type": "app"
+        }
+      },
+      "rights": "Public domain (published 1854).",
+      "verification": {
+        "status": "verified",
+        "checked": "2026-10-22",
+        "against": "https://etc.usf.edu/lit2go/90/walden-or-life-in-the-woods/1538/where-i-lived-and-what-i-lived-for",
+        "note": "Complete sentence, unchanged."
+      },
+      "status": "approved",
+      "cite": "Walden, 1854"
+    },
+    {
+      "id": "q07-ecclesiastes-season",
+      "author": "Ecclesiastes 3:1",
+      "authorNote": "Hebrew Bible",
+      "lang": "he",
+      "text": {
+        "en": "To every thing there is a season, and a time to every purpose under the heaven",
+        "es": "Para todas las cosas hay sazón, y todo lo que se quiere debajo del cielo, tiene su tiempo",
+        "it": "Per tutto v’è il suo tempo, v’è il suo momento per ogni cosa sotto il cielo",
+        "fr": "Il y a un temps pour tout, un temps pour toute chose sous les cieux"
+      },
+      "source": {
+        "title": "The Book of Ecclesiastes",
+        "detail": "chapter 3, verse 1",
+        "year": null,
+        "publisher": "",
+        "url": "https://www.biblestudytools.com/kjv/ecclesiastes/3-1.html"
+      },
+      "translations": {
+        "en": {
+          "type": "published",
+          "name": "King James Version (1611)",
+          "url": "https://www.biblestudytools.com/kjv/ecclesiastes/3-1.html"
+        },
+        "es": {
+          "type": "published",
+          "name": "Reina-Valera Antigua (1909)",
+          "url": "https://www.biblegateway.com/passage/?search=Ecclesiastes+3%3A1&version=RVA"
+        },
+        "it": {
+          "type": "published",
+          "name": "Riveduta (1927)",
+          "url": "https://www.biblestudytools.com/riv/ecclesiaste/3-1.html"
+        },
+        "fr": {
+          "type": "published",
+          "name": "Louis Segond (1910)",
+          "url": "https://www.biblegateway.com/passage/?search=Ecclesiastes+3%3A1&version=LSG"
+        }
+      },
+      "rights": "All four translations are in the public domain.",
+      "verification": {
+        "status": "verified",
+        "checked": "2026-10-22",
+        "against": "Each translation’s link",
+        "note": "The verse ends with a colon because the list that follows continues it; the colon is left off for display. Reina-Valera capitalizes the first word as a chapter opening (“PARA”); shown in normal case."
+      },
+      "status": "approved",
+      "authorL": {
+        "en": "Ecclesiastes 3:1",
+        "es": "Eclesiastés 3:1",
+        "it": "Ecclesiaste 3:1",
+        "fr": "Ecclésiaste 3:1"
+      }
+    },
+    {
+      "id": "x01-emerson-pace",
+      "author": "Ralph Waldo Emerson",
+      "lang": "en",
+      "text": {
+        "en": "Adopt the pace of nature: her secret is patience."
+      },
+      "source": {
+        "title": "Lectures and Biographical Sketches, “Education”",
+        "year": 1883,
+        "url": "https://www.gutenberg.org/ebooks/75942"
+      },
+      "verification": {
+        "status": "not verified",
+        "checked": "2026-10-22",
+        "note": "Widely attributed, but the wording could not be found in the checked text of this edition."
+      },
+      "status": "rejected"
+    },
+    {
+      "id": "x02-lubbock-rest",
+      "author": "John Lubbock",
+      "lang": "en",
+      "text": {
+        "en": "Rest is not idleness, and to lie sometimes on the grass under trees on a summer’s day…"
+      },
+      "source": {
+        "title": "The Use of Life, “Recreation”",
+        "year": 1894,
+        "url": "https://archive.org/details/useoflife00lubbrich"
+      },
+      "verification": {
+        "status": "not verified",
+        "checked": "2026-10-22",
+        "note": "The available scan of the book ended before this chapter, so the wording could not be checked."
+      },
+      "status": "rejected"
+    },
+    {
+      "id": "x03-ovid-field",
+      "author": "Ovid",
+      "lang": "la",
+      "text": {
+        "la": "Da requiem: requietus ager bene credita reddit"
+      },
+      "source": {
+        "title": "Ars Amatoria",
+        "detail": "2.351",
+        "url": "https://www.thelatinlibrary.com/ovid/ovid.artis2.shtml"
+      },
+      "verification": {
+        "status": "verified",
+        "checked": "2026-10-22",
+        "note": "Wording is correct, but in context it is advice on keeping a lover interested through absence. Using it as a message about rest would change its meaning."
+      },
+      "status": "rejected"
+    },
+    {
+      "id": "x04-pascal-room",
+      "author": "Blaise Pascal",
+      "lang": "fr",
+      "text": {
+        "fr": "tout le malheur des hommes vient de ne savoir pas se tenir en repos dans une chambre"
+      },
+      "source": {
+        "title": "Pensées, 2e éd. Desprez, XXVI",
+        "url": "https://fr.wikisource.org/wiki/Pens%C3%A9es_(Pascal)/2e_%C3%A9d._Desprez/XXVI"
+      },
+      "verification": {
+        "status": "verified",
+        "checked": "2026-10-22",
+        "note": "Wording differs between editions (“se tenir” or “demeurer en repos”), and it frames rest through unhappiness. Not used."
+      },
+      "status": "rejected"
+    }
+  ]
+}

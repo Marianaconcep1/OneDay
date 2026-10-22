@@ -9,7 +9,7 @@ js = '\n'.join(open(f, encoding='utf-8').read() for f in sorted(glob.glob(os.pat
 i18n = {}
 for f in sorted(glob.glob(os.path.join(ROOT, 'src', 'i18n', '*.json'))):
     i18n.update(json.load(open(f, encoding='utf-8')))
-js = js.replace('__I18N__', json.dumps(i18n, ensure_ascii=False, separators=(',', ':')))
+js = js.replace('__REST_QUOTES__', json.dumps([q for q in json.load(open(os.path.join(ROOT, 'src', 'rest-quotes.json'), encoding='utf-8'))['quotes'] if q.get('status') == 'approved'], ensure_ascii=False, separators=(',', ':'))).replace('__I18N__', json.dumps(i18n, ensure_ascii=False, separators=(',', ':')))
 FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&family=Dancing+Script:wght@600&display=swap">'
 BODY = '<div id="app"><main class="wrap"><p style="padding:24px 0">Loading One Day…</p></main></div><noscript>One Day needs JavaScript.</noscript>'
 TITLE = 'One Day — Mariana'

@@ -41,6 +41,18 @@ Important: Safari and the home-screen app keep **separate** storage on iOS. Pick
 
 The check-in reminder appears inside the app while it's open, and never during a pause. The app cannot notify you while it's closed, so set a repeating iPhone alarm or Reminder for your check-in time. Email and text reminders are not built: they need a server and a sending service, which the app owner would pay for.
 
+## Taking a break (Rest Mode)
+
+Settings › Pause › Plan a pause › Everything. While a pause of everything is running, the app shows only Rest Mode: a daily quotation with its author and source, your bonsai, garden or farm with all its growth, and a small caretaker tending it (still when reduced motion is on). The regular views, reminders, reviews and progress stay hidden, and every address (`#today`, `#plan`, …) opens Rest Mode until you tap “I’m ready to return”. A small menu keeps language, accessibility and appearance, pause dates, privacy and backup, and the PIN lock within reach. Pausing selected areas never opens Rest Mode.
+
+Paused days have nothing scheduled, build no backlog, aren’t counted in progress and don’t change your companion’s growth. Rest Mode stays on after the planned end until you choose to return; returning opens Today with “Welcome back. Let’s start with today.” and an optional “Adjust today’s plan”, with no review or catching up that day.
+
+The return reminder is one note shown inside the app, once, the first time you open it on or after the planned end, and only if you ticked it. Returning earlier cancels it. Email, text and phone notifications would need a server and aren’t built.
+
+### Rest Mode quotations (for the app owner)
+
+The collection is `src/rest-quotes.json`, and only entries with `"status": "approved"` are built into the app. Each entry records the exact wording, author, original language, source with link, rights, translations (published edition, or `app` for One Day’s own translation, which the app labels “Translated from …” with the original wording available) and verification notes. The current 7 approved entries were each checked word for word against their linked source; 4 candidates were rejected (an unconfirmed Emerson line, an unchecked Lubbock passage, an Ovid line whose context is about love, and a Pascal line whose wording differs by edition). To add one, check it against the original source, add it with `"status": "approved"`, and rebuild with `python3 build.py`. One quotation shows per day in your timezone, cycling through the collection before any repeats.
+
 ## PIN lock
 
 Settings › Profile and security › Set up a PIN. It's a 6-digit convenience lock for this device. Only a salted PBKDF2 hash is stored, never the PIN. After 5 wrong tries it waits 30 seconds, then longer. It auto-locks after inactivity (1–30 minutes) and when you leave the app. A recovery code, shown once, resets a forgotten PIN.

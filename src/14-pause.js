@@ -17,7 +17,7 @@ function pauseDays(p) {
   const sd = p.start.slice(0, 10); const first = p.start.slice(11) < '12:00' ? sd : dAdd(sd, 1);
   let lastExcl;
   if (p.resumedOn) lastExcl = p.resumedOn;
-  else if (pauseState(p) === 'ended') { const ed = p.end.slice(0, 10), td = today(); lastExcl = ed > td ? ed : td; }
+  else if (pauseState(p) === 'ended') { const ed = p.end.slice(0, 10), td = dAdd(today(), 1); lastExcl = ed > td ? ed : td; } // still paused today, until you choose to return
   else lastExcl = p.end.slice(0, 10);
   return first < lastExcl ? { first, last: dAdd(lastExcl, -1) } : null;
 }
@@ -72,12 +72,13 @@ function renderPauseSettings() {
   const cur = currentPause() || upcomingPause();
   const past = S.pauses.filter((p) => pauseState(p) === 'over').slice(-3).reverse();
   return `<p class="small">Pause the whole routine or selected areas for a trip, illness or a break. Paused days have no reminders, build no backlog and aren’t counted in your progress. Records are kept.</p>
+    <p class="small">Pausing everything opens Rest Mode: a quiet page with a daily quotation and your companion. The rest of the app waits until you choose to return.</p>
     ${cur ? `<div class="card tint small"><b>${pauseState(cur) === 'scheduled' ? 'Scheduled' : 'Paused now'}:</b> ${esc(pauseScopeText(cur))}, ${esc(fmtLocal(cur.start, cur.tz))} to ${esc(fmtLocal(cur.end, cur.tz))}</div>
       <div class="btn-row"><button class="btn sm" data-act="pauseForm" data-id="${cur.id}">Extend or change</button>${pauseState(cur) === 'scheduled' ? `<button class="btn ghost sm" data-act="pauseCancel" data-id="${cur.id}">Cancel pause</button>` : `<button class="btn ghost sm" data-act="pauseEnd" data-id="${cur.id}">End early</button>`}</div>`
       : '<button class="btn sm" data-act="pauseForm">Plan a pause</button>'}
     ${past.length ? `<p class="tiny muted">Earlier: ${past.map((p) => esc(dMD(p.start.slice(0, 10)) + '–' + dMD(p.resumedOn))).join(', ')}</p>` : ''}
     <div class="stack-s"><div class="h3">Reminder when a pause ends</div>
-      <p class="small">An email or text at the end of a pause isn’t available in this version. Sending one needs a server and a verified email address or phone number, and this app has neither, so no reminder is set or pretended. When you open the app after the pause, it asks before anything resumes.</p></div>`;
+      <p class="small">When you pause everything, you can ask for one note inside the app when your planned return arrives. It appears once, the first time you open the app on or after that date, and is cancelled if you return earlier. Email, text and phone notifications aren’t available in this version; they need a server, which this app doesn’t have.</p></div>`;
 }
 
 A.pauseForm = (el) => {
@@ -93,6 +94,8 @@ A.pauseForm = (el) => {
     <div class="grid2"><label class="f">Starts<input class="inp" id="psSd" type="date" value="${x.start.slice(0, 10)}" ${started ? 'disabled' : ''}></label><label class="f">Time<input class="inp" id="psSt" type="time" value="${x.start.slice(11)}" ${started ? 'disabled' : ''}></label></div>
     <div class="grid2"><label class="f">Ends<input class="inp" id="psEd" type="date" value="${x.end.slice(0, 10)}"></label><label class="f">Time<input class="inp" id="psEt" type="time" value="${x.end.slice(11)}"></label></div>
     <label class="f">Timezone for these times<input class="inp" id="psTz" list="tzList2" value="${esc(x.tz)}" autocomplete="off"><datalist id="tzList2">${TZ_LIST.map((z) => `<option value="${z}">`).join('')}</datalist><span class="hint">Use the timezone you’ll be in when the pause ends.</span></label>
+    <label class="row" style="min-height:44px;gap:10px"><input type="checkbox" id="psNote" ${x.returnNote ? 'checked' : ''} style="width:22px;height:22px;flex:none"> Show one note in the app when my planned return arrives</label>
+    <p class="tiny muted">For a pause of everything. It appears once, the first time you open the app on or after the end, and is cancelled if you return earlier. Email, text and phone notifications aren’t available in this version.</p>
     <p class="tiny muted">If a pause starts after noon, that day stays scheduled. The day it ends is yours to start fresh.</p>
     <button class="btn primary" data-act="pauseSave">${p ? 'Save changes' : 'Start pause'}</button>`);
 };
@@ -108,7 +111,9 @@ A.pauseSave = () => {
   if (end <= localNow(zone)) { toast('The end time has already passed. Choose a later time, or end the pause instead.'); return; }
   const overlap = S.pauses.some((p) => p.id !== x.id && !p.cancelled && pauseState(p) !== 'over' && !(end <= p.start || start >= p.end));
   if (overlap) { toast('This overlaps another pause. Change that one instead.'); return; }
-  Object.assign(x, { scope, areas: scope === 'all' ? [] : areas, start, end, tz: zone, updatedAt: nowISO() });
+  const note = scope === 'all' && !!($('#psNote') && $('#psNote').checked);
+  if (note !== !!x.returnNote || end !== x.end) delete x.returnNoteShownOn;
+  Object.assign(x, { scope, areas: scope === 'all' ? [] : areas, start, end, tz: zone, returnNote: note, updatedAt: nowISO() });
   if (!x.id) { x.id = uid('pause'); x.createdAt = nowISO(); S.pauses.push(x); }
   else S.pauses[S.pauses.findIndex((p) => p.id === x.id)] = x;
   save(); closeSheet(); render(); toast(start <= localNow(zone) ? 'Paused. Nothing is owed while you’re away.' : 'Pause scheduled.');

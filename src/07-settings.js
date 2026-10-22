@@ -16,7 +16,7 @@ function renderSettings() {
       <label class="f">${t('set.name')}<input class="inp" id="stName" maxlength="60" value="${esc(s.name)}" placeholder="${esc(SL.namePh)}"></label>
       <div id="stNameErr" class="field-err" role="alert"></div>
       <div class="f"><span>${t('set.tz')}</span>${tzPicker('stTz', SH.tzSel, SL)}<span class="hint">Days you’ve already recorded keep their dates if you change this.</span></div>
-      <label class="f">${t('set.lang')}<select class="inp" id="stLang">${APP_LANGS.map(([k, n]) => `<option value="${k}" lang="${k}" ${s.language === k ? 'selected' : ''}>${n}</option>`).join('')}</select>${s.language !== 'en' ? `<span class="hint">${t('set.partial')}</span>` : ''}</label>
+      <label class="f">${t('set.lang')}<select class="inp" id="stLang">${APP_LANGS.map(([k, n]) => `<option value="${k}" lang="${k}" ${s.language === k ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
       <button class="btn primary sm" data-act="settingsSave">${t('btn.save')}</button>
       <div class="stack-s"><div class="h3">PIN lock</div>${renderSecurity()}</div>`, true);
   h += setSect('schedule', t('set.schedule'), 'Check-in time, weekly review, available time', `
