@@ -5,7 +5,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 src = lambda p: open(os.path.join(ROOT, 'src', p), encoding='utf-8').read()
 css = src('style.css').replace('__MONET__', src('monet.b64').strip()).replace('__SEURAT__', src('bg-seurat.b64').strip()).replace('__NIGHT__', src('bg-night.b64').strip())
 js = '\n'.join(open(f, encoding='utf-8').read() for f in sorted(glob.glob(os.path.join(ROOT, 'src', '[0-9][0-9]-*.js'))))
-FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&display=swap">'
+FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&family=Dancing+Script:wght@600&display=swap">'
 BODY = '<div id="app"><main class="wrap"><p style="padding:24px 0">Loading One Day…</p></main></div><noscript>One Day needs JavaScript.</noscript>'
 TITLE = 'One Day — Mariana'
 

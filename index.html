@@ -15,7 +15,7 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icons/icon-192.png" type="image/png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&display=swap">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&family=Dancing+Script:wght@600&display=swap">
 <style>
 :root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
 [hidden] { display: none !important; }
@@ -372,6 +372,71 @@ input[type="range"] { width: 100%; min-height: 36px; accent-color: var(--slate);
 .ms-end { text-align: center; padding-block: 8px; }
 .tab span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
+/* ---------- Welcome: envelope, letter, profile setup ---------- */
+.welcome { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px; padding-block: 32px; }
+.env-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; }
+.envelope { --paper: #F6EEDC; --paper-2: #EFE4CC; --paper-3: #E7D9BC; --env-ink: #4A3B2E;
+  position: relative; width: min(330px, 88vw); aspect-ratio: 3 / 2; border: 0; padding: 0; background: transparent; cursor: pointer; border-radius: 8px; perspective: 900px;
+  filter: drop-shadow(0 10px 22px rgba(60, 40, 30, .18)) drop-shadow(0 2px 3px rgba(60, 40, 30, .12)); }
+.envelope:focus-visible { outline: 3px solid var(--slate); outline-offset: 8px; }
+.envelope > span { position: absolute; display: block; }
+.env-letter { left: 7%; right: 7%; top: 8%; height: 84%; background: #FCF9F2; border-radius: 4px; z-index: 1;
+  background-image: repeating-linear-gradient(180deg, transparent 0 15px, rgba(120, 100, 80, .12) 15px 16px); background-position: 0 22px; background-size: 100% 100%; }
+.env-body { inset: 0; z-index: 2; border-radius: 8px; background: linear-gradient(160deg, var(--paper), var(--paper-2));
+  clip-path: polygon(0 0, 50% 50%, 100% 0, 100% 100%, 0 100%); }
+.env-body::before { content: ""; position: absolute; inset: 0; background: linear-gradient(28deg, rgba(0,0,0,.05) 0 50%, transparent 50%), linear-gradient(-28deg, rgba(0,0,0,.05) 0 50%, transparent 50%); }
+.env-flap { left: 0; right: 0; top: 0; height: 54%; z-index: 3; background: linear-gradient(180deg, var(--paper-3), var(--paper)); clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: 50% 0; transition: transform .6s cubic-bezier(.4, .1, .3, 1), z-index 0s .3s; border-radius: 8px 8px 0 0; }
+.env-text { left: 0; right: 0; bottom: 8%; z-index: 4; display: flex; flex-direction: column; align-items: center; gap: 2px; color: var(--env-ink); font-family: var(--f-display); font-style: italic; transition: opacity .3s; }
+.env-en, .env-es { display: block; } .env-en { font-size: 19px; } .env-es { font-size: 15px; opacity: .78; }
+.env-seal { width: 56px; height: 56px; left: calc(50% - 28px); top: calc(54% - 32px); z-index: 5; transition: opacity .3s, transform .4s; }
+.env-seal svg { width: 100%; height: 100%; filter: drop-shadow(0 2px 2px rgba(80, 20, 40, .35)); }
+.env-hint { font-size: 15px; color: var(--muted); letter-spacing: .02em; margin: 0; }
+.env-wrap:not(.opening) .envelope:hover .env-seal { transform: scale(1.04); }
+.opening .env-seal { opacity: 0; transform: scale(.8); }
+.opening .env-text { opacity: 0; }
+.opening .env-flap { transform: rotateX(180deg); z-index: 0; }
+.opening .env-letter { animation: letterOut .7s .65s cubic-bezier(.3, .1, .3, 1) forwards; }
+@keyframes letterOut { to { transform: translateY(-62%); } }
+.wel-lang { width: 100%; max-width: 360px; text-align: center; animation: fadeUp .35s ease both; }
+.wel-q { display: flex; flex-direction: column; gap: 4px; font-family: var(--f-display); font-size: 21px; line-height: 1.3; }
+.wel-q span[lang="es"] { font-size: 17px; color: var(--muted); font-style: italic; }
+.wel-langs { justify-content: center; }
+.wel-langs .btn { flex: 1; min-width: 130px; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } }
+
+.letter-wrap { justify-content: flex-start; }
+.letter-page { --lp-ink: #2E2620; position: relative; width: 100%; max-width: 560px; background: #FBF7EE; color: var(--lp-ink); border-radius: 6px; padding: 22px 22px 30px;
+  box-shadow: 0 1px 2px rgba(60, 40, 30, .1), 0 12px 30px rgba(60, 40, 30, .14); font-family: var(--f-body); font-size: 17px; line-height: 1.65; outline: none; }
+.letter-page::before { content: ""; position: absolute; inset: 0; pointer-events: none; border-radius: 6px;
+  background: linear-gradient(180deg, transparent 33.1%, rgba(120, 100, 80, .09) 33.3%, transparent 33.6%, transparent 66.4%, rgba(120, 100, 80, .09) 66.6%, transparent 66.9%); }
+.letter-page p { margin: 0 0 14px; }
+.letter-page.unfold { transform-origin: 50% 0; animation: unfold .8s cubic-bezier(.2, .7, .2, 1) both; }
+@keyframes unfold { 0% { transform: perspective(1000px) rotateX(-75deg) scaleY(.35); opacity: .2; } 60% { opacity: 1; } 100% { transform: none; } }
+.letter-top { display: flex; justify-content: flex-end; margin: -6px -6px 6px; }
+.letter-switch { background: transparent; border: 1px solid rgba(46, 38, 32, .25); color: var(--lp-ink); border-radius: 999px; padding: 6px 14px; min-height: 36px; font: inherit; font-size: 14px; cursor: pointer; }
+.letter-switch:focus-visible { outline: 3px solid #66569A; outline-offset: 2px; }
+.letter-closing { margin-top: 22px !important; margin-bottom: 0 !important; }
+.letter-sign { font-family: "Dancing Script", "Snell Roundhand", cursive; font-size: 40px; line-height: 1.1; color: #5A3A5E; margin: 2px 0 2px !important; }
+.letter-role { font-size: 15px; color: #6A5D52; }
+.letter-invite { margin-top: 26px; padding-top: 20px; border-top: 1px solid rgba(46, 38, 32, .15); text-align: center; }
+.letter-invite p { font-family: var(--f-display); font-size: 22px; margin-bottom: 12px !important; }
+.letter-invite .btn { min-width: 200px; }
+.letter-sheet .letter-page { box-shadow: none; padding-inline: 16px; }
+
+.setup .brand { font-size: 30px; }
+.field-err { color: var(--pink-ink); font-size: 14px; min-height: 0; margin-top: -10px; }
+.field-err:empty { display: none; }
+.tzpick { display: flex; flex-direction: column; gap: 8px; margin-top: 6px; }
+.tz-current { padding: 2px 0; }
+.tz-list { max-height: 232px; overflow-y: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); -webkit-overflow-scrolling: touch; }
+.tz-opt { display: flex; justify-content: space-between; gap: 10px; width: 100%; min-height: 44px; padding: 8px 12px; border: 0; border-bottom: 1px solid var(--line); background: transparent; color: var(--ink); font: inherit; font-size: 15px; text-align: left; cursor: pointer; }
+.tz-opt:last-child { border-bottom: 0; }
+.tz-opt[aria-selected="true"] { background: var(--slate-soft); font-weight: 700; }
+.tz-opt:focus-visible { outline: 3px solid var(--slate); outline-offset: -3px; }
+.reduce-motion .letter-page.unfold, .reduce-motion .wel-lang { animation: none; }
+@media (prefers-reduced-motion: reduce) { .letter-page.unfold, .wel-lang, .opening .env-letter { animation: none; } .env-flap { transition: none; } }
+
 </style>
 </head>
 <body>
@@ -411,7 +476,10 @@ const STRINGS = {
     'enough': 'Enough reflection—choose the next step',
     'estimate': 'Estimate',
     'not.advice': 'This is arithmetic on the numbers you entered, not financial advice.',
-    'descriptive': 'These are descriptive counts. They don’t show what caused what.'
+    'descriptive': 'These are descriptive counts. They don’t show what caused what.',
+    'set.profile': 'Profile and security', 'set.schedule': 'Goals and schedules', 'set.notify': 'Notifications', 'set.look': 'Personalize', 'set.companion': 'Companion', 'set.pause': 'Pause', 'set.data': 'Your data', 'set.privacy': 'Privacy', 'set.delete': 'Delete my data', 'set.about': 'About', 'set.demo': 'Demo mode',
+    'set.letter': 'A letter from Mariana', 'set.name': 'Name', 'set.tz': 'Timezone', 'set.lang': 'App language', 'set.partial': 'Some detailed screens are still in English while the translation is completed.',
+    'ms.orig': 'Resources are shown in their original language; they haven’t been translated.', 'ci.reminder': 'It’s {time}. Check-in time.', 'ms.notice': 'A new Mindset edition is ready.'
   },
   es: {
     'tab.today': 'Hoy', 'tab.plan': 'Plan', 'tab.progress': 'Progreso', 'tab.mindset': 'Mentalidad', 'tab.settings': 'Ajustes',
@@ -435,7 +503,46 @@ const STRINGS = {
     'enough': 'Basta de reflexión: elige el próximo paso',
     'estimate': 'Estimado',
     'not.advice': 'Esto es aritmética con los números que ingresaste, no asesoría financiera.',
-    'descriptive': 'Son conteos descriptivos. No muestran qué causó qué.'
+    'descriptive': 'Son conteos descriptivos. No muestran qué causó qué.',
+    'set.profile': 'Perfil y seguridad', 'set.schedule': 'Metas y horarios', 'set.notify': 'Avisos', 'set.look': 'Personalizar', 'set.companion': 'Compañero', 'set.pause': 'Pausa', 'set.data': 'Tus datos', 'set.privacy': 'Privacidad', 'set.delete': 'Borrar mis datos', 'set.about': 'Acerca de', 'set.demo': 'Modo demo',
+    'set.letter': 'Una carta de Mariana', 'set.name': 'Nombre', 'set.tz': 'Zona horaria', 'set.lang': 'Idioma de la app', 'set.partial': 'Algunas pantallas detalladas siguen en inglés mientras se completa la traducción.',
+    'ms.orig': 'Los recursos se muestran en su idioma original; no han sido traducidos.', 'ci.reminder': 'Son las {time}. Hora de la revisión.', 'ms.notice': 'Hay una nueva edición de Mindset.'
+  },
+  it: {
+    'tab.today': 'Oggi', 'tab.plan': 'Piano', 'tab.progress': 'Progressi', 'tab.mindset': 'Mindset', 'tab.settings': 'Impostazioni',
+    'area.money': 'Denaro', 'area.business': 'Attività', 'area.training': 'Allenamento', 'area.art': 'Arte', 'area.mind': 'Mente',
+    'btn.start': 'Inizia', 'btn.log': 'Registra', 'btn.smaller': 'Rendi oggi più leggero', 'btn.save': 'Salva', 'btn.cancel': 'Annulla',
+    'btn.next': 'Avanti', 'btn.back': 'Indietro', 'btn.done': 'Fatto', 'btn.edit': 'Modifica', 'btn.delete': 'Elimina', 'btn.close': 'Chiudi',
+    'btn.add': 'Aggiungi', 'btn.copy': 'Copia', 'checkin': 'Check-in serale', 'checkin.edit': 'Modifica il check-in di stasera',
+    'st.scheduled': 'In programma', 'st.started': 'Iniziato', 'st.done': 'Completato come previsto', 'st.modified': 'Versione minima',
+    'st.skipped': 'Saltato', 'st.unscheduled': 'Non in programma', 'st.rest': 'Giorno di riposo rispettato', 'st.norecord': 'Non registrato',
+    'st.trainmod': 'Sessione modificata', 'unknown': 'Sconosciuto', 'notset': 'Non ancora impostato',
+    'today.available': 'Oggi è libero.', 'today.allset': 'Tutto ciò che era previsto oggi è registrato.', 'today.next': 'Prossima azione',
+    'calib': 'Stiamo trovando una routine adatta alla tua vita reale.', 'welcome.back': 'Bentornata. Inizia da oggi.',
+    'tagline': 'Abbastanza piccolo per iniziare. Abbastanza chiaro per finire.', 'spend.title': 'Registra le spese di oggi', 'spend.none': 'Oggi nessuna spesa',
+    'mind.part': 'Fa parte del check-in serale.', 'enough': 'Basta riflettere: scegli il prossimo passo', 'estimate': 'Stima',
+    'not.advice': 'Sono calcoli sui numeri che hai inserito, non consulenza finanziaria.', 'descriptive': 'Sono conteggi descrittivi. Non mostrano cause ed effetti.',
+    'set.profile': 'Profilo e sicurezza', 'set.schedule': 'Obiettivi e orari', 'set.notify': 'Notifiche', 'set.look': 'Personalizza', 'set.companion': 'Compagno', 'set.pause': 'Pausa', 'set.data': 'I tuoi dati', 'set.privacy': 'Privacy', 'set.delete': 'Elimina i miei dati', 'set.about': 'Informazioni', 'set.demo': 'Modalità demo',
+    'set.letter': 'Una lettera da Mariana', 'set.name': 'Nome', 'set.tz': 'Fuso orario', 'set.lang': 'Lingua dell’app', 'set.partial': 'Alcune schermate dettagliate sono ancora in inglese mentre completiamo la traduzione.',
+    'ms.orig': 'Le risorse sono nella lingua originale; non sono state tradotte.', 'ci.reminder': 'Sono le {time}. È l’ora del check-in.', 'ms.notice': 'È pronta una nuova edizione di Mindset.'
+  },
+  fr: {
+    'tab.today': 'Aujourd’hui', 'tab.plan': 'Plan', 'tab.progress': 'Progrès', 'tab.mindset': 'Mindset', 'tab.settings': 'Réglages',
+    'area.money': 'Argent', 'area.business': 'Entreprise', 'area.training': 'Entraînement', 'area.art': 'Art', 'area.mind': 'Esprit',
+    'btn.start': 'Commencer', 'btn.log': 'Noter', 'btn.smaller': 'Alléger la journée', 'btn.save': 'Enregistrer', 'btn.cancel': 'Annuler',
+    'btn.next': 'Suivant', 'btn.back': 'Retour', 'btn.done': 'Terminé', 'btn.edit': 'Modifier', 'btn.delete': 'Supprimer', 'btn.close': 'Fermer',
+    'btn.add': 'Ajouter', 'btn.copy': 'Copier', 'checkin': 'Bilan du soir', 'checkin.edit': 'Modifier le bilan de ce soir',
+    'st.scheduled': 'Prévu', 'st.started': 'Commencé', 'st.done': 'Fait comme prévu', 'st.modified': 'Version minimale',
+    'st.skipped': 'Sauté', 'st.unscheduled': 'Non prévu', 'st.rest': 'Jour de repos respecté', 'st.norecord': 'Non noté',
+    'st.trainmod': 'Séance modifiée', 'unknown': 'Inconnu', 'notset': 'Pas encore défini',
+    'today.available': 'La journée est libre.', 'today.allset': 'Tout ce qui était prévu aujourd’hui est noté.', 'today.next': 'Prochaine action',
+    'calib': 'Nous cherchons une routine adaptée à ta vraie vie.', 'welcome.back': 'Bon retour. Commence par aujourd’hui.',
+    'tagline': 'Assez petit pour commencer. Assez clair pour finir.', 'spend.title': 'Noter les dépenses du jour', 'spend.none': 'Aucune dépense aujourd’hui',
+    'mind.part': 'Fait partie du bilan du soir.', 'enough': 'Assez réfléchi : choisis la prochaine étape', 'estimate': 'Estimation',
+    'not.advice': 'Ce sont des calculs sur les chiffres que tu as saisis, pas des conseils financiers.', 'descriptive': 'Ce sont des comptes descriptifs. Ils ne montrent pas les causes.',
+    'set.profile': 'Profil et sécurité', 'set.schedule': 'Objectifs et horaires', 'set.notify': 'Notifications', 'set.look': 'Personnaliser', 'set.companion': 'Compagnon', 'set.pause': 'Pause', 'set.data': 'Tes données', 'set.privacy': 'Confidentialité', 'set.delete': 'Supprimer mes données', 'set.about': 'À propos', 'set.demo': 'Mode démo',
+    'set.letter': 'Une lettre de Mariana', 'set.name': 'Nom', 'set.tz': 'Fuseau horaire', 'set.lang': 'Langue de l’app', 'set.partial': 'Certains écrans détaillés sont encore en anglais pendant que la traduction se termine.',
+    'ms.orig': 'Les ressources sont dans leur langue d’origine ; elles n’ont pas été traduites.', 'ci.reminder': 'Il est {time}. C’est l’heure du bilan.', 'ms.notice': 'Une nouvelle édition de Mindset est prête.'
   }
 };
 function t(key, vars) {
@@ -444,7 +551,8 @@ function t(key, vars) {
   if (vars) for (const k in vars) s = s.split('{' + k + '}').join(vars[k]);
   return s;
 }
-function locale() { return (S && S.settings && S.settings.language === 'es') ? 'es-PR' : 'en-US'; }
+const LOCALES = { en: 'en-US', es: 'es-PR', it: 'it-IT', fr: 'fr-FR' };
+function locale() { return LOCALES[(S && S.settings && S.settings.language) || 'en'] || 'en-US'; }
 
 /* ---------- Utilities ---------- */
 const $ = (s, r = document) => r.querySelector(s);
@@ -570,7 +678,7 @@ function defaultState() {
   return {
     schema: SCHEMA, app: 'one-day', createdAt: nowISO(), updatedAt: nowISO(),
     settings: {
-      name: 'Mariana', timezone: 'America/Puerto_Rico', language: 'en', workdayNote: '',
+      name: '', timezone: 'America/Puerto_Rico', language: 'en', welcomeDone: false, letterLang: null, languageChosen: false, onbStep: 1, workdayNote: '',
       availability: { 0: null, 1: null, 2: null, 3: null, 4: null, 5: null, 6: null },
       checkinTime: '21:00', focus: 'money', areasConfirmed: false, onboarded: false,
       calibrationStart: null, skipThreshold: 3, reviewDay: 0, reminders: false,
@@ -1053,7 +1161,7 @@ const ICONS = {
 function render() {
   const root = $('#app');
   if (LOCKED) { root.innerHTML = renderLock(); return; }
-  if (!S.settings.onboarded) { root.innerHTML = renderOnboarding(); return; }
+  if (!S.settings.onboarded) { root.innerHTML = renderOnboarding(); bindSetup(); return; }
   const views = { today: renderToday, plan: renderPlan, progress: renderProgress, mindset: renderMindset, settings: renderSettings };
   root.innerHTML =
     (DEMO ? '<div class="wrap" style="padding-bottom:0"><div class="demo-flag">Demo mode: sample data only. Your real data is untouched. <button class="btn ghost sm" data-act="exitDemo" style="min-height:32px;color:inherit;text-decoration:underline">Exit demo</button></div></div>' : '') +
@@ -1061,6 +1169,7 @@ function render() {
     '<nav class="tabbar" aria-label="Main">' + ['today', 'plan', 'progress', 'mindset', 'settings'].map((k) =>
       `<button class="tab" data-act="tab" data-tab="${k}" ${TAB === k ? 'aria-current="page"' : ''}>${ICONS[k]}<span>${t('tab.' + k)}</span></button>`).join('') + '</nav>' +
     renderTimerBar();
+  if (TAB === 'settings') bindTzPicker('stTz', () => SH.tzSel, SETUP[S.settings.language] || SETUP.en);
 }
 A.tab = (el) => { TAB = el.dataset.tab; render(); window.scrollTo(0, 0); };
 
@@ -1236,7 +1345,7 @@ function renderToday() {
   const cd = calibrationDay();
   if (cd) h += `<section class="banner"><div class="row-between"><div class="h3">Calibration · day ${cd} of 7</div></div><p class="small">${t('calib')} Log what actually happens. Targets stay where they are this week.</p>${firstWeekQuestions()}</section>`;
   h += firstWeekBanner(td);
-  if (S.settings.reminders && !currentPause() && nowHM() >= S.settings.checkinTime && !S.checkins[td]) h += `<section class="banner pink"><div class="h3">It’s ${esc(fmtTime(S.settings.checkinTime))}. Check-in time.</div></section>`;
+  if (S.settings.reminders && !currentPause() && nowHM() >= S.settings.checkinTime && !S.checkins[td]) h += `<section class="banner pink"><div class="h3">${esc(t('ci.reminder', { time: fmtTime(S.settings.checkinTime) }))}</div></section>`;
   if (reviewDue()) h += `<section class="banner"><div class="h3">Weekly review is ready</div><p class="small">10–15 minutes to adjust next week. One change at most.</p><div><button class="btn primary sm" data-act="openReview">Start review</button></div></section>`;
 
   // Featured next action
@@ -2510,13 +2619,16 @@ function renderSettings() {
   const s = S.settings;
   const modeText = { indexeddb: 'IndexedDB in this browser', localstorage: 'localStorage in this browser', memory: 'Memory only. Changes will be lost when this page closes.' }[Store.mode];
   let h = `<header class="topbar"><div><div class="eyebrow">${esc(s.name || 'One Day')}</div><h1 class="view-h">Settings</h1></div></header><div class="stack">`;
-  h += setSect('profile', 'Profile and security', AUTH && AUTH.hash ? 'PIN lock on' : 'Name, timezone, language, PIN', `
-      <label class="f">Name<input class="inp" id="stName" maxlength="40" value="${esc(s.name)}"></label>
-      <label class="f">Timezone<input class="inp" id="stTz" list="tzList" value="${esc(s.timezone)}" autocomplete="off"><datalist id="tzList">${TZ_LIST.map((z) => `<option value="${z}">`).join('')}</datalist><span class="hint">Days you’ve already recorded keep their dates if you change this.</span></label>
-      <label class="f">Language<select class="inp" id="stLang"><option value="en" ${s.language === 'en' ? 'selected' : ''}>English</option><option value="es" ${s.language === 'es' ? 'selected' : ''}>Español (parcial)</option></select></label>
+  const SL = SETUP[s.language] || SETUP.en;
+  if (SH.tzSel == null) SH.tzSel = s.timezone;
+  h += setSect('profile', t('set.profile'), AUTH && AUTH.hash ? 'PIN lock on' : 'Name, timezone, language, PIN', `
+      <label class="f">${t('set.name')}<input class="inp" id="stName" maxlength="60" value="${esc(s.name)}" placeholder="${esc(SL.namePh)}"></label>
+      <div id="stNameErr" class="field-err" role="alert"></div>
+      <div class="f"><span>${t('set.tz')}</span>${tzPicker('stTz', SH.tzSel, SL)}<span class="hint">Days you’ve already recorded keep their dates if you change this.</span></div>
+      <label class="f">${t('set.lang')}<select class="inp" id="stLang">${APP_LANGS.map(([k, n]) => `<option value="${k}" lang="${k}" ${s.language === k ? 'selected' : ''}>${n}</option>`).join('')}</select>${s.language !== 'en' ? `<span class="hint">${t('set.partial')}</span>` : ''}</label>
       <button class="btn primary sm" data-act="settingsSave">${t('btn.save')}</button>
       <div class="stack-s"><div class="h3">PIN lock</div>${renderSecurity()}</div>`, true);
-  h += setSect('schedule', 'Goals and schedules', 'Check-in time, weekly review, available time', `
+  h += setSect('schedule', t('set.schedule'), 'Check-in time, weekly review, available time', `
       <div class="grid2"><label class="f">Evening check-in<input class="inp" id="stCi" type="time" value="${esc(s.checkinTime)}"></label>
       <label class="f">Weekly review day<select class="inp" id="stRv">${[0, 1, 2, 3, 4, 5, 6].map((d) => `<option value="${d}" ${s.reviewDay === d ? 'selected' : ''}>${DOW_SHORT[d]}</option>`).join('')}</select></label></div>
       <label class="f">Suggest a smaller task after this many skips<input class="inp num" id="stSkip" type="number" min="2" max="8" value="${esc(s.skipThreshold)}"><span class="hint">A product rule of thumb, not a scientific threshold. Suggestions appear only in the weekly review and need your OK.</span></label>
@@ -2526,14 +2638,14 @@ function renderSettings() {
       <label class="f">Typical workday notes<input class="inp" id="avNote" maxlength="200" value="${esc(s.workdayNote)}" placeholder="e.g. Work 8–5, free after 6"></label>
       <button class="btn sm" data-act="availSave">Save available time</button></div>
       <div class="row-between"><span class="small">${plural(activeGoals().length, 'active goal')}. Areas: ${AREAS.map((a) => t('area.' + a)).join(' · ')}</span><button class="btn sm" data-act="goPlan" data-open="goals">Goals</button></div>`);
-  h += setSect('notify', 'Notifications', s.reminders ? 'In-app check-in reminder on' : 'Off', `
+  h += setSect('notify', t('set.notify'), s.reminders ? 'In-app check-in reminder on' : 'Off', `
       <label class="row" style="min-height:44px;gap:10px"><input type="checkbox" id="stRem" ${s.reminders ? 'checked' : ''} style="width:22px;height:22px" data-act="remToggle"> Show a check-in reminder inside the app</label>
       <p class="small">This reminder appears only while the app is open, and never during a pause. The app can’t notify you when it’s closed; for that, set a repeating iPhone alarm or Reminder for ${esc(fmtTime(s.checkinTime))}.</p>
       <p class="tiny muted">Email and text reminders aren’t available in this version. They need a server and a verified address, so none are set or simulated.</p>`);
-  h += setSect('look', 'Personalize', esc(lookSummary()), `<p class="small">Background, font, text color, theme, dimming, blur, text size and motion. You see a preview before anything is saved.</p><button class="btn primary sm" data-act="lookOpen">Personalize</button>`);
-  h += setSect('companion', 'Companion', S.growth.enabled ? esc(KINDS[chapter().kind]) + ' on Today' : 'Hidden', renderCompanionSettings());
-  h += setSect('pause', 'Pause', currentPause() ? 'Paused now' : upcomingPause() ? 'Pause scheduled' : 'For trips, illness or a break', renderPauseSettings());
-  h += setSect('data', 'Your data', 'Backup, restore and exports', `
+  h += setSect('look', t('set.look'), esc(lookSummary()), `<p class="small">Background, font, text color, theme, dimming, blur, text size and motion. You see a preview before anything is saved.</p><button class="btn primary sm" data-act="lookOpen">Personalize</button>`);
+  h += setSect('companion', t('set.companion'), S.growth.enabled ? esc(KINDS[chapter().kind]) + ' on Today' : 'Hidden', renderCompanionSettings());
+  h += setSect('pause', t('set.pause'), currentPause() ? 'Paused now' : upcomingPause() ? 'Pause scheduled' : 'For trips, illness or a break', renderPauseSettings());
+  h += setSect('data', t('set.data'), 'Backup, restore and exports', `
       <div class="small stack-s"><p><b>Where it lives:</b> ${esc(modeText)}${DEMO ? ' (demo data, kept separately)' : ''}.</p>
       ${inFrame ? '<p><b>Preview note:</b> this copy runs inside a preview frame. Use the hosted, installed version for daily use, and back up often.</p>' : ''}
       <p class="muted">${lastSaveOk ? 'Last saved ' + esc(new Date(S.updatedAt).toLocaleString(locale(), { timeZone: tz() })) + '.' : 'The last save failed. Export a backup now.'}${S.lastBackup ? ' Last backup ' + esc(dMD(S.lastBackup)) + '.' : ' No backup yet.'}</p></div>
@@ -2542,25 +2654,27 @@ function renderSettings() {
       <details class="more"><summary>Spreadsheet exports (CSV)</summary><div class="btn-row mt-s">
         <button class="btn sm" data-act="csv" data-k="tx">Money entries</button><button class="btn sm" data-act="csv" data-k="tasks">Task log</button><button class="btn sm" data-act="csv" data-k="train">Training log</button><button class="btn sm" data-act="csv" data-k="checkins">Check-ins</button></div></details>
       <button class="btn" data-act="openReport">Copy weekly report for ChatGPT</button>`);
-  h += setSect('privacy', 'Privacy', 'What stays on this device', `<div class="small stack-s">
+  h += setSect('privacy', t('set.privacy'), 'What stays on this device', `<div class="small stack-s">
       <p>Your records stay on this device, in this browser. They don’t sync to other devices. There is no online account, no tracking, no analytics and no bank connection.</p>
       <p>Clearing this browser’s website data can erase them, and private browsing may not keep them. Back up regularly.</p>
       <p>The PIN lock keeps the app private from casual viewing. It doesn’t encrypt the stored records; anyone with full access to this phone’s browser data could still read them.</p>
       <p class="muted">This is a single-person app, so there are no other users and no administrator. A shared, multi-user version would need a server with sign-in and roles.</p></div>`);
   h += renderLaterImprovements();
-  h += `<section class="card stack-s"><div class="h3">Demo mode</div><p class="small muted">Explore the app with clearly labeled sample data. Your real records are kept apart and untouched.</p>
+  h += `<section class="card stack-s"><div class="h3">${t('set.demo')}</div><p class="small muted">Explore the app with clearly labeled sample data. Your real records are kept apart and untouched.</p>
       ${DEMO ? '<button class="btn sm" data-act="exitDemo">Exit demo</button>' : '<button class="btn sm" data-act="enterDemo">Open demo mode</button>'}</section>`;
-  h += `<section class="card stack-s"><div class="h3">About</div><p class="small">One Day keeps a daily loop: a specific next action, a quick log, a two-minute evening check-in and a short weekly review. Feedback is rule-based and shown openly. It isn’t therapy, financial advice or athletic coaching.</p></section>`;
-  h += DEMO ? `<button class="btn ghost danger" data-act="eraseAll">Reset demo data</button>` : setSect('delete', 'Delete my data', 'Erase everything on this device', `<p class="small">Deletes every record, goal, pause, companion growth, your PIN and your background photo from this device. It can’t be undone. Export a backup first if you might want it.</p>
+  h += `<section class="card stack-s"><div class="h3">${t('set.about')}</div><p class="small">One Day keeps a daily loop: a specific next action, a quick log, a two-minute evening check-in and a short weekly review. Feedback is rule-based and shown openly. It isn’t therapy, financial advice or athletic coaching.</p><button class="btn sm" data-act="openLetter">${t('set.letter')}</button></section>`;
+  h += DEMO ? `<button class="btn ghost danger" data-act="eraseAll">Reset demo data</button>` : setSect('delete', t('set.delete'), 'Erase everything on this device', `<p class="small">Deletes every record, goal, pause, companion growth, your PIN and your background photo from this device. It can’t be undone. Export a backup first if you might want it.</p>
       <label class="f">Type DELETE to confirm<input class="inp" id="delConfirm" autocomplete="off" autocapitalize="characters"></label>
       <button class="btn ghost danger" data-act="eraseAll">Delete everything</button>`);
   return h + '</div>';
 }
 A.settingsSave = () => {
-  const s = S.settings; const z = val('stTz');
-  if (!validTz(z)) { $('#stTz').classList.add('invalid'); toast('That timezone isn’t recognized. Try America/Puerto_Rico.'); return; }
+  const s = S.settings; const z = SH.tzSel || s.timezone;
+  if (!validTz(z)) { toast('That timezone isn’t recognized.'); return; }
+  const name = val('stName').replace(/\s+/g, ' ').trim();
+  if (!name) { const i = $('#stName'); i.classList.add('invalid'); i.setAttribute('aria-invalid', 'true'); $('#stNameErr').textContent = (SETUP[s.language] || SETUP.en).nameErr; i.focus(); return; }
   const oldTz = s.timezone;
-  s.name = val('stName'); s.timezone = z; s.language = $('#stLang').value;
+  s.name = name; s.timezone = z; s.language = $('#stLang').value; s.languageChosen = true; SH.tzSel = null;
   if ($('#stCi')) A.scheduleSave(true);
   applyLook(); save(); render(); toast(oldTz !== z ? 'Saved. Recorded days keep their dates.' : 'Saved.');
 };
@@ -2630,7 +2744,7 @@ A.eraseAll = () => {
   confirmBox(DEMO ? 'Reset the demo data?' : 'Delete every record, your PIN and your photo from this device? This can’t be undone.', DEMO ? 'Reset demo' : 'Delete everything', async () => {
     if (DEMO) { S = demoState(); await flush(); render(); return; }
     AUTH = null; await saveAuth(); await Store.del(BG_KEY); BG_DATA = null;
-    S = defaultState(); await flush(); applyLook(); ONB = { step: 1 }; render();
+    S = defaultState(); await flush(); applyLook(); ONB = { step: 1 }; WEL = { stage: 'closed' }; SETUP_DRAFT = null; render();
   }, true);
 };
 A.enterDemo = async () => { await flush(); DEMO = true; const d = await Store.get(DEMO_KEY); S = d && !validateState(d).length ? normalize(d) : demoState(); await flush(); RETURN_GAP = 0; TAB = 'today'; render(); window.scrollTo(0, 0); toast('Demo mode. Sample data only.'); };
@@ -2639,14 +2753,13 @@ A.exitDemo = async () => { await flush(); DEMO = false; S = normalize((await Sto
 /* ---------- Onboarding (short; deeper setup happens one area at a time) ---------- */
 let ONB = { step: 1 };
 function renderOnboarding() {
-  const s = S.settings; const n = ONB.step;
+  const s = S.settings;
+  if (!s.welcomeDone) return renderWelcome();
+  if (ONB.step <= 1) return renderProfileSetup();
+  const n = ONB.step;
   const mins = [['15', '15 min'], ['30', '30 min'], ['45', '45 min'], ['60', '1 h'], ['90', '1.5 h'], ['120', '2 h+'], ['', 'Not sure']];
   const wd = s.availability[1] == null ? '' : String(s.availability[1]); const we = s.availability[6] == null ? '' : String(s.availability[6]);
   const steps = {
-    1: `<div class="brand">One Day<br><em>${esc(s.name || 'Mariana')}</em></div><p>Know what to do next. Check in at night. Adjust each week.</p>
-      <label class="f">Name<input class="inp" id="obName" maxlength="40" value="${esc(s.name)}"></label>
-      <label class="f">Timezone<input class="inp" id="obTz" list="tzList" value="${esc(s.timezone)}" autocomplete="off"><datalist id="tzList">${TZ_LIST.map((z) => `<option value="${z}">`).join('')}</datalist></label>
-      <label class="f">Language<select class="inp" id="obLang"><option value="en" ${s.language === 'en' ? 'selected' : ''}>English</option><option value="es" ${s.language === 'es' ? 'selected' : ''}>Español (parcial)</option></select></label>`,
     2: `<div class="h2">How much time do you usually have?</div><p class="small muted">For all five areas together, training included. A rough guess is fine, and you can set each day later.</p>
       <div class="stack-s"><div class="h3">Workdays (Mon–Fri)</div>${chips('obWd', mins, wd)}</div>
       <div class="stack-s"><div class="h3">Weekends</div>${chips('obWe', mins, we)}</div>
@@ -2660,21 +2773,19 @@ function renderOnboarding() {
   return `<main class="wrap"><div class="onb"><div class="steps" aria-hidden="true">${[1, 2, 3, 4, 5].map((i) => `<span class="${i <= n ? 'on' : ''}"></span>`).join('')}</div>
     <div class="stack">${steps[n]}</div>
     <div class="btn-row">${n > 1 ? `<button class="btn" data-act="obBack">${t('btn.back')}</button>` : ''}<button class="btn primary" data-act="obNext">${n === 5 ? 'Confirm and start' : t('btn.next')}</button></div>
-    ${n === 1 ? '<button class="btn ghost sm" data-act="enterDemo">Look around with sample data first</button>' : ''}
-    ${n === 1 ? '<p class="tiny muted">Everything stays on this device. Unknown details can stay unknown.</p>' : ''}</div></main>`;
+    </div></main>`;
 }
 function obCapture() {
   const s = S.settings; const n = ONB.step;
-  if (n === 1) { const z = val('obTz'); if (!validTz(z)) { toast('That timezone isn’t recognized.'); return false; } s.name = val('obName'); s.timezone = z; s.language = $('#obLang').value; }
   if (n === 2) { const wd = getPick('obWd'), we = getPick('obWe'); for (const d of [1, 2, 3, 4, 5]) s.availability[d] = wd ? Number(wd) : null; for (const d of [0, 6]) s.availability[d] = we ? Number(we) : null; s.workdayNote = val('obNote'); }
   if (n === 3) s.checkinTime = val('obCi') || '21:00';
   if (n === 4) s.focus = getPick('obFocus') || 'money';
   return true;
 }
-A.obBack = () => { obCapture(); ONB.step--; render(); };
+A.obBack = () => { obCapture(); ONB.step--; S.settings.onbStep = ONB.step; save(); render(); window.scrollTo(0, 0); };
 A.obNext = () => {
   if (!obCapture()) return;
-  if (ONB.step < 5) { ONB.step++; save(); render(); window.scrollTo(0, 0); return; }
+  if (ONB.step < 5) { ONB.step++; S.settings.onbStep = ONB.step; save(); render(); window.scrollTo(0, 0); return; }
   const td = today();
   S.settings.areasConfirmed = true; S.settings.onboarded = true; S.settings.calibrationStart = td; S.settings.lastOpened = td;
   S.weeks[weekStart(td)] = { main: S.settings.focus, mainOutcome: '', maintain: AREAS.filter((a) => a !== S.settings.focus), confirmedAt: nowISO() };
@@ -2754,6 +2865,8 @@ async function boot() {
   if (S.settings.onboarded) S.settings.lastOpened = td;
   if (RETURN_GAP >= 3 && !S.returns.some((r) => r.date === td)) S.returns.push({ date: td, missed: RETURN_GAP - 1 });
   lastDay = td;
+  ONB.step = S.settings.onbStep || 1;
+  if (!S.settings.welcomeDone && S.settings.letterLang) WEL = { stage: 'letter', lang: S.settings.letterLang };
   try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) { }
   applyTheme(); render();
   document.addEventListener('click', onClick);
@@ -4311,6 +4424,7 @@ function msCard(it, isNew) {
 function renderMindset() {
   const m = msState(); const e = latestEdition();
   let h = `<header class="topbar"><div><div class="eyebrow">Updated weekly</div><h1 class="view-h">Mindset</h1></div></header><div class="stack-l">`;
+  if (S.settings.language !== 'en') h += `<p class="small muted ms-orig">${esc(t('ms.orig'))}</p>`;
   h += `<section class="card stack-s small"><div><b>Last successful update:</b> ${m.lastSuccess ? esc(fmtStamp(m.lastSuccess)) : 'None yet'}</div>
     <div><b>Next scheduled update:</b> Not scheduled. Automatic weekly updates need a server, which this app doesn’t have yet.</div>
     ${m.lastCheck ? `<div class="${m.lastCheck.ok ? 'muted' : ''}">${m.lastCheck.ok ? '' : '<b>Last check failed:</b> '}${esc(m.lastCheck.msg)} <span class="muted">(${esc(fmtStamp(m.lastCheck.at))})</span>${m.lastCheck.ok ? '' : ' The previous edition is kept.'}</div>` : ''}
@@ -4368,7 +4482,7 @@ A.msNotify = (el) => { setTimeout(() => { const m = msState(); m.notify = el.che
 function mindsetNotice() {
   const m = msState(); const e = latestEdition();
   if (!m.notify || !e || m.notifiedEdition === e.id) return '';
-  return `<section class="banner"><div class="h3">A new Mindset edition is ready.</div><div class="btn-row"><button class="btn sm" data-act="msNoticeOpen">Open Mindset</button><button class="btn ghost sm" data-act="msNoticeDismiss">Dismiss</button></div></section>`;
+  return `<section class="banner"><div class="h3">${esc(t('ms.notice'))}</div><div class="btn-row"><button class="btn sm" data-act="msNoticeOpen">Open Mindset</button><button class="btn ghost sm" data-act="msNoticeDismiss">Dismiss</button></div></section>`;
 }
 A.msNoticeOpen = () => { const m = msState(); m.notifiedEdition = latestEdition().id; save(); TAB = 'mindset'; render(); window.scrollTo(0, 0); };
 A.msNoticeDismiss = () => { const m = msState(); m.notifiedEdition = latestEdition().id; save(); render(); };
@@ -4400,6 +4514,193 @@ A.tryReplaceGo = () => {
     createOneOff(o.it.area, tryTitle(), tr.finish || 'Tried once, any amount.', tr.minutes || o.it.minutes || 10, o.d);
     tryRecord({ status: 'replaced', date: o.d }); save(); render(); toast('Replaced for ' + dShort(o.d) + '.');
   });
+};
+
+/* ---------- Welcome: a letter from the founder, then a short profile setup ---------- */
+const LETTER = {
+  en: {
+    paras: [
+      'You know that life you keep saying you’ll build “one day”? I wanted to give it somewhere to start.',
+      'I created One Day because I have big dreams, and sometimes, thinking about everything it takes to reach them makes me want to take a nap.',
+      'Maybe you know the feeling. You’re excited about what’s possible, but between work, responsibilities, and being a person, your dreams keep getting pushed to “when things settle down.”',
+      'Or maybe you’re already going after what you want, making moves, keeping promises to yourself, and setting your sights higher. One Day gives you a place to focus that energy, see how far you’ve come, and actually celebrate before rushing toward the next goal. Even the most driven people deserve to enjoy what they’re building.',
+      'For me, it started with a smaller question: What can I do today?',
+      'One workout. A little money set aside. Twenty minutes on an idea I believe in. Something small enough to begin and meaningful enough to count.',
+      'That’s the heart of One Day: giving your dreams a place in your actual day.',
+      'And honestly? I wanted it to feel good, too. Watch your garden grow. Celebrate the task you almost talked yourself out of. Look back and see the little promises you’ve kept to yourself. There should be some joy in becoming the person you want to be.',
+      'You’ll have busy days, messy days, and days when you surprise yourself. There’s room for all of them here.',
+      'Your dreams deserve a beginning. Your effort deserves a little celebration.',
+      'Come celebrate the small wins with One Day. I’ll be growing right alongside you.'
+    ],
+    closing: 'With love,', role: 'CEO of One Day', ready: 'Ready to begin?', go: 'Let’s begin', other: 'Leer en español', title: 'A letter from Mariana'
+  },
+  es: {
+    paras: [
+      '¿Sabes esa vida que siempre dices que vas a construir “algún día”? Quería darle un lugar donde comenzar.',
+      'Creé One Day porque tengo grandes sueños y, a veces, pensar en todo lo que hace falta para alcanzarlos me da ganas de tomar una siesta.',
+      'Quizás conoces esa sensación. Te emociona todo lo que podrías lograr, pero entre el trabajo, las responsabilidades y las cosas de la vida, tus sueños se van quedando para “cuando todo se calme un poco”.',
+      'O quizás ya estás trabajando por lo que quieres, tomando acción, cumpliendo las promesas que te haces y aspirando a más. One Day te ofrece un espacio para enfocar esa energía, reconocer cuánto has avanzado y celebrar antes de correr hacia la próxima meta. Hasta las personas más decididas merecen disfrutar lo que están construyendo.',
+      'Para mí, todo comenzó con una pregunta más sencilla: ¿Qué puedo hacer hoy?',
+      'Una sesión de ejercicio. Un poco de dinero ahorrado. Veinte minutos dedicados a una idea en la que creo. Algo lo suficientemente pequeño como para empezar y lo suficientemente importante como para contar.',
+      'Esa es la esencia de One Day: darles a tus sueños un espacio en tu día a día.',
+      'Y, sinceramente, también quería que se sintiera bonito. Ver crecer tu jardín. Celebrar esa tarea que casi dejaste para después. Mirar atrás y reconocer las pequeñas promesas que te has cumplido. También debe haber alegría en convertirte en la persona que quieres ser.',
+      'Tendrás días ocupados, días complicados y días en los que te sorprenderás. Aquí hay espacio para todos ellos.',
+      'Tus sueños merecen un comienzo. Tu esfuerzo merece una pequeña celebración.',
+      'Ven a celebrar tus pequeños logros con One Day. Yo también estaré creciendo contigo.'
+    ],
+    closing: 'Con cariño,', role: 'CEO de One Day', ready: '¿Comenzamos?', go: 'Vamos a comenzar', other: 'Read in English', title: 'Una carta de Mariana'
+  }
+};
+/* Profile setup copy, in all four app languages */
+const SETUP = {
+  en: { title: 'Let’s make this yours.', name: 'What should we call you?', namePh: 'Your name', nameErr: 'Please tell us what to call you.', tz: 'Timezone', tzSearch: 'Search city or region', tzLater: 'You can change this later in Settings.', lang: 'App language', cont: 'Continue', demo: 'Look around with sample data first', local: 'Everything stays on this device.', noMatch: 'No timezone matches that search.', current: 'Selected' },
+  es: { title: 'Hagamos este espacio tuyo.', name: '¿Cómo te llamamos?', namePh: 'Tu nombre', nameErr: 'Dinos cómo quieres que te llamemos.', tz: 'Zona horaria', tzSearch: 'Busca ciudad o región', tzLater: 'Puedes cambiarla luego en Ajustes.', lang: 'Idioma de la app', cont: 'Continuar', demo: 'Explorar primero con datos de ejemplo', local: 'Todo se queda en este dispositivo.', noMatch: 'Ninguna zona horaria coincide.', current: 'Seleccionada' },
+  it: { title: 'Rendiamo questo spazio tuo.', name: 'Come vuoi che ti chiamiamo?', namePh: 'Il tuo nome', nameErr: 'Dicci come vuoi essere chiamata.', tz: 'Fuso orario', tzSearch: 'Cerca città o regione', tzLater: 'Puoi cambiarlo più tardi nelle Impostazioni.', lang: 'Lingua dell’app', cont: 'Continua', demo: 'Prima dai un’occhiata con dati di esempio', local: 'Tutto resta su questo dispositivo.', noMatch: 'Nessun fuso orario corrisponde.', current: 'Selezionato' },
+  fr: { title: 'Faisons de cet espace le tien.', name: 'Comment veux-tu qu’on t’appelle ?', namePh: 'Ton prénom', nameErr: 'Dis-nous comment t’appeler.', tz: 'Fuseau horaire', tzSearch: 'Cherche une ville ou une région', tzLater: 'Tu pourras le changer plus tard dans Réglages.', lang: 'Langue de l’app', cont: 'Continuer', demo: 'D’abord explorer avec des données d’exemple', local: 'Tout reste sur cet appareil.', noMatch: 'Aucun fuseau ne correspond.', current: 'Sélectionné' }
+};
+const APP_LANGS = [['en', 'English'], ['es', 'Español'], ['it', 'Italiano'], ['fr', 'Français']];
+let WEL = { stage: 'closed' };
+let SETUP_DRAFT = null;
+
+/* All IANA zones the browser supports, each with a readable place and its current offset */
+let TZ_ALL = null;
+function tzOffset(z) {
+  try { const p = new Intl.DateTimeFormat('en-US', { timeZone: z, timeZoneName: 'shortOffset' }).formatToParts(nowMs()).find((x) => x.type === 'timeZoneName'); const v = p ? p.value.replace('GMT', '') : ''; return 'UTC' + (v ? v.replace('-', '−') : '±0'); } catch (e) { return ''; }
+}
+function tzLong(z) { try { const p = new Intl.DateTimeFormat(locale(), { timeZone: z, timeZoneName: 'long' }).formatToParts(nowMs()).find((x) => x.type === 'timeZoneName'); return p ? p.value : ''; } catch (e) { return ''; } }
+function tzLabel(z) {
+  if (z === 'America/Puerto_Rico') return 'Puerto Rico — Atlantic Standard Time';
+  const parts = z.split('/'); const city = parts[parts.length - 1].replace(/_/g, ' '); const region = parts.slice(0, -1).join(' / ').replace(/_/g, ' ');
+  return region ? `${city}, ${region}` : city;
+}
+function tzAll() {
+  if (TZ_ALL) return TZ_ALL;
+  let zones = [];
+  try { zones = Intl.supportedValuesOf('timeZone'); } catch (e) { zones = TZ_LIST.slice(); }
+  if (!zones.includes('America/Puerto_Rico')) zones.unshift('America/Puerto_Rico');
+  if (!zones.includes('UTC')) zones.push('UTC');
+  TZ_ALL = zones.map((z) => ({ z, label: tzLabel(z), off: tzOffset(z) }));
+  return TZ_ALL;
+}
+function tzMatches(q) {
+  const n = (s) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[_/]/g, ' ');
+  const qq = n(q || '').trim();
+  const all = tzAll();
+  const hits = qq ? all.filter((x) => n(x.z + ' ' + x.label + ' ' + x.off).includes(qq)) : all;
+  return hits.slice(0, 80);
+}
+/* Searchable timezone picker: a search box over a listbox of buttons */
+function tzPicker(id, selected, L) {
+  return `<div class="tzpick" id="${id}">
+    <div class="tz-current small"><span class="muted">${esc(L.current)}:</span> <b id="${id}Cur">${esc(tzLabel(selected))}</b> <span class="muted num">${esc(tzOffset(selected))}</span></div>
+    <input class="inp" id="${id}Q" type="search" placeholder="${esc(L.tzSearch)}" aria-label="${esc(L.tzSearch)}" aria-controls="${id}List" autocomplete="off" spellcheck="false">
+    <div class="tz-list" id="${id}List" role="listbox" aria-label="${esc(L.tz)}">${tzListHtml(id, '', selected, L)}</div></div>`;
+}
+function tzListHtml(id, q, selected, L) {
+  let m = tzMatches(q);
+  if (!(q || '').trim()) { const sel = m.find((x) => x.z === selected) || tzAll().find((x) => x.z === selected); m = (sel ? [sel] : []).concat(m.filter((x) => x.z !== selected)); }
+  if (!m.length) return `<p class="small muted" style="padding:8px">${esc(L.noMatch)}</p>`;
+  return m.map((x) => `<button type="button" role="option" class="tz-opt" data-act="tzPick" data-picker="${id}" data-z="${esc(x.z)}" aria-selected="${x.z === selected}"><span>${esc(x.label)}</span><span class="muted num">${esc(x.off)}</span></button>`).join('');
+}
+function bindTzPicker(id, getSel, L) {
+  const q = document.getElementById(id + 'Q'); if (!q) return;
+  q.addEventListener('input', () => { document.getElementById(id + 'List').innerHTML = tzListHtml(id, q.value, getSel(), L); });
+}
+A.tzPick = (el) => {
+  const id = el.dataset.picker; const z = el.dataset.z;
+  if (id === 'suTz') SETUP_DRAFT.tz = z; else SH.tzSel = z;
+  $$(`#${id}List .tz-opt`).forEach((b) => b.setAttribute('aria-selected', b.dataset.z === z ? 'true' : 'false'));
+  const c = document.getElementById(id + 'Cur'); if (c) { c.textContent = tzLabel(z); c.nextElementSibling.textContent = tzOffset(z); }
+};
+
+/* ----- Screen 1: the envelope ----- */
+const SEAL = '<svg viewBox="0 0 64 64" aria-hidden="true"><defs><radialGradient id="sealG" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#B0566E"/><stop offset="1" stop-color="#7A2E45"/></radialGradient></defs><path d="M32 3c5 2 8 0 12 3s4 7 8 9 3 7 5 11-1 8 0 12-4 6-5 10-6 4-9 7-8 2-11 4-8-1-12-2-6-4-10-6-3-7-6-10-1-8-2-12 3-7 3-11 5-6 8-9 7-3 11-5 6 0 8-1z" fill="url(#sealG)"/><circle cx="32" cy="32" r="18" fill="none" stroke="#E9B7C6" stroke-opacity=".55" stroke-width="1.5"/><path d="M32 45V24" stroke="#F4D6DF" stroke-width="1.8" stroke-linecap="round"/><path d="M32 30c-5-1-8-5-8-9 5 0 8 4 8 9zM32 34c5-1 8-5 8-9-5 0-8 4-8 9zM32 39c-4 0-7-3-7-6 4 0 7 3 7 6z" fill="#F4D6DF" fill-opacity=".9"/></svg>';
+function renderEnvelope(opening) {
+  return `<div class="env-wrap ${opening ? 'opening' : ''}">
+    <button class="envelope" data-act="welOpen" aria-label="A little letter for you. Una cartita para ti. Tap to open, toca para abrir." ${opening || WEL.stage === 'lang' ? 'aria-expanded="true"' : 'aria-expanded="false"'}>
+      <span class="env-letter" aria-hidden="true"></span>
+      <span class="env-body" aria-hidden="true"></span>
+      <span class="env-flap" aria-hidden="true"></span>
+      <span class="env-text" aria-hidden="true"><span class="env-en">A little letter for you.</span><span class="env-es">Una cartita para ti.</span></span>
+      <span class="env-seal" aria-hidden="true">${SEAL}</span>
+    </button>
+    ${opening ? '' : '<p class="env-hint">Tap to open · Toca para abrir</p>'}</div>`;
+}
+function renderWelcome() {
+  if (WEL.stage === 'letter') return renderLetterPage(WEL.lang, false);
+  let h = `<main class="wrap welcome" aria-label="Welcome">${renderEnvelope(WEL.stage === 'opening')}`;
+  if (WEL.stage === 'lang') h += `<section class="wel-lang stack" role="dialog" aria-labelledby="welLangQ"><div id="welLangQ" class="wel-q"><span>How would you like to read your letter?</span><span lang="es">¿En qué idioma quieres leer tu carta?</span></div>
+    <div class="btn-row wel-langs"><button class="btn primary" data-act="welLang" data-l="en" lang="en" autofocus>English</button><button class="btn primary" data-act="welLang" data-l="es" lang="es">Español</button></div></section>`;
+  return h + '</main>';
+}
+A.welOpen = () => { if (WEL.stage !== 'closed') return; WEL.stage = 'lang'; render(); const b = $('[data-act="welLang"]'); if (b) b.focus(); };
+A.welLang = (el) => {
+  const l = el.dataset.l; WEL.lang = l; S.settings.letterLang = l; save();
+  if (reducedMotion()) { WEL.stage = 'letter'; render(); window.scrollTo(0, 0); focusLetter(); return; }
+  WEL.stage = 'opening'; render();
+  setTimeout(() => { if (WEL.stage !== 'opening') return; WEL.stage = 'letter'; WEL.unfold = true; render(); window.scrollTo(0, 0); focusLetter(); }, 1500);
+};
+function focusLetter() { const p = $('.letter-page'); if (p) p.focus({ preventScroll: true }); }
+
+/* ----- The letter itself (also reachable from Settings) ----- */
+function letterHtml(lang, fromSettings) {
+  const L = LETTER[lang] || LETTER.en;
+  return `<article class="letter-page ${WEL.unfold && !fromSettings ? 'unfold' : ''}" tabindex="-1" lang="${lang}" aria-label="${esc(L.title)}">
+    <div class="letter-top"><button class="letter-switch" data-act="letterLang" data-l="${lang === 'en' ? 'es' : 'en'}" data-from="${fromSettings ? 1 : ''}" lang="${lang === 'en' ? 'es' : 'en'}">${esc(L.other)}</button></div>
+    ${L.paras.map((p) => `<p>${esc(p)}</p>`).join('')}
+    <p class="letter-closing">${esc(L.closing)}</p>
+    <p class="letter-sign" aria-label="Mariana">Mariana</p>
+    <p class="letter-role">${esc(L.role)}</p>
+    ${fromSettings ? '' : `<div class="letter-invite"><p>${esc(L.ready)}</p><button class="btn primary" data-act="welBegin">${esc(L.go)}</button></div>`}
+  </article>`;
+}
+function renderLetterPage(lang) { const h = `<main class="wrap welcome letter-wrap">${letterHtml(lang, false)}</main>`; WEL.unfold = false; return h; }
+A.letterLang = (el) => {
+  const l = el.dataset.l;
+  if (el.dataset.from) { SH.letterLang = l; refreshSheet(); return; }
+  WEL.lang = l; S.settings.letterLang = l; save(); render(); focusLetter();
+};
+A.welBegin = () => {
+  S.settings.welcomeDone = true;
+  if (!S.settings.languageChosen) S.settings.language = WEL.lang || S.settings.letterLang || 'en';
+  S.settings.onbStep = 1; ONB.step = 1; save(); render(); window.scrollTo(0, 0);
+  const n = $('#suName'); if (n) n.focus();
+};
+A.openLetter = () => {
+  SH.letterLang = S.settings.language === 'es' ? 'es' : (S.settings.letterLang || 'en');
+  openSheet(() => `${sheetHead(esc(t('set.letter')))}<div class="letter-sheet">${letterHtml(SH.letterLang, true)}</div>`, { full: true });
+};
+
+/* ----- Screen 2: profile setup ----- */
+function renderProfileSetup() {
+  const s = S.settings;
+  if (!SETUP_DRAFT) SETUP_DRAFT = { name: s.name || '', tz: s.timezone || 'America/Puerto_Rico', lang: s.language || s.letterLang || 'en', err: false };
+  const D = SETUP_DRAFT; const L = SETUP[D.lang] || SETUP.en;
+  return `<main class="wrap" lang="${D.lang}"><div class="onb stack setup">
+    <div class="brand">${esc(L.title)}</div>
+    <label class="f" for="suName">${esc(L.name)}
+      <input class="inp ${D.err ? 'invalid' : ''}" id="suName" maxlength="60" autocomplete="given-name" placeholder="${esc(L.namePh)}" value="${esc(D.name)}" aria-required="true" aria-invalid="${D.err}" aria-describedby="suNameErr"></label>
+    <div id="suNameErr" class="field-err" role="alert">${D.err ? esc(L.nameErr) : ''}</div>
+    <div class="f"><span id="suTzLab">${esc(L.tz)}</span>${tzPicker('suTz', D.tz, L)}<span class="hint">${esc(L.tzLater)}</span></div>
+    <div class="f"><span>${esc(L.lang)}</span>${seg('suLang', APP_LANGS, D.lang)}</div>
+    <button class="btn primary" data-act="setupSave">${esc(L.cont)}</button>
+    <button class="btn ghost sm" data-act="enterDemo">${esc(L.demo)}</button>
+    <p class="tiny muted">${esc(L.local)}</p></div></main>`;
+}
+function setupCapture() { const n = $('#suName'); if (n) SETUP_DRAFT.name = n.value; }
+function bindSetup() {
+  if (!$('#suName')) return;
+  $('#suName').addEventListener('input', (e) => { SETUP_DRAFT.name = e.target.value; if (SETUP_DRAFT.err && e.target.value.trim()) { SETUP_DRAFT.err = false; e.target.classList.remove('invalid'); e.target.setAttribute('aria-invalid', 'false'); $('#suNameErr').textContent = ''; } });
+  bindTzPicker('suTz', () => SETUP_DRAFT.tz, SETUP[SETUP_DRAFT.lang] || SETUP.en);
+  SH.onPick = (g, v) => { if (g === 'suLang' && v) { setupCapture(); const q = val('suTzQ'); SETUP_DRAFT.lang = v; render(); const qi = $('#suTzQ'); if (qi && q) { qi.value = q; qi.dispatchEvent(new Event('input')); } } };
+}
+A.setupSave = () => {
+  setupCapture(); const D = SETUP_DRAFT;
+  const name = D.name.replace(/\s+/g, ' ').trim();
+  if (!name) { D.err = true; render(); const n = $('#suName'); if (n) n.focus(); return; }
+  if (!validTz(D.tz)) D.tz = 'America/Puerto_Rico';
+  const s = S.settings; s.name = name; s.timezone = D.tz; s.language = D.lang; s.languageChosen = true;
+  SETUP_DRAFT = null; ONB.step = 2; s.onbStep = 2; save(); render(); window.scrollTo(0, 0);
 };
 
 boot();

@@ -86,6 +86,7 @@ function msCard(it, isNew) {
 function renderMindset() {
   const m = msState(); const e = latestEdition();
   let h = `<header class="topbar"><div><div class="eyebrow">Updated weekly</div><h1 class="view-h">Mindset</h1></div></header><div class="stack-l">`;
+  if (S.settings.language !== 'en') h += `<p class="small muted ms-orig">${esc(t('ms.orig'))}</p>`;
   h += `<section class="card stack-s small"><div><b>Last successful update:</b> ${m.lastSuccess ? esc(fmtStamp(m.lastSuccess)) : 'None yet'}</div>
     <div><b>Next scheduled update:</b> Not scheduled. Automatic weekly updates need a server, which this app doesn’t have yet.</div>
     ${m.lastCheck ? `<div class="${m.lastCheck.ok ? 'muted' : ''}">${m.lastCheck.ok ? '' : '<b>Last check failed:</b> '}${esc(m.lastCheck.msg)} <span class="muted">(${esc(fmtStamp(m.lastCheck.at))})</span>${m.lastCheck.ok ? '' : ' The previous edition is kept.'}</div>` : ''}
@@ -143,7 +144,7 @@ A.msNotify = (el) => { setTimeout(() => { const m = msState(); m.notify = el.che
 function mindsetNotice() {
   const m = msState(); const e = latestEdition();
   if (!m.notify || !e || m.notifiedEdition === e.id) return '';
-  return `<section class="banner"><div class="h3">A new Mindset edition is ready.</div><div class="btn-row"><button class="btn sm" data-act="msNoticeOpen">Open Mindset</button><button class="btn ghost sm" data-act="msNoticeDismiss">Dismiss</button></div></section>`;
+  return `<section class="banner"><div class="h3">${esc(t('ms.notice'))}</div><div class="btn-row"><button class="btn sm" data-act="msNoticeOpen">Open Mindset</button><button class="btn ghost sm" data-act="msNoticeDismiss">Dismiss</button></div></section>`;
 }
 A.msNoticeOpen = () => { const m = msState(); m.notifiedEdition = latestEdition().id; save(); TAB = 'mindset'; render(); window.scrollTo(0, 0); };
 A.msNoticeDismiss = () => { const m = msState(); m.notifiedEdition = latestEdition().id; save(); render(); };

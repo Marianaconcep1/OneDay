@@ -27,9 +27,58 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
 
   await page.goto('http://localhost:8765/');
   await setNow('2026-10-22T14:00:00Z'); await page.reload(); await page.waitForTimeout(400);
-  await shot('01-onboarding');
+  await shot('01-envelope');
+  // W. Founder letter welcome and profile setup
+  ok('W1 Closed envelope is an accessible button', (await page.locator('button.envelope[aria-label*="A little letter for you"]').count()) === 1 && (await page.locator('text=Tap to open · Toca para abrir').count()) === 1);
+  await page.focus('button.envelope'); await page.keyboard.press('Enter'); await page.waitForTimeout(300);
+  ok('W2 Envelope opens the language choice (keyboard)', (await page.locator('text=How would you like to read your letter?').count()) === 1 && (await page.locator('text=¿En qué idioma quieres leer tu carta?').count()) === 1);
+  ok('W2b Focus moves to the language buttons', await st('document.activeElement && document.activeElement.dataset.act === "welLang"'));
+  await shot('01b-lang-choice');
+  await click('[data-act="welLang"][data-l="en"]');
+  ok('W3 Opening animation plays (flap opens)', (await page.locator('.env-wrap.opening').count()) === 1);
+  await page.waitForTimeout(500); await shot('01c-opening');
+  await page.waitForTimeout(1500);
+  const enTxt = await page.locator('.letter-page').innerText();
+  ok('W4 English letter complete', enTxt.includes('You know that life you keep saying') && enTxt.includes('I’ll be growing right alongside you.') && enTxt.includes('With love,') && enTxt.includes('CEO of One Day') && enTxt.includes('Mariana'));
+  ok('W4b Letter text has no dash punctuation added', !/[—–]/.test(enTxt));
+  ok('W4c Handwritten font only on the signature', await st('getComputedStyle(document.querySelector(".letter-sign")).fontFamily.includes("Dancing") && !getComputedStyle(document.querySelector(".letter-page p")).fontFamily.includes("Dancing")'));
+  await shot('01d-letter-en'); await noHScroll('letter');
+  await page.reload(); await page.waitForTimeout(500);
+  ok('W5 Refresh resumes at the letter', (await page.locator('.letter-page').count()) === 1);
+  await click('[data-act="letterLang"]');
+  const esTxt = await page.locator('.letter-page').innerText();
+  ok('W6 Spanish letter complete, switch while reading', esTxt.includes('¿Sabes esa vida que siempre dices') && esTxt.includes('Yo también estaré creciendo contigo.') && esTxt.includes('Con cariño,') && esTxt.includes('CEO de One Day') && esTxt.includes('¿Comenzamos?') && esTxt.includes('Vamos a comenzar'));
+  await click('[data-act="letterLang"]');
+  ok('W7 Invitation in English', (await page.locator('text=Ready to begin?').count()) === 1);
+  await page.locator('[data-act="welBegin"]').scrollIntoViewIfNeeded(); await click('[data-act="welBegin"]');
+  ok('W8 Invitation opens profile setup', (await page.locator('text=Let’s make this yours.').count()) === 1);
+  ok('W9 Name starts empty (never prefilled)', (await page.inputValue('#suName')) === '' && (await page.getAttribute('#suName', 'placeholder')) === 'Your name' && (await page.locator('text=What should we call you?').count()) === 1);
+  await shot('01e-setup');
+  await page.fill('#suName', '   '); await click('[data-act="setupSave"]');
+  ok('W10 Whitespace-only name is rejected inline', (await page.locator('#suNameErr').innerText()).length > 0 && !(await st('S.settings.onboarded')) && (await st('ONB.step')) === 1);
+  ok('W11 Puerto Rico is the default zone', (await page.locator('#suTzCur').innerText()) === 'Puerto Rico — Atlantic Standard Time');
+  await page.fill('#suTzQ', 'tokyo'); await page.waitForTimeout(150);
+  const tokyo = await page.locator('#suTzList .tz-opt').allInnerTexts();
+  ok('W12 Zones are searchable, with current offset', tokyo.length >= 1 && tokyo[0].includes('Tokyo') && tokyo[0].includes('UTC+9'));
+  ok('W12b Every IANA zone is listed', await st('tzAll().length') > 300);
+  await page.fill('#suTzQ', 'new york'); await page.waitForTimeout(150);
+  const ny = await page.locator('#suTzList .tz-opt').first().innerText();
+  ok('W12c DST-aware offset (New York in October is UTC−4)', ny.includes('UTC−4'), ny);
+  await page.fill('#suTzQ', ''); await page.waitForTimeout(150);
+  await page.fill('#suName', 'Mariana');
+  await click('[data-group="suLang"][data-val="it"]');
+  ok('W13 Italian setup, name kept', (await page.locator('text=Rendiamo questo spazio tuo.').count()) === 1 && (await page.inputValue('#suName')) === 'Mariana');
+  await click('[data-group="suLang"][data-val="fr"]');
+  ok('W14 French setup', (await page.locator('text=Faisons de cet espace le tien.').count()) === 1 && (await page.locator('text=Continuer').count()) >= 1);
+  await click('[data-group="suLang"][data-val="es"]');
+  ok('W15 Spanish setup', (await page.locator('text=Hagamos este espacio tuyo.').count()) === 1);
+  await click('[data-group="suLang"][data-val="en"]');
+  await shot('01f-setup-filled');
+  await click('[data-act="setupSave"]');
+  ok('W16 Continue goes to the next onboarding step and saves', (await st('ONB.step')) === 2 && (await st('S.settings.name')) === 'Mariana' && (await st('S.settings.timezone')) === 'America/Puerto_Rico' && (await st('S.settings.language')) === 'en');
+  await page.reload(); await page.waitForTimeout(500);
+  ok('W17 Onboarding progress survives refresh', (await page.locator('[data-group="obWd"]').count()) > 0);
   // 1. Onboarding without race date or finances
-  await click('[data-act="obNext"]');
   await click('[data-group="obWd"][data-val="60"]'); await click('[data-group="obWe"][data-val="90"]'); await click('[data-act="obNext"]');
   await click('[data-act="obNext"]');
   await click('[data-act="obNext"]');
@@ -432,6 +481,39 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
   ok('M14 Replacing a task also asks first', (await page.locator('.sheet').count()) === 1);
   await click('.sheet [data-act="closeSheet"]');
   await noHScroll('mindset');
+
+  // W. Returning users, language switch, letter in Settings
+  await page.reload(); await page.waitForTimeout(500);
+  ok('W18 Returning users skip the welcome', (await page.locator('.envelope').count()) === 0 && (await page.locator('.date-h').count()) === 1);
+  const recBefore = await st('JSON.stringify([S.tasks.length, Object.keys(S.checkins).length, S.money.tx.length, S.goals.length])');
+  await click('[data-act="tab"][data-tab="settings"]');
+  await page.selectOption('#stLang', 'fr'); await click('[data-act="settingsSave"]');
+  const frTabs = await page.locator('.tabbar').innerText();
+  ok('W19 French applies to navigation and settings, entries kept', (await st('S.settings.language')) === 'fr' && (await page.locator('text=Profil et sécurité').count()) === 1 && (await st('JSON.stringify([S.tasks.length, Object.keys(S.checkins).length, S.money.tx.length, S.goals.length])')) === recBefore, frTabs.replace(/\n/g, ' '));
+  await shot('60-settings-fr');
+  await page.selectOption('#stLang', 'it'); await click('[data-act="settingsSave"]');
+  ok('W20 Italian applies to settings', (await page.locator('text=Profilo e sicurezza').count()) === 1);
+  await click('[data-act="tab"][data-tab="mindset"]');
+  ok('W21 External resources labeled as original language', (await page.locator('.ms-orig').count()) === 1);
+  await click('[data-act="tab"][data-tab="settings"]');
+  await page.locator('[data-act="openLetter"]').scrollIntoViewIfNeeded(); await click('[data-act="openLetter"]');
+  ok('W22 “A letter from Mariana” opens from Settings', (await page.locator('.sheet .letter-page').count()) === 1 && (await page.locator('.sheet [data-act="welBegin"]').count()) === 0);
+  await shot('61-letter-settings');
+  await click('.sheet [data-act="closeSheet"]');
+  await page.fill('#stName', '  '); await click('[data-act="settingsSave"]');
+  ok('W23 Settings also rejects an empty name', (await st('S.settings.name')) === 'Mariana');
+  await page.fill('#stTzQ', 'madrid'); await page.waitForTimeout(150); await click('#stTzList .tz-opt'); await page.fill('#stName', 'Mariana'); await click('[data-act="settingsSave"]');
+  ok('W24 Timezone changeable later in Settings', (await st('S.settings.timezone')) === 'Europe/Madrid');
+  await page.fill('#stTzQ', 'puerto'); await page.waitForTimeout(150); await click('#stTzList .tz-opt'); await page.selectOption('#stLang', 'en'); await click('[data-act="settingsSave"]');
+  ok('W25 Back to Puerto Rico and English', (await st('S.settings.timezone')) === 'America/Puerto_Rico' && (await st('S.settings.language')) === 'en');
+  // Reduced motion: a fresh visitor sees the letter right away
+  const ctx2 = await browser.newContext({ ...devices['iPhone SE'], reducedMotion: 'reduce' });
+  const p2 = await ctx2.newPage(); await p2.goto('http://localhost:8765/'); await p2.waitForTimeout(500);
+  await p2.locator('button.envelope').click(); await p2.waitForTimeout(200); await p2.locator('[data-act="welLang"][data-l="es"]').click(); await p2.waitForTimeout(150);
+  ok('W26 Reduced motion shows the letter immediately', (await p2.locator('.env-wrap.opening').count()) === 0 && (await p2.locator('.letter-page').count()) === 1 && (await p2.locator('text=¿Comenzamos?').count()) === 1);
+  await p2.locator('[data-act="welBegin"]').click(); await p2.waitForTimeout(200);
+  ok('W27 Spanish letter sets Spanish as the starting app language', (await p2.locator('text=Hagamos este espacio tuyo.').count()) === 1 && (await p2.inputValue('#suName')) === '');
+  await ctx2.close();
 
   // Dark mode screenshot
   await page.emulateMedia({ colorScheme: 'dark' }); await click('[data-act="tab"][data-tab="today"]'); await shot('18-today-dark');

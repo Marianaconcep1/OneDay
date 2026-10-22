@@ -16,7 +16,7 @@ const ICONS = {
 function render() {
   const root = $('#app');
   if (LOCKED) { root.innerHTML = renderLock(); return; }
-  if (!S.settings.onboarded) { root.innerHTML = renderOnboarding(); return; }
+  if (!S.settings.onboarded) { root.innerHTML = renderOnboarding(); bindSetup(); return; }
   const views = { today: renderToday, plan: renderPlan, progress: renderProgress, mindset: renderMindset, settings: renderSettings };
   root.innerHTML =
     (DEMO ? '<div class="wrap" style="padding-bottom:0"><div class="demo-flag">Demo mode: sample data only. Your real data is untouched. <button class="btn ghost sm" data-act="exitDemo" style="min-height:32px;color:inherit;text-decoration:underline">Exit demo</button></div></div>' : '') +
@@ -24,6 +24,7 @@ function render() {
     '<nav class="tabbar" aria-label="Main">' + ['today', 'plan', 'progress', 'mindset', 'settings'].map((k) =>
       `<button class="tab" data-act="tab" data-tab="${k}" ${TAB === k ? 'aria-current="page"' : ''}>${ICONS[k]}<span>${t('tab.' + k)}</span></button>`).join('') + '</nav>' +
     renderTimerBar();
+  if (TAB === 'settings') bindTzPicker('stTz', () => SH.tzSel, SETUP[S.settings.language] || SETUP.en);
 }
 A.tab = (el) => { TAB = el.dataset.tab; render(); window.scrollTo(0, 0); };
 
@@ -199,7 +200,7 @@ function renderToday() {
   const cd = calibrationDay();
   if (cd) h += `<section class="banner"><div class="row-between"><div class="h3">Calibration · day ${cd} of 7</div></div><p class="small">${t('calib')} Log what actually happens. Targets stay where they are this week.</p>${firstWeekQuestions()}</section>`;
   h += firstWeekBanner(td);
-  if (S.settings.reminders && !currentPause() && nowHM() >= S.settings.checkinTime && !S.checkins[td]) h += `<section class="banner pink"><div class="h3">It’s ${esc(fmtTime(S.settings.checkinTime))}. Check-in time.</div></section>`;
+  if (S.settings.reminders && !currentPause() && nowHM() >= S.settings.checkinTime && !S.checkins[td]) h += `<section class="banner pink"><div class="h3">${esc(t('ci.reminder', { time: fmtTime(S.settings.checkinTime) }))}</div></section>`;
   if (reviewDue()) h += `<section class="banner"><div class="h3">Weekly review is ready</div><p class="small">10–15 minutes to adjust next week. One change at most.</p><div><button class="btn primary sm" data-act="openReview">Start review</button></div></section>`;
 
   // Featured next action

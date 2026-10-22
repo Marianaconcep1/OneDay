@@ -10,13 +10,16 @@ function renderSettings() {
   const s = S.settings;
   const modeText = { indexeddb: 'IndexedDB in this browser', localstorage: 'localStorage in this browser', memory: 'Memory only. Changes will be lost when this page closes.' }[Store.mode];
   let h = `<header class="topbar"><div><div class="eyebrow">${esc(s.name || 'One Day')}</div><h1 class="view-h">Settings</h1></div></header><div class="stack">`;
-  h += setSect('profile', 'Profile and security', AUTH && AUTH.hash ? 'PIN lock on' : 'Name, timezone, language, PIN', `
-      <label class="f">Name<input class="inp" id="stName" maxlength="40" value="${esc(s.name)}"></label>
-      <label class="f">Timezone<input class="inp" id="stTz" list="tzList" value="${esc(s.timezone)}" autocomplete="off"><datalist id="tzList">${TZ_LIST.map((z) => `<option value="${z}">`).join('')}</datalist><span class="hint">Days you’ve already recorded keep their dates if you change this.</span></label>
-      <label class="f">Language<select class="inp" id="stLang"><option value="en" ${s.language === 'en' ? 'selected' : ''}>English</option><option value="es" ${s.language === 'es' ? 'selected' : ''}>Español (parcial)</option></select></label>
+  const SL = SETUP[s.language] || SETUP.en;
+  if (SH.tzSel == null) SH.tzSel = s.timezone;
+  h += setSect('profile', t('set.profile'), AUTH && AUTH.hash ? 'PIN lock on' : 'Name, timezone, language, PIN', `
+      <label class="f">${t('set.name')}<input class="inp" id="stName" maxlength="60" value="${esc(s.name)}" placeholder="${esc(SL.namePh)}"></label>
+      <div id="stNameErr" class="field-err" role="alert"></div>
+      <div class="f"><span>${t('set.tz')}</span>${tzPicker('stTz', SH.tzSel, SL)}<span class="hint">Days you’ve already recorded keep their dates if you change this.</span></div>
+      <label class="f">${t('set.lang')}<select class="inp" id="stLang">${APP_LANGS.map(([k, n]) => `<option value="${k}" lang="${k}" ${s.language === k ? 'selected' : ''}>${n}</option>`).join('')}</select>${s.language !== 'en' ? `<span class="hint">${t('set.partial')}</span>` : ''}</label>
       <button class="btn primary sm" data-act="settingsSave">${t('btn.save')}</button>
       <div class="stack-s"><div class="h3">PIN lock</div>${renderSecurity()}</div>`, true);
-  h += setSect('schedule', 'Goals and schedules', 'Check-in time, weekly review, available time', `
+  h += setSect('schedule', t('set.schedule'), 'Check-in time, weekly review, available time', `
       <div class="grid2"><label class="f">Evening check-in<input class="inp" id="stCi" type="time" value="${esc(s.checkinTime)}"></label>
       <label class="f">Weekly review day<select class="inp" id="stRv">${[0, 1, 2, 3, 4, 5, 6].map((d) => `<option value="${d}" ${s.reviewDay === d ? 'selected' : ''}>${DOW_SHORT[d]}</option>`).join('')}</select></label></div>
       <label class="f">Suggest a smaller task after this many skips<input class="inp num" id="stSkip" type="number" min="2" max="8" value="${esc(s.skipThreshold)}"><span class="hint">A product rule of thumb, not a scientific threshold. Suggestions appear only in the weekly review and need your OK.</span></label>
@@ -26,14 +29,14 @@ function renderSettings() {
       <label class="f">Typical workday notes<input class="inp" id="avNote" maxlength="200" value="${esc(s.workdayNote)}" placeholder="e.g. Work 8–5, free after 6"></label>
       <button class="btn sm" data-act="availSave">Save available time</button></div>
       <div class="row-between"><span class="small">${plural(activeGoals().length, 'active goal')}. Areas: ${AREAS.map((a) => t('area.' + a)).join(' · ')}</span><button class="btn sm" data-act="goPlan" data-open="goals">Goals</button></div>`);
-  h += setSect('notify', 'Notifications', s.reminders ? 'In-app check-in reminder on' : 'Off', `
+  h += setSect('notify', t('set.notify'), s.reminders ? 'In-app check-in reminder on' : 'Off', `
       <label class="row" style="min-height:44px;gap:10px"><input type="checkbox" id="stRem" ${s.reminders ? 'checked' : ''} style="width:22px;height:22px" data-act="remToggle"> Show a check-in reminder inside the app</label>
       <p class="small">This reminder appears only while the app is open, and never during a pause. The app can’t notify you when it’s closed; for that, set a repeating iPhone alarm or Reminder for ${esc(fmtTime(s.checkinTime))}.</p>
       <p class="tiny muted">Email and text reminders aren’t available in this version. They need a server and a verified address, so none are set or simulated.</p>`);
-  h += setSect('look', 'Personalize', esc(lookSummary()), `<p class="small">Background, font, text color, theme, dimming, blur, text size and motion. You see a preview before anything is saved.</p><button class="btn primary sm" data-act="lookOpen">Personalize</button>`);
-  h += setSect('companion', 'Companion', S.growth.enabled ? esc(KINDS[chapter().kind]) + ' on Today' : 'Hidden', renderCompanionSettings());
-  h += setSect('pause', 'Pause', currentPause() ? 'Paused now' : upcomingPause() ? 'Pause scheduled' : 'For trips, illness or a break', renderPauseSettings());
-  h += setSect('data', 'Your data', 'Backup, restore and exports', `
+  h += setSect('look', t('set.look'), esc(lookSummary()), `<p class="small">Background, font, text color, theme, dimming, blur, text size and motion. You see a preview before anything is saved.</p><button class="btn primary sm" data-act="lookOpen">Personalize</button>`);
+  h += setSect('companion', t('set.companion'), S.growth.enabled ? esc(KINDS[chapter().kind]) + ' on Today' : 'Hidden', renderCompanionSettings());
+  h += setSect('pause', t('set.pause'), currentPause() ? 'Paused now' : upcomingPause() ? 'Pause scheduled' : 'For trips, illness or a break', renderPauseSettings());
+  h += setSect('data', t('set.data'), 'Backup, restore and exports', `
       <div class="small stack-s"><p><b>Where it lives:</b> ${esc(modeText)}${DEMO ? ' (demo data, kept separately)' : ''}.</p>
       ${inFrame ? '<p><b>Preview note:</b> this copy runs inside a preview frame. Use the hosted, installed version for daily use, and back up often.</p>' : ''}
       <p class="muted">${lastSaveOk ? 'Last saved ' + esc(new Date(S.updatedAt).toLocaleString(locale(), { timeZone: tz() })) + '.' : 'The last save failed. Export a backup now.'}${S.lastBackup ? ' Last backup ' + esc(dMD(S.lastBackup)) + '.' : ' No backup yet.'}</p></div>
@@ -42,25 +45,27 @@ function renderSettings() {
       <details class="more"><summary>Spreadsheet exports (CSV)</summary><div class="btn-row mt-s">
         <button class="btn sm" data-act="csv" data-k="tx">Money entries</button><button class="btn sm" data-act="csv" data-k="tasks">Task log</button><button class="btn sm" data-act="csv" data-k="train">Training log</button><button class="btn sm" data-act="csv" data-k="checkins">Check-ins</button></div></details>
       <button class="btn" data-act="openReport">Copy weekly report for ChatGPT</button>`);
-  h += setSect('privacy', 'Privacy', 'What stays on this device', `<div class="small stack-s">
+  h += setSect('privacy', t('set.privacy'), 'What stays on this device', `<div class="small stack-s">
       <p>Your records stay on this device, in this browser. They don’t sync to other devices. There is no online account, no tracking, no analytics and no bank connection.</p>
       <p>Clearing this browser’s website data can erase them, and private browsing may not keep them. Back up regularly.</p>
       <p>The PIN lock keeps the app private from casual viewing. It doesn’t encrypt the stored records; anyone with full access to this phone’s browser data could still read them.</p>
       <p class="muted">This is a single-person app, so there are no other users and no administrator. A shared, multi-user version would need a server with sign-in and roles.</p></div>`);
   h += renderLaterImprovements();
-  h += `<section class="card stack-s"><div class="h3">Demo mode</div><p class="small muted">Explore the app with clearly labeled sample data. Your real records are kept apart and untouched.</p>
+  h += `<section class="card stack-s"><div class="h3">${t('set.demo')}</div><p class="small muted">Explore the app with clearly labeled sample data. Your real records are kept apart and untouched.</p>
       ${DEMO ? '<button class="btn sm" data-act="exitDemo">Exit demo</button>' : '<button class="btn sm" data-act="enterDemo">Open demo mode</button>'}</section>`;
-  h += `<section class="card stack-s"><div class="h3">About</div><p class="small">One Day keeps a daily loop: a specific next action, a quick log, a two-minute evening check-in and a short weekly review. Feedback is rule-based and shown openly. It isn’t therapy, financial advice or athletic coaching.</p></section>`;
-  h += DEMO ? `<button class="btn ghost danger" data-act="eraseAll">Reset demo data</button>` : setSect('delete', 'Delete my data', 'Erase everything on this device', `<p class="small">Deletes every record, goal, pause, companion growth, your PIN and your background photo from this device. It can’t be undone. Export a backup first if you might want it.</p>
+  h += `<section class="card stack-s"><div class="h3">${t('set.about')}</div><p class="small">One Day keeps a daily loop: a specific next action, a quick log, a two-minute evening check-in and a short weekly review. Feedback is rule-based and shown openly. It isn’t therapy, financial advice or athletic coaching.</p><button class="btn sm" data-act="openLetter">${t('set.letter')}</button></section>`;
+  h += DEMO ? `<button class="btn ghost danger" data-act="eraseAll">Reset demo data</button>` : setSect('delete', t('set.delete'), 'Erase everything on this device', `<p class="small">Deletes every record, goal, pause, companion growth, your PIN and your background photo from this device. It can’t be undone. Export a backup first if you might want it.</p>
       <label class="f">Type DELETE to confirm<input class="inp" id="delConfirm" autocomplete="off" autocapitalize="characters"></label>
       <button class="btn ghost danger" data-act="eraseAll">Delete everything</button>`);
   return h + '</div>';
 }
 A.settingsSave = () => {
-  const s = S.settings; const z = val('stTz');
-  if (!validTz(z)) { $('#stTz').classList.add('invalid'); toast('That timezone isn’t recognized. Try America/Puerto_Rico.'); return; }
+  const s = S.settings; const z = SH.tzSel || s.timezone;
+  if (!validTz(z)) { toast('That timezone isn’t recognized.'); return; }
+  const name = val('stName').replace(/\s+/g, ' ').trim();
+  if (!name) { const i = $('#stName'); i.classList.add('invalid'); i.setAttribute('aria-invalid', 'true'); $('#stNameErr').textContent = (SETUP[s.language] || SETUP.en).nameErr; i.focus(); return; }
   const oldTz = s.timezone;
-  s.name = val('stName'); s.timezone = z; s.language = $('#stLang').value;
+  s.name = name; s.timezone = z; s.language = $('#stLang').value; s.languageChosen = true; SH.tzSel = null;
   if ($('#stCi')) A.scheduleSave(true);
   applyLook(); save(); render(); toast(oldTz !== z ? 'Saved. Recorded days keep their dates.' : 'Saved.');
 };
@@ -130,7 +135,7 @@ A.eraseAll = () => {
   confirmBox(DEMO ? 'Reset the demo data?' : 'Delete every record, your PIN and your photo from this device? This can’t be undone.', DEMO ? 'Reset demo' : 'Delete everything', async () => {
     if (DEMO) { S = demoState(); await flush(); render(); return; }
     AUTH = null; await saveAuth(); await Store.del(BG_KEY); BG_DATA = null;
-    S = defaultState(); await flush(); applyLook(); ONB = { step: 1 }; render();
+    S = defaultState(); await flush(); applyLook(); ONB = { step: 1 }; WEL = { stage: 'closed' }; SETUP_DRAFT = null; render();
   }, true);
 };
 A.enterDemo = async () => { await flush(); DEMO = true; const d = await Store.get(DEMO_KEY); S = d && !validateState(d).length ? normalize(d) : demoState(); await flush(); RETURN_GAP = 0; TAB = 'today'; render(); window.scrollTo(0, 0); toast('Demo mode. Sample data only.'); };
@@ -139,14 +144,13 @@ A.exitDemo = async () => { await flush(); DEMO = false; S = normalize((await Sto
 /* ---------- Onboarding (short; deeper setup happens one area at a time) ---------- */
 let ONB = { step: 1 };
 function renderOnboarding() {
-  const s = S.settings; const n = ONB.step;
+  const s = S.settings;
+  if (!s.welcomeDone) return renderWelcome();
+  if (ONB.step <= 1) return renderProfileSetup();
+  const n = ONB.step;
   const mins = [['15', '15 min'], ['30', '30 min'], ['45', '45 min'], ['60', '1 h'], ['90', '1.5 h'], ['120', '2 h+'], ['', 'Not sure']];
   const wd = s.availability[1] == null ? '' : String(s.availability[1]); const we = s.availability[6] == null ? '' : String(s.availability[6]);
   const steps = {
-    1: `<div class="brand">One Day<br><em>${esc(s.name || 'Mariana')}</em></div><p>Know what to do next. Check in at night. Adjust each week.</p>
-      <label class="f">Name<input class="inp" id="obName" maxlength="40" value="${esc(s.name)}"></label>
-      <label class="f">Timezone<input class="inp" id="obTz" list="tzList" value="${esc(s.timezone)}" autocomplete="off"><datalist id="tzList">${TZ_LIST.map((z) => `<option value="${z}">`).join('')}</datalist></label>
-      <label class="f">Language<select class="inp" id="obLang"><option value="en" ${s.language === 'en' ? 'selected' : ''}>English</option><option value="es" ${s.language === 'es' ? 'selected' : ''}>Español (parcial)</option></select></label>`,
     2: `<div class="h2">How much time do you usually have?</div><p class="small muted">For all five areas together, training included. A rough guess is fine, and you can set each day later.</p>
       <div class="stack-s"><div class="h3">Workdays (Mon–Fri)</div>${chips('obWd', mins, wd)}</div>
       <div class="stack-s"><div class="h3">Weekends</div>${chips('obWe', mins, we)}</div>
@@ -160,21 +164,19 @@ function renderOnboarding() {
   return `<main class="wrap"><div class="onb"><div class="steps" aria-hidden="true">${[1, 2, 3, 4, 5].map((i) => `<span class="${i <= n ? 'on' : ''}"></span>`).join('')}</div>
     <div class="stack">${steps[n]}</div>
     <div class="btn-row">${n > 1 ? `<button class="btn" data-act="obBack">${t('btn.back')}</button>` : ''}<button class="btn primary" data-act="obNext">${n === 5 ? 'Confirm and start' : t('btn.next')}</button></div>
-    ${n === 1 ? '<button class="btn ghost sm" data-act="enterDemo">Look around with sample data first</button>' : ''}
-    ${n === 1 ? '<p class="tiny muted">Everything stays on this device. Unknown details can stay unknown.</p>' : ''}</div></main>`;
+    </div></main>`;
 }
 function obCapture() {
   const s = S.settings; const n = ONB.step;
-  if (n === 1) { const z = val('obTz'); if (!validTz(z)) { toast('That timezone isn’t recognized.'); return false; } s.name = val('obName'); s.timezone = z; s.language = $('#obLang').value; }
   if (n === 2) { const wd = getPick('obWd'), we = getPick('obWe'); for (const d of [1, 2, 3, 4, 5]) s.availability[d] = wd ? Number(wd) : null; for (const d of [0, 6]) s.availability[d] = we ? Number(we) : null; s.workdayNote = val('obNote'); }
   if (n === 3) s.checkinTime = val('obCi') || '21:00';
   if (n === 4) s.focus = getPick('obFocus') || 'money';
   return true;
 }
-A.obBack = () => { obCapture(); ONB.step--; render(); };
+A.obBack = () => { obCapture(); ONB.step--; S.settings.onbStep = ONB.step; save(); render(); window.scrollTo(0, 0); };
 A.obNext = () => {
   if (!obCapture()) return;
-  if (ONB.step < 5) { ONB.step++; save(); render(); window.scrollTo(0, 0); return; }
+  if (ONB.step < 5) { ONB.step++; S.settings.onbStep = ONB.step; save(); render(); window.scrollTo(0, 0); return; }
   const td = today();
   S.settings.areasConfirmed = true; S.settings.onboarded = true; S.settings.calibrationStart = td; S.settings.lastOpened = td;
   S.weeks[weekStart(td)] = { main: S.settings.focus, mainOutcome: '', maintain: AREAS.filter((a) => a !== S.settings.focus), confirmedAt: nowISO() };
@@ -254,6 +256,8 @@ async function boot() {
   if (S.settings.onboarded) S.settings.lastOpened = td;
   if (RETURN_GAP >= 3 && !S.returns.some((r) => r.date === td)) S.returns.push({ date: td, missed: RETURN_GAP - 1 });
   lastDay = td;
+  ONB.step = S.settings.onbStep || 1;
+  if (!S.settings.welcomeDone && S.settings.letterLang) WEL = { stage: 'letter', lang: S.settings.letterLang };
   try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) { }
   applyTheme(); render();
   document.addEventListener('click', onClick);

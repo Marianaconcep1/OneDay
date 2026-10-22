@@ -6,6 +6,10 @@ The site is served from the repository root (GitHub Pages: `index.html`, `manife
 
 A personal, local-first accountability app: one clear next action, quick logging, a two-minute evening check-in, and a short weekly review.
 
+## First open
+
+A first-time visitor sees a sealed envelope with a letter from Mariana (English or Spanish), then a short profile setup: name (required, never prefilled), timezone (Puerto Rico by default, any IANA zone searchable) and app language (English, Español, Italiano, Français). Progress is saved if the page is refreshed, and returning users go straight to Today. The letter can be reread from Settings › About. Italian and French cover navigation, setup, settings titles and notices; some detailed screens are still in English.
+
 ## Put it on your iPhone
 
 The app is a set of static files (this folder). To install it as a real home-screen app it has to be served from an **https** address. The preview link is good for trying it, not for daily use.

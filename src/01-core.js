@@ -32,7 +32,10 @@ const STRINGS = {
     'enough': 'Enough reflection—choose the next step',
     'estimate': 'Estimate',
     'not.advice': 'This is arithmetic on the numbers you entered, not financial advice.',
-    'descriptive': 'These are descriptive counts. They don’t show what caused what.'
+    'descriptive': 'These are descriptive counts. They don’t show what caused what.',
+    'set.profile': 'Profile and security', 'set.schedule': 'Goals and schedules', 'set.notify': 'Notifications', 'set.look': 'Personalize', 'set.companion': 'Companion', 'set.pause': 'Pause', 'set.data': 'Your data', 'set.privacy': 'Privacy', 'set.delete': 'Delete my data', 'set.about': 'About', 'set.demo': 'Demo mode',
+    'set.letter': 'A letter from Mariana', 'set.name': 'Name', 'set.tz': 'Timezone', 'set.lang': 'App language', 'set.partial': 'Some detailed screens are still in English while the translation is completed.',
+    'ms.orig': 'Resources are shown in their original language; they haven’t been translated.', 'ci.reminder': 'It’s {time}. Check-in time.', 'ms.notice': 'A new Mindset edition is ready.'
   },
   es: {
     'tab.today': 'Hoy', 'tab.plan': 'Plan', 'tab.progress': 'Progreso', 'tab.mindset': 'Mentalidad', 'tab.settings': 'Ajustes',
@@ -56,7 +59,46 @@ const STRINGS = {
     'enough': 'Basta de reflexión: elige el próximo paso',
     'estimate': 'Estimado',
     'not.advice': 'Esto es aritmética con los números que ingresaste, no asesoría financiera.',
-    'descriptive': 'Son conteos descriptivos. No muestran qué causó qué.'
+    'descriptive': 'Son conteos descriptivos. No muestran qué causó qué.',
+    'set.profile': 'Perfil y seguridad', 'set.schedule': 'Metas y horarios', 'set.notify': 'Avisos', 'set.look': 'Personalizar', 'set.companion': 'Compañero', 'set.pause': 'Pausa', 'set.data': 'Tus datos', 'set.privacy': 'Privacidad', 'set.delete': 'Borrar mis datos', 'set.about': 'Acerca de', 'set.demo': 'Modo demo',
+    'set.letter': 'Una carta de Mariana', 'set.name': 'Nombre', 'set.tz': 'Zona horaria', 'set.lang': 'Idioma de la app', 'set.partial': 'Algunas pantallas detalladas siguen en inglés mientras se completa la traducción.',
+    'ms.orig': 'Los recursos se muestran en su idioma original; no han sido traducidos.', 'ci.reminder': 'Son las {time}. Hora de la revisión.', 'ms.notice': 'Hay una nueva edición de Mindset.'
+  },
+  it: {
+    'tab.today': 'Oggi', 'tab.plan': 'Piano', 'tab.progress': 'Progressi', 'tab.mindset': 'Mindset', 'tab.settings': 'Impostazioni',
+    'area.money': 'Denaro', 'area.business': 'Attività', 'area.training': 'Allenamento', 'area.art': 'Arte', 'area.mind': 'Mente',
+    'btn.start': 'Inizia', 'btn.log': 'Registra', 'btn.smaller': 'Rendi oggi più leggero', 'btn.save': 'Salva', 'btn.cancel': 'Annulla',
+    'btn.next': 'Avanti', 'btn.back': 'Indietro', 'btn.done': 'Fatto', 'btn.edit': 'Modifica', 'btn.delete': 'Elimina', 'btn.close': 'Chiudi',
+    'btn.add': 'Aggiungi', 'btn.copy': 'Copia', 'checkin': 'Check-in serale', 'checkin.edit': 'Modifica il check-in di stasera',
+    'st.scheduled': 'In programma', 'st.started': 'Iniziato', 'st.done': 'Completato come previsto', 'st.modified': 'Versione minima',
+    'st.skipped': 'Saltato', 'st.unscheduled': 'Non in programma', 'st.rest': 'Giorno di riposo rispettato', 'st.norecord': 'Non registrato',
+    'st.trainmod': 'Sessione modificata', 'unknown': 'Sconosciuto', 'notset': 'Non ancora impostato',
+    'today.available': 'Oggi è libero.', 'today.allset': 'Tutto ciò che era previsto oggi è registrato.', 'today.next': 'Prossima azione',
+    'calib': 'Stiamo trovando una routine adatta alla tua vita reale.', 'welcome.back': 'Bentornata. Inizia da oggi.',
+    'tagline': 'Abbastanza piccolo per iniziare. Abbastanza chiaro per finire.', 'spend.title': 'Registra le spese di oggi', 'spend.none': 'Oggi nessuna spesa',
+    'mind.part': 'Fa parte del check-in serale.', 'enough': 'Basta riflettere: scegli il prossimo passo', 'estimate': 'Stima',
+    'not.advice': 'Sono calcoli sui numeri che hai inserito, non consulenza finanziaria.', 'descriptive': 'Sono conteggi descrittivi. Non mostrano cause ed effetti.',
+    'set.profile': 'Profilo e sicurezza', 'set.schedule': 'Obiettivi e orari', 'set.notify': 'Notifiche', 'set.look': 'Personalizza', 'set.companion': 'Compagno', 'set.pause': 'Pausa', 'set.data': 'I tuoi dati', 'set.privacy': 'Privacy', 'set.delete': 'Elimina i miei dati', 'set.about': 'Informazioni', 'set.demo': 'Modalità demo',
+    'set.letter': 'Una lettera da Mariana', 'set.name': 'Nome', 'set.tz': 'Fuso orario', 'set.lang': 'Lingua dell’app', 'set.partial': 'Alcune schermate dettagliate sono ancora in inglese mentre completiamo la traduzione.',
+    'ms.orig': 'Le risorse sono nella lingua originale; non sono state tradotte.', 'ci.reminder': 'Sono le {time}. È l’ora del check-in.', 'ms.notice': 'È pronta una nuova edizione di Mindset.'
+  },
+  fr: {
+    'tab.today': 'Aujourd’hui', 'tab.plan': 'Plan', 'tab.progress': 'Progrès', 'tab.mindset': 'Mindset', 'tab.settings': 'Réglages',
+    'area.money': 'Argent', 'area.business': 'Entreprise', 'area.training': 'Entraînement', 'area.art': 'Art', 'area.mind': 'Esprit',
+    'btn.start': 'Commencer', 'btn.log': 'Noter', 'btn.smaller': 'Alléger la journée', 'btn.save': 'Enregistrer', 'btn.cancel': 'Annuler',
+    'btn.next': 'Suivant', 'btn.back': 'Retour', 'btn.done': 'Terminé', 'btn.edit': 'Modifier', 'btn.delete': 'Supprimer', 'btn.close': 'Fermer',
+    'btn.add': 'Ajouter', 'btn.copy': 'Copier', 'checkin': 'Bilan du soir', 'checkin.edit': 'Modifier le bilan de ce soir',
+    'st.scheduled': 'Prévu', 'st.started': 'Commencé', 'st.done': 'Fait comme prévu', 'st.modified': 'Version minimale',
+    'st.skipped': 'Sauté', 'st.unscheduled': 'Non prévu', 'st.rest': 'Jour de repos respecté', 'st.norecord': 'Non noté',
+    'st.trainmod': 'Séance modifiée', 'unknown': 'Inconnu', 'notset': 'Pas encore défini',
+    'today.available': 'La journée est libre.', 'today.allset': 'Tout ce qui était prévu aujourd’hui est noté.', 'today.next': 'Prochaine action',
+    'calib': 'Nous cherchons une routine adaptée à ta vraie vie.', 'welcome.back': 'Bon retour. Commence par aujourd’hui.',
+    'tagline': 'Assez petit pour commencer. Assez clair pour finir.', 'spend.title': 'Noter les dépenses du jour', 'spend.none': 'Aucune dépense aujourd’hui',
+    'mind.part': 'Fait partie du bilan du soir.', 'enough': 'Assez réfléchi : choisis la prochaine étape', 'estimate': 'Estimation',
+    'not.advice': 'Ce sont des calculs sur les chiffres que tu as saisis, pas des conseils financiers.', 'descriptive': 'Ce sont des comptes descriptifs. Ils ne montrent pas les causes.',
+    'set.profile': 'Profil et sécurité', 'set.schedule': 'Objectifs et horaires', 'set.notify': 'Notifications', 'set.look': 'Personnaliser', 'set.companion': 'Compagnon', 'set.pause': 'Pause', 'set.data': 'Tes données', 'set.privacy': 'Confidentialité', 'set.delete': 'Supprimer mes données', 'set.about': 'À propos', 'set.demo': 'Mode démo',
+    'set.letter': 'Une lettre de Mariana', 'set.name': 'Nom', 'set.tz': 'Fuseau horaire', 'set.lang': 'Langue de l’app', 'set.partial': 'Certains écrans détaillés sont encore en anglais pendant que la traduction se termine.',
+    'ms.orig': 'Les ressources sont dans leur langue d’origine ; elles n’ont pas été traduites.', 'ci.reminder': 'Il est {time}. C’est l’heure du bilan.', 'ms.notice': 'Une nouvelle édition de Mindset est prête.'
   }
 };
 function t(key, vars) {
@@ -65,7 +107,8 @@ function t(key, vars) {
   if (vars) for (const k in vars) s = s.split('{' + k + '}').join(vars[k]);
   return s;
 }
-function locale() { return (S && S.settings && S.settings.language === 'es') ? 'es-PR' : 'en-US'; }
+const LOCALES = { en: 'en-US', es: 'es-PR', it: 'it-IT', fr: 'fr-FR' };
+function locale() { return LOCALES[(S && S.settings && S.settings.language) || 'en'] || 'en-US'; }
 
 /* ---------- Utilities ---------- */
 const $ = (s, r = document) => r.querySelector(s);
@@ -191,7 +234,7 @@ function defaultState() {
   return {
     schema: SCHEMA, app: 'one-day', createdAt: nowISO(), updatedAt: nowISO(),
     settings: {
-      name: 'Mariana', timezone: 'America/Puerto_Rico', language: 'en', workdayNote: '',
+      name: '', timezone: 'America/Puerto_Rico', language: 'en', welcomeDone: false, letterLang: null, languageChosen: false, onbStep: 1, workdayNote: '',
       availability: { 0: null, 1: null, 2: null, 3: null, 4: null, 5: null, 6: null },
       checkinTime: '21:00', focus: 'money', areasConfirmed: false, onboarded: false,
       calibrationStart: null, skipThreshold: 3, reviewDay: 0, reminders: false,
