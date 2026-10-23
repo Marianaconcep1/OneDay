@@ -17,7 +17,7 @@ const RC = {
     privacy: 'Privacy and your data', privacySub: 'Backup, PIN lock and deleting your data',
     lock: 'Lock the app', account: 'There’s no online account, so there’s nothing to sign out of. A PIN lock keeps the app private on this device.',
     scene: 'Your {0} at its current stage, {1}, with a caretaker {2}. Decorative only; it adds no growth.',
-    acts: { garden: 'watering the plants', farm: 'tending the crops', bonsai: 'sitting quietly beside it' },
+    acts: { garden: 'watering the plants', farm: 'tending the crops', bonsai: 'sitting beside it, watering it now and then' },
     kinds: { garden: 'garden', farm: 'farm', bonsai: 'bonsai' },
     back: 'Welcome back. Let’s start with today.', adjust: 'Adjust today’s plan', dismiss: 'Dismiss' },
   es: { eyebrow: 'Modo descanso', menu: 'Menú', ready: 'Quiero volver', planned: 'Regreso previsto: {0}', calm: 'No hay prisa.',
@@ -32,7 +32,7 @@ const RC = {
     privacy: 'Privacidad y tus datos', privacySub: 'Copia de seguridad, bloqueo con PIN y borrar tus datos',
     lock: 'Bloquear la app', account: 'No hay una cuenta en línea, así que no hay sesión que cerrar. Un PIN mantiene la app privada en este dispositivo.',
     scene: 'Tu {0} en su etapa actual, {1}, con una cuidadora {2}. Es solo decorativo; no suma crecimiento.',
-    acts: { garden: 'regando las plantas', farm: 'cuidando los cultivos', bonsai: 'sentada en calma a su lado' },
+    acts: { garden: 'regando las plantas', farm: 'cuidando los cultivos', bonsai: 'sentada a su lado, regándolo de vez en cuando' },
     kinds: { garden: 'jardín', farm: 'granja', bonsai: 'bonsái' },
     back: 'Hola de nuevo. Empecemos por hoy.', adjust: 'Ajustar el plan de hoy', dismiss: 'Cerrar' },
   it: { eyebrow: 'Modalità riposo', menu: 'Menu', ready: 'Voglio tornare', planned: 'Rientro previsto: {0}', calm: 'Non c’è fretta.',
@@ -47,7 +47,7 @@ const RC = {
     privacy: 'Privacy e dati', privacySub: 'Backup, blocco con PIN ed eliminazione dei dati',
     lock: 'Blocca l’app', account: 'Non c’è un account online, quindi non c’è nulla da cui uscire. Un PIN tiene l’app privata su questo dispositivo.',
     scene: 'Il tuo {0} nella fase attuale, {1}, con una giardiniera {2}. È solo decorativo; non aggiunge crescita.',
-    acts: { garden: 'che annaffia le piante', farm: 'che cura i raccolti', bonsai: 'seduta in silenzio accanto' },
+    acts: { garden: 'che annaffia le piante', farm: 'che cura i raccolti', bonsai: 'seduta accanto, che ogni tanto lo annaffia' },
     kinds: { garden: 'giardino', farm: 'podere', bonsai: 'bonsai' },
     back: 'Che bello rivederti. Cominciamo da oggi.', adjust: 'Modifica il piano di oggi', dismiss: 'Chiudi' },
   fr: { eyebrow: 'Mode repos', menu: 'Menu', ready: 'Je veux revenir', planned: 'Retour prévu : {0}', calm: 'Rien ne presse.',
@@ -62,7 +62,7 @@ const RC = {
     privacy: 'Confidentialité et données', privacySub: 'Sauvegarde, verrou par PIN et suppression des données',
     lock: 'Verrouiller l’app', account: 'Il n’y a pas de compte en ligne, donc rien à déconnecter. Un PIN garde l’app privée sur cet appareil.',
     scene: 'Ton {0} à son stade actuel, {1}, avec une jardinière {2}. Purement décoratif ; cela n’ajoute aucune croissance.',
-    acts: { garden: 'qui arrose les plantes', farm: 'qui soigne les cultures', bonsai: 'assise tranquillement à côté' },
+    acts: { garden: 'qui arrose les plantes', farm: 'qui soigne les cultures', bonsai: 'assise à côté, qui l’arrose de temps en temps' },
     kinds: { garden: 'jardin', farm: 'ferme', bonsai: 'bonsaï' },
     back: 'Bon retour. Commençons par aujourd’hui.', adjust: 'Ajuster le plan du jour', dismiss: 'Fermer' }
 };
@@ -147,8 +147,8 @@ function renderRest() {
     <header class="rest-top"><span class="eyebrow">${esc(R.eyebrow)}</span>
       <button class="btn ghost sm" data-act="restMenu" aria-haspopup="dialog">${esc(R.menu)}</button></header>
     ${renderRestQuote(restQuote(today()))}
-    <figure class="rest-scene ${moving ? 'anim' : ''}" role="img" aria-label="${esc(rcf(R.scene, R.kinds[kind], stageName, R.acts[kind]))}">
-      ${drawCompanion(kind, c.stage, c.ch.seed, false).replace('<svg ', '<svg preserveAspectRatio="xMidYMax slice" ')}${drawCaretaker(kind, moving)}</figure>
+    <figure class="rest-scene ${moving ? 'anim' : ''} wide" role="img" aria-label="${esc(rcf(R.scene, R.kinds[kind], stageName, R.acts[kind]))}">
+      ${drawScene(kind, c.stage, c.ch.seed, moving, true)}</figure>
     ${note}
     <div class="rest-foot"><p class="tiny muted">${esc(rcf(R.planned, endDate))}. ${esc(R.calm)}</p>
       <button class="btn rest-return" data-act="restReturn">${esc(R.ready)}</button></div></main>`;

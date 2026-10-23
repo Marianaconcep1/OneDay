@@ -66,4 +66,10 @@ shutil.copy(os.path.join(ROOT, 'src', 'mindset.json'), os.path.join(dist, 'minds
 shutil.copy(os.path.join(ROOT, 'src', 'mindset.json'), os.path.join(ROOT, 'mindset.json'))
 json.dump(manifest, open(os.path.join(dist, 'manifest.webmanifest'), 'w'), indent=2)
 shutil.copy(os.path.join(ROOT, 'src', 'sw.js'), os.path.join(dist, 'sw.js'))
+# Animation preview page: the app code without its boot, plus a small preview script
+pv = os.path.join(ROOT, 'src', 'preview', 'preview.js')
+if os.path.exists(pv):
+    core = '\n'.join(open(f, encoding='utf-8').read() for f in sorted(glob.glob(os.path.join(ROOT, 'src', '[0-9][0-9]-*.js'))) if not f.endswith('99-boot.js'))
+    core = core.replace('__REST_QUOTES__', '[]').replace('__I18N__', json.dumps(i18n, ensure_ascii=False, separators=(',', ':')))
+    open(os.path.join(ROOT, 'preview.html'), 'w', encoding='utf-8').write(f'<meta charset="utf-8">\n<title>One Day animation preview</title>\n{FONTS}\n<style>\n{css}\n.pv-env {{ display: flex; justify-content: center; padding: 70px 0 10px; min-height: 300px; }}\n</style>\n{BODY}\n<script>\n{core}\n{open(pv, encoding="utf-8").read()}\n</script>\n')
 print('built', len(index), 'bytes')

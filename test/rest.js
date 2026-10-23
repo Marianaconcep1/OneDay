@@ -52,8 +52,8 @@ const QUOTES = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'src', 'res
   const approved = QUOTES.filter((q) => q.status === 'approved').map((q) => q.id);
   ok('R5 Only an approved, verified quotation appears', approved.includes(q1) && (await st('REST_QUOTES.every((q) => q.status === "approved")')) && (await st('REST_QUOTES.length')) === approved.length);
   ok('R6 Author and a source link are visible', (await page.locator('.rq-author').innerText()).startsWith('—') && (await page.locator('.rq-meta a[href^="https://"]').count()) === 1 && (await page.locator('.rq-meta a').innerText()) === 'View source');
-  ok('R7 Environment keeps its earned stage, drawn healthy', (await st('stageOf(chapterPoints(chapter().id))')) > 3 && (await page.locator('.rest-scene svg.comp.resting').count()) === 0 && (await page.locator('.rest-scene .caretaker').count()) === 1);
-  ok('R8 Caretaker moves gently when motion is allowed', (await page.locator('.rest-scene.anim .caretaker animateTransform').count()) >= 1);
+  ok('R7 Environment keeps its earned stage, drawn healthy', (await st('stageOf(chapterPoints(chapter().id))')) > 3 && (await page.locator('.rest-scene svg.comp.resting').count()) === 0 && (await page.locator('.rest-scene .caretaker, .rest-scene .gd').count()) === 1);
+  ok('R8 Caretaker moves gently when motion is allowed', (await page.locator('.rest-scene .scene.anim .gd-arm').count()) === 1 && (await st('getComputedStyle(document.querySelector(".gd-arm")).animationName')) === 'gdArm');
   ok('R8b Scene has a text description and says it adds no growth', /caretaker watering the plants\. Decorative only; it adds no growth\./.test(await page.locator('.rest-scene').getAttribute('aria-label')));
 
   // Persistence and internal links
@@ -97,7 +97,7 @@ const QUOTES = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'src', 'res
 
   // Reduced motion: still illustration
   await page.emulateMedia({ reducedMotion: 'reduce' }); await reload();
-  ok('R18 Reduced motion shows a still scene', (await page.locator('.rest-scene.anim').count()) === 0 && (await page.locator('.rest-scene animate, .rest-scene animateTransform').count()) === 0 && (await page.locator('.rest-scene .caretaker').count()) === 1);
+  ok('R18 Reduced motion shows a still scene', (await page.locator('.rest-scene.anim, .rest-scene .scene.anim').count()) === 0 && (await page.locator('.rest-scene animate, .rest-scene animateTransform, .rest-scene animateMotion').count()) === 0 && (await st('getComputedStyle(document.querySelector(".gd-arm")).animationName')) === 'none' && (await page.locator('.rest-scene .gd').count()) === 1);
   await shot('r4-still');
   await page.emulateMedia({ reducedMotion: 'no-preference' });
 
@@ -135,6 +135,7 @@ const QUOTES = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'src', 'res
   await setNow('2026-11-08T15:00:00Z'); await reload();
   ok('R30 No note after an early return', (await page.locator('.rest-note').count()) === 0 && (await page.locator('main.rest').count()) === 0);
 
+  ok('R33 All three scenes draw at every stage; still versions carry no animation', await st(() => ['garden', 'bonsai', 'farm'].every((k) => { for (let i = 0; i <= 14; i++) { const a = drawScene(k, i, 42, true, true), b = drawScene(k, i, 42, false, true); if (!a.includes('class="scene anim"') || b.includes('class="scene anim"') || /<animate/.test(b) || !/class="(gd|sz)/.test(a)) return false; } return true; })));
   // No horizontal scroll at 320px
   await page.setViewportSize({ width: 320, height: 640 });
   await st(() => { S.pauses.push({ id: 'pC', scope: 'all', areas: [], start: '2026-11-08T09:00', end: '2026-11-15T09:00', tz: 'America/Puerto_Rico' }); S.settings.language = 'fr'; save(); render(); });

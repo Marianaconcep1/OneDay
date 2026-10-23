@@ -53,6 +53,10 @@ The return reminder is one note shown inside the app, once, the first time you o
 
 The collection is `src/rest-quotes.json`, and only entries with `"status": "approved"` are built into the app. Each entry records the exact wording, author, original language, source with link, rights, translations (published edition, or `app` for One Day’s own translation, which the app labels “Translated from …” with the original wording available) and verification notes. The current 7 approved entries were each checked word for word against their linked source; 4 candidates were rejected (an unconfirmed Emerson line, an unchecked Lubbock passage, an Ovid line whose context is about love, and a Pascal line whose wording differs by edition). To add one, check it against the original source, add it with `"status": "approved"`, and rebuild with `python3 build.py`. One quotation shows per day in your timezone, cycling through the collection before any repeats.
 
+## Animation
+
+The envelope, letter and scenes use the browser's own animation tools (CSS and the Web Animations API), with no animation library and nothing downloaded. The garden, bonsai and farm are layered SVG drawings in `src/20-scene.js`: leaves, stems, foliage and the caretaker's torso, arm and tool each move on their own, on calm loops (garden 10 s, bonsai 12 s, farm 9 s). With reduced motion on (device setting, or Personalize › Motion), or the companion's gentle movement off, every scene is a still drawing. Rive was considered; it would need a commissioned `.riv` file and a paid Rive plan to export it, so it isn't used.
+
 ## PIN lock
 
 Settings › Profile and security › Set up a PIN. It's a 6-digit convenience lock for this device. Only a salted PBKDF2 hash is stored, never the PIN. After 5 wrong tries it waits 30 seconds, then longer. It auto-locks after inactivity (1–30 minutes) and when you leave the app. A recovery code, shown once, resets a forgotten PIN.

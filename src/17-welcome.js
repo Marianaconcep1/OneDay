@@ -232,7 +232,8 @@ function renderEnvelope(opening) {
     <button class="envelope" data-act="welOpen" aria-label="${esc(E.text + ' ' + E.hint + '.')}" aria-expanded="${opening ? 'true' : 'false'}">
       <span class="env-letter" aria-hidden="true"></span>
       <span class="env-body" aria-hidden="true"></span>
-      <span class="env-flap" aria-hidden="true"></span>
+      <span class="env-shade" aria-hidden="true"></span>
+      <span class="env-flap" aria-hidden="true"><span class="env-flap-face"></span></span>
       <span class="env-text" aria-hidden="true"><span class="env-en">${esc(E.text)}</span></span>
       <span class="env-seal" aria-hidden="true">${SEAL}</span>
     </button>
@@ -246,10 +247,27 @@ function renderWelcome() {
 A.welOpen = () => {
   if (WEL.stage !== 'closed') return;
   S.settings.envOpened = true; save();
-  if (reducedMotion()) { WEL.stage = 'letter'; render(); window.scrollTo(0, 0); focusLetter(); return; }
-  WEL.stage = 'opening'; render();
-  setTimeout(() => { if (WEL.stage !== 'opening') return; WEL.stage = 'letter'; WEL.unfold = true; render(); window.scrollTo(0, 0); focusLetter(); }, 1500);
+  const env = $('button.envelope');
+  if (reducedMotion() || !env || !env.animate) { WEL.stage = 'letter'; render(); window.scrollTo(0, 0); focusLetter(); return; }
+  WEL.stage = 'opening'; env.setAttribute('aria-expanded', 'true'); env.closest('.env-wrap').classList.add('opening');
+  const done = () => { if (WEL.stage !== 'opening') return; WEL.stage = 'letter'; WEL.unfold = true; render(); window.scrollTo(0, 0); focusLetter(); };
+  envelopeOpen(env).then(done, done);
 };
+/* The opening, in order: the seal lifts away, the flap swings back with depth (darkening as it
+   turns, passing behind the letter at its midpoint), the letter slides up out of the pocket with
+   its shadow lengthening, then the envelope settles away and the letter unfolds on its page. */
+function envelopeOpen(env) {
+  const q = (c) => env.querySelector(c); const soft = 'cubic-bezier(.45, .05, .25, 1)'; const out = 'cubic-bezier(.2, .75, .25, 1)';
+  const fade = (el) => el && el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 260, fill: 'forwards' });
+  fade(document.querySelector('.env-hint')); fade(document.querySelector('.onb-top'));
+  q('.env-seal').animate([{ transform: 'none', opacity: 1 }, { transform: 'translateY(-3px) scale(1.06)', opacity: 1, offset: .4 }, { transform: 'translateY(-10px) scale(.86)', opacity: 0 }], { duration: 420, easing: 'ease-in', fill: 'forwards' });
+  q('.env-text').animate([{ opacity: 1 }, { opacity: 0 }], { duration: 300, fill: 'forwards' });
+  q('.env-shade').animate([{ opacity: 1 }, { opacity: 0 }], { duration: 500, delay: 260, easing: soft, fill: 'forwards' });
+  q('.env-flap').animate([{ transform: 'rotateX(0deg)', zIndex: 3 }, { transform: 'rotateX(90deg)', zIndex: 3, offset: .5 }, { transform: 'rotateX(90deg)', zIndex: 0, offset: .501 }, { transform: 'rotateX(180deg)', zIndex: 0 }], { duration: 820, delay: 260, easing: soft, fill: 'forwards' });
+  q('.env-flap-face').animate([{ filter: 'brightness(1)' }, { filter: 'brightness(.8)', offset: .5 }, { filter: 'brightness(.93)' }], { duration: 820, delay: 260, easing: soft, fill: 'forwards' });
+  q('.env-letter').animate([{ transform: 'translateY(0)', boxShadow: '0 1px 2px rgba(60,40,30,.10)' }, { transform: 'translateY(-64%)', boxShadow: '0 12px 22px rgba(60,40,30,.20)' }], { duration: 820, delay: 1000, easing: out, fill: 'forwards' });
+  return env.animate([{ opacity: 1, transform: 'none' }, { opacity: 1, transform: 'none', offset: .55 }, { opacity: 0, transform: 'translateY(10px) scale(.985)' }], { duration: 820, delay: 1600, easing: soft, fill: 'forwards' }).finished;
+}
 function focusLetter() { const p = $('.letter-page'); if (p) p.focus({ preventScroll: true }); }
 
 /* ----- The letter itself (also reachable from Settings) ----- */

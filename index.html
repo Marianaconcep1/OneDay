@@ -387,19 +387,17 @@ html:not([lang="en"]) .tab span { overflow: visible; text-overflow: clip; white-
 .env-body { inset: 0; z-index: 2; border-radius: 8px; background: linear-gradient(160deg, var(--paper), var(--paper-2));
   clip-path: polygon(0 0, 50% 50%, 100% 0, 100% 100%, 0 100%); }
 .env-body::before { content: ""; position: absolute; inset: 0; background: linear-gradient(28deg, rgba(0,0,0,.05) 0 50%, transparent 50%), linear-gradient(-28deg, rgba(0,0,0,.05) 0 50%, transparent 50%); }
-.env-flap { left: 0; right: 0; top: 0; height: 54%; z-index: 3; background: linear-gradient(180deg, var(--paper-3), var(--paper)); clip-path: polygon(0 0, 100% 0, 50% 100%);
-  transform-origin: 50% 0; transition: transform .6s cubic-bezier(.4, .1, .3, 1), z-index 0s .3s; border-radius: 8px 8px 0 0; }
+.env-flap { left: 0; right: 0; top: 0; height: 54%; z-index: 3; transform-origin: 50% 0; filter: drop-shadow(0 2.5px 2px rgba(70, 50, 35, .16)); }
+.env-flap-face { position: absolute; inset: 0; display: block; background: linear-gradient(180deg, var(--paper-3), var(--paper)); clip-path: polygon(0 0, 100% 0, 50% 100%); border-radius: 8px 8px 0 0; }
+.env-shade { left: 0; right: 0; top: 0; height: 60%; z-index: 2; pointer-events: none; background: radial-gradient(60% 50% at 50% 92%, rgba(70, 50, 35, .10), transparent 70%); }
+.env-letter { box-shadow: 0 1px 2px rgba(60, 40, 30, .10); }
 .env-text { left: 0; right: 0; bottom: 8%; z-index: 4; display: flex; flex-direction: column; align-items: center; gap: 2px; color: var(--env-ink); font-family: var(--f-display); font-style: italic; transition: opacity .3s; }
 .env-en, .env-es { display: block; } .env-en { font-size: 19px; } .env-es { font-size: 15px; opacity: .78; }
 .env-seal { width: 56px; height: 56px; left: calc(50% - 28px); top: calc(54% - 32px); z-index: 5; transition: opacity .3s, transform .4s; }
 .env-seal svg { width: 100%; height: 100%; filter: drop-shadow(0 2px 2px rgba(80, 20, 40, .35)); }
 .env-hint { font-size: 15px; color: var(--muted); letter-spacing: .02em; margin: 0; }
 .env-wrap:not(.opening) .envelope:hover .env-seal { transform: scale(1.04); }
-.opening .env-seal { opacity: 0; transform: scale(.8); }
-.opening .env-text { opacity: 0; }
-.opening .env-flap { transform: rotateX(180deg); z-index: 0; }
-.opening .env-letter { animation: letterOut .7s .65s cubic-bezier(.3, .1, .3, 1) forwards; }
-@keyframes letterOut { to { transform: translateY(-62%); } }
+
 .wel-lang { width: 100%; max-width: 360px; text-align: center; animation: fadeUp .35s ease both; }
 .wel-q { display: flex; flex-direction: column; gap: 4px; font-family: var(--f-display); font-size: 21px; line-height: 1.3; }
 .wel-q span[lang="es"] { font-size: 17px; color: var(--muted); font-style: italic; }
@@ -413,8 +411,13 @@ html:not([lang="en"]) .tab span { overflow: visible; text-overflow: clip; white-
 .letter-page::before { content: ""; position: absolute; inset: 0; pointer-events: none; border-radius: 6px;
   background: linear-gradient(180deg, transparent 33.1%, rgba(120, 100, 80, .09) 33.3%, transparent 33.6%, transparent 66.4%, rgba(120, 100, 80, .09) 66.6%, transparent 66.9%); }
 .letter-page p { margin: 0 0 14px; }
-.letter-page.unfold { transform-origin: 50% 0; animation: unfold .8s cubic-bezier(.2, .7, .2, 1) both; }
-@keyframes unfold { 0% { transform: perspective(1000px) rotateX(-75deg) scaleY(.35); opacity: .2; } 60% { opacity: 1; } 100% { transform: none; } }
+.letter-page.unfold { transform-origin: 50% 0; animation: unfold .95s cubic-bezier(.22, .8, .25, 1) both; }
+.letter-page::after { content: ""; position: absolute; inset: 0; pointer-events: none; border-radius: 6px; opacity: .55;
+  background: linear-gradient(180deg, transparent calc(33.3% - 1px), rgba(90, 70, 50, .07) 33.3%, rgba(255, 255, 255, .35) calc(33.3% + 1px), transparent calc(33.3% + 2px), transparent calc(66.6% - 1px), rgba(90, 70, 50, .07) 66.6%, rgba(255, 255, 255, .35) calc(66.6% + 1px), transparent calc(66.6% + 2px)); }
+.letter-page.unfold::after { animation: creases .95s ease-out both; }
+.letter-page.unfold > * { animation: fadeUp .5s .55s ease both; }
+@keyframes unfold { 0% { transform: perspective(1400px) rotateX(-62deg) scaleY(.34); opacity: 0; box-shadow: 0 2px 4px rgba(60, 40, 30, .08); } 30% { opacity: 1; } 100% { transform: none; } }
+@keyframes creases { 0% { opacity: 1; } 100% { opacity: .55; } }
 .letter-top { display: flex; justify-content: flex-end; margin: -6px -6px 6px; }
 .letter-switch { background: transparent; border: 1px solid rgba(46, 38, 32, .25); color: var(--lp-ink); border-radius: 999px; padding: 6px 14px; min-height: 36px; font: inherit; font-size: 14px; cursor: pointer; }
 .letter-switch:focus-visible { outline: 3px solid #66569A; outline-offset: 2px; }
@@ -436,8 +439,8 @@ html:not([lang="en"]) .tab span { overflow: visible; text-overflow: clip; white-
 .tz-opt:last-child { border-bottom: 0; }
 .tz-opt[aria-selected="true"] { background: var(--slate-soft); font-weight: 700; }
 .tz-opt:focus-visible { outline: 3px solid var(--slate); outline-offset: -3px; }
-.reduce-motion .letter-page.unfold, .reduce-motion .wel-lang { animation: none; }
-@media (prefers-reduced-motion: reduce) { .letter-page.unfold, .wel-lang, .opening .env-letter { animation: none; } .env-flap { transition: none; } }
+.reduce-motion .letter-page.unfold, .reduce-motion .letter-page.unfold > *, .reduce-motion .letter-page.unfold::after, .reduce-motion .wel-lang { animation: none; }
+@media (prefers-reduced-motion: reduce) { .letter-page.unfold, .letter-page.unfold > *, .letter-page.unfold::after, .wel-lang { animation: none; } }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 .onb-top { display: flex; justify-content: flex-end; width: 100%; max-width: 560px; margin-inline: auto; }
 .welcome .onb-top { position: absolute; top: max(14px, env(safe-area-inset-top)); right: 16px; width: auto; }
@@ -476,6 +479,73 @@ html:not([lang="en"]) .tab span { overflow: visible; text-overflow: clip; white-
 .rest-item span { font-weight: 400; }
 .rest-check { display: flex; gap: 12px; align-items: flex-start; min-height: 44px; }
 .rest-check input { width: 22px; height: 22px; flex: none; margin: 2px 0 0; }
+
+/* ---------- Illustrated scenes ---------- */
+:root { --gs-grain: #E0B85A; --gs-sky1: #F3EEF8; --gs-sky2: #F6F0E6; --gs-sun: #F5D58A; --gs-cloud: #FFFFFF; --gs-hill2: #CFE0C9; --gs-hill1: #B5D1AE; --gs-grass: #9CC28F; --gs-grass2: #B4D3A5; --gs-grass3: #6E9C62;
+  --gs-wood: #A97C5C; --gs-wood2: #7E5A42; --gs-soil: #8A6450; --gs-soil2: #6E4E3E; --gs-wet: #4F362B; --gs-stem: #4F8A57; --gs-leaf: #5FA067; --gs-leaf2: #7DB874; --gs-vein: #E9F5E2;
+  --gs-petal1: #E98FB4; --gs-petal2: #F2C46D; --gs-petal3: #B79BE0; --gs-center: #F7E3A3; --gs-stone: #CFC6B8; --gs-bee: #F2C14E; --gs-ink: #3A2E2A;
+  --ct-cloth2: #6A5794; --ct-apron: #F4EBDD; --ct-apron2: #E4D6C1; --ct-hair: #5B3A2E; --ct-shoe: #4A3A34; --ct-band: #B0566E; --ct-blush: #E58D8D; --ct-tool2: #6D7F96; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --gs-grain: #C9A24E; --gs-sky1: #262038; --gs-sky2: #2C2638; --gs-sun: #E8CF92; --gs-cloud: #4A4360; --gs-hill2: #2F3B34; --gs-hill1: #354A3B; --gs-grass: #3C5A40; --gs-grass2: #48684A; --gs-grass3: #5E8A5E;
+  --gs-wood: #7E5E48; --gs-wood2: #5E4434; --gs-soil: #5A4236; --gs-soil2: #47342B; --gs-wet: #2E211B; --gs-stem: #5E9A66; --gs-leaf: #6DAE74; --gs-leaf2: #86C27D; --gs-vein: #2E4A32;
+  --gs-petal1: #D886A8; --gs-petal2: #E0B868; --gs-petal3: #A58ED0; --gs-center: #EAD79A; --gs-stone: #6E675E; --gs-bee: #E0B448; --gs-ink: #1E1820;
+  --ct-cloth2: #7C6AA8; --ct-apron: #D9CFBF; --ct-apron2: #C2B6A2; --ct-hair: #3E2A22; --ct-shoe: #2E2522; --ct-band: #A04C63; --ct-blush: #C97878; --ct-tool2: #7E90A6; } }
+:root[data-theme="dark"] { --gs-grain: #C9A24E; --gs-sky1: #262038; --gs-sky2: #2C2638; --gs-sun: #E8CF92; --gs-cloud: #4A4360; --gs-hill2: #2F3B34; --gs-hill1: #354A3B; --gs-grass: #3C5A40; --gs-grass2: #48684A; --gs-grass3: #5E8A5E;
+  --gs-wood: #7E5E48; --gs-wood2: #5E4434; --gs-soil: #5A4236; --gs-soil2: #47342B; --gs-wet: #2E211B; --gs-stem: #5E9A66; --gs-leaf: #6DAE74; --gs-leaf2: #86C27D; --gs-vein: #2E4A32;
+  --gs-petal1: #D886A8; --gs-petal2: #E0B868; --gs-petal3: #A58ED0; --gs-center: #EAD79A; --gs-stone: #6E675E; --gs-bee: #E0B448; --gs-ink: #1E1820;
+  --ct-cloth2: #7C6AA8; --ct-apron: #D9CFBF; --ct-apron2: #C2B6A2; --ct-hair: #3E2A22; --ct-shoe: #2E2522; --ct-band: #A04C63; --ct-blush: #C97878; --ct-tool2: #7E90A6; }
+.scene { display: block; width: 100%; height: 100%; }
+.scene .gs-wet { opacity: 0; }
+.scene .gd-water { opacity: 0; }
+.scene.anim .gs-cloud { animation: gsDrift var(--dur, 40s) ease-in-out infinite alternate; }
+.scene.anim .gs-plant { transform-box: fill-box; transform-origin: 50% 100%; animation: gsSway var(--dur, 7s) ease-in-out var(--delay, 0s) infinite alternate; }
+.scene.anim .gs-leaf { transform-box: fill-box; transform-origin: 0% 50%; animation: gsLeaf var(--dur, 4s) ease-in-out var(--delay, 0s) infinite alternate; }
+.scene.anim .gd-torso { transform-box: view-box; transform-origin: 72px 228px; animation: gdLean 10s cubic-bezier(.45, .05, .35, 1) infinite; }
+.scene.anim .gd-arm { transform-box: view-box; transform-origin: 79px 195px; animation: gdArm 10s cubic-bezier(.45, .05, .35, 1) infinite; }
+.scene.anim .gd-can { transform-box: view-box; transform-origin: 92.5px 214.5px; animation: gdCan 10s cubic-bezier(.45, .05, .35, 1) infinite; }
+.scene.anim .gd-water { animation: gdPour 10s linear infinite; }
+.scene.anim .gd-drop { transform-box: view-box; animation: gdDrop .78s cubic-bezier(.5, 0, 1, .6) var(--delay, 0s) infinite; }
+.scene.anim .gs-wet { animation: gsWet var(--dur, 10s) ease-in-out infinite; }
+@keyframes gsDrift { from { transform: translateX(var(--dx, 10px)); } to { transform: translateX(calc(var(--dx, 10px) * -1)); } }
+@keyframes gsSway { from { transform: rotate(-1.4deg); } to { transform: rotate(1.4deg); } }
+@keyframes gsLeaf { from { transform: rotate(-5deg); } to { transform: rotate(4deg); } }
+@keyframes gdLean { 0%, 10% { transform: rotate(0deg); } 24%, 60% { transform: rotate(5deg); } 76%, 100% { transform: rotate(0deg); } }
+@keyframes gdArm { 0%, 12% { transform: rotate(0deg); } 28%, 60% { transform: rotate(-60deg); } 76%, 100% { transform: rotate(0deg); } }
+@keyframes gdCan { 0%, 12% { transform: rotate(0deg); } 28% { transform: rotate(36deg); } 35%, 53% { transform: rotate(56deg); } 60% { transform: rotate(36deg); } 76%, 100% { transform: rotate(0deg); } }
+@keyframes gdPour { 0%, 34% { opacity: 0; } 37%, 52% { opacity: 1; } 55%, 100% { opacity: 0; } }
+@keyframes gdDrop { 0% { transform: translate(0, 0); opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { transform: translate(var(--x, 0px), 19px); opacity: 0; } }
+@keyframes gsWet { 0%, 38% { opacity: 0; } 58% { opacity: .38; } 80% { opacity: .2; } 100% { opacity: 0; } }
+.rest-scene.wide { aspect-ratio: 36 / 23; padding: 0; overflow: hidden; }
+.rest-scene.wide svg { inset: 0; width: 100%; height: 100%; }
+.scene .sz-water, .scene .gd-puff { opacity: 0; }
+.scene.anim .gs-pad { transform-box: fill-box; transform-origin: 50% 90%; animation: gsPad var(--dur, 7s) ease-in-out var(--delay, 0s) infinite alternate; }
+.scene.anim .gs-mill { transform-box: view-box; transform-origin: var(--cx) var(--cy); animation: spin 26s linear infinite; }
+.scene.anim .gs-petal { transform-box: view-box; animation: gsPetal 16s ease-in-out infinite; }
+@keyframes gsPad { from { transform: rotate(-1.2deg) translateY(0); } to { transform: rotate(1.2deg) translateY(-.6px); } }
+@keyframes gsPetal { 0%, 55% { transform: translate(0, 0) rotate(0deg); opacity: 0; } 60% { opacity: 1; } 92% { opacity: 1; } 100% { transform: translate(22px, 38px) rotate(220deg); opacity: 0; } }
+/* seated caretaker (bonsai): 12 s, a longer rest between waterings */
+.scene.anim .sz-torso { transform-box: view-box; transform-origin: 118px 226px; animation: szLean 12s cubic-bezier(.45, .05, .35, 1) infinite; }
+.scene.anim .sz-arm { transform-box: view-box; transform-origin: 124px 196px; animation: szArm 12s cubic-bezier(.45, .05, .35, 1) infinite; }
+.scene.anim .sz-can { transform-box: view-box; transform-origin: 134px 218px; animation: szCan 12s cubic-bezier(.45, .05, .35, 1) infinite; }
+.scene.anim .sz-water { animation: szPour 12s linear infinite; }
+.scene.anim .sz-drop { animation-name: szDrop; }
+@keyframes szLean { 0%, 18% { transform: rotate(0deg); } 30%, 62% { transform: rotate(8deg); } 76%, 100% { transform: rotate(0deg); } }
+@keyframes szArm { 0%, 20% { transform: rotate(0deg); } 34%, 60% { transform: rotate(-55deg); } 74%, 100% { transform: rotate(0deg); } }
+@keyframes szCan { 0%, 20% { transform: rotate(0deg); } 34% { transform: rotate(28deg); } 40%, 54% { transform: rotate(45deg); } 60% { transform: rotate(28deg); } 74%, 100% { transform: rotate(0deg); } }
+@keyframes szPour { 0%, 40% { opacity: 0; } 42%, 53% { opacity: 1; } 55%, 100% { opacity: 0; } }
+@keyframes szDrop { 0% { transform: translate(0, 0); opacity: 0; } 20% { opacity: 1; } 80% { opacity: 1; } 100% { transform: translate(var(--x, 0px), 8px); opacity: 0; } }
+/* standing caretaker with a hoe (farm): 9 s, lift, a soft chop, the soil lifts a little, settle */
+.scene.anim .gd.hoe .gd-torso { animation-name: hoLean; animation-duration: 9s; }
+.scene.anim .gd.hoe .gd-arm { animation-name: hoArm; animation-duration: 9s; }
+.scene.anim .gd-hoe { transform-box: view-box; transform-origin: 92.5px 214.5px; animation: hoHoe 9s cubic-bezier(.45, .05, .35, 1) infinite; }
+.scene.anim .gd-puff { animation: hoPuff 9s linear infinite; }
+.scene.anim .gd-crumb { transform-box: view-box; animation: hoCrumb 9s ease-out infinite; }
+@keyframes hoLean { 0%, 14% { transform: rotate(0deg); } 30% { transform: rotate(-2deg); } 42%, 56% { transform: rotate(5deg); } 74%, 100% { transform: rotate(0deg); } }
+@keyframes hoArm { 0%, 14% { transform: rotate(0deg); } 30% { transform: rotate(-22deg); } 42%, 56% { transform: rotate(2deg); } 74%, 100% { transform: rotate(0deg); } }
+@keyframes hoHoe { 0%, 14% { transform: rotate(0deg); } 30% { transform: rotate(-26deg); } 40% { transform: rotate(1.5deg); } 43%, 56% { transform: rotate(0deg); } 74%, 100% { transform: rotate(0deg); } }
+@keyframes hoPuff { 0%, 40% { opacity: 0; } 42% { opacity: 1; } 54% { opacity: 0; } 100% { opacity: 0; } }
+@keyframes hoCrumb { 0%, 41% { transform: translate(0, 0); } 52%, 100% { transform: translate(calc((var(--i) - 1) * 4px), -6px); } }
+.comp-big.rest-scene { width: 100%; height: auto; }
+.rest-scene.resting .scene { filter: saturate(.7); }
 
 </style>
 </head>
@@ -4113,7 +4183,7 @@ A.compOpen = () => openSheet(() => {
   const recent = Object.values(g.ledger).filter((e) => e.ch === c.ch.id && e.type !== 'carry').sort((a, b) => (a.date < b.date ? 1 : -1)).slice(0, 8);
   const label = { day: 'Daily records', milestone: 'Milestone', result: 'Business result', goal: 'Goal completed' };
   return `${sheetHead(esc(KINDS[c.ch.kind] + ' · ' + c.ch.name), esc(STAGE_NAMES[c.ch.kind][c.stage]))}
-    <div class="comp-big">${drawCompanion(c.ch.kind, c.stage, c.ch.seed, c.resting || c.paused)}</div>
+    <div class="comp-big rest-scene wide ${c.resting ? 'resting' : ''}">${drawScene(c.ch.kind, c.stage, c.ch.seed, g.animations && !reducedMotion(), false)}</div>
     <p class="small">${c.next ? `${c.pts} growth so far. The next stage comes at ${c.next}.` : `${c.pts} growth. Fully grown, and it keeps every ring.`}</p>
     <p class="tiny muted">Completed actions give 2, smaller versions and rest days 1, a check-in 1, up to ${DAY_CAP} a day. Milestones, business results and finished goals add more. Growth is never taken away; quiet days only let it rest, and paused days don’t count.</p>
     ${recent.length ? `<div class="kv small">${recent.map((e) => `<span>${esc(label[e.type] || e.type)} · ${esc(dMD(e.date))}</span><span>+${e.pts}</span>`).join('')}</div>` : ''}
@@ -4809,7 +4879,8 @@ function renderEnvelope(opening) {
     <button class="envelope" data-act="welOpen" aria-label="${esc(E.text + ' ' + E.hint + '.')}" aria-expanded="${opening ? 'true' : 'false'}">
       <span class="env-letter" aria-hidden="true"></span>
       <span class="env-body" aria-hidden="true"></span>
-      <span class="env-flap" aria-hidden="true"></span>
+      <span class="env-shade" aria-hidden="true"></span>
+      <span class="env-flap" aria-hidden="true"><span class="env-flap-face"></span></span>
       <span class="env-text" aria-hidden="true"><span class="env-en">${esc(E.text)}</span></span>
       <span class="env-seal" aria-hidden="true">${SEAL}</span>
     </button>
@@ -4823,10 +4894,27 @@ function renderWelcome() {
 A.welOpen = () => {
   if (WEL.stage !== 'closed') return;
   S.settings.envOpened = true; save();
-  if (reducedMotion()) { WEL.stage = 'letter'; render(); window.scrollTo(0, 0); focusLetter(); return; }
-  WEL.stage = 'opening'; render();
-  setTimeout(() => { if (WEL.stage !== 'opening') return; WEL.stage = 'letter'; WEL.unfold = true; render(); window.scrollTo(0, 0); focusLetter(); }, 1500);
+  const env = $('button.envelope');
+  if (reducedMotion() || !env || !env.animate) { WEL.stage = 'letter'; render(); window.scrollTo(0, 0); focusLetter(); return; }
+  WEL.stage = 'opening'; env.setAttribute('aria-expanded', 'true'); env.closest('.env-wrap').classList.add('opening');
+  const done = () => { if (WEL.stage !== 'opening') return; WEL.stage = 'letter'; WEL.unfold = true; render(); window.scrollTo(0, 0); focusLetter(); };
+  envelopeOpen(env).then(done, done);
 };
+/* The opening, in order: the seal lifts away, the flap swings back with depth (darkening as it
+   turns, passing behind the letter at its midpoint), the letter slides up out of the pocket with
+   its shadow lengthening, then the envelope settles away and the letter unfolds on its page. */
+function envelopeOpen(env) {
+  const q = (c) => env.querySelector(c); const soft = 'cubic-bezier(.45, .05, .25, 1)'; const out = 'cubic-bezier(.2, .75, .25, 1)';
+  const fade = (el) => el && el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 260, fill: 'forwards' });
+  fade(document.querySelector('.env-hint')); fade(document.querySelector('.onb-top'));
+  q('.env-seal').animate([{ transform: 'none', opacity: 1 }, { transform: 'translateY(-3px) scale(1.06)', opacity: 1, offset: .4 }, { transform: 'translateY(-10px) scale(.86)', opacity: 0 }], { duration: 420, easing: 'ease-in', fill: 'forwards' });
+  q('.env-text').animate([{ opacity: 1 }, { opacity: 0 }], { duration: 300, fill: 'forwards' });
+  q('.env-shade').animate([{ opacity: 1 }, { opacity: 0 }], { duration: 500, delay: 260, easing: soft, fill: 'forwards' });
+  q('.env-flap').animate([{ transform: 'rotateX(0deg)', zIndex: 3 }, { transform: 'rotateX(90deg)', zIndex: 3, offset: .5 }, { transform: 'rotateX(90deg)', zIndex: 0, offset: .501 }, { transform: 'rotateX(180deg)', zIndex: 0 }], { duration: 820, delay: 260, easing: soft, fill: 'forwards' });
+  q('.env-flap-face').animate([{ filter: 'brightness(1)' }, { filter: 'brightness(.8)', offset: .5 }, { filter: 'brightness(.93)' }], { duration: 820, delay: 260, easing: soft, fill: 'forwards' });
+  q('.env-letter').animate([{ transform: 'translateY(0)', boxShadow: '0 1px 2px rgba(60,40,30,.10)' }, { transform: 'translateY(-64%)', boxShadow: '0 12px 22px rgba(60,40,30,.20)' }], { duration: 820, delay: 1000, easing: out, fill: 'forwards' });
+  return env.animate([{ opacity: 1, transform: 'none' }, { opacity: 1, transform: 'none', offset: .55 }, { opacity: 0, transform: 'translateY(10px) scale(.985)' }], { duration: 820, delay: 1600, easing: soft, fill: 'forwards' }).finished;
+}
 function focusLetter() { const p = $('.letter-page'); if (p) p.focus({ preventScroll: true }); }
 
 /* ----- The letter itself (also reachable from Settings) ----- */
@@ -4980,7 +5068,7 @@ const RC = {
     privacy: 'Privacy and your data', privacySub: 'Backup, PIN lock and deleting your data',
     lock: 'Lock the app', account: 'There’s no online account, so there’s nothing to sign out of. A PIN lock keeps the app private on this device.',
     scene: 'Your {0} at its current stage, {1}, with a caretaker {2}. Decorative only; it adds no growth.',
-    acts: { garden: 'watering the plants', farm: 'tending the crops', bonsai: 'sitting quietly beside it' },
+    acts: { garden: 'watering the plants', farm: 'tending the crops', bonsai: 'sitting beside it, watering it now and then' },
     kinds: { garden: 'garden', farm: 'farm', bonsai: 'bonsai' },
     back: 'Welcome back. Let’s start with today.', adjust: 'Adjust today’s plan', dismiss: 'Dismiss' },
   es: { eyebrow: 'Modo descanso', menu: 'Menú', ready: 'Quiero volver', planned: 'Regreso previsto: {0}', calm: 'No hay prisa.',
@@ -4995,7 +5083,7 @@ const RC = {
     privacy: 'Privacidad y tus datos', privacySub: 'Copia de seguridad, bloqueo con PIN y borrar tus datos',
     lock: 'Bloquear la app', account: 'No hay una cuenta en línea, así que no hay sesión que cerrar. Un PIN mantiene la app privada en este dispositivo.',
     scene: 'Tu {0} en su etapa actual, {1}, con una cuidadora {2}. Es solo decorativo; no suma crecimiento.',
-    acts: { garden: 'regando las plantas', farm: 'cuidando los cultivos', bonsai: 'sentada en calma a su lado' },
+    acts: { garden: 'regando las plantas', farm: 'cuidando los cultivos', bonsai: 'sentada a su lado, regándolo de vez en cuando' },
     kinds: { garden: 'jardín', farm: 'granja', bonsai: 'bonsái' },
     back: 'Hola de nuevo. Empecemos por hoy.', adjust: 'Ajustar el plan de hoy', dismiss: 'Cerrar' },
   it: { eyebrow: 'Modalità riposo', menu: 'Menu', ready: 'Voglio tornare', planned: 'Rientro previsto: {0}', calm: 'Non c’è fretta.',
@@ -5010,7 +5098,7 @@ const RC = {
     privacy: 'Privacy e dati', privacySub: 'Backup, blocco con PIN ed eliminazione dei dati',
     lock: 'Blocca l’app', account: 'Non c’è un account online, quindi non c’è nulla da cui uscire. Un PIN tiene l’app privata su questo dispositivo.',
     scene: 'Il tuo {0} nella fase attuale, {1}, con una giardiniera {2}. È solo decorativo; non aggiunge crescita.',
-    acts: { garden: 'che annaffia le piante', farm: 'che cura i raccolti', bonsai: 'seduta in silenzio accanto' },
+    acts: { garden: 'che annaffia le piante', farm: 'che cura i raccolti', bonsai: 'seduta accanto, che ogni tanto lo annaffia' },
     kinds: { garden: 'giardino', farm: 'podere', bonsai: 'bonsai' },
     back: 'Che bello rivederti. Cominciamo da oggi.', adjust: 'Modifica il piano di oggi', dismiss: 'Chiudi' },
   fr: { eyebrow: 'Mode repos', menu: 'Menu', ready: 'Je veux revenir', planned: 'Retour prévu : {0}', calm: 'Rien ne presse.',
@@ -5025,7 +5113,7 @@ const RC = {
     privacy: 'Confidentialité et données', privacySub: 'Sauvegarde, verrou par PIN et suppression des données',
     lock: 'Verrouiller l’app', account: 'Il n’y a pas de compte en ligne, donc rien à déconnecter. Un PIN garde l’app privée sur cet appareil.',
     scene: 'Ton {0} à son stade actuel, {1}, avec une jardinière {2}. Purement décoratif ; cela n’ajoute aucune croissance.',
-    acts: { garden: 'qui arrose les plantes', farm: 'qui soigne les cultures', bonsai: 'assise tranquillement à côté' },
+    acts: { garden: 'qui arrose les plantes', farm: 'qui soigne les cultures', bonsai: 'assise à côté, qui l’arrose de temps en temps' },
     kinds: { garden: 'jardin', farm: 'ferme', bonsai: 'bonsaï' },
     back: 'Bon retour. Commençons par aujourd’hui.', adjust: 'Ajuster le plan du jour', dismiss: 'Fermer' }
 };
@@ -5110,8 +5198,8 @@ function renderRest() {
     <header class="rest-top"><span class="eyebrow">${esc(R.eyebrow)}</span>
       <button class="btn ghost sm" data-act="restMenu" aria-haspopup="dialog">${esc(R.menu)}</button></header>
     ${renderRestQuote(restQuote(today()))}
-    <figure class="rest-scene ${moving ? 'anim' : ''}" role="img" aria-label="${esc(rcf(R.scene, R.kinds[kind], stageName, R.acts[kind]))}">
-      ${drawCompanion(kind, c.stage, c.ch.seed, false).replace('<svg ', '<svg preserveAspectRatio="xMidYMax slice" ')}${drawCaretaker(kind, moving)}</figure>
+    <figure class="rest-scene ${moving ? 'anim' : ''} wide" role="img" aria-label="${esc(rcf(R.scene, R.kinds[kind], stageName, R.acts[kind]))}">
+      ${drawScene(kind, c.stage, c.ch.seed, moving, true)}</figure>
     ${note}
     <div class="rest-foot"><p class="tiny muted">${esc(rcf(R.planned, endDate))}. ${esc(R.calm)}</p>
       <button class="btn rest-return" data-act="restReturn">${esc(R.ready)}</button></div></main>`;
@@ -5188,6 +5276,260 @@ let restWas = null;
 /* Pauses start and end at a set time: switch views when that moment passes */
 function restCheck() { const r = !!(S && S.settings.onboarded && restPause()); if (restWas !== null && r !== restWas && !$('.sheet') && !LOCKED) render(); restWas = r; }
 setInterval(restCheck, 30000);
+
+/* ---------- Illustrated scenes: layered SVG, parts animated separately ----------
+   Movement is CSS on individual parts (leaves, stems, the caretaker's torso, arm and can),
+   so the picture never bounces as a whole. Everything moves only under .scene.anim, which is
+   left off when motion is reduced. Loops either alternate or start and end on the resting
+   pose, so they join without a seam. Shapes are drawn in absolute scene coordinates and
+   rotate around fixed points (transform-box: view-box) to keep the joints steady. */
+let SCENE_N = 0;
+const SCENE_W = 360, SCENE_H = 280;
+function drawScene(kind, stage, seed, moving, caretaker) {
+  return kind === 'bonsai' ? drawBonsaiScene(stage, seed, moving, caretaker) : kind === 'farm' ? drawFarmScene(stage, seed, moving, caretaker) : drawGardenScene(stage, seed, moving, caretaker);
+}
+function sceneOpen(id, moving) {
+  return `<svg class="scene ${moving ? 'anim' : ''}" viewBox="0 50 ${SCENE_W} ${SCENE_H - 50}" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <defs><linearGradient id="${id}sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--gs-sky1)"/><stop offset="1" stop-color="var(--gs-sky2)"/></linearGradient>
+      <linearGradient id="${id}soil" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--gs-soil)"/><stop offset="1" stop-color="var(--gs-soil2)"/></linearGradient>
+      <radialGradient id="${id}sun" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="var(--gs-sun)" stop-opacity=".9"/><stop offset="1" stop-color="var(--gs-sun)" stop-opacity="0"/></radialGradient></defs>`;
+}
+/* Shared sky, sun, drifting clouds, hills and lawn, so all three scenes feel like one place */
+function sceneBackdrop(id, r, skipTuft) {
+  const W = SCENE_W, H = SCENE_H;
+  let g = `<rect width="${W}" height="${H}" fill="url(#${id}sky)"/>
+    <circle cx="300" cy="92" r="40" fill="url(#${id}sun)"/><circle cx="300" cy="92" r="14" fill="var(--gs-sun)" opacity=".85"/>
+    <g class="gs-cloud" style="--dur:38s"><path d="M42 98 q6 -14 22 -9 q8 -10 20 -2 q14 -2 14 10 q-1 7 -10 7 h-42 q-10 0 -4 -6z" fill="var(--gs-cloud)"/></g>
+    <g class="gs-cloud" style="--dur:52s;--dx:-10px"><path d="M190 80 q5 -10 17 -7 q7 -8 16 -1 q11 -1 11 8 q-1 5 -8 5 h-33 q-8 0 -3 -5z" fill="var(--gs-cloud)" opacity=".8"/></g>
+    <path d="M0 150 Q 70 112 150 138 T 360 126 V${H} H0Z" fill="var(--gs-hill2)"/>
+    <path d="M0 176 Q 96 142 204 168 T 360 158 V${H} H0Z" fill="var(--gs-hill1)"/>
+    <rect y="186" width="${W}" height="${H - 186}" fill="var(--gs-grass)"/>
+    <path d="M0 186 H${W} V192 Q 180 198 0 192Z" fill="var(--gs-grass2)" opacity=".7"/>`;
+  for (let i = 0; i < 16; i++) { const x = 8 + r() * 344, y = 200 + r() * 74; if (skipTuft(x, y)) continue; g += `<path d="M${x.toFixed(1)} ${y.toFixed(1)} l2 -6 l1.5 6 l2 -5 l1 5" stroke="var(--gs-grass3)" stroke-width="1.2" fill="none" stroke-linecap="round"/>`; }
+  return g;
+}
+function drawGardenScene(stage, seed, moving, caretaker) {
+  const r = rng(seed || 7); const id = 'gs' + (++SCENE_N);
+  const W = 360, H = 280, bedL = 104, bedR = 300, soilY = 214;
+  let g = sceneOpen(id, moving) + sceneBackdrop(id, r, (x, y) => x > bedL - 10 && x < bedR + 10 && y < 252);
+  if (stage >= 14) g += `<g><rect x="30" y="134" width="3" height="58" fill="var(--gs-wood2)"/><path d="M20 140 l11.5 -12 l11.5 12z" fill="var(--g-barn)"/><rect x="22" y="139" width="19" height="15" rx="2" fill="var(--gs-wood)"/><circle cx="31.5" cy="146" r="3" fill="var(--gs-wood2)"/></g>`;
+  if (stage >= 8) { // a trellis with a climbing vine behind the right end of the bed
+    g += `<g stroke="var(--gs-wood2)" stroke-width="2.2" fill="none"><path d="M284 200 V128 M312 200 V128 M280 136 H316 M280 156 H316 M280 176 H316"/></g>
+      <path d="M288 200 C 280 180 300 168 292 150 S 306 128 300 120" stroke="var(--gs-stem)" stroke-width="2" fill="none"/>`;
+    [[290, 182, -30], [296, 164, 25], [291, 146, -20], [301, 128, 30]].forEach(([x, y, a], i) => { g += `<g transform="translate(${x} ${y}) rotate(${a})"><path class="gs-leaf" style="--dur:${5 + i}s;--delay:-${i}s" d="M0 0 C 4 -5 11 -5 14 0 C 11 4 4 4 0 0Z" fill="var(--gs-leaf2)"/></g>`; });
+    if (stage >= 9) g += `<circle cx="306" cy="140" r="3.2" fill="var(--gs-petal2)"/><circle cx="286" cy="170" r="3" fill="var(--gs-petal2)"/>`;
+  }
+  // the raised bed: wooden frame, soil with texture, and the patch that darkens when watered
+  g += `<rect x="${bedL - 6}" y="194" width="${bedR - bedL + 12}" height="56" rx="10" fill="var(--gs-wood)"/>
+    <rect x="${bedL - 6}" y="236" width="${bedR - bedL + 12}" height="14" rx="6" fill="var(--gs-wood2)" opacity=".55"/>
+    <rect x="${bedL}" y="200" width="${bedR - bedL}" height="40" rx="7" fill="url(#${id}soil)"/>`;
+  for (let i = 0; i < 26; i++) g += `<circle cx="${(bedL + 6 + r() * (bedR - bedL - 12)).toFixed(1)}" cy="${(205 + r() * 30).toFixed(1)}" r="${(0.8 + r() * 1.1).toFixed(1)}" fill="var(--gs-soil2)" opacity=".7"/>`;
+  if (caretaker) g += `<ellipse class="gs-wet" cx="136" cy="216" rx="24" ry="6" fill="var(--gs-wet)"/>`;
+  if (stage === 0) for (let i = 0; i < 3; i++) g += `<path d="M${bedL + 14} ${210 + i * 9} Q ${(bedL + bedR) / 2} ${206 + i * 9} ${bedR - 14} ${210 + i * 9}" stroke="var(--gs-soil2)" stroke-width="2" fill="none" stroke-linecap="round"/>`;
+  // plants: each sways on its own, and each leaf flutters on its own
+  const n = stage === 0 ? 0 : Math.min(9, stage + 1);
+  const flowers = stage < 5 ? 0 : stage === 5 ? 1 : stage < 9 ? Math.min(n, stage - 3) : n;
+  for (let i = 0; i < n; i++) {
+    const x = bedL + 18 + i * ((bedR - bedL - 36) / Math.max(1, 8)) + (r() - 0.5) * 6;
+    const h = (stage <= 1 ? 8 : 14 + Math.min(66, stage * 5.2)) * (0.72 + r() * 0.28);
+    const bend = (r() - 0.5) * 10; const top = [x + bend, soilY - h];
+    let p = `<g class="gs-plant" style="--dur:${(6 + r() * 3).toFixed(1)}s;--delay:-${(r() * 6).toFixed(1)}s">
+      <path d="M${x.toFixed(1)} ${soilY} Q ${(x + bend * 0.2).toFixed(1)} ${(soilY - h * 0.55).toFixed(1)} ${top[0].toFixed(1)} ${top[1].toFixed(1)}" stroke="var(--gs-stem)" stroke-width="${stage < 3 ? 1.6 : 2.2}" fill="none" stroke-linecap="round"/>`;
+    const leaves = stage <= 1 ? [[0.9, -1]] : stage < 6 ? [[0.38, -1], [0.62, 1]] : [[0.3, -1], [0.52, 1], [0.74, -1]];
+    leaves.forEach(([f, side], j) => {
+      const lx = x + bend * f * f, ly = soilY - h * f; const sz = stage <= 1 ? 0.55 : Math.min(1.25, 0.6 + stage * 0.07);
+      p += `<g transform="translate(${lx.toFixed(1)} ${ly.toFixed(1)}) rotate(${side < 0 ? 200 + r() * 20 : -20 - r() * 20}) scale(${sz.toFixed(2)})"><path class="gs-leaf" style="--dur:${(3.8 + r() * 2.4).toFixed(1)}s;--delay:-${(r() * 4).toFixed(1)}s" d="M0 0 C 5 -7 15 -7 20 0 C 15 6 5 6 0 0Z" fill="${(i + j) % 3 ? 'var(--gs-leaf)' : 'var(--gs-leaf2)'}"/><path d="M1 0 H17" stroke="var(--gs-vein)" stroke-width=".7" opacity=".6"/></g>`;
+    });
+    if (i < flowers || (stage === 4 && i === 2)) {
+      const [cx, cy] = top; const col = i % 3 === 1 ? 'var(--gs-petal2)' : i % 3 === 2 ? 'var(--gs-petal3)' : 'var(--gs-petal1)';
+      if (stage === 4) p += `<ellipse cx="${cx.toFixed(1)}" cy="${(cy - 3).toFixed(1)}" rx="3" ry="4.5" fill="${col}"/>`;
+      else { const pr = Math.min(7, 4 + stage * 0.25); p += `<g>${[0, 72, 144, 216, 288].map((a) => `<ellipse cx="${cx.toFixed(1)}" cy="${(cy - pr * 0.8).toFixed(1)}" rx="${(pr * 0.55).toFixed(1)}" ry="${pr.toFixed(1)}" transform="rotate(${a + i * 11} ${cx.toFixed(1)} ${cy.toFixed(1)})" fill="${col}"/>`).join('')}<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${(pr * 0.45).toFixed(1)}" fill="var(--gs-center)"/></g>`; }
+    }
+    g += p + '</g>';
+  }
+  if (stage >= 7) for (let i = 0; i < 7; i++) { const x = bedL + 10 + i * 30 + r() * 6; g += `<g class="gs-plant" style="--dur:${(7 + r() * 3).toFixed(1)}s;--delay:-${(r() * 5).toFixed(1)}s"><circle cx="${x.toFixed(1)}" cy="236" r="7" fill="var(--gs-leaf2)"/><circle cx="${(x + 5).toFixed(1)}" cy="233" r="5" fill="var(--gs-leaf)"/>${stage >= 13 ? `<circle cx="${(x + 2).toFixed(1)}" cy="230" r="2.4" fill="var(--gs-petal${1 + (i % 3)})"/>` : ''}</g>`; }
+  if (stage >= 10) [[76, 272, 13], [100, 262, 11], [124, 256, 9]].forEach(([x, y, w]) => { g += `<ellipse cx="${x}" cy="${y}" rx="${w}" ry="${(w * 0.42).toFixed(1)}" fill="var(--gs-stone)"/><ellipse cx="${x - 2}" cy="${y - 1.5}" rx="${(w * 0.6).toFixed(1)}" ry="${(w * 0.2).toFixed(1)}" fill="#fff" opacity=".18"/>`; });
+  if (stage >= 12) g += `<g><rect x="306" y="236" width="44" height="5" rx="2" fill="var(--gs-wood)"/><rect x="306" y="226" width="44" height="4" rx="2" fill="var(--gs-wood)"/><rect x="309" y="241" width="3.5" height="14" fill="var(--gs-wood2)"/><rect x="343" y="241" width="3.5" height="14" fill="var(--gs-wood2)"/><rect x="309" y="226" width="3" height="12" fill="var(--gs-wood2)"/><rect x="343" y="226" width="3" height="12" fill="var(--gs-wood2)"/></g>`;
+  if (stage >= 11 && moving) [[200, 150, 0], [250, 140, -3]].forEach(([x, y, b]) => { g += `<g><animateMotion dur="9s" begin="${b}s" repeatCount="indefinite" path="M${x} ${y} c 18 -12 36 8 18 18 c -18 10 -36 -8 -18 -18z"/><ellipse rx="3" ry="2.2" fill="var(--gs-bee)"/><path d="M-1 -2.2 v4.4 M1 -2.2 v4.4" stroke="var(--gs-ink)" stroke-width=".8"/><ellipse cx="0" cy="-3" rx="2.2" ry="1.4" fill="#fff" opacity=".7"/></g>`; });
+  if (caretaker) g += drawGardener();
+  return g + '</svg>';
+}
+
+/* The gardener: torso leans from the hips, the arm lifts the can from the shoulder,
+   the can tips at the hand, water falls to the soil, then everything settles back. */
+function drawGardener(tool) {
+  const hoe = tool === 'hoe';
+  return `<g class="gd ${hoe ? 'hoe' : ''}">
+    <ellipse cx="72" cy="252" rx="20" ry="3.5" fill="var(--gs-ink)" opacity=".12"/>
+    <rect x="62" y="226" width="6" height="24" rx="3" fill="var(--ct-pants)"/><rect x="75" y="226" width="6" height="24" rx="3" fill="var(--ct-pants)"/>
+    <ellipse cx="64" cy="250.5" rx="6.5" ry="3" fill="var(--ct-shoe)"/><ellipse cx="79" cy="250.5" rx="6.5" ry="3" fill="var(--ct-shoe)"/>
+    <g class="gd-torso">
+      <path d="M62 196 Q 56 208 58 218" stroke="var(--ct-cloth2)" stroke-width="5.5" fill="none" stroke-linecap="round"/><circle cx="58.3" cy="219.5" r="2.6" fill="var(--ct-skin)"/>
+      <path d="M58 229 Q 56 202 64 192 L 80 192 Q 88 202 86 229 Z" fill="var(--ct-cloth)"/>
+      <path d="M64.5 204 L 80 204 Q 82.5 217 81 229 L 63 229 Q 61.5 217 64.5 204Z" fill="var(--ct-apron)"/>
+      <path d="M66 214 h10 v6 q-5 2 -10 0z" fill="var(--ct-apron2)"/>
+      <path d="M64.5 204 L 68 193 M80 204 L 76 193" stroke="var(--ct-apron)" stroke-width="1.6"/>
+      <rect x="69.5" y="185" width="5" height="8" rx="2" fill="var(--ct-skin)"/>
+      <path d="M62 171 q -8 6 -3 15 q 6 1 8 -6z" fill="var(--ct-hair)"/>
+      <circle cx="72.5" cy="178" r="9" fill="var(--ct-skin)"/>
+      <path d="M64 175 q 2 -8 10 -8 q -3 5 -10 8z" fill="var(--ct-hair)"/>
+      <path d="M76 176.5 q 1.6 -1.4 3.2 0" stroke="var(--gs-ink)" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+      <circle cx="78.5" cy="181" r="1.8" fill="var(--ct-blush)" opacity=".55"/>
+      <path d="M79 183.5 q 1.5 .8 3 -.4" stroke="var(--gs-ink)" stroke-width=".9" fill="none" stroke-linecap="round" opacity=".7"/>
+      <ellipse cx="72" cy="170" rx="16" ry="3.6" fill="var(--ct-hat)"/>
+      <path d="M63.5 170 Q 64.5 159.5 72 158.5 Q 79.5 159.5 80.5 170Z" fill="var(--ct-hat)"/>
+      <path d="M64 167 Q 72 169.5 80 167 L 80.3 169.3 Q 72 171.5 63.8 169.3Z" fill="var(--ct-band)"/>
+      <g class="gd-arm">
+        <path d="M79 195 Q 84 203 87 210" stroke="var(--ct-cloth)" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <path d="M87 210 L 92 214" stroke="var(--ct-skin)" stroke-width="4" stroke-linecap="round"/>
+        ${hoe ? `<g class="gd-hoe">
+          <path d="M84 196 L 106 240" stroke="var(--gs-wood)" stroke-width="2.6" stroke-linecap="round"/>
+          <path d="M84 196 L 92 212" stroke="#fff" stroke-width=".8" opacity=".25"/>
+          <path d="M101 242 L 113 237.5" stroke="var(--ct-tool)" stroke-width="4.5" stroke-linecap="round"/>
+        </g>` : `<g class="gd-can">
+          <path d="M89 216 q 5 -8 12 -1" stroke="var(--ct-tool2)" stroke-width="2" fill="none"/>
+          <path d="M86 216 h 19 l -1.5 14 q -8 2.5 -16 0z" fill="var(--ct-tool)"/>
+          <path d="M88 219 h 15" stroke="#fff" stroke-width="1.2" opacity=".35"/>
+          <path d="M104 222 L 118 212" stroke="var(--ct-tool)" stroke-width="3" stroke-linecap="round"/>
+          <ellipse cx="119.5" cy="211" rx="2.2" ry="3.4" transform="rotate(-35 119.5 211)" fill="var(--ct-tool2)"/>
+        </g>`}
+        <circle cx="92.5" cy="214.5" r="2.8" fill="var(--ct-skin)"/>
+      </g>
+    </g>
+    ${hoe ? `<g class="gd-puff">${[[108, 242, 2.4], [113, 240, 1.8], [103, 240, 1.6]].map(([x, y, rr], i) => `<circle class="gd-crumb" style="--i:${i}" cx="${x}" cy="${y}" r="${rr}" fill="var(--gs-soil)"/>`).join('')}</g>` : `<g class="gd-water">${[0, 1, 2, 3, 4, 5, 6, 7].map((i) => `<path class="gd-drop" style="--delay:-${(i * 0.1).toFixed(2)}s;--x:${(i % 4) * 1.8 - 2.7}px" d="M${(129.5 + (i % 4) * 1.5).toFixed(1)} 193 q 1.9 2.8 0 4.6 q -1.9 -1.8 0 -4.6z" fill="var(--ct-water)"/>`).join('')}</g>`}
+  </g>`;
+}
+
+/* Bonsai: a pot on a low wooden stand, trunk and foliage pads that grow with each stage.
+   Each pad sways on its own; the caretaker sits on a stool and waters with a long-spouted can. */
+function drawBonsaiScene(stage, seed, moving, caretaker) {
+  const r = rng((seed || 7) + 3); const id = 'gs' + (++SCENE_N);
+  const bx = 218, by = 199;
+  let g = sceneOpen(id, moving) + sceneBackdrop(id, r, (x, y) => x > 140 && x < 300 && y < 256);
+  if (stage >= 14) g += `<g><rect x="318" y="226" width="16" height="24" rx="2" fill="var(--gs-stone)"/><path d="M312 228 h28 l-6 -8 h-16z" fill="var(--gs-stone)"/><rect x="322" y="232" width="8" height="7" fill="var(--gs-sun)" opacity=".7"/><path d="M314 250 h24" stroke="var(--gs-wood2)" stroke-width="3" stroke-linecap="round"/></g>`;
+  // stand and pot
+  g += `<ellipse cx="220" cy="252" rx="78" ry="5" fill="var(--gs-ink)" opacity=".1"/>
+    <rect x="158" y="226" width="6" height="25" rx="2" fill="var(--gs-wood2)"/><rect x="276" y="226" width="6" height="25" rx="2" fill="var(--gs-wood2)"/>
+    <rect x="150" y="219" width="140" height="8" rx="3" fill="var(--gs-wood)"/><path d="M152 221 h136" stroke="#fff" stroke-width=".8" opacity=".2"/>
+    <path d="M174 205 H262 L254 220 H182Z" fill="var(--g-pot)"/><path d="M178 210 H258" stroke="#fff" stroke-width="1" opacity=".18"/>
+    <rect x="170" y="198" width="96" height="8" rx="3" fill="var(--g-pot-rim)"/>
+    <ellipse cx="${bx}" cy="${by}" rx="44" ry="2.6" fill="var(--gs-soil2)"/>`;
+  if (caretaker) g += `<ellipse class="gs-wet" style="--dur:12s" cx="186" cy="199.5" rx="12" ry="2" fill="var(--gs-wet)"/>`;
+  if (stage === 0) g += `<ellipse cx="${bx}" cy="${by - 2}" rx="4" ry="2.6" fill="var(--gs-wood2)"/>`;
+  if (stage >= 1) {
+    const h = Math.min(92, 10 + stage * 6.2); const w = Math.min(11, 1.6 + stage * 0.72); const lean = (r() - 0.5) * 14;
+    const P = [[bx, by], [bx - 10 - lean, by - h * 0.35], [bx + 12 + lean, by - h * 0.7], [bx + lean * 0.4, by - h]];
+    const at = (t) => { const u = 1 - t; return [0, 1].map((k) => u * u * u * P[0][k] + 3 * u * u * t * P[1][k] + 3 * u * t * t * P[2][k] + t * t * t * P[3][k]); };
+    // tapered trunk: two offset curves
+    const side = (d, f) => P.map(([x, y], i) => [x + d * (1 - i / 3 * f), y]);
+    const L = side(-w / 2, 0.75), R = side(w / 2, 0.75);
+    g += `<path d="M${L[0][0].toFixed(1)} ${L[0][1]} C ${L[1][0].toFixed(1)} ${L[1][1].toFixed(1)}, ${L[2][0].toFixed(1)} ${L[2][1].toFixed(1)}, ${L[3][0].toFixed(1)} ${L[3][1].toFixed(1)} L ${R[3][0].toFixed(1)} ${R[3][1].toFixed(1)} C ${R[2][0].toFixed(1)} ${R[2][1].toFixed(1)}, ${R[1][0].toFixed(1)} ${R[1][1].toFixed(1)}, ${R[0][0].toFixed(1)} ${R[0][1]} Z" fill="var(--g-trunk)"/>`;
+    if (stage >= 6) g += `<path d="M${(bx - w * 0.2).toFixed(1)} ${by - 4} C ${(P[1][0] + 1).toFixed(1)} ${(P[1][1] + 6).toFixed(1)}, ${(P[2][0] - 2).toFixed(1)} ${(P[2][1] + 8).toFixed(1)}, ${(P[3][0] - 1).toFixed(1)} ${(P[3][1] + 10).toFixed(1)}" stroke="#fff" stroke-width="1" fill="none" opacity=".16"/>`;
+    if (stage <= 2) {
+      const [tx, ty] = P[3];
+      [[-1, 0], [1, 1]].forEach(([d, j]) => { g += `<g transform="translate(${tx.toFixed(1)} ${ty.toFixed(1)}) rotate(${d < 0 ? 200 : -20}) scale(${(0.5 + stage * 0.15).toFixed(2)})"><path class="gs-leaf" style="--dur:${4 + j}s" d="M0 0 C 5 -7 15 -7 20 0 C 15 6 5 6 0 0Z" fill="var(--gs-leaf)"/></g>`; });
+    } else {
+      const nb = Math.min(6, Math.floor(stage / 2)); const pads = [];
+      for (let i = 0; i < nb; i++) {
+        const t = 0.42 + 0.5 * (i / Math.max(1, nb)); const [x0, y0] = at(t); const dir = i % 2 ? 1 : -1;
+        const len = 14 + r() * 10 + stage * 1.6; const x2 = x0 + dir * len, y2 = y0 - 5 - r() * 8;
+        g += `<path d="M${x0.toFixed(1)} ${y0.toFixed(1)} Q ${(x0 + dir * len * 0.5).toFixed(1)} ${(y0 + 3).toFixed(1)} ${x2.toFixed(1)} ${y2.toFixed(1)}" stroke="var(--g-trunk)" stroke-width="${Math.max(1.4, w * 0.42).toFixed(1)}" fill="none" stroke-linecap="round"/>`;
+        pads.push([x2, y2, 9 + stage * 0.9 + r() * 4]);
+      }
+      pads.push([P[3][0], P[3][1] - 2, 8 + stage * 1.1]);
+      pads.forEach(([x, y, rr], i) => {
+        let pad = `<g class="gs-pad" style="--dur:${(6.5 + r() * 3).toFixed(1)}s;--delay:-${(r() * 5).toFixed(1)}s">`;
+        pad += `<ellipse cx="${x.toFixed(1)}" cy="${(y + 1.5).toFixed(1)}" rx="${(rr * 1.05).toFixed(1)}" ry="${(rr * 0.5).toFixed(1)}" fill="var(--gs-stem)"/>`;
+        for (let k = 0; k < 4; k++) { const ox = (k - 1.5) * rr * 0.42, oy = -rr * 0.18 - (k % 2) * rr * 0.12; pad += `<ellipse cx="${(x + ox).toFixed(1)}" cy="${(y + oy).toFixed(1)}" rx="${(rr * 0.46).toFixed(1)}" ry="${(rr * 0.34).toFixed(1)}" fill="${k % 2 ? 'var(--gs-leaf2)' : 'var(--gs-leaf)'}"/>`; }
+        if (stage >= 12) for (let k = 0; k < 3; k++) pad += `<circle cx="${(x + (k - 1) * rr * 0.5).toFixed(1)}" cy="${(y - rr * 0.25 - (k % 2) * 2).toFixed(1)}" r="1.8" fill="var(--gs-petal1)"/>`;
+        g += pad + '</g>';
+      });
+    }
+    if (stage >= 11) for (let i = 0; i < 6; i++) g += `<ellipse cx="${(bx - 30 + i * 12 + r() * 4).toFixed(1)}" cy="${by - 0.5}" rx="${(4 + r() * 3).toFixed(1)}" ry="2" fill="var(--g-moss)"/>`;
+    if (stage >= 12 && moving) g += `<ellipse class="gs-petal" cx="${(bx + 20).toFixed(1)}" cy="${(by - h).toFixed(1)}" rx="1.8" ry="1.2" fill="var(--gs-petal1)"/>`;
+  }
+  if (caretaker) g += drawSitter();
+  return g + '</svg>';
+}
+/* Seated caretaker: leans from the hips, lifts a small long-spouted can, a few drops fall into the pot */
+function drawSitter() {
+  return `<g class="sz">
+    <ellipse cx="124" cy="252" rx="22" ry="3.5" fill="var(--gs-ink)" opacity=".12"/>
+    <rect x="104" y="228" width="4" height="23" rx="1.5" fill="var(--gs-wood2)"/><rect x="126" y="228" width="4" height="23" rx="1.5" fill="var(--gs-wood2)"/>
+    <rect x="100" y="224" width="34" height="6" rx="2.5" fill="var(--gs-wood)"/>
+    <path d="M110 222 L 134 222 Q 140 223 139 230 L 139 248" stroke="var(--ct-pants)" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <ellipse cx="142" cy="250" rx="6.5" ry="3" fill="var(--ct-shoe)"/>
+    <g class="sz-torso">
+      <path d="M108 200 Q 103 211 108 219" stroke="var(--ct-cloth2)" stroke-width="5.5" fill="none" stroke-linecap="round"/>
+      <path d="M104 225 Q 102 200 110 192 L 126 192 Q 134 202 132 225 Z" fill="var(--ct-cloth)"/>
+      <path d="M110.5 204 L 126 204 Q 128.5 215 127 225 L 109 225 Q 107.5 215 110.5 204Z" fill="var(--ct-apron)"/>
+      <path d="M110.5 204 L 114 193 M126 204 L 122 193" stroke="var(--ct-apron)" stroke-width="1.6"/>
+      <rect x="115.5" y="185" width="5" height="8" rx="2" fill="var(--ct-skin)"/>
+      <path d="M108 171 q -8 6 -3 15 q 6 1 8 -6z" fill="var(--ct-hair)"/>
+      <circle cx="118.5" cy="178" r="9" fill="var(--ct-skin)"/>
+      <path d="M110 175 q 2 -8 10 -8 q -3 5 -10 8z" fill="var(--ct-hair)"/>
+      <path d="M122 176.5 q 1.6 -1.4 3.2 0" stroke="var(--gs-ink)" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+      <circle cx="124.5" cy="181" r="1.8" fill="var(--ct-blush)" opacity=".55"/>
+      <path d="M125 183.5 q 1.5 .8 3 -.4" stroke="var(--gs-ink)" stroke-width=".9" fill="none" stroke-linecap="round" opacity=".7"/>
+      <ellipse cx="118" cy="170" rx="16" ry="3.6" fill="var(--ct-hat)"/>
+      <path d="M109.5 170 Q 110.5 159.5 118 158.5 Q 125.5 159.5 126.5 170Z" fill="var(--ct-hat)"/>
+      <path d="M110 167 Q 118 169.5 126 167 L 126.3 169.3 Q 118 171.5 109.8 169.3Z" fill="var(--ct-band)"/>
+      <g class="sz-arm">
+        <path d="M124 196 Q 129 206 131 213" stroke="var(--ct-cloth)" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <path d="M131 213 L 134 218" stroke="var(--ct-skin)" stroke-width="4" stroke-linecap="round"/>
+        <g class="sz-can">
+          <path d="M131 216 q 5 -6 11 -1" stroke="var(--ct-tool2)" stroke-width="1.8" fill="none"/>
+          <path d="M129 216 h 15 l -1.2 9 q -6 2 -12.6 0z" fill="var(--ct-tool)"/>
+          <path d="M131 218.5 h 11" stroke="#fff" stroke-width="1" opacity=".35"/>
+          <path d="M143 219 L 166 205.5" stroke="var(--ct-tool)" stroke-width="1.8" stroke-linecap="round"/>
+          <circle cx="167" cy="205" r="1.6" fill="var(--ct-tool2)"/>
+        </g>
+        <circle cx="134" cy="218" r="2.8" fill="var(--ct-skin)"/>
+      </g>
+    </g>
+    <g class="sz-water">${[0, 1, 2, 3, 4].map((i) => `<path class="gd-drop sz-drop" style="--delay:-${(i * 0.14).toFixed(2)}s;--x:${(i % 3) * 1.2 - 1.2}px" d="M${(182.5 + (i % 3) * 1.1).toFixed(1)} 191 q 1.5 2.2 0 3.6 q -1.5 -1.4 0 -3.6z" fill="var(--ct-water)"/>`).join('')}</g>
+  </g>`;
+}
+
+/* Farm: a field of furrows in rows, crops that sway plant by plant, and the buildings each stage adds.
+   The caretaker tends the front row with a hoe; a little soil lifts where it lands. */
+function drawFarmScene(stage, seed, moving, caretaker) {
+  const r = rng((seed || 7) + 5); const id = 'gs' + (++SCENE_N);
+  const fl = 98, fr = 350;
+  let g = sceneOpen(id, moving) + sceneBackdrop(id, r, (x, y) => x > fl - 8 && y < 258);
+  if (stage >= 11) g += `<path d="M146 160 Q 200 146 250 152 L 256 166 Q 200 160 142 172Z" fill="var(--gs-grain)" opacity=".5"/><path d="M152 163 Q 200 151 250 157 M148 167 Q 200 156 252 162" stroke="var(--gs-soil)" stroke-width=".8" opacity=".35" fill="none"/>`;
+  if (stage >= 12) g += `<g><path d="M244 186 L 248 136 L 256 136 L 260 186Z" fill="var(--gs-wood)"/><path d="M243 138 l 9 -9 l 9 9z" fill="var(--g-barn)"/>
+      <g class="gs-mill" style="--cx:252px;--cy:134px">${[0, 90, 180, 270].map((a) => `<path d="M252 134 L 252 108 L 258 110 L 254 134Z" transform="rotate(${a} 252 134)" fill="var(--gs-cloud)" stroke="var(--gs-wood2)" stroke-width=".8"/>`).join('')}<circle cx="252" cy="134" r="2.2" fill="var(--gs-wood2)"/></g></g>`;
+  if (stage >= 8) g += `<g><path d="M288 192 V 156 L 312 140 L 336 156 V 192Z" fill="var(--g-barn)"/><path d="M284 158 L 312 138 L 340 158" stroke="var(--gs-wood2)" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <rect x="303" y="168" width="18" height="24" fill="var(--gs-wood2)"/><path d="M303 168 L 321 192 M321 168 L 303 192" stroke="var(--gs-wood)" stroke-width="1.4"/><rect x="308" y="150" width="8" height="7" fill="var(--gs-sun)" opacity=".6"/></g>`;
+  if (stage >= 13) g += `<g><rect x="262" y="180" width="18" height="12" rx="3" fill="var(--gs-grain)"/><path d="M262 186 h18" stroke="var(--gs-wood)" stroke-width=".8"/><rect x="270" y="172" width="16" height="10" rx="3" fill="var(--gs-grain)" opacity=".9"/></g>`;
+  if (stage >= 10) g += `<g><path d="M34 196 V 160" stroke="var(--g-trunk)" stroke-width="4" stroke-linecap="round"/><g class="gs-pad" style="--dur:8s"><circle cx="34" cy="152" r="15" fill="var(--gs-leaf)"/><circle cx="25" cy="158" r="9" fill="var(--gs-leaf2)"/><circle cx="43" cy="157" r="10" fill="var(--gs-leaf2)"/><circle cx="29" cy="149" r="2.4" fill="var(--g-barn)"/><circle cx="40" cy="154" r="2.4" fill="var(--g-barn)"/><circle cx="34" cy="160" r="2.4" fill="var(--g-barn)"/></g></g>`;
+  if (stage >= 6) { g += `<path d="M${fl} 190 H ${fr}" stroke="var(--gs-wood2)" stroke-width="1.6"/><path d="M${fl} 185 H ${fr}" stroke="var(--gs-wood2)" stroke-width="1.6"/>`; for (let x = fl; x <= fr; x += 21) g += `<rect x="${x - 1.5}" y="181" width="3" height="13" rx="1" fill="var(--gs-wood)"/>`; }
+  // the field: rows get wider toward the front
+  g += `<path d="M${fl + 8} 196 H ${fr - 4} L ${fr} 256 H ${fl}Z" fill="url(#${id}soil)"/>`;
+  const rowsY = [204, 216, 230, 246]; const rows = stage === 0 ? 0 : Math.min(4, Math.ceil(stage / 2));
+  rowsY.forEach((y, i) => { g += `<path d="M${fl + 6 - i * 2} ${y + 2} H ${fr - 2 + i}" stroke="var(--gs-soil2)" stroke-width="${2 + i}" stroke-linecap="round"/>`; });
+  if (caretaker) g += `<ellipse class="gs-wet" style="--dur:9s" cx="108" cy="243" rx="12" ry="3" fill="var(--gs-wet)"/>`;
+  const grain = stage >= 9;
+  for (let ri = 0; ri < rows; ri++) {
+    const y = rowsY[3 - ri] + 1; const sc = 0.62 + (3 - ri) * 0.14; const step = 22 - ri * 2;
+    for (let x = fl + 26 + (ri % 2) * 8; x < fr - 8; x += step) {
+      if (stage < 3) { g += `<path d="M${x} ${y} v -${(2 + stage).toFixed(1)}" stroke="var(--gs-stem)" stroke-width="1.6" stroke-linecap="round"/>`; continue; }
+      const h = Math.min(20, 5 + stage * 1.5) * sc;
+      let p = `<g class="gs-plant" style="--dur:${(5.5 + r() * 3).toFixed(1)}s;--delay:-${(r() * 5).toFixed(1)}s">`;
+      if (grain) {
+        for (let k = -1; k <= 1; k++) p += `<path d="M${x + k * 2} ${y} q ${k} -${(h * 0.6).toFixed(1)} ${k * 2.4} -${h.toFixed(1)}" stroke="var(--gs-stem)" stroke-width="1.2" fill="none"/><ellipse cx="${(x + k * 4.4).toFixed(1)}" cy="${(y - h - 2.5 * sc).toFixed(1)}" rx="${(1.6 * sc + 0.4).toFixed(1)}" ry="${(4 * sc + 1).toFixed(1)}" transform="rotate(${k * 10} ${(x + k * 4.4).toFixed(1)} ${(y - h).toFixed(1)})" fill="var(--gs-grain)"/>`;
+      } else {
+        p += `<path d="M${x} ${y} V ${(y - h).toFixed(1)}" stroke="var(--gs-stem)" stroke-width="1.6"/>`;
+        [[-1, 0.45], [1, 0.7], [-1, 0.95]].slice(0, stage >= 6 ? 3 : 2).forEach(([d, f]) => { p += `<path d="M${x} ${(y - h * f).toFixed(1)} q ${d * 5 * sc} -${(4 * sc).toFixed(1)} ${d * 9 * sc} -${(1 * sc).toFixed(1)} q ${-d * 5 * sc} ${(3 * sc).toFixed(1)} ${-d * 9 * sc} ${(1 * sc).toFixed(1)}z" fill="${d < 0 ? 'var(--gs-leaf)' : 'var(--gs-leaf2)'}"/>`; });
+      }
+      g += p + '</g>';
+    }
+  }
+  if (stage >= 14) g += `<g><ellipse cx="322" cy="275" rx="26" ry="2.5" fill="var(--gs-ink)" opacity=".1"/><rect x="304" y="259" width="30" height="11" rx="2" fill="var(--gs-wood)"/><path d="M306 263 h26" stroke="var(--gs-wood2)" stroke-width=".8"/><rect x="306" y="254" width="12" height="6" rx="2" fill="var(--gs-grain)"/><circle cx="310" cy="272" r="4.5" fill="none" stroke="var(--gs-wood2)" stroke-width="2"/><circle cx="328" cy="272" r="4.5" fill="none" stroke="var(--gs-wood2)" stroke-width="2"/><path d="M334 262 l 14 -5" stroke="var(--gs-wood2)" stroke-width="2" stroke-linecap="round"/></g>`;
+  if (caretaker) g += drawGardener('hoe');
+  return g + '</svg>';
+}
 
 boot();
 

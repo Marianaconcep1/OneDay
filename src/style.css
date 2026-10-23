@@ -365,19 +365,17 @@ html:not([lang="en"]) .tab span { overflow: visible; text-overflow: clip; white-
 .env-body { inset: 0; z-index: 2; border-radius: 8px; background: linear-gradient(160deg, var(--paper), var(--paper-2));
   clip-path: polygon(0 0, 50% 50%, 100% 0, 100% 100%, 0 100%); }
 .env-body::before { content: ""; position: absolute; inset: 0; background: linear-gradient(28deg, rgba(0,0,0,.05) 0 50%, transparent 50%), linear-gradient(-28deg, rgba(0,0,0,.05) 0 50%, transparent 50%); }
-.env-flap { left: 0; right: 0; top: 0; height: 54%; z-index: 3; background: linear-gradient(180deg, var(--paper-3), var(--paper)); clip-path: polygon(0 0, 100% 0, 50% 100%);
-  transform-origin: 50% 0; transition: transform .6s cubic-bezier(.4, .1, .3, 1), z-index 0s .3s; border-radius: 8px 8px 0 0; }
+.env-flap { left: 0; right: 0; top: 0; height: 54%; z-index: 3; transform-origin: 50% 0; filter: drop-shadow(0 2.5px 2px rgba(70, 50, 35, .16)); }
+.env-flap-face { position: absolute; inset: 0; display: block; background: linear-gradient(180deg, var(--paper-3), var(--paper)); clip-path: polygon(0 0, 100% 0, 50% 100%); border-radius: 8px 8px 0 0; }
+.env-shade { left: 0; right: 0; top: 0; height: 60%; z-index: 2; pointer-events: none; background: radial-gradient(60% 50% at 50% 92%, rgba(70, 50, 35, .10), transparent 70%); }
+.env-letter { box-shadow: 0 1px 2px rgba(60, 40, 30, .10); }
 .env-text { left: 0; right: 0; bottom: 8%; z-index: 4; display: flex; flex-direction: column; align-items: center; gap: 2px; color: var(--env-ink); font-family: var(--f-display); font-style: italic; transition: opacity .3s; }
 .env-en, .env-es { display: block; } .env-en { font-size: 19px; } .env-es { font-size: 15px; opacity: .78; }
 .env-seal { width: 56px; height: 56px; left: calc(50% - 28px); top: calc(54% - 32px); z-index: 5; transition: opacity .3s, transform .4s; }
 .env-seal svg { width: 100%; height: 100%; filter: drop-shadow(0 2px 2px rgba(80, 20, 40, .35)); }
 .env-hint { font-size: 15px; color: var(--muted); letter-spacing: .02em; margin: 0; }
 .env-wrap:not(.opening) .envelope:hover .env-seal { transform: scale(1.04); }
-.opening .env-seal { opacity: 0; transform: scale(.8); }
-.opening .env-text { opacity: 0; }
-.opening .env-flap { transform: rotateX(180deg); z-index: 0; }
-.opening .env-letter { animation: letterOut .7s .65s cubic-bezier(.3, .1, .3, 1) forwards; }
-@keyframes letterOut { to { transform: translateY(-62%); } }
+
 .wel-lang { width: 100%; max-width: 360px; text-align: center; animation: fadeUp .35s ease both; }
 .wel-q { display: flex; flex-direction: column; gap: 4px; font-family: var(--f-display); font-size: 21px; line-height: 1.3; }
 .wel-q span[lang="es"] { font-size: 17px; color: var(--muted); font-style: italic; }
@@ -391,8 +389,13 @@ html:not([lang="en"]) .tab span { overflow: visible; text-overflow: clip; white-
 .letter-page::before { content: ""; position: absolute; inset: 0; pointer-events: none; border-radius: 6px;
   background: linear-gradient(180deg, transparent 33.1%, rgba(120, 100, 80, .09) 33.3%, transparent 33.6%, transparent 66.4%, rgba(120, 100, 80, .09) 66.6%, transparent 66.9%); }
 .letter-page p { margin: 0 0 14px; }
-.letter-page.unfold { transform-origin: 50% 0; animation: unfold .8s cubic-bezier(.2, .7, .2, 1) both; }
-@keyframes unfold { 0% { transform: perspective(1000px) rotateX(-75deg) scaleY(.35); opacity: .2; } 60% { opacity: 1; } 100% { transform: none; } }
+.letter-page.unfold { transform-origin: 50% 0; animation: unfold .95s cubic-bezier(.22, .8, .25, 1) both; }
+.letter-page::after { content: ""; position: absolute; inset: 0; pointer-events: none; border-radius: 6px; opacity: .55;
+  background: linear-gradient(180deg, transparent calc(33.3% - 1px), rgba(90, 70, 50, .07) 33.3%, rgba(255, 255, 255, .35) calc(33.3% + 1px), transparent calc(33.3% + 2px), transparent calc(66.6% - 1px), rgba(90, 70, 50, .07) 66.6%, rgba(255, 255, 255, .35) calc(66.6% + 1px), transparent calc(66.6% + 2px)); }
+.letter-page.unfold::after { animation: creases .95s ease-out both; }
+.letter-page.unfold > * { animation: fadeUp .5s .55s ease both; }
+@keyframes unfold { 0% { transform: perspective(1400px) rotateX(-62deg) scaleY(.34); opacity: 0; box-shadow: 0 2px 4px rgba(60, 40, 30, .08); } 30% { opacity: 1; } 100% { transform: none; } }
+@keyframes creases { 0% { opacity: 1; } 100% { opacity: .55; } }
 .letter-top { display: flex; justify-content: flex-end; margin: -6px -6px 6px; }
 .letter-switch { background: transparent; border: 1px solid rgba(46, 38, 32, .25); color: var(--lp-ink); border-radius: 999px; padding: 6px 14px; min-height: 36px; font: inherit; font-size: 14px; cursor: pointer; }
 .letter-switch:focus-visible { outline: 3px solid #66569A; outline-offset: 2px; }
@@ -414,8 +417,8 @@ html:not([lang="en"]) .tab span { overflow: visible; text-overflow: clip; white-
 .tz-opt:last-child { border-bottom: 0; }
 .tz-opt[aria-selected="true"] { background: var(--slate-soft); font-weight: 700; }
 .tz-opt:focus-visible { outline: 3px solid var(--slate); outline-offset: -3px; }
-.reduce-motion .letter-page.unfold, .reduce-motion .wel-lang { animation: none; }
-@media (prefers-reduced-motion: reduce) { .letter-page.unfold, .wel-lang, .opening .env-letter { animation: none; } .env-flap { transition: none; } }
+.reduce-motion .letter-page.unfold, .reduce-motion .letter-page.unfold > *, .reduce-motion .letter-page.unfold::after, .reduce-motion .wel-lang { animation: none; }
+@media (prefers-reduced-motion: reduce) { .letter-page.unfold, .letter-page.unfold > *, .letter-page.unfold::after, .wel-lang { animation: none; } }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 .onb-top { display: flex; justify-content: flex-end; width: 100%; max-width: 560px; margin-inline: auto; }
 .welcome .onb-top { position: absolute; top: max(14px, env(safe-area-inset-top)); right: 16px; width: auto; }
@@ -454,3 +457,70 @@ html:not([lang="en"]) .tab span { overflow: visible; text-overflow: clip; white-
 .rest-item span { font-weight: 400; }
 .rest-check { display: flex; gap: 12px; align-items: flex-start; min-height: 44px; }
 .rest-check input { width: 22px; height: 22px; flex: none; margin: 2px 0 0; }
+
+/* ---------- Illustrated scenes ---------- */
+:root { --gs-grain: #E0B85A; --gs-sky1: #F3EEF8; --gs-sky2: #F6F0E6; --gs-sun: #F5D58A; --gs-cloud: #FFFFFF; --gs-hill2: #CFE0C9; --gs-hill1: #B5D1AE; --gs-grass: #9CC28F; --gs-grass2: #B4D3A5; --gs-grass3: #6E9C62;
+  --gs-wood: #A97C5C; --gs-wood2: #7E5A42; --gs-soil: #8A6450; --gs-soil2: #6E4E3E; --gs-wet: #4F362B; --gs-stem: #4F8A57; --gs-leaf: #5FA067; --gs-leaf2: #7DB874; --gs-vein: #E9F5E2;
+  --gs-petal1: #E98FB4; --gs-petal2: #F2C46D; --gs-petal3: #B79BE0; --gs-center: #F7E3A3; --gs-stone: #CFC6B8; --gs-bee: #F2C14E; --gs-ink: #3A2E2A;
+  --ct-cloth2: #6A5794; --ct-apron: #F4EBDD; --ct-apron2: #E4D6C1; --ct-hair: #5B3A2E; --ct-shoe: #4A3A34; --ct-band: #B0566E; --ct-blush: #E58D8D; --ct-tool2: #6D7F96; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --gs-grain: #C9A24E; --gs-sky1: #262038; --gs-sky2: #2C2638; --gs-sun: #E8CF92; --gs-cloud: #4A4360; --gs-hill2: #2F3B34; --gs-hill1: #354A3B; --gs-grass: #3C5A40; --gs-grass2: #48684A; --gs-grass3: #5E8A5E;
+  --gs-wood: #7E5E48; --gs-wood2: #5E4434; --gs-soil: #5A4236; --gs-soil2: #47342B; --gs-wet: #2E211B; --gs-stem: #5E9A66; --gs-leaf: #6DAE74; --gs-leaf2: #86C27D; --gs-vein: #2E4A32;
+  --gs-petal1: #D886A8; --gs-petal2: #E0B868; --gs-petal3: #A58ED0; --gs-center: #EAD79A; --gs-stone: #6E675E; --gs-bee: #E0B448; --gs-ink: #1E1820;
+  --ct-cloth2: #7C6AA8; --ct-apron: #D9CFBF; --ct-apron2: #C2B6A2; --ct-hair: #3E2A22; --ct-shoe: #2E2522; --ct-band: #A04C63; --ct-blush: #C97878; --ct-tool2: #7E90A6; } }
+:root[data-theme="dark"] { --gs-grain: #C9A24E; --gs-sky1: #262038; --gs-sky2: #2C2638; --gs-sun: #E8CF92; --gs-cloud: #4A4360; --gs-hill2: #2F3B34; --gs-hill1: #354A3B; --gs-grass: #3C5A40; --gs-grass2: #48684A; --gs-grass3: #5E8A5E;
+  --gs-wood: #7E5E48; --gs-wood2: #5E4434; --gs-soil: #5A4236; --gs-soil2: #47342B; --gs-wet: #2E211B; --gs-stem: #5E9A66; --gs-leaf: #6DAE74; --gs-leaf2: #86C27D; --gs-vein: #2E4A32;
+  --gs-petal1: #D886A8; --gs-petal2: #E0B868; --gs-petal3: #A58ED0; --gs-center: #EAD79A; --gs-stone: #6E675E; --gs-bee: #E0B448; --gs-ink: #1E1820;
+  --ct-cloth2: #7C6AA8; --ct-apron: #D9CFBF; --ct-apron2: #C2B6A2; --ct-hair: #3E2A22; --ct-shoe: #2E2522; --ct-band: #A04C63; --ct-blush: #C97878; --ct-tool2: #7E90A6; }
+.scene { display: block; width: 100%; height: 100%; }
+.scene .gs-wet { opacity: 0; }
+.scene .gd-water { opacity: 0; }
+.scene.anim .gs-cloud { animation: gsDrift var(--dur, 40s) ease-in-out infinite alternate; }
+.scene.anim .gs-plant { transform-box: fill-box; transform-origin: 50% 100%; animation: gsSway var(--dur, 7s) ease-in-out var(--delay, 0s) infinite alternate; }
+.scene.anim .gs-leaf { transform-box: fill-box; transform-origin: 0% 50%; animation: gsLeaf var(--dur, 4s) ease-in-out var(--delay, 0s) infinite alternate; }
+.scene.anim .gd-torso { transform-box: view-box; transform-origin: 72px 228px; animation: gdLean 10s cubic-bezier(.45, .05, .35, 1) infinite; }
+.scene.anim .gd-arm { transform-box: view-box; transform-origin: 79px 195px; animation: gdArm 10s cubic-bezier(.45, .05, .35, 1) infinite; }
+.scene.anim .gd-can { transform-box: view-box; transform-origin: 92.5px 214.5px; animation: gdCan 10s cubic-bezier(.45, .05, .35, 1) infinite; }
+.scene.anim .gd-water { animation: gdPour 10s linear infinite; }
+.scene.anim .gd-drop { transform-box: view-box; animation: gdDrop .78s cubic-bezier(.5, 0, 1, .6) var(--delay, 0s) infinite; }
+.scene.anim .gs-wet { animation: gsWet var(--dur, 10s) ease-in-out infinite; }
+@keyframes gsDrift { from { transform: translateX(var(--dx, 10px)); } to { transform: translateX(calc(var(--dx, 10px) * -1)); } }
+@keyframes gsSway { from { transform: rotate(-1.4deg); } to { transform: rotate(1.4deg); } }
+@keyframes gsLeaf { from { transform: rotate(-5deg); } to { transform: rotate(4deg); } }
+@keyframes gdLean { 0%, 10% { transform: rotate(0deg); } 24%, 60% { transform: rotate(5deg); } 76%, 100% { transform: rotate(0deg); } }
+@keyframes gdArm { 0%, 12% { transform: rotate(0deg); } 28%, 60% { transform: rotate(-60deg); } 76%, 100% { transform: rotate(0deg); } }
+@keyframes gdCan { 0%, 12% { transform: rotate(0deg); } 28% { transform: rotate(36deg); } 35%, 53% { transform: rotate(56deg); } 60% { transform: rotate(36deg); } 76%, 100% { transform: rotate(0deg); } }
+@keyframes gdPour { 0%, 34% { opacity: 0; } 37%, 52% { opacity: 1; } 55%, 100% { opacity: 0; } }
+@keyframes gdDrop { 0% { transform: translate(0, 0); opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { transform: translate(var(--x, 0px), 19px); opacity: 0; } }
+@keyframes gsWet { 0%, 38% { opacity: 0; } 58% { opacity: .38; } 80% { opacity: .2; } 100% { opacity: 0; } }
+.rest-scene.wide { aspect-ratio: 36 / 23; padding: 0; overflow: hidden; }
+.rest-scene.wide svg { inset: 0; width: 100%; height: 100%; }
+.scene .sz-water, .scene .gd-puff { opacity: 0; }
+.scene.anim .gs-pad { transform-box: fill-box; transform-origin: 50% 90%; animation: gsPad var(--dur, 7s) ease-in-out var(--delay, 0s) infinite alternate; }
+.scene.anim .gs-mill { transform-box: view-box; transform-origin: var(--cx) var(--cy); animation: spin 26s linear infinite; }
+.scene.anim .gs-petal { transform-box: view-box; animation: gsPetal 16s ease-in-out infinite; }
+@keyframes gsPad { from { transform: rotate(-1.2deg) translateY(0); } to { transform: rotate(1.2deg) translateY(-.6px); } }
+@keyframes gsPetal { 0%, 55% { transform: translate(0, 0) rotate(0deg); opacity: 0; } 60% { opacity: 1; } 92% { opacity: 1; } 100% { transform: translate(22px, 38px) rotate(220deg); opacity: 0; } }
+/* seated caretaker (bonsai): 12 s, a longer rest between waterings */
+.scene.anim .sz-torso { transform-box: view-box; transform-origin: 118px 226px; animation: szLean 12s cubic-bezier(.45, .05, .35, 1) infinite; }
+.scene.anim .sz-arm { transform-box: view-box; transform-origin: 124px 196px; animation: szArm 12s cubic-bezier(.45, .05, .35, 1) infinite; }
+.scene.anim .sz-can { transform-box: view-box; transform-origin: 134px 218px; animation: szCan 12s cubic-bezier(.45, .05, .35, 1) infinite; }
+.scene.anim .sz-water { animation: szPour 12s linear infinite; }
+.scene.anim .sz-drop { animation-name: szDrop; }
+@keyframes szLean { 0%, 18% { transform: rotate(0deg); } 30%, 62% { transform: rotate(8deg); } 76%, 100% { transform: rotate(0deg); } }
+@keyframes szArm { 0%, 20% { transform: rotate(0deg); } 34%, 60% { transform: rotate(-55deg); } 74%, 100% { transform: rotate(0deg); } }
+@keyframes szCan { 0%, 20% { transform: rotate(0deg); } 34% { transform: rotate(28deg); } 40%, 54% { transform: rotate(45deg); } 60% { transform: rotate(28deg); } 74%, 100% { transform: rotate(0deg); } }
+@keyframes szPour { 0%, 40% { opacity: 0; } 42%, 53% { opacity: 1; } 55%, 100% { opacity: 0; } }
+@keyframes szDrop { 0% { transform: translate(0, 0); opacity: 0; } 20% { opacity: 1; } 80% { opacity: 1; } 100% { transform: translate(var(--x, 0px), 8px); opacity: 0; } }
+/* standing caretaker with a hoe (farm): 9 s, lift, a soft chop, the soil lifts a little, settle */
+.scene.anim .gd.hoe .gd-torso { animation-name: hoLean; animation-duration: 9s; }
+.scene.anim .gd.hoe .gd-arm { animation-name: hoArm; animation-duration: 9s; }
+.scene.anim .gd-hoe { transform-box: view-box; transform-origin: 92.5px 214.5px; animation: hoHoe 9s cubic-bezier(.45, .05, .35, 1) infinite; }
+.scene.anim .gd-puff { animation: hoPuff 9s linear infinite; }
+.scene.anim .gd-crumb { transform-box: view-box; animation: hoCrumb 9s ease-out infinite; }
+@keyframes hoLean { 0%, 14% { transform: rotate(0deg); } 30% { transform: rotate(-2deg); } 42%, 56% { transform: rotate(5deg); } 74%, 100% { transform: rotate(0deg); } }
+@keyframes hoArm { 0%, 14% { transform: rotate(0deg); } 30% { transform: rotate(-22deg); } 42%, 56% { transform: rotate(2deg); } 74%, 100% { transform: rotate(0deg); } }
+@keyframes hoHoe { 0%, 14% { transform: rotate(0deg); } 30% { transform: rotate(-26deg); } 40% { transform: rotate(1.5deg); } 43%, 56% { transform: rotate(0deg); } 74%, 100% { transform: rotate(0deg); } }
+@keyframes hoPuff { 0%, 40% { opacity: 0; } 42% { opacity: 1; } 54% { opacity: 0; } 100% { opacity: 0; } }
+@keyframes hoCrumb { 0%, 41% { transform: translate(0, 0); } 52%, 100% { transform: translate(calc((var(--i) - 1) * 4px), -6px); } }
+.comp-big.rest-scene { width: 100%; height: auto; }
+.rest-scene.resting .scene { filter: saturate(.7); }

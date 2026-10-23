@@ -161,7 +161,7 @@ A.compOpen = () => openSheet(() => {
   const recent = Object.values(g.ledger).filter((e) => e.ch === c.ch.id && e.type !== 'carry').sort((a, b) => (a.date < b.date ? 1 : -1)).slice(0, 8);
   const label = { day: 'Daily records', milestone: 'Milestone', result: 'Business result', goal: 'Goal completed' };
   return `${sheetHead(esc(KINDS[c.ch.kind] + ' · ' + c.ch.name), esc(STAGE_NAMES[c.ch.kind][c.stage]))}
-    <div class="comp-big">${drawCompanion(c.ch.kind, c.stage, c.ch.seed, c.resting || c.paused)}</div>
+    <div class="comp-big rest-scene wide ${c.resting ? 'resting' : ''}">${drawScene(c.ch.kind, c.stage, c.ch.seed, g.animations && !reducedMotion(), false)}</div>
     <p class="small">${c.next ? `${c.pts} growth so far. The next stage comes at ${c.next}.` : `${c.pts} growth. Fully grown, and it keeps every ring.`}</p>
     <p class="tiny muted">Completed actions give 2, smaller versions and rest days 1, a check-in 1, up to ${DAY_CAP} a day. Milestones, business results and finished goals add more. Growth is never taken away; quiet days only let it rest, and paused days don’t count.</p>
     ${recent.length ? `<div class="kv small">${recent.map((e) => `<span>${esc(label[e.type] || e.type)} · ${esc(dMD(e.date))}</span><span>+${e.pts}</span>`).join('')}</div>` : ''}
