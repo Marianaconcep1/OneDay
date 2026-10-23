@@ -88,9 +88,20 @@ const TZ_REGIONS = {
   it: { Africa: 'Africa', America: 'America', Antarctica: 'Antartide', Arctic: 'Artico', Asia: 'Asia', Atlantic: 'Atlantico', Australia: 'Australia', Europe: 'Europa', Indian: 'Oceano Indiano', Pacific: 'Pacifico' },
   fr: { Africa: 'Afrique', America: 'Amérique', Antarctica: 'Antarctique', Arctic: 'Arctique', Asia: 'Asie', Atlantic: 'Atlantique', Australia: 'Australie', Europe: 'Europe', Indian: 'Océan Indien', Pacific: 'Pacifique' }
 };
+/* The main US zones, named the way people say them, listed first and found by "central", "CST" and so on */
+const TZ_US = {
+  'America/New_York': ['ET EST EDT', { en: 'Eastern Time (New York)', es: 'Hora del Este (Nueva York)', it: 'Ora della costa est USA (New York)', fr: 'Heure de l’Est (New York)' }],
+  'America/Chicago': ['CT CST CDT', { en: 'Central Time (Chicago)', es: 'Hora central (Chicago)', it: 'Ora centrale USA (Chicago)', fr: 'Heure du Centre (Chicago)' }],
+  'America/Denver': ['MT MST MDT', { en: 'Mountain Time (Denver)', es: 'Hora de la montaña (Denver)', it: 'Ora delle Montagne Rocciose (Denver)', fr: 'Heure des Rocheuses (Denver)' }],
+  'America/Phoenix': ['MST', { en: 'Arizona Time (Phoenix)', es: 'Hora de Arizona (Phoenix)', it: 'Ora dell’Arizona (Phoenix)', fr: 'Heure de l’Arizona (Phoenix)' }],
+  'America/Los_Angeles': ['PT PST PDT', { en: 'Pacific Time (Los Angeles)', es: 'Hora del Pacífico (Los Ángeles)', it: 'Ora del Pacifico USA (Los Angeles)', fr: 'Heure du Pacifique (Los Angeles)' }],
+  'America/Anchorage': ['AKST AKDT', { en: 'Alaska Time (Anchorage)', es: 'Hora de Alaska (Anchorage)', it: 'Ora dell’Alaska (Anchorage)', fr: 'Heure de l’Alaska (Anchorage)' }],
+  'Pacific/Honolulu': ['HST', { en: 'Hawaii Time (Honolulu)', es: 'Hora de Hawái (Honolulu)', it: 'Ora delle Hawaii (Honolulu)', fr: 'Heure d’Hawaï (Honolulu)' }]
+};
 function lang() { return (S && S.settings && S.settings.language) || 'en'; }
 function tzLabel(z) {
   if (z === 'America/Puerto_Rico') return TZ_PR[lang()] || TZ_PR.en;
+  if (TZ_US[z]) return TZ_US[z][1][lang()] || TZ_US[z][1].en;
   const R = TZ_REGIONS[lang()] || {};
   const parts = z.split('/'); const city = parts[parts.length - 1].replace(/_/g, ' '); const region = parts.slice(0, -1).map((x) => R[x] || x).join(' / ').replace(/_/g, ' ');
   return region ? `${city}, ${region}` : city;
@@ -101,14 +112,17 @@ function tzAll() {
   try { zones = Intl.supportedValuesOf('timeZone'); } catch (e) { zones = TZ_LIST.slice(); }
   if (!zones.includes('America/Puerto_Rico')) zones.unshift('America/Puerto_Rico');
   if (!zones.includes('UTC')) zones.push('UTC');
-  TZ_ALL = zones.map((z) => ({ z, label: tzLabel(z), off: tzOffset(z), long: tzLong(z) })); TZ_ALL.lang = lang();
+  const first = ['America/Puerto_Rico', ...Object.keys(TZ_US)];
+  zones = first.filter((z) => zones.includes(z)).concat(zones.filter((z) => !first.includes(z)));
+  TZ_ALL = zones.map((z) => ({ z, label: tzLabel(z), off: tzOffset(z), long: tzLong(z), alias: (TZ_US[z] ? TZ_US[z][0] + ' US USA ' + TZ_US[z][1].en : '') })); TZ_ALL.lang = lang();
   return TZ_ALL;
 }
 function tzMatches(q) {
   const n = (s) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[_/]/g, ' ');
   const qq = n(q || '').trim();
   const all = tzAll();
-  const hits = qq ? all.filter((x) => n(x.z + ' ' + x.label + ' ' + x.off + ' ' + x.long).includes(qq)) : all;
+  const hits = qq ? all.filter((x) => n(x.z + ' ' + x.label + ' ' + x.off + ' ' + x.long + ' ' + x.alias).includes(qq)) : all;
+  if (qq) hits.sort((a, b) => (n(b.label + ' ' + b.alias).includes(qq) ? 1 : 0) - (n(a.label + ' ' + a.alias).includes(qq) ? 1 : 0));  // name matches before long-name matches
   return hits.slice(0, 80);
 }
 /* Searchable timezone picker: a search box over a listbox of buttons */
