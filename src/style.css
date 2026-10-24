@@ -172,7 +172,7 @@ a { color: var(--slate); }
 /* Tabs */
 .tabbar {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 25; background: var(--glass); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); border-top: 1px solid var(--line);
-  display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
+  display: grid; grid-template-columns: repeat(6, minmax(0, 1fr));
   padding-bottom: env(safe-area-inset-bottom, 0px);
   padding-left: env(safe-area-inset-left, 0px); padding-right: env(safe-area-inset-right, 0px);
 }
@@ -524,3 +524,52 @@ html:not([lang="en"]) .tab span { overflow: visible; text-overflow: clip; white-
 @keyframes hoCrumb { 0%, 41% { transform: translate(0, 0); } 52%, 100% { transform: translate(calc((var(--i) - 1) * 4px), -6px); } }
 .comp-big.rest-scene { width: 100%; height: auto; }
 .rest-scene.resting .scene { filter: saturate(.7); }
+/* ---------- Scenery: lighting by period, ground and trees by season ----------
+   The picture has its own palette, separate from the interface theme: daytime is bright
+   even in dark mode, night is dark even in light mode. Text never sits on the picture. */
+.scene { --gs-grain: #E0B85A; --gs-sky1: #A9D6F2; --gs-skym: #CBE6F7; --gs-sky2: #EEF7F6; --gs-sun: #FFE08A; --gs-cloud: #FFFFFF; --gs-hill2: #CFE0C9; --gs-hill1: #B5D1AE; --gs-grass: #9CC28F; --gs-grass2: #B4D3A5; --gs-grass3: #6E9C62;
+  --gs-wood: #A97C5C; --gs-wood2: #7E5A42; --gs-soil: #8A6450; --gs-soil2: #6E4E3E; --gs-wet: #4F362B; --gs-stem: #4F8A57; --gs-leaf: #5FA067; --gs-leaf2: #7DB874; --gs-vein: #E9F5E2;
+  --gs-petal1: #E98FB4; --gs-petal2: #F2C46D; --gs-petal3: #B79BE0; --gs-center: #F7E3A3; --gs-stone: #CFC6B8; --gs-bee: #F2C14E; --gs-ink: #3A2E2A;
+  --g-trunk: #7A5A48; --g-pot: #9C6B8E; --g-pot-rim: #7F5574; --g-moss: #7FA06A; --g-barn: #B5626A;
+  --ct-skin: #E2B494; --ct-cloth: #7E6AA8; --ct-pants: #5B4E73; --ct-hat: #D6AE62; --ct-tool: #8496AD; --ct-water: #5FA3D6;
+  --ct-cloth2: #6A5794; --ct-apron: #F4EBDD; --ct-apron2: #E4D6C1; --ct-hair: #5B3A2E; --ct-shoe: #4A3A34; --ct-band: #B0566E; --ct-blush: #E58D8D; --ct-tool2: #6D7F96;
+  --sc-tint: #000; --sc-a: 0; --sc-lamp: #FFC46B; --sc-tree1: #6FA86A; --sc-tree2: #8CBF78; --sc-dot: #F6C1D3; --sc-palm: #9A7A58; }
+.scene .sc-tint { fill: var(--sc-tint); opacity: var(--sc-a); mix-blend-mode: multiply; pointer-events: none; }
+.scene[data-tod="dawn"] { --gs-sky1: #F2B7C3; --gs-skym: #F8CBC0; --gs-sky2: #FCE3C8; --gs-sun: #FFC28A; --gs-cloud: #FFE6E4; --sc-tint: #F6C0AE; --sc-a: .16; }
+.scene[data-tod="sunset"] { --gs-sky1: #A897D3; --gs-skym: #EBA0AF; --gs-sky2: #F8C27E; --gs-sun: #F79250; --gs-cloud: #F6BBA9; --sc-tint: #F0A47C; --sc-a: .2; }
+.scene[data-tod="night"] { --gs-sky1: #1A2352; --gs-skym: #2D3A78; --gs-sky2: #4A5594; --gs-cloud: #6670A6; --sc-cloud-a: .55; --sc-tint: #34468F; --sc-a: .52; --sc-lamp: #FFC060; }
+/* seasons: the ground, the leaves and the far trees */
+.scene[data-season="spring"] { --gs-hill2: #D4E9C3; --gs-hill1: #B8DCA6; --gs-grass: #A4D08B; --gs-grass2: #BFE1A7; --gs-leaf: #67B266; --gs-leaf2: #96CF7C; --gs-petal1: #F2A3C2; --gs-petal3: #C6A8EC; --sc-tree1: #F4BBD0; --sc-tree2: #F7CFDD; --sc-dot: #FFFFFF; }
+.scene[data-season="summer"] { --gs-hill2: #A8CF92; --gs-hill1: #8CBF76; --gs-grass: #7CB864; --gs-grass2: #93C879; --gs-grass3: #4E8A44; --gs-stem: #3D7C45; --gs-leaf: #3F9A4D; --gs-leaf2: #63B759; --gs-petal1: #EC6F9C; --gs-petal2: #F5B83D; --sc-tree1: #3E8F4A; --sc-tree2: #56A85A; }
+.scene[data-season="fall"] { --gs-hill2: #E5C58A; --gs-hill1: #D6AA66; --gs-grass: #ADB063; --gs-grass2: #C3C27A; --gs-grass3: #7E8040; --gs-stem: #6E8A44; --gs-leaf: #7F9C46; --gs-leaf2: #D88E34; --gs-petal1: #D5683A; --gs-petal2: #E8B23E; --gs-petal3: #B4523A; --g-moss: #9A9A52; --sc-tree1: #D4782F; --sc-tree2: #E3A53C; }
+.scene[data-season="winter"] { --gs-hill2: #E3ECEF; --gs-hill1: #D1DFE2; --gs-grass: #BCD1C6; --gs-grass2: #D9E6E3; --gs-grass3: #8DA99E; --gs-stem: #4A7461; --gs-leaf: #4F7F66; --gs-leaf2: #6D9A80; --gs-vein: #E4EEE8; --gs-petal1: #E8B4C5; --gs-petal2: #F2E1B0; --gs-petal3: #C6B6E4; --g-moss: #7F9A86; --sc-tree1: #3F6E58; --sc-tree2: #557F69; }
+.scene[data-snow] { --gs-hill2: #EEF3F6; --gs-hill1: #E2EBEE; --gs-grass: #D3E1DC; --gs-grass2: #EEF4F2; }
+/* tropical: lush greenery and hibiscus all year, with the season's light; never snow or frost */
+.scene[data-trop] { --gs-hill2: #8FC99B; --gs-hill1: #6DB683; --gs-grass: #6CB873; --gs-grass2: #86C98A; --gs-grass3: #3F8A50; --gs-stem: #2E7D48; --gs-leaf: #2F9A57; --gs-leaf2: #4CBF6B; --gs-vein: #DFF3E2; --gs-petal1: #E8445E; --gs-petal2: #F59A3C; --gs-petal3: #F06AA0; --g-moss: #5FA463; --sc-tree1: #2E8B4E; --sc-tree2: #46A863; --sc-dot: #E8445E; }
+.scene[data-trop][data-season="summer"] { --sc-dot: #F7C948; --gs-hill2: #86C690; }
+.scene[data-trop][data-season="fall"] { --gs-hill2: #A3C98A; --gs-hill1: #7DBA7B; --gs-petal1: #F2793A; }
+.scene[data-trop][data-season="winter"] { --gs-hill2: #96CBA6; --gs-hill1: #73B78A; --sc-dot: #F06AA0; }
+.scene.anim .sc-fall { transform-box: fill-box; transform-origin: 50% 50%; animation: scFall var(--dur, 15s) linear var(--delay, 0s) infinite; }
+.scene.anim .sc-snow { animation: scSnow var(--dur, 18s) linear var(--delay, 0s) infinite; }
+.scene.anim .sc-star { animation: scTwinkle var(--dur, 6s) ease-in-out var(--delay, 0s) infinite alternate; }
+@keyframes scFall { 0% { transform: translate(0, 0) rotate(0deg); opacity: 0; } 8% { opacity: .95; } 85% { opacity: .95; } 100% { transform: translate(var(--dx, 24px), 150px) rotate(320deg); opacity: 0; } }
+@keyframes scSnow { 0% { transform: translate(0, -40px); opacity: 0; } 10% { opacity: .9; } 90% { opacity: .9; } 100% { transform: translate(12px, 120px); opacity: 0; } }
+@keyframes scTwinkle { from { opacity: .55; } to { opacity: .95; } }
+/* My Companion page */
+.tab, html:not([lang="en"]) .tab { font-size: 10px; letter-spacing: -.01em; padding: 0; min-width: 0; }
+@media (max-width: 340px) { .tab, html:not([lang="en"]) .tab { font-size: 9px; letter-spacing: -.03em; } }
+.cp-top { flex-direction: column; align-items: flex-start; gap: 6px; }
+.cp-meet { display: inline-flex; align-items: center; gap: 6px; text-align: left; line-height: 1.2; margin-left: -8px; }
+.cp-meet svg { flex: none; }
+.cp .cp-scene { width: 100%; }
+
+.cp-stage p { margin: 0; }
+.cp-info p { margin: 0; line-height: 1.55; }
+.cp-info h3 { margin: 0; }
+.cp-info-end { font-family: var(--f-display, Fraunces, serif); font-size: 1.05rem; }
+.cp-kinds { display: grid; gap: 10px; }
+.cp-kind { display: grid; grid-template-columns: 112px 1fr; gap: 12px; align-items: center; text-align: left; background: var(--surface-2); border: 2px solid transparent; border-radius: 18px; padding: 8px; cursor: pointer; color: inherit; font: inherit; min-height: 44px; }
+.cp-kind[aria-pressed="true"] { border-color: var(--slate); }
+.cp-kind .rest-scene { display: block; width: 112px; border-radius: 12px; }
+#cpScenery .seg, #cpSceneryS .seg { display: flex; flex-wrap: wrap; }
+#cpScenery .seg .chip, #cpSceneryS .seg .chip { flex: 1 1 auto; overflow-wrap: normal; word-break: normal; padding: 6px 10px; }

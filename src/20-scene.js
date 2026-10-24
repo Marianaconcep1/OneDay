@@ -6,33 +6,113 @@
    rotate around fixed points (transform-box: view-box) to keep the joints steady. */
 let SCENE_N = 0;
 const SCENE_W = 360, SCENE_H = 280;
-function drawScene(kind, stage, seed, moving, caretaker) {
-  return kind === 'bonsai' ? drawBonsaiScene(stage, seed, moving, caretaker) : kind === 'farm' ? drawFarmScene(stage, seed, moving, caretaker) : drawGardenScene(stage, seed, moving, caretaker);
+/* look: { tod: dawn|day|sunset|night, season: spring|summer|fall|winter|null, trop, snow }.
+   Lighting is a palette per period plus one tint laid over the whole picture, so the sky,
+   the companion, the ground and the caretaker are lit the same way. Seasons change the
+   ground, the leaves and a few background details; growth is drawn the same in every look. */
+function drawScene(kind, stage, seed, moving, caretaker, look) {
+  look = look || (typeof sceneLook === 'function' ? sceneLook() : { tod: 'day', season: null });
+  return kind === 'bonsai' ? drawBonsaiScene(stage, seed, moving, caretaker, look) : kind === 'farm' ? drawFarmScene(stage, seed, moving, caretaker, look) : drawGardenScene(stage, seed, moving, caretaker, look);
 }
-function sceneOpen(id, moving) {
-  return `<svg class="scene ${moving ? 'anim' : ''}" viewBox="0 50 ${SCENE_W} ${SCENE_H - 50}" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
-    <defs><linearGradient id="${id}sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--gs-sky1)"/><stop offset="1" stop-color="var(--gs-sky2)"/></linearGradient>
+const lookKey = (k) => [k.tod, k.season || 'none', k.trop ? 'trop' : '', k.snow && !k.trop && k.season === 'winter' ? 'snow' : ''].join('.');
+function sceneOpen(id, moving, look) {
+  const k = look || { tod: 'day' };
+  return `<svg class="scene ${moving ? 'anim' : ''}" viewBox="0 50 ${SCENE_W} ${SCENE_H - 50}" preserveAspectRatio="xMidYMax slice" aria-hidden="true" data-key="${lookKey(k)}" data-tod="${k.tod}" data-season="${k.season || 'none'}"${k.trop ? ' data-trop=""' : ''}${k.snow && !k.trop && k.season === 'winter' ? ' data-snow=""' : ''}>
+    <defs><linearGradient id="${id}sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--gs-sky1)"/><stop offset=".55" stop-color="var(--gs-skym)"/><stop offset="1" stop-color="var(--gs-sky2)"/></linearGradient>
       <linearGradient id="${id}soil" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--gs-soil)"/><stop offset="1" stop-color="var(--gs-soil2)"/></linearGradient>
-      <radialGradient id="${id}sun" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="var(--gs-sun)" stop-opacity=".9"/><stop offset="1" stop-color="var(--gs-sun)" stop-opacity="0"/></radialGradient></defs>`;
+      <radialGradient id="${id}sun" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="var(--gs-sun)" stop-opacity=".9"/><stop offset="1" stop-color="var(--gs-sun)" stop-opacity="0"/></radialGradient>
+      <radialGradient id="${id}glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="var(--sc-lamp)" stop-opacity=".75"/><stop offset="1" stop-color="var(--sc-lamp)" stop-opacity="0"/></radialGradient>
+      <radialGradient id="${id}moonglow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#F6EFD2" stop-opacity=".35"/><stop offset="1" stop-color="#F6EFD2" stop-opacity="0"/></radialGradient>
+      <mask id="${id}moon"><circle cx="296" cy="84" r="11" fill="#fff"/><circle cx="302" cy="79" r="10" fill="#000"/></mask></defs>`;
 }
 /* Shared sky, sun, drifting clouds, hills and lawn, so all three scenes feel like one place */
-function sceneBackdrop(id, r, skipTuft) {
-  const W = SCENE_W, H = SCENE_H;
-  let g = `<rect width="${W}" height="${H}" fill="url(#${id}sky)"/>
-    <circle cx="300" cy="92" r="40" fill="url(#${id}sun)"/><circle cx="300" cy="92" r="14" fill="var(--gs-sun)" opacity=".85"/>
-    <g class="gs-cloud" style="--dur:38s"><path d="M42 98 q6 -14 22 -9 q8 -10 20 -2 q14 -2 14 10 q-1 7 -10 7 h-42 q-10 0 -4 -6z" fill="var(--gs-cloud)"/></g>
+function sceneBackdrop(id, r, skipTuft, look) {
+  const W = SCENE_W, H = SCENE_H; const k = look || { tod: 'day' };
+  const sun = k.tod === 'dawn' ? [58, 124, 13] : k.tod === 'sunset' ? [300, 130, 15] : [300, 92, 14];
+  let g = `<rect width="${W}" height="${H}" fill="url(#${id}sky)"/>`;
+  if (k.tod !== 'night') g += `<circle class="sc-sun" cx="${sun[0]}" cy="${sun[1]}" r="${sun[2] * 2.9}" fill="url(#${id}sun)"/><circle cx="${sun[0]}" cy="${sun[1]}" r="${sun[2]}" fill="var(--gs-sun)" opacity=".85"/>`;
+  g += `<g class="gs-cloud" style="--dur:38s"><path d="M42 98 q6 -14 22 -9 q8 -10 20 -2 q14 -2 14 10 q-1 7 -10 7 h-42 q-10 0 -4 -6z" fill="var(--gs-cloud)" opacity="var(--sc-cloud-a, 1)"/></g>
     <g class="gs-cloud" style="--dur:52s;--dx:-10px"><path d="M190 80 q5 -10 17 -7 q7 -8 16 -1 q11 -1 11 8 q-1 5 -8 5 h-33 q-8 0 -3 -5z" fill="var(--gs-cloud)" opacity=".8"/></g>
-    <path d="M0 150 Q 70 112 150 138 T 360 126 V${H} H0Z" fill="var(--gs-hill2)"/>
-    <path d="M0 176 Q 96 142 204 168 T 360 158 V${H} H0Z" fill="var(--gs-hill1)"/>
-    <rect y="186" width="${W}" height="${H - 186}" fill="var(--gs-grass)"/>
+    <path d="M0 150 Q 70 112 150 138 T 360 126 V${H} H0Z" fill="var(--gs-hill2)"/>`;
+  g += sceneDistant(k);
+  g += `<path d="M0 176 Q 96 142 204 168 T 360 158 V${H} H0Z" fill="var(--gs-hill1)"/>`;
+  if (k.season === 'winter' && !k.trop) g += `<g class="sc-frost"><path d="M0 150 Q 70 112 150 138 T 360 126" stroke="#fff" stroke-width="2.4" fill="none" opacity=".7"/><path d="M0 176 Q 96 142 204 168 T 360 158" stroke="#fff" stroke-width="2" fill="none" opacity=".6"/></g>`;
+  g += sceneNear(k);
+  g += `<rect y="186" width="${W}" height="${H - 186}" fill="var(--gs-grass)"/>
     <path d="M0 186 H${W} V192 Q 180 198 0 192Z" fill="var(--gs-grass2)" opacity=".7"/>`;
   for (let i = 0; i < 16; i++) { const x = 8 + r() * 344, y = 200 + r() * 74; if (skipTuft(x, y)) continue; g += `<path d="M${x.toFixed(1)} ${y.toFixed(1)} l2 -6 l1.5 6 l2 -5 l1 5" stroke="var(--gs-grass3)" stroke-width="1.2" fill="none" stroke-linecap="round"/>`; }
+  if (k.season === 'winter' && !k.trop && k.snow) [[18, 262, 22], [178, 270, 30], [340, 258, 20], [60, 196, 26], [300, 198, 24]].forEach(([x, y, w]) => { g += `<ellipse class="sc-snowbank" cx="${x}" cy="${y}" rx="${w}" ry="${(w * 0.16).toFixed(1)}" fill="#fff" opacity=".75"/>`; });
+  if (k.season === 'fall' && !k.trop) [[22, 266], [336, 262], [190, 274]].forEach(([x, y], i) => { g += `<g class="sc-leaves" opacity=".9">${[0, 1, 2, 3].map((j) => `<ellipse cx="${x + j * 4 - 6}" cy="${y - (j % 2) * 1.5}" rx="3.2" ry="1.6" transform="rotate(${j * 40 - 50 + i * 15} ${x + j * 4 - 6} ${y})" fill="${j % 2 ? 'var(--sc-tree2)' : 'var(--sc-tree1)'}"/>`).join('')}</g>`; });
   return g;
 }
-function drawGardenScene(stage, seed, moving, caretaker) {
+/* Trees on the far hill: blossoms in spring, full in summer, amber in fall, frosted pines in
+   winter, palms when tropical. Nothing is drawn when seasons aren't set and it isn't tropical. */
+function sceneDistant(k) {
+  if (!k.season && !k.trop) return '';
+  const spots = [[20, 143, 0.9], [342, 128, 0.8]];
+  if (k.trop) return spots.map(([x, y, s], i) => (i === 1 && k.season === 'summer' ? scTree(x, y, s, 'flame') : scPalm(x, y, s, i))).join('');
+  const type = { spring: 'blossom', summer: 'full', fall: 'fall', winter: 'pine' }[k.season];
+  return spots.map(([x, y, s]) => (type === 'pine' ? scPine(x, y, s) : scTree(x, y, s, type))).join('');
+}
+function scTree(x, y, s, type) {
+  const flame = type === 'flame'; const f1 = flame ? '#D9542C' : 'var(--sc-tree1)', f2 = flame ? '#EE7A3A' : 'var(--sc-tree2)'; // a flamboyán in bloom
+  const c = (dx, dy, rr, f) => `<circle cx="${(x + dx * s).toFixed(1)}" cy="${(y + dy * s).toFixed(1)}" r="${(rr * s).toFixed(1)}" fill="${f}"/>`;
+  let g = `<g class="sc-tree sc-${type}"><path d="M${x} ${y} V ${(y - 18 * s).toFixed(1)}" stroke="var(--gs-wood2)" stroke-width="${(3.4 * s).toFixed(1)}" stroke-linecap="round"/>
+    ${c(0, -26, 13, f1)}${c(-9, -19, 9, f2)}${c(9, -20, 10, f2)}${c(2, -31, 8, f2)}`;
+  if (type === 'blossom' || flame) [[-6, -28], [5, -33], [10, -22], [-10, -18], [1, -21], [-3, -35]].forEach(([dx, dy]) => { g += c(dx, dy, 1.7, 'var(--sc-dot)'); });
+  return g + '</g>';
+}
+function scPine(x, y, s) {
+  const tri = (w, top, bot) => `<path d="M${(x - w * s).toFixed(1)} ${(y - bot * s).toFixed(1)} L ${x} ${(y - top * s).toFixed(1)} L ${(x + w * s).toFixed(1)} ${(y - bot * s).toFixed(1)}Z" fill="var(--sc-tree1)"/><path d="M${(x - w * 0.42 * s).toFixed(1)} ${(y - (top + (bot - top) * 0.42) * s).toFixed(1)} L ${x} ${(y - top * s).toFixed(1)} L ${(x + w * 0.42 * s).toFixed(1)} ${(y - (top + (bot - top) * 0.42) * s).toFixed(1)}Z" fill="#fff" opacity=".85"/>`;
+  return `<g class="sc-tree sc-pine"><path d="M${x} ${y} V ${(y - 8 * s).toFixed(1)}" stroke="var(--gs-wood2)" stroke-width="${(3 * s).toFixed(1)}"/>${tri(13, 22, 6)}${tri(10, 32, 16)}${tri(7, 41, 26)}</g>`;
+}
+function scPalm(x, y, s, flip) {
+  const d = flip ? -1 : 1; const tx = x + d * 8 * s, ty = y - 40 * s;
+  const frond = (a, len, f) => { const ex = tx + Math.cos(a) * len * s, ey = ty + Math.sin(a) * len * s; const mx = tx + Math.cos(a) * len * 0.5 * s, my = ty + Math.sin(a) * len * 0.5 * s - 5 * s; return `<path d="M${tx.toFixed(1)} ${ty.toFixed(1)} Q ${mx.toFixed(1)} ${(my - 3 * s).toFixed(1)} ${ex.toFixed(1)} ${ey.toFixed(1)} Q ${mx.toFixed(1)} ${(my + 4 * s).toFixed(1)} ${tx.toFixed(1)} ${ty.toFixed(1)}Z" fill="${f}"/>`; };
+  return `<g class="sc-tree sc-palm-tree"><path d="M${x} ${y} Q ${(x + d * 2 * s).toFixed(1)} ${(y - 22 * s).toFixed(1)} ${tx.toFixed(1)} ${ty.toFixed(1)}" stroke="var(--sc-palm)" stroke-width="${(3.2 * s).toFixed(1)}" fill="none" stroke-linecap="round"/>
+    ${[[-2.9, 20, 1], [-2.2, 22, 2], [-1.5, 19, 1], [-0.6, 20, 2], [0.2, 18, 1], [-3.6, 17, 2]].map(([a, l, f]) => frond(a, l, f === 1 ? 'var(--sc-tree1)' : 'var(--sc-tree2)')).join('')}
+    <circle cx="${(tx - 1.5 * s).toFixed(1)}" cy="${(ty + 2.5 * s).toFixed(1)}" r="${(1.8 * s).toFixed(1)}" fill="var(--gs-wood2)"/><circle cx="${(tx + 1.6 * s).toFixed(1)}" cy="${(ty + 3 * s).toFixed(1)}" r="${(1.8 * s).toFixed(1)}" fill="var(--gs-wood)"/></g>`;
+}
+/* Flowering shrubs on the near hill when tropical (hibiscus) */
+function sceneNear(k) {
+  if (!k.trop) return '';
+  return [[38, 166], [324, 160]].map(([x, y]) => `<g class="sc-bush sc-hibiscus"><ellipse cx="${x}" cy="${y}" rx="15" ry="8" fill="var(--sc-tree2)"/><ellipse cx="${x - 7}" cy="${y - 3}" rx="8" ry="6" fill="var(--sc-tree1)"/>
+    ${[[-6, -5], [4, -6], [9, -1]].map(([dx, dy]) => `<g>${[0, 72, 144, 216, 288].map((a) => `<ellipse cx="${x + dx}" cy="${y + dy - 2.2}" rx="1.6" ry="2.4" transform="rotate(${a} ${x + dx} ${y + dy})" fill="var(--sc-dot)"/>`).join('')}<circle cx="${x + dx}" cy="${y + dy}" r=".9" fill="var(--gs-center)"/></g>`).join('')}</g>`).join('');
+}
+/* In front of everything: drifting petals, falling leaves or snow (few, slow, none when still),
+   lanterns in winter, then the light of the period, then what glows on top of it. */
+function sceneFront(id, k, moving) {
+  k = k || { tod: 'day' }; let g = ''; const r = rng(4242);
+  const fall = (n, mk, dur) => { for (let i = 0; i < n; i++) { const x = 20 + r() * 320, y = 56 + r() * 70; g += `<g class="sc-fall" style="--dur:${(dur + r() * 6).toFixed(1)}s;--delay:-${(r() * dur).toFixed(1)}s;--dx:${(18 + r() * 30).toFixed(0)}px">${mk(x, y, i)}</g>`; } };
+  if (moving && k.season === 'spring') fall(4, (x, y) => `<ellipse cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="2.2" ry="1.3" fill="var(--sc-dot)"/>`, 15);
+  if (moving && k.season === 'fall' && !k.trop) fall(4, (x, y, i) => `<path d="M${x.toFixed(1)} ${y.toFixed(1)} c 2 -3 6 -3 7 0 c -1 3 -5 3 -7 0z" fill="${i % 2 ? 'var(--sc-tree1)' : 'var(--sc-tree2)'}"/>`, 14);
+  if (k.season === 'winter' && !k.trop && k.snow) {
+    for (let i = 0; i < 10; i++) { const x = 8 + r() * 344, y = 54 + r() * 130, rr = 0.9 + r() * 0.8; g += `<circle class="sc-flake ${moving ? 'sc-snow' : ''}" style="--dur:${(16 + r() * 8).toFixed(1)}s;--delay:-${(r() * 20).toFixed(1)}s" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${rr.toFixed(1)}" fill="#fff" opacity=".9"/>`; }
+  }
+  const lamps = k.season === 'winter' ? scLanternSpots() : [];
+  if (lamps.length) {
+    g += `<path d="M-6 57 Q 90 79 180 63 Q 270 79 366 57" stroke="var(--gs-wood2)" stroke-width=".9" fill="none" opacity=".8"/>`;
+    lamps.forEach(([x, y]) => { g += `<path class="sc-lantern" d="M${x} ${y} v 3" stroke="var(--gs-wood2)" stroke-width=".8"/><rect x="${x - 2.6}" y="${y + 3}" width="5.2" height="7" rx="2.2" fill="var(--sc-lamp)"/><rect x="${x - 1.8}" y="${y + 2.4}" width="3.6" height="1.4" rx=".5" fill="var(--gs-wood2)"/>`; });
+  }
+  g += `<rect class="sc-tint" x="0" y="0" width="${SCENE_W}" height="${SCENE_H}"/>`;
+  if (k.tod === 'night') {
+    for (let i = 0; i < 14; i++) { const x = 8 + r() * 344, y = 54 + r() * 46; if (x > 278 && x < 316 && y < 100) continue; g += `<circle class="sc-star" style="--dur:${(4 + r() * 4).toFixed(1)}s;--delay:-${(r() * 6).toFixed(1)}s" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${(0.5 + r() * 0.7).toFixed(1)}" fill="#FFF7DE"/>`; }
+    g += `<circle class="sc-moon" cx="296" cy="84" r="30" fill="url(#${id}moonglow)"/><circle cx="296" cy="84" r="11" fill="#F6EFD2" mask="url(#${id}moon)"/>`;
+  }
+  lamps.forEach(([x, y]) => { g += `<circle class="sc-glow" cx="${x}" cy="${y + 6.5}" r="${k.tod === 'night' ? 11 : 7}" fill="url(#${id}glow)"/>`; });
+  return g;
+}
+function scLanternSpots() {
+  const q = (p0, c, p1, t) => [0, 1].map((i) => (1 - t) * (1 - t) * p0[i] + 2 * (1 - t) * t * c[i] + t * t * p1[i]);
+  const out = [];
+  [0.3, 0.62].forEach((t) => out.push(q([-6, 57], [90, 79], [180, 63], t)));
+  [0.38, 0.7].forEach((t) => out.push(q([180, 63], [270, 79], [366, 57], t)));
+  return out.map(([x, y]) => [+x.toFixed(1), +y.toFixed(1)]);
+}
+function drawGardenScene(stage, seed, moving, caretaker, look) {
   const r = rng(seed || 7); const id = 'gs' + (++SCENE_N);
   const W = 360, H = 280, bedL = 104, bedR = 300, soilY = 214;
-  let g = sceneOpen(id, moving) + sceneBackdrop(id, r, (x, y) => x > bedL - 10 && x < bedR + 10 && y < 252);
+  let g = sceneOpen(id, moving, look) + sceneBackdrop(id, r, (x, y) => x > bedL - 10 && x < bedR + 10 && y < 252, look);
   if (stage >= 14) g += `<g><rect x="30" y="134" width="3" height="58" fill="var(--gs-wood2)"/><path d="M20 140 l11.5 -12 l11.5 12z" fill="var(--g-barn)"/><rect x="22" y="139" width="19" height="15" rx="2" fill="var(--gs-wood)"/><circle cx="31.5" cy="146" r="3" fill="var(--gs-wood2)"/></g>`;
   if (stage >= 8) { // a trellis with a climbing vine behind the right end of the bed
     g += `<g stroke="var(--gs-wood2)" stroke-width="2.2" fill="none"><path d="M284 200 V128 M312 200 V128 M280 136 H316 M280 156 H316 M280 176 H316"/></g>
@@ -73,7 +153,7 @@ function drawGardenScene(stage, seed, moving, caretaker) {
   if (stage >= 12) g += `<g><rect x="306" y="236" width="44" height="5" rx="2" fill="var(--gs-wood)"/><rect x="306" y="226" width="44" height="4" rx="2" fill="var(--gs-wood)"/><rect x="309" y="241" width="3.5" height="14" fill="var(--gs-wood2)"/><rect x="343" y="241" width="3.5" height="14" fill="var(--gs-wood2)"/><rect x="309" y="226" width="3" height="12" fill="var(--gs-wood2)"/><rect x="343" y="226" width="3" height="12" fill="var(--gs-wood2)"/></g>`;
   if (stage >= 11 && moving) [[200, 150, 0], [250, 140, -3]].forEach(([x, y, b]) => { g += `<g><animateMotion dur="9s" begin="${b}s" repeatCount="indefinite" path="M${x} ${y} c 18 -12 36 8 18 18 c -18 10 -36 -8 -18 -18z"/><ellipse rx="3" ry="2.2" fill="var(--gs-bee)"/><path d="M-1 -2.2 v4.4 M1 -2.2 v4.4" stroke="var(--gs-ink)" stroke-width=".8"/><ellipse cx="0" cy="-3" rx="2.2" ry="1.4" fill="#fff" opacity=".7"/></g>`; });
   if (caretaker) g += drawGardener();
-  return g + '</svg>';
+  return g + sceneFront(id, look, moving) + '</svg>';
 }
 
 /* The gardener: torso leans from the hips, the arm lifts the can from the shoulder,
@@ -123,10 +203,10 @@ function drawGardener(tool) {
 
 /* Bonsai: a pot on a low wooden stand, trunk and foliage pads that grow with each stage.
    Each pad sways on its own; the caretaker sits on a stool and waters with a long-spouted can. */
-function drawBonsaiScene(stage, seed, moving, caretaker) {
+function drawBonsaiScene(stage, seed, moving, caretaker, look) {
   const r = rng((seed || 7) + 3); const id = 'gs' + (++SCENE_N);
   const bx = 218, by = 199;
-  let g = sceneOpen(id, moving) + sceneBackdrop(id, r, (x, y) => x > 140 && x < 300 && y < 256);
+  let g = sceneOpen(id, moving, look) + sceneBackdrop(id, r, (x, y) => x > 140 && x < 300 && y < 256, look);
   if (stage >= 14) g += `<g><rect x="318" y="226" width="16" height="24" rx="2" fill="var(--gs-stone)"/><path d="M312 228 h28 l-6 -8 h-16z" fill="var(--gs-stone)"/><rect x="322" y="232" width="8" height="7" fill="var(--gs-sun)" opacity=".7"/><path d="M314 250 h24" stroke="var(--gs-wood2)" stroke-width="3" stroke-linecap="round"/></g>`;
   // stand and pot
   g += `<ellipse cx="220" cy="252" rx="78" ry="5" fill="var(--gs-ink)" opacity=".1"/>
@@ -170,7 +250,7 @@ function drawBonsaiScene(stage, seed, moving, caretaker) {
     if (stage >= 12 && moving) g += `<ellipse class="gs-petal" cx="${(bx + 20).toFixed(1)}" cy="${(by - h).toFixed(1)}" rx="1.8" ry="1.2" fill="var(--gs-petal1)"/>`;
   }
   if (caretaker) g += drawSitter();
-  return g + '</svg>';
+  return g + sceneFront(id, look, moving) + '</svg>';
 }
 /* Seated caretaker: leans from the hips, lifts a small long-spouted can, a few drops fall into the pot */
 function drawSitter() {
@@ -214,10 +294,10 @@ function drawSitter() {
 
 /* Farm: a field of furrows in rows, crops that sway plant by plant, and the buildings each stage adds.
    The caretaker tends the front row with a hoe; a little soil lifts where it lands. */
-function drawFarmScene(stage, seed, moving, caretaker) {
+function drawFarmScene(stage, seed, moving, caretaker, look) {
   const r = rng((seed || 7) + 5); const id = 'gs' + (++SCENE_N);
   const fl = 98, fr = 350;
-  let g = sceneOpen(id, moving) + sceneBackdrop(id, r, (x, y) => x > fl - 8 && y < 258);
+  let g = sceneOpen(id, moving, look) + sceneBackdrop(id, r, (x, y) => x > fl - 8 && y < 258, look);
   if (stage >= 11) g += `<path d="M146 160 Q 200 146 250 152 L 256 166 Q 200 160 142 172Z" fill="var(--gs-grain)" opacity=".5"/><path d="M152 163 Q 200 151 250 157 M148 167 Q 200 156 252 162" stroke="var(--gs-soil)" stroke-width=".8" opacity=".35" fill="none"/>`;
   if (stage >= 12) g += `<g><path d="M244 186 L 248 136 L 256 136 L 260 186Z" fill="var(--gs-wood)"/><path d="M243 138 l 9 -9 l 9 9z" fill="var(--g-barn)"/>
       <g class="gs-mill" style="--cx:252px;--cy:134px">${[0, 90, 180, 270].map((a) => `<path d="M252 134 L 252 108 L 258 110 L 254 134Z" transform="rotate(${a} 252 134)" fill="var(--gs-cloud)" stroke="var(--gs-wood2)" stroke-width=".8"/>`).join('')}<circle cx="252" cy="134" r="2.2" fill="var(--gs-wood2)"/></g></g>`;
@@ -249,5 +329,5 @@ function drawFarmScene(stage, seed, moving, caretaker) {
   }
   if (stage >= 14) g += `<g><ellipse cx="322" cy="275" rx="26" ry="2.5" fill="var(--gs-ink)" opacity=".1"/><rect x="304" y="259" width="30" height="11" rx="2" fill="var(--gs-wood)"/><path d="M306 263 h26" stroke="var(--gs-wood2)" stroke-width=".8"/><rect x="306" y="254" width="12" height="6" rx="2" fill="var(--gs-grain)"/><circle cx="310" cy="272" r="4.5" fill="none" stroke="var(--gs-wood2)" stroke-width="2"/><circle cx="328" cy="272" r="4.5" fill="none" stroke="var(--gs-wood2)" stroke-width="2"/><path d="M334 262 l 14 -5" stroke="var(--gs-wood2)" stroke-width="2" stroke-linecap="round"/></g>`;
   if (caretaker) g += drawGardener('hoe');
-  return g + '</svg>';
+  return g + sceneFront(id, look, moving) + '</svg>';
 }

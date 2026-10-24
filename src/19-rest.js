@@ -134,7 +134,6 @@ function drawCaretaker(kind, moving) {
 function renderRest() {
   const p = restPause(); const R = RCL(); const L = lang();
   const c = companionState(); const kind = c.ch.kind;
-  const moving = S.growth.animations !== false && !reducedMotion();
   const ended = pauseState(p) === 'ended';
   let note = '';
   if (ended && p.returnNote && !p.returnNoteCancelled) {
@@ -142,13 +141,11 @@ function renderRest() {
     if (p.returnNoteShownOn === today()) note = `<p class="rest-note small" role="status">${esc(R.arrived)}</p>`;
   }
   const endDate = dFmt(p.end.slice(0, 10), { weekday: 'long', month: 'long', day: 'numeric' });
-  const stageName = trText(STAGE_NAMES[kind][c.stage]);
   return `<main class="wrap rest" id="main" data-raw lang="${L}">
     <header class="rest-top"><span class="eyebrow">${esc(R.eyebrow)}</span>
       <button class="btn ghost sm" data-act="restMenu" aria-haspopup="dialog">${esc(R.menu)}</button></header>
     ${renderRestQuote(restQuote(today()))}
-    <figure class="rest-scene ${moving ? 'anim' : ''} wide" role="img" aria-label="${esc(rcf(R.scene, R.kinds[kind], stageName, R.acts[kind]))}">
-      ${drawScene(kind, c.stage, c.ch.seed, moving, true)}</figure>
+    ${sceneFigure(kind, c.stage, c.ch.seed, true)}
     ${note}
     <div class="rest-foot"><p class="tiny muted">${esc(rcf(R.planned, endDate))}. ${esc(R.calm)}</p>
       <button class="btn rest-return" data-act="restReturn">${esc(R.ready)}</button></div></main>`;
@@ -161,6 +158,8 @@ A.restMenu = () => {
     const R = RCL(); const p = restPause(); if (!p) return '';
     return `${sheetHead(esc(R.menuTitle), esc(R.menuSub))}<div class="stack" data-raw>
       <div class="row-between"><span>${esc(R.lang)}</span>${langSwitch('restLang', lang())}</div>
+      <button class="btn rest-item" data-act="cpInfo" aria-haspopup="dialog"><b>${esc(CPL().meet)}</b></button>
+      <button class="btn rest-item" data-act="cpScenerySheet"><b>${esc(CPL().sceneryMenu)}</b><span class="tiny muted">${esc(CPL().sceneryMenuSub)}</span></button>
       <button class="btn rest-item" data-act="restLook"><b>${esc(R.look)}</b><span class="tiny muted">${esc(R.lookSub)}</span></button>
       <button class="btn rest-item" data-act="pauseForm" data-id="${p.id}"><b>${esc(R.dates)}</b><span class="tiny muted">${esc(R.datesSub)}</span></button>
       <label class="rest-check"><input type="checkbox" id="restNote" data-act="restNote" ${p.returnNote ? 'checked' : ''} ><span><b class="small">${esc(R.note)}</b><br><span class="tiny muted">${esc(R.noteSub)}</span></span></label>
@@ -208,9 +207,9 @@ function renderRestBack(td) {
 A.restBackClose = () => { S.dismissed.restBack = null; save(); render(); };
 A.restAdjust = () => { S.dismissed.restBack = null; save(); render(); A.makeSmaller(); };
 
-/* Bookmarkable views: #today, #plan, #progress, #mindset, #settings.
+/* Bookmarkable views: #today, #companion, #plan, #progress, #mindset, #settings.
    While resting, every address shows Rest Mode and reads #rest. */
-const VIEWS = ['today', 'plan', 'progress', 'mindset', 'settings'];
+const VIEWS = ['today', 'companion', 'plan', 'progress', 'mindset', 'settings'];
 (function () { const h = location.hash.slice(1); if (VIEWS.includes(h)) TAB = h; })();
 function syncHash(rest) {
   const want = '#' + (rest ? 'rest' : TAB);

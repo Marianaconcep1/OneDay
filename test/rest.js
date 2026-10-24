@@ -54,7 +54,7 @@ const QUOTES = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'src', 'res
   ok('R6 Author and a source link are visible', (await page.locator('.rq-author').innerText()).startsWith('—') && (await page.locator('.rq-meta a[href^="https://"]').count()) === 1 && (await page.locator('.rq-meta a').innerText()) === 'View source');
   ok('R7 Environment keeps its earned stage, drawn healthy', (await st('stageOf(chapterPoints(chapter().id))')) > 3 && (await page.locator('.rest-scene svg.comp.resting').count()) === 0 && (await page.locator('.rest-scene .caretaker, .rest-scene .gd').count()) === 1);
   ok('R8 Caretaker moves gently when motion is allowed', (await page.locator('.rest-scene .scene.anim .gd-arm').count()) === 1 && (await st('getComputedStyle(document.querySelector(".gd-arm")).animationName')) === 'gdArm');
-  ok('R8b Scene has a text description and says it adds no growth', /caretaker watering the plants\. Decorative only; it adds no growth\./.test(await page.locator('.rest-scene').getAttribute('aria-label')));
+  ok('R8b Scene has a text description and says it adds no growth', /caretaker is watering the plants\. Decorative only; it adds no growth\. Scenery: /.test(await page.locator('.rest-scene').getAttribute('aria-label')));
 
   // Persistence and internal links
   await reload('#settings');

@@ -4,27 +4,33 @@
   Object.assign(S.settings, { languageChosen: true, language: 'en', letterLang: 'en' });
   growthInit(); S.growth.chapters[0].kind = 'garden';
   save = () => {}; flush = async () => {};
-  const P = { stage: 9, motion: true, theme: 'system', kind: 'garden' };
+  const P = { stage: 9, motion: true, theme: 'system', kind: 'garden', tod: 'day', season: '', trop: false, snow: false };
   applyLook();
   const motionOn = () => P.motion && !(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
   render = function () {
     const root = $('#app');
     root.innerHTML = `<main class="wrap stack-l pv">
       <header class="topbar"><div><div class="eyebrow">One Day</div><h1 class="view-h">Animation preview</h1>
-        <p class="small muted">The new envelope and the garden, bonsai and farm scenes, drawn with the same code the app uses. Nothing here is saved.</p></div></header>
+        <p class="small muted">The envelope and the garden, bonsai and farm scenes, drawn with the same code the app uses, in every time of day and season. Nothing here is saved.</p></div></header>
       <section class="card stack-s"><div class="row-between"><div class="h3">Envelope and letter</div><button class="btn sm" data-act="pvReplay">Play again</button></div>
         <p class="tiny muted">Tap the envelope.</p>
         <div class="pv-env">${WEL.stage === 'letter' ? letterHtml(lang(), false) : renderEnvelope(WEL.stage === 'opening')}</div></section>
       <section class="card stack-s"><div class="h3">Scenes with the caretaker</div>
         ${seg('pvKind', [['garden', 'Garden'], ['bonsai', 'Bonsai'], ['farm', 'Farm']], P.kind)}
-        <figure class="rest-scene wide" role="img" aria-label="Garden scene">${drawScene(P.kind, P.stage, S.growth.chapters[0].seed, motionOn(), true)}</figure>
+        ${seg('pvTod', [['dawn', 'Dawn'], ['day', 'Daytime'], ['sunset', 'Sunset'], ['night', 'Night']], P.tod)}
+        ${seg('pvSeason', [['', 'No season'], ['spring', 'Spring'], ['summer', 'Summer'], ['fall', 'Fall'], ['winter', 'Winter']], P.season)}
+        <figure class="rest-scene wide" role="img" aria-label="Scene preview">${drawScene(P.kind, P.stage, S.growth.chapters[0].seed, motionOn(), true, { tod: P.tod, season: P.season || null, trop: P.trop, snow: P.snow && !P.trop })}</figure>
         <label class="f">Growth stage: <b>${P.stage}</b> · ${esc(STAGE_NAMES[P.kind][P.stage])}<input type="range" id="pvStage" min="0" max="14" value="${P.stage}"></label>
         <div class="btn-row"><button class="btn sm" data-act="pvMotion">${motionOn() ? 'Show still (reduced motion)' : 'Show movement'}</button>
+          <button class="btn sm" data-act="pvTrop">Tropical: ${P.trop ? 'on' : 'off'}</button>
+          ${P.trop ? '' : `<button class="btn sm" data-act="pvSnow">Winter snow: ${P.snow ? 'on' : 'off'}</button>`}
           <button class="btn sm" data-act="pvTheme">Theme: ${P.theme === 'system' ? 'match device' : P.theme}</button></div>
         <p class="tiny muted">Each caretaker repeats a calm cycle: garden 10 s, bonsai 12 s, farm 9 s. Leaves, stems and foliage move on their own.</p></section></main>`;
     const r = $('#pvStage'); if (r) r.addEventListener('input', () => { P.stage = Number(r.value); render(); });
   };
-  SH.onPick = (grp, v) => { if (grp === 'pvKind') { P.kind = v; render(); } };
+  SH.onPick = (grp, v) => { if (grp === 'pvKind') { P.kind = v; render(); } if (grp === 'pvTod') { P.tod = v; render(); } if (grp === 'pvSeason') { P.season = v || ''; render(); } };
+  A.pvTrop = () => { P.trop = !P.trop; render(); };
+  A.pvSnow = () => { P.snow = !P.snow; render(); };
   A.pvReplay = () => { WEL = { stage: 'closed' }; render(); };
   A.pvMotion = () => { P.motion = !P.motion; render(); };
   A.pvTheme = () => { P.theme = { system: 'light', light: 'dark', dark: 'system' }[P.theme]; if (P.theme === 'system') document.documentElement.removeAttribute('data-theme'); else document.documentElement.setAttribute('data-theme', P.theme); render(); };

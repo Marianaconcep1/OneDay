@@ -11,7 +11,7 @@ const AREAS = ['money', 'business', 'training', 'art', 'mind'];
 /* ---------- Strings: keep all UI copy here so Spanish can be filled in ---------- */
 const STRINGS = {
   en: {
-    'tab.today': 'Today', 'tab.plan': 'Plan', 'tab.progress': 'Progress', 'tab.mindset': 'Mindset', 'tab.settings': 'Settings',
+    'tab.today': 'Today', 'tab.companion': 'Companion', 'tab.plan': 'Plan', 'tab.progress': 'Progress', 'tab.mindset': 'Mindset', 'tab.settings': 'Settings',
     'area.money': 'Money', 'area.business': 'Business', 'area.training': 'Training', 'area.art': 'Art', 'area.mind': 'Mind',
     'btn.start': 'Start', 'btn.log': 'Log', 'btn.smaller': 'Make today smaller', 'btn.save': 'Save', 'btn.cancel': 'Cancel',
     'btn.next': 'Next', 'btn.back': 'Back', 'btn.done': 'Done', 'btn.edit': 'Edit', 'btn.delete': 'Delete', 'btn.close': 'Close',
@@ -38,7 +38,7 @@ const STRINGS = {
     'ms.orig': 'Resources are shown in their original language; they haven’t been translated.', 'ci.reminder': 'It’s {time}. Check-in time.', 'ms.notice': 'A new Mindset edition is ready.'
   },
   es: {
-    'tab.today': 'Hoy', 'tab.plan': 'Plan', 'tab.progress': 'Progreso', 'tab.mindset': 'Mentalidad', 'tab.settings': 'Ajustes',
+    'tab.today': 'Hoy', 'tab.companion': 'Compañero', 'tab.plan': 'Plan', 'tab.progress': 'Progreso', 'tab.mindset': 'Mentalidad', 'tab.settings': 'Ajustes',
     'area.money': 'Dinero', 'area.business': 'Negocio', 'area.training': 'Entrenamiento', 'area.art': 'Arte', 'area.mind': 'Mente',
     'btn.start': 'Empezar', 'btn.log': 'Registrar', 'btn.smaller': 'Hacer hoy más pequeño', 'btn.save': 'Guardar', 'btn.cancel': 'Cancelar',
     'btn.next': 'Siguiente', 'btn.back': 'Atrás', 'btn.done': 'Listo', 'btn.edit': 'Editar', 'btn.delete': 'Borrar', 'btn.close': 'Cerrar',
@@ -65,7 +65,7 @@ const STRINGS = {
     'ms.orig': 'Los recursos se muestran en su idioma original; no han sido traducidos.', 'ci.reminder': 'Son las {time}. Hora de la revisión.', 'ms.notice': 'Hay una nueva edición de Mindset.'
   },
   it: {
-    'tab.today': 'Oggi', 'tab.plan': 'Piano', 'tab.progress': 'Progressi', 'tab.mindset': 'Mindset', 'tab.settings': 'Opzioni',
+    'tab.today': 'Oggi', 'tab.companion': 'Compagno', 'tab.plan': 'Piano', 'tab.progress': 'Progressi', 'tab.mindset': 'Mindset', 'tab.settings': 'Opzioni',
     'area.money': 'Denaro', 'area.business': 'Attività', 'area.training': 'Allenamento', 'area.art': 'Arte', 'area.mind': 'Mente',
     'btn.start': 'Inizia', 'btn.log': 'Registra', 'btn.smaller': 'Rendi oggi più leggero', 'btn.save': 'Salva', 'btn.cancel': 'Annulla',
     'btn.next': 'Avanti', 'btn.back': 'Indietro', 'btn.done': 'Fatto', 'btn.edit': 'Modifica', 'btn.delete': 'Elimina', 'btn.close': 'Chiudi',
@@ -83,7 +83,7 @@ const STRINGS = {
     'ms.orig': 'Le risorse sono nella lingua originale; non sono state tradotte.', 'ci.reminder': 'Sono le {time}. È l’ora del check-in.', 'ms.notice': 'È pronta una nuova edizione di Mindset.'
   },
   fr: {
-    'tab.today': 'Aujourd’hui', 'tab.plan': 'Plan', 'tab.progress': 'Progrès', 'tab.mindset': 'Mindset', 'tab.settings': 'Réglages',
+    'tab.today': 'Aujourd’hui', 'tab.companion': 'Compagnon', 'tab.plan': 'Plan', 'tab.progress': 'Progrès', 'tab.mindset': 'Mindset', 'tab.settings': 'Réglages',
     'area.money': 'Argent', 'area.business': 'Entreprise', 'area.training': 'Entraînement', 'area.art': 'Art', 'area.mind': 'Esprit',
     'btn.start': 'Commencer', 'btn.log': 'Noter', 'btn.smaller': 'Alléger la journée', 'btn.save': 'Enregistrer', 'btn.cancel': 'Annuler',
     'btn.next': 'Suivant', 'btn.back': 'Retour', 'btn.done': 'Terminé', 'btn.edit': 'Modifier', 'btn.delete': 'Supprimer', 'btn.close': 'Fermer',
@@ -286,7 +286,8 @@ function defaultState() {
     goals: [],          // several goals: measurable, milestones or ongoing
     pauses: [],         // planned breaks; paused days are never scheduled or counted
     mindset: { editions: [], lastSuccess: null, lastCheck: null, saved: {}, hidden: {}, interests: DEFAULT_TOPICS.slice(), notify: false, notifiedEdition: null, tryOne: {} },
-    growth: { enabled: true, kind: 'bonsai', messages: true, animations: true, ledger: {}, chapters: [], offerDismissed: null }
+    growth: { enabled: true, kind: 'bonsai', messages: true, animations: true, ledger: {}, chapters: [], offerDismissed: null,
+      scenery: { matchTime: true, tod: 'day', seasons: 'off', calendar: null, season: null, tropical: false, snow: false } }
   };
 }
 

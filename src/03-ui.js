@@ -7,6 +7,7 @@ let RETURN_GAP = 0;
 
 const ICONS = {
   today: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4"/></svg>',
+  companion: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 16h11l-1.6 4.5H8.1Z"/><path d="M12 16v-3.5c0-1.6.9-2.7 2.6-3.2"/><path d="M7 9.6C7 7.1 9.2 5 12 5s5 2.1 5 4.6c0 1.2-1 2.2-2.2 2.2H9.2C8 11.8 7 10.8 7 9.6Z"/></svg>',
   plan: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="4" y="5" width="16" height="15" rx="2.5"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>',
   progress: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 19V11M12 19V6M19 19v-5"/></svg>',
   mindset: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V11"/><path d="M12 11c0-3.5 2.5-6 6-6 0 3.5-2.5 6-6 6Z"/><path d="M12 14c0-3-2.2-5-5-5 0 3 2.2 5 5 5Z"/></svg>',
@@ -18,11 +19,11 @@ function render() {
   if (LOCKED) { root.innerHTML = renderLock(); return; }
   if (!S.settings.onboarded) { root.innerHTML = renderOnboarding(); bindSetup(); return; }
   if (restPause()) { closeSheetIfStale(); root.innerHTML = renderRest(); syncHash(true); restWas = true; return; }
-  const views = { today: renderToday, plan: renderPlan, progress: renderProgress, mindset: renderMindset, settings: renderSettings };
+  const views = { today: renderToday, companion: renderCompanion, plan: renderPlan, progress: renderProgress, mindset: renderMindset, settings: renderSettings };
   root.innerHTML =
     (DEMO ? '<div class="wrap" style="padding-bottom:0"><div class="demo-flag">Demo mode: sample data only. Your real data is untouched. <button class="btn ghost sm" data-act="exitDemo" style="min-height:32px;color:inherit;text-decoration:underline">Exit demo</button></div></div>' : '') +
     '<main class="wrap" id="main">' + views[TAB]() + '</main>' +
-    '<nav class="tabbar" aria-label="Main">' + ['today', 'plan', 'progress', 'mindset', 'settings'].map((k) =>
+    '<nav class="tabbar" aria-label="Main">' + ['today', 'companion', 'plan', 'progress', 'mindset', 'settings'].map((k) =>
       `<button class="tab" data-act="tab" data-tab="${k}" ${TAB === k ? 'aria-current="page"' : ''}>${ICONS[k]}<span>${t('tab.' + k)}</span></button>`).join('') + '</nav>' +
     renderTimerBar();
   if (TAB === 'settings') bindTzPicker('stTz', () => SH.tzSel, SETUP[S.settings.language] || SETUP.en);

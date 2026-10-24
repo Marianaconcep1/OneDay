@@ -53,9 +53,21 @@ The return reminder is one note shown inside the app, once, the first time you o
 
 The collection is `src/rest-quotes.json`, and only entries with `"status": "approved"` are built into the app. Each entry records the exact wording, author, original language, source with link, rights, translations (published edition, or `app` for One Day’s own translation, which the app labels “Translated from …” with the original wording available) and verification notes. The current 7 approved entries were each checked word for word against their linked source; 4 candidates were rejected (an unconfirmed Emerson line, an unchecked Lubbock passage, an Ovid line whose context is about love, and a Pascal line whose wording differs by edition). To add one, check it against the original source, add it with `"status": "approved"`, and rebuild with `python3 build.py`. One quotation shows per day in your timezone, cycling through the collection before any repeats.
 
+## My Companion
+
+The Companion tab (`#companion`) shows your bonsai, garden or farm at its current stage, the same daily quotation as Rest Mode (one per day in your saved timezone, the same in every language), “Meet your companion”, which explains how growth works, and “Change companion”. Switching between bonsai, garden and farm keeps every point, so the stage carries over and nothing is reset. Opening the tab, tapping, changing the scenery or reading the quote never adds growth.
+
+Scenery is decoration only and doesn't follow the light or dark theme:
+
+- **Time of day** follows the clock in your saved timezone, never the device's: dawn 5:00–7:59, daytime 8:00–16:59, sunset 17:00–19:59, night 20:00–4:59. It's on by default. Turn off “Match companion scene to my local time” to pick dawn, daytime, sunset or night yourself.
+- **Seasons** are off (neutral scenery) until you choose. You can pick Automatic with a northern calendar (spring Mar–May, summer Jun–Aug, fall Sep–Nov, winter Dec–Feb) or a southern one (the reverse), or choose one season. These are calendar themes, not weather or astronomy. The month comes from the date in your saved timezone. Your location is never used, and the hemisphere is never guessed.
+- **Tropical scenery** gives palms and hibiscus all year with each season's light, and never shows snow, frost or bare trees. Winter snow is a separate, optional setting.
+
+The scene is recalculated every 30 seconds, when you come back to the app and when the timezone changes, and it cross-fades to the new look without reloading. With reduced motion on, the drawing is still and changes are immediate. Rest Mode uses the same companion and scenery, and its menu includes the info panel and the scenery settings. Preferences are saved on this device; they don't sync, because nothing does.
+
 ## Animation
 
-The envelope, letter and scenes use the browser's own animation tools (CSS and the Web Animations API), with no animation library and nothing downloaded. The garden, bonsai and farm are layered SVG drawings in `src/20-scene.js`: leaves, stems, foliage and the caretaker's torso, arm and tool each move on their own, on calm loops (garden 10 s, bonsai 12 s, farm 9 s). With reduced motion on (device setting, or Personalize › Motion), or the companion's gentle movement off, every scene is a still drawing. Rive was considered; it would need a commissioned `.riv` file and a paid Rive plan to export it, so it isn't used.
+The envelope, letter and scenes use the browser's own animation tools (CSS and the Web Animations API), with no animation library and nothing downloaded. The garden, bonsai and farm are layered SVG drawings in `src/20-scene.js` (scenery settings and the Companion tab are in `src/21-companion.js`): leaves, stems, foliage and the caretaker's torso, arm and tool each move on their own, on calm loops (garden 10 s, bonsai 12 s, farm 9 s). With reduced motion on (device setting, or Personalize › Motion), or the companion's gentle movement off, every scene is a still drawing. Rive was considered; it would need a commissioned `.riv` file and a paid Rive plan to export it, so it isn't used.
 
 ## PIN lock
 

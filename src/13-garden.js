@@ -129,7 +129,7 @@ function renderCompanionToday() {
   const g = S.growth; if (!g.enabled) return '';
   const c = companionState();
   const anim = g.animations && !reducedMotion() ? 'anim' : '';
-  let h = `<section class="companion card ${anim}"><button class="comp-btn" data-act="compOpen" aria-label="Open your ${esc(KINDS[c.ch.kind].toLowerCase())}">${drawCompanion(c.ch.kind, c.stage, c.ch.seed, c.resting || c.paused)}</button>
+  let h = `<section class="companion card ${anim}"><button class="comp-btn" data-act="tab" data-tab="companion" aria-label="Open My Companion">${drawCompanion(c.ch.kind, c.stage, c.ch.seed, c.resting || c.paused)}</button>
     <div class="grow stack-s"><div class="eyebrow">${esc(KINDS[c.ch.kind])} · ${esc(c.ch.name)}</div><div class="h3">${esc(STAGE_NAMES[c.ch.kind][c.stage])}</div>
     <div class="small muted">${c.paused ? 'Resting with you during the pause.' : c.resting ? 'Resting. It will be here when you are.' : g.messages ? esc(dailyMessage(today())) : ''}</div></div></section>`;
   if (c.offer) h += `<section class="banner pink stack-s" id="gardenOffer"><div class="h3">Your garden is ready when you are. Continue growing, or begin a new chapter?</div>
