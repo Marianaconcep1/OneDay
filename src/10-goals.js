@@ -75,7 +75,7 @@ function renderGoals() {
 A.goalForm = (el) => {
   const g = el && el.dataset.id ? goalById(el.dataset.id) : null;
   SH.goal = g ? clone(g) : { area: S.settings.focus || 'money', kind: 'target', target: { source: 'savings' }, milestones: [], status: 'active' };
-  SH.onPick = (grp, v) => { if (grp === 'gfKind') { show('gfTarget', v === 'target'); show('gfMs', v !== 'target'); } if (grp === 'gfSrc') { show('gfStartWrap', v === 'manual'); show('gfUnitWrap', v === 'manual'); } };
+  SH.onPick = (grp, v) => { if (grp === 'gfKind') { show('gfTarget', v === 'target'); show('gfMs', v !== 'target'); ['gfTargetWrap', 'gfTargetHint', 'gfCritWrap'].forEach((id) => show(id, v !== 'ongoing')); } if (grp === 'gfSrc') { show('gfStartWrap', v === 'manual'); show('gfUnitWrap', v === 'manual'); } };
   const x = SH.goal; const tg = x.target || {};
   const tv = tg.value == null ? '' : isMoneySrc(tg.source) ? centsToInput(tg.value) : tg.value;
   openSheet(() => `${sheetHead(g ? 'Edit goal' : 'Add a goal')}
@@ -83,6 +83,7 @@ A.goalForm = (el) => {
     <div class="stack-s"><div class="h3">Area</div>${chips('gfArea', AREAS.map((a) => [a, t('area.' + a)]), x.area)}</div>
     <label class="f">Where you’re starting from <span class="hint">Optional. Kept for the completion report.</span><input class="inp" id="gfFrom" maxlength="200" value="${esc(x.from || '')}" placeholder="e.g. No savings buffer yet"></label>
     <div class="stack-s"><div class="h3">How you’ll know</div>${seg('gfKind', [['target', 'A number'], ['milestones', 'Milestones'], ['ongoing', 'Ongoing']], x.kind)}</div>
+    ${goalDateFields(x)}
     <div id="gfTarget" class="stack-s" ${x.kind === 'target' ? '' : 'hidden'}>
       ${chips('gfSrc', GOAL_SOURCES, tg.source || 'savings')}
       <div class="grid2"><label class="f">Target<input class="inp num" id="gfVal" inputmode="decimal" value="${esc(tv)}"></label>
@@ -101,6 +102,7 @@ A.goalSave = () => {
   const title = val('gfTitle'); if (!title) { $('#gfTitle').classList.add('invalid'); toast('Name the goal.'); return; }
   x.title = title; x.area = getPick('gfArea') || x.area; x.kind = getPick('gfKind') || 'target'; x.from = val('gfFrom');
   x.status = getPick('gfStatus') || x.status;
+  const dErr = goalDatesCheck(x.kind); if (dErr) { toast(dErr); return; }
   if (x.kind === 'target') {
     const src = getPick('gfSrc') || 'savings'; const raw = val('gfVal');
     const v = isMoneySrc(src) ? parseCents(raw) : (raw === '' ? null : Number(raw));
@@ -115,7 +117,8 @@ A.goalSave = () => {
   const lines = ($('#gfMsText') ? $('#gfMsText').value : '').split('\n').map((s) => s.trim()).filter(Boolean);
   if (x.kind !== 'target') x.milestones = lines.map((l) => x.milestones.find((m) => m.title === l) || { id: uid('ms'), title: l, doneOn: null });
   if (x.kind === 'milestones' && !x.milestones.length) { toast('Add at least one milestone, or choose Ongoing.'); return; }
-  if (!x.id) { x.id = uid('goal'); x.createdAt = nowISO(); x.startedOn = td; x.manual = x.manual || []; S.goals.push(x); }
+  goalDatesApply(x, x.kind);
+  if (!x.id) { x.id = uid('goal'); x.createdAt = nowISO(); x.startedOn = x.startedOn || td; x.manual = x.manual || []; S.goals.push(x); }
   else S.goals[S.goals.findIndex((g) => g.id === x.id)] = x;
   const ws = weekStart(td);
   if ($('#gfFocus').checked) { S.weeks[ws] = Object.assign({ main: x.area, maintain: AREAS.filter((a) => a !== x.area), mainOutcome: '' }, S.weeks[ws] || {}, { goalId: x.id, main: x.area }); }
@@ -134,15 +137,15 @@ function openGoal(id) {
   openSheet(() => {
     const g = goalById(id); if (!g) return sheetHead('Goal');
     const p = g.kind === 'target' ? goalProgress(g) : null;
-    let h = `${sheetHead(esc(g.title), esc(t('area.' + g.area) + ' · ' + GOAL_STATUS[g.status] + ' · since ' + dMD(g.startedOn)))}`;
+    let h = `${sheetHead(esc(g.title), esc(t('area.' + g.area) + ' · ' + GOAL_STATUS[g.status] + ' · since ' + dMD(g.startedOn)))}` + goalDatesCard(g);
     if (p) h += `<div class="card tint stack-s"><div class="kv"><span>Start</span><span>${goalFmt(g, p.st)}</span><span>Now</span><span>${goalFmt(g, p.cur)}</span><span>Target</span><span>${goalFmt(g, p.tv)}</span></div>${goalBar(g)}
       ${p.pct == null ? '<p class="tiny muted">No percentage until both the start and current values are recorded.</p>' : ''}</div>`;
     if (g.target && g.target.source === 'manual' && g.status !== 'complete' && g.status !== 'ended') h += `<div class="grid2"><label class="f">Update the number<input class="inp num" id="gmVal" inputmode="decimal"></label><button class="btn sm" data-act="goalManual">Record</button></div>`;
     if (g.milestones.length || g.kind !== 'target') {
-      h += `<div class="stack-s"><div class="h3">Milestones</div>${g.milestones.map((m) => `<label class="row" style="min-height:44px;gap:10px"><input type="checkbox" data-act="msToggle" data-id="${m.id}" ${m.doneOn ? 'checked' : ''} style="width:22px;height:22px"><span class="grow">${esc(m.title)}${m.doneOn ? ` <span class="tiny muted">· ${esc(dMD(m.doneOn))}</span>` : ''}</span></label>`).join('') || '<p class="small muted">None yet.</p>'}
-        ${g.status === 'ended' ? '' : `<div class="grid2"><input class="inp" id="gmMs" maxlength="90" placeholder="Add a milestone"><button class="btn sm" data-act="msAdd">${t('btn.add')}</button></div>`}</div>`;
+      h += `<div class="stack-s"><div class="h3">Milestones</div>${g.milestones.map((m) => `<label class="row" style="min-height:44px;gap:10px"><input type="checkbox" data-act="msToggle" data-id="${m.id}" ${m.doneOn ? 'checked' : ''} style="width:22px;height:22px"><span class="grow">${esc(m.title)}${m.doneOn ? ` <span class="tiny muted">· ${esc(dMD(m.doneOn))}</span>` : m.targetDate ? ` <span class="tiny muted" data-raw>· ${esc(mf('msBy', dMD(m.targetDate)))}</span>` : ''}${medalByKey('ms:' + m.id) ? ' <span aria-hidden="true">🏅</span>' : ''}</span></label>`).join('') || '<p class="small muted">None yet.</p>'}
+        ${g.status === 'ended' ? '' : g.kind === 'ongoing' ? msAddDatedRow() : `<div class="grid2"><input class="inp" id="gmMs" maxlength="90" placeholder="Add a milestone"><button class="btn sm" data-act="msAdd">${t('btn.add')}</button></div>`}</div>`;
     }
-    if (g.status !== 'complete' && goalReached(g)) h += `<div class="banner pink"><div class="h3">You’ve reached what this goal set out to do.</div><p class="small">Mark it complete when it feels finished. Nothing changes until you do.</p><button class="btn primary sm" data-act="goalComplete">Mark complete</button></div>`;
+    if (g.status !== 'complete' && goalReached(g)) h += `<div class="banner pink"><div class="h3">You’ve reached what this goal set out to do.</div><p class="small">Mark it complete when it feels finished. Nothing changes until you do.</p><button class="btn primary sm" data-act="goalComplete" data-raw>${esc(MDL().complete)}</button></div>`;
     if (g.status === 'ended') {
       const r = goalRecord(g);
       h += `<div class="card tint stack-s"><div class="eyebrow">Ended ${esc(dMD(g.endedOn))}</div><p class="small">${esc(endSummary(g, r))}</p></div>
@@ -151,7 +154,7 @@ function openGoal(id) {
       return h;
     }
     h += `<div class="btn-row">${g.status === 'complete' ? `<button class="btn primary" data-act="reportOpen" data-id="${g.id}">Completion report</button>` : `<button class="btn" data-act="goalForm" data-id="${g.id}">${t('btn.edit')}</button>`}
-      ${g.status !== 'complete' && !goalReached(g) && g.kind !== 'ongoing' ? `<button class="btn ghost sm" data-act="goalComplete">Mark complete anyway</button>` : ''}
+      ${g.status !== 'complete' && !goalReached(g) && g.kind !== 'ongoing' ? `<button class="btn ghost sm" data-act="goalComplete" data-raw>${esc(MDL().complete)}</button>` : ''}
       ${g.status === 'later' ? `<button class="btn ghost sm" data-act="goalStatus" data-s="active">Make active</button>` : g.status !== 'complete' ? `<button class="btn ghost sm" data-act="goalStatus" data-s="later">Move to Later</button>` : ''}</div>
       ${g.status !== 'complete' ? `<details class="more"><summary>More options</summary><div class="mt-s"><button class="btn ghost sm" data-act="endOpen">End this project</button><p class="tiny muted">Ending keeps all history. Deleting is separate, under Edit.</p></div></details>` : ''}`;
     return h;
@@ -162,21 +165,13 @@ A.msAdd = () => { const g = goalById(SH.goalId); const t2 = val('gmMs'); if (!t2
 A.msToggle = (el) => {
   setTimeout(() => {
     const g = goalById(SH.goalId); const m = g.milestones.find((x) => x.id === el.dataset.id); if (!m) return;
+    if (g.kind === 'ongoing' && el.checked && !m.doneOn) { el.checked = false; SH.msId = m.id; A.msConfirm(); return; } // confirmed like a project, with its own medal
     m.doneOn = el.checked ? today() : null;
     if (m.doneOn) { growthAward('ms:' + m.id, 'milestone', today()); toast(g.kind === 'ongoing' ? 'Milestone reached. The goal keeps going.' : 'Milestone reached.'); }
     save(); refreshSheet();
   }, 0);
 };
 A.goalStatus = (el) => { const g = goalById(SH.goalId); g.status = el.dataset.s; save(); refreshSheet(); render(); };
-A.goalComplete = () => {
-  const g = goalById(SH.goalId);
-  confirmBox(`Mark “${esc(g.title)}” complete? It moves to Complete, and you’ll see a report of how you got here.`, 'Mark complete', () => {
-    g.status = 'complete'; g.completedOn = today();
-    const ws = weekStart(today()); if (S.weeks[ws] && S.weeks[ws].goalId === g.id) S.weeks[ws].goalId = null;
-    growthAward('goal:' + g.id, 'goal', today()); save(); render(); openReport(g.id);
-  });
-};
-
 /* ---------- Ending a project: separate from deleting; history and growth stay ---------- */
 const END_REASONS = [['priorities', 'My priorities changed.'], ['fit', 'This goal no longer fits.'], ['cost', 'The time or resources required are too much.'], ['approach', 'I want to pursue a different approach.'], ['other', 'Other.'], ['nosay', 'Prefer not to say.']];
 function goalEndedOn(g, ds) { return (g.endedRanges || []).some((r) => ds >= r.from && (!r.to || ds <= r.to)); }

@@ -87,8 +87,9 @@ function openReport(id) {
     const r = goalRecord(g); const p = g.kind === 'target' ? goalProgress(g) : null;
     const ms = g.milestones.filter((m) => m.doneOn).sort((a, b) => (a.doneOn < b.doneOn ? -1 : 1));
     const rs = Object.entries(r.reasons).sort((a, b) => b[1] - a[1]);
-    return `${sheetHead('Completion report', esc(g.title))}
-      <div class="card tint stack-s"><div class="eyebrow">${esc(t('area.' + g.area))} · completed ${esc(dLong(r.to))}</div>
+    const fin = g.status === 'complete';
+    return `${sheetHead(fin ? 'Completion report' : `<span data-raw>${esc(MDL().progressTitle)}</span>`, esc(g.title))}
+      <div class="card tint stack-s"><div class="eyebrow">${esc(t('area.' + g.area))} · ${fin ? 'completed ' + esc(dLong(r.to)) : `<span data-raw>${esc(mf('asOf', dLong(r.to)))}</span>`}</div>
         <p class="small">${esc(reportMessage(g, r))}</p></div>
       <div class="kv small"><span>Started</span><span>${esc(dMD(r.from))}</span><span>Elapsed</span><span>${plural(r.days, 'day')}${r.paused ? ` (${r.paused} paused)` : ''}</span>
         ${g.from ? `<span>Starting point</span><span>${esc(g.from)}</span>` : ''}
@@ -99,9 +100,9 @@ function openReport(id) {
       ${ms.length ? `<div class="stack-s"><div class="h3">Milestones</div>${ms.map((m) => `<p class="small">${esc(dMD(m.doneOn))} · ${esc(m.title)}</p>`).join('')}</div>` : ''}
       ${rs.length || r.changes.length ? `<div class="stack-s"><div class="h3">Obstacles and adjustments</div>${rs.length ? `<p class="small">${rs.map(([k, n]) => esc(reasonLabel(k)) + ' ×' + n).join(', ')}</p>` : ''}${r.changes.slice(0, 6).map((c) => `<p class="small">${esc(dMD(c.date))} · ${esc(c.title)}: ${esc(CHANGE_KIND[c.kind] || c.kind)}${c.to ? ' → ' + esc(c.to) : ''}</p>`).join('')}</div>` : ''}
       <label class="row" style="min-height:44px;gap:10px"><input type="checkbox" id="rpManifest" data-act="rpManifest" ${S.settings.manifest ? 'checked' : ''} style="width:22px;height:22px"> Include intention language</label>
-      <div class="stack-s"><div class="h3">What next?</div><p class="tiny muted">Nothing is created unless you choose it.</p>
+      ${fin ? `<div class="stack-s"><div class="h3">What next?</div><p class="tiny muted">Nothing is created unless you choose it.</p>
         ${chips('rpNext', [['maintain', 'Maintain what you built'], ['milestone', 'Set a new milestone'], ['rest', 'Rest and celebrate']], g.nextChoice || null)}
-        <button class="btn sm" data-act="rpNextGo">Continue</button></div>
+        <button class="btn sm" data-act="rpNextGo">Continue</button></div>` : ''}
       <div class="btn-row"><button class="btn primary" data-act="rpExport">Export report</button></div>
       <p class="tiny muted">Emailing the report isn’t available in this version; it would need a sending service. Export it and share it however you like.</p>`;
   }, { full: true });

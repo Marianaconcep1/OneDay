@@ -284,6 +284,7 @@ function defaultState() {
     returns: [],        // days you came back after missed days
     firstWeek: null,
     goals: [],          // several goals: measurable, milestones or ongoing
+    medals: [],         // one per confirmed completion of a project or dated milestone
     pauses: [],         // planned breaks; paused days are never scheduled or counted
     mindset: { editions: [], lastSuccess: null, lastCheck: null, saved: {}, hidden: {}, interests: DEFAULT_TOPICS.slice(), notify: false, notifiedEdition: null, tryOne: {} },
     growth: { enabled: true, kind: 'bonsai', messages: true, animations: true, ledger: {}, chapters: [], offerDismissed: null,

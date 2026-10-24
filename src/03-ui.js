@@ -197,6 +197,7 @@ function renderToday() {
 
   const fullPause = pausedAll(td);
   h += renderRestBack(td);
+  h += renderGiftToday();
   h += renderPauseToday(td);
   h += mindsetNotice();
   if (RETURN_GAP >= 3 && S.dismissed.returnOn !== td && !currentPause() && !S.pauses.some((p) => p.resumedOn === td)) {
@@ -206,7 +207,7 @@ function renderToday() {
   const cd = calibrationDay();
   if (cd) h += `<section class="banner"><div class="row-between"><div class="h3">Calibration · day ${cd} of 7</div></div><p class="small">${t('calib')} Log what actually happens. Targets stay where they are this week.</p>${firstWeekQuestions()}</section>`;
   const justBack = S.pauses.some((p) => p.resumedOn === td && p.scope === 'all');  // no reviews or catching up on the day you return
-  if (!justBack) h += firstWeekBanner(td);
+  if (!justBack) h += firstWeekBanner(td) + renderDueToday(td);
   if (S.settings.reminders && !currentPause() && nowHM() >= S.settings.checkinTime && !S.checkins[td]) h += `<section class="banner pink"><div class="h3">${esc(t('ci.reminder', { time: fmtTime(S.settings.checkinTime) }))}</div></section>`;
   if (reviewDue() && !justBack) h += `<section class="banner"><div class="h3">Weekly review is ready</div><p class="small">10–15 minutes to adjust next week. One change at most.</p><div><button class="btn primary sm" data-act="openReview">Start review</button></div></section>`;
 

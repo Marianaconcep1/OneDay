@@ -65,6 +65,14 @@ Scenery is decoration only and doesn't follow the light or dark theme:
 
 The scene is recalculated every 30 seconds, when you come back to the app and when the timezone changes, and it cross-fades to the new look without reloading. With reduced motion on, the drawing is still and changes are immediate. Rest Mode uses the same companion and scenery, and its menu includes the info panel and the scenery settings. Preferences are saved on this device; they don't sync, because nothing does.
 
+## Project dates and medals
+
+Each project with a finish (a number or milestones) has a start date (today in your saved timezone by default, editable), a target completion date on or after it, and a sentence saying what finishing means. Ongoing goals have no target date, but you can add dated milestones inside them, such as "Complete my first four weeks of planned training". Changing a target date keeps all progress, and the original and revised dates stay in the project's date history.
+
+A date never completes anything. Once a target date passes, the project and Today offer a neutral choice: review progress, adjust the date, or end the project. "Complete project" shows the completion criteria and what's recorded, then asks "Have you accomplished what you set out to do?" Your own answer is enough for goals that aren't measured in numbers. The actual completion date is stored separately from the target date.
+
+Only a confirmed completion earns a medal: one per project and one per dated milestone in an ongoing goal. It's saved the moment you confirm. Repeated taps, reloads or completing the same project again never add a second one, and ending an unfinished project earns none. A gift box then waits, closed, until you tap it (or press Enter). Opening it lifts the lid and shows the medal with a short sparkle; with reduced motion on, the medal simply appears. There is no sound. "Open later" keeps the gift in My Companion › My milestones, where medals stay even if you change companions or archive or delete the project. Tapping a medal shows its details and the completion report. Nothing pops up during Rest Mode; gifts wait until you return.
+
 ## Animation
 
 The envelope, letter and scenes use the browser's own animation tools (CSS and the Web Animations API), with no animation library and nothing downloaded. The garden, bonsai and farm are layered SVG drawings in `src/20-scene.js` (scenery settings and the Companion tab are in `src/21-companion.js`): leaves, stems, foliage and the caretaker's torso, arm and tool each move on their own, on calm loops (garden 10 s, bonsai 12 s, farm 9 s). With reduced motion on (device setting, or Personalize › Motion), or the companion's gentle movement off, every scene is a still drawing. Rive was considered; it would need a commissioned `.riv` file and a paid Rive plan to export it, so it isn't used.

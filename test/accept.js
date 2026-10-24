@@ -294,12 +294,12 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
   await click('[data-act="tab"][data-tab="plan"]'); await page.evaluate(() => { OPEN_SECTS.add('sect-goals'); render(); });
   await click('[data-act="goalForm"]'); await page.fill('#gfTitle', 'Read 10 books'); await click('[data-group="gfArea"][data-val="money"]');
   await click('[data-group="gfSrc"][data-val="manual"]'); await page.fill('#gfVal', '10'); await page.fill('#gfStart', '2'); await page.fill('#gfUnit', 'books');
-  await page.check('#gfFocus'); await shot('30-goal-form'); await click('[data-act="goalSave"]');
+  await page.check('#gfFocus'); await page.evaluate(() => { const set = (id, v) => { const e = document.getElementById(id); e.value = v; }; set('gfTargetOn', dAdd(today(), 60)); set('gfCriteria', 'Done as described'); }); await shot('30-goal-form'); await click('[data-act="goalSave"]');
   ok('G1 A measurable goal saves with its starting point', await st('S.goals.length === 1 && S.goals[0].target.start === 2 && S.weeks[weekStart(today())].goalId === S.goals[0].id'));
   await click('[data-act="goalOpen"]'); await page.fill('#gmVal', '6'); await click('[data-act="goalManual"]'); await click('.sheet [data-act="closeSheet"]');
   ok('G2 Progress percentage only from a numeric target: 2 → 6 of 10 is 50%', await st('goalProgress(S.goals[0]).pct === 50'));
   await click('[data-act="goalForm"]'); await page.fill('#gfTitle', 'Launch the dashboard offer'); await click('[data-group="gfArea"][data-val="business"]');
-  await click('[data-group="gfKind"][data-val="milestones"]'); await page.fill('#gfMsText', 'Draft the offer\nFirst client'); await click('[data-act="goalSave"]');
+  await click('[data-group="gfKind"][data-val="milestones"]'); await page.fill('#gfMsText', 'Draft the offer\nFirst client'); await page.evaluate(() => { const set = (id, v) => { const e = document.getElementById(id); e.value = v; }; set('gfTargetOn', dAdd(today(), 60)); set('gfCriteria', 'Done as described'); }); await click('[data-act="goalSave"]');
   ok('G3 Milestone goals show counts, never an invented percentage', await st('!goalSummaryLine(S.goals[1]).includes("%") && goalSummaryLine(S.goals[1]) === "0 of 2 milestones"'));
   await shot('31-plan-goals');
   await click('[data-act="tab"][data-tab="today"]');
@@ -309,8 +309,8 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
   await page.locator('[data-act="goalOpen"][data-id]').nth(1).click(); await page.waitForTimeout(250);
   for (const i of [0, 1]) { await page.locator('.sheet [data-act="msToggle"]').nth(i).check(); await page.waitForTimeout(150); }
   await page.waitForTimeout(200); await shot('32-goal-reached');
-  ok('G5 Reaching every milestone offers completion; nothing completes automatically', (await page.locator('text=Mark complete').count()) >= 1 && await st('S.goals[1].status === "active"'));
-  await click('.sheet [data-act="goalComplete"]'); await click('[data-act="confirmOk"]'); await page.waitForTimeout(300); await shot('33-report');
+  ok('G5 Reaching every milestone offers completion; nothing completes automatically', (await page.locator('text=Complete project').count()) >= 1 && await st('S.goals[1].status === "active"'));
+  await click('.sheet [data-act="goalComplete"]'); await click('[data-act="goalCompleteYes"]'); await page.evaluate(() => openReport(S.goals[1].id)); await page.waitForTimeout(300); await shot('33-report');
   const rtext = await st('reportText(S.goals[1], goalRecord(S.goals[1]))');
   ok('C1 Completion report opens with records, milestones and a grounded message', rtext.includes('GOAL COMPLETED: Launch the dashboard offer') && rtext.includes('Draft the offer') && rtext.includes('You began') && (await page.locator('.sheet svg.chart').count()) === 1);
   await page.check('#rpManifest'); await page.waitForTimeout(200);

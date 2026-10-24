@@ -217,6 +217,7 @@ function renderCompanion() {
       <p class="small">${esc(c.next ? rcf(C.growth, c.pts, c.next) : rcf(C.full, c.pts))}</p>${status ? `<p class="small muted">${esc(status)}</p>` : ''}
       <div class="btn-row"><button class="btn sm" data-act="cpChange" aria-haspopup="dialog">${esc(C.change)}</button><button class="btn ghost sm" data-act="compOpen">${esc(C.details)}</button></div></section>
     ${renderRestQuote(restQuote(today()))}
+    ${renderMilestones()}
     <section class="card stack" id="cpScenery">${renderSceneryControls()}</section>
     <p class="tiny muted">${esc(C.decor)}</p></div>`;
 }
