@@ -141,50 +141,19 @@ A.eraseAll = () => {
 A.enterDemo = async () => { await flush(); DEMO = true; const d = await Store.get(DEMO_KEY); S = d && !validateState(d).length ? normalize(d) : demoState(); await flush(); RETURN_GAP = 0; TAB = 'today'; render(); window.scrollTo(0, 0); toast('Demo mode. Sample data only.'); };
 A.exitDemo = async () => { await flush(); DEMO = false; S = normalize((await Store.get(REAL_KEY)) || defaultState()); applyTheme(); TAB = 'today'; render(); window.scrollTo(0, 0); toast('Back to your data.'); };
 
-/* ---------- Onboarding (short; deeper setup happens one area at a time) ---------- */
+/* ---------- Onboarding: profile, then ten questions (23-questions.js), then the plan review ---------- */
 let ONB = { step: 1 };
 function renderOnboarding() {
   const s = S.settings;
   if (!s.welcomeDone) return renderWelcome();
   if (ONB.step <= 1) return renderProfileSetup();
-  const n = ONB.step; const C = OC();
-  const h15 = (x) => new Intl.NumberFormat(locale()).format(x) + ' h';
-  const mins = [['15', '15 min'], ['30', '30 min'], ['45', '45 min'], ['60', h15(1)], ['90', h15(1.5)], ['120', h15(2) + '+'], ['', C.notSure]];
-  const wd = s.availability[1] == null ? '' : String(s.availability[1]); const we = s.availability[6] == null ? '' : String(s.availability[6]);
-  const steps = {
-    2: `<h1 class="h2">${esc(C.timeH)}</h1><p class="small muted">${esc(C.timeSub)}</p>
-      <div class="stack-s"><div class="h3">${esc(C.wd)}</div>${chips('obWd', mins, wd)}</div>
-      <div class="stack-s"><div class="h3">${esc(C.we)}</div>${chips('obWe', mins, we)}</div>
-      <label class="f">${esc(C.note)} <span class="hint">${esc(C.opt)}</span><input class="inp" id="obNote" maxlength="200" value="${esc(s.workdayNote)}" placeholder="${esc(C.notePh)}"></label>`,
-    3: `<h1 class="h2">${esc(C.ciH)}</h1><p class="small muted">${esc(C.ciSub)}</p><label class="f">${esc(C.ciLab)}<input class="inp" id="obCi" type="time" value="${esc(s.checkinTime)}"></label>`,
-    4: `<h1 class="h2">${esc(C.focusH)}</h1><p class="small muted">${esc(C.focusSub)}</p>${chips('obFocus', AREAS.map((a) => [a, C.focus[a]]), s.focus)}`,
-    5: `<h1 class="h2">${esc(C.areasH)}</h1><p class="small muted">${esc(C.areasSub)}</p>
-      <div class="area-list">${AREAS.map((a) => `<div class="area"><span class="dot ${a}"></span><div class="area-body"><span class="area-name">${t('area.' + a)}</span><span class="small">${esc(C.areas[a])}</span></div></div>`).join('')}</div>
-      <p class="small">${esc(C.calib)} ${t('calib')}</p>`
-  };
-  return `<main class="wrap" lang="${lang()}">${onbTop()}<div class="onb"><div class="steps" aria-hidden="true">${[1, 2, 3, 4, 5].map((i) => `<span class="${i <= n ? 'on' : ''}"></span>`).join('')}</div>
-    <div class="stack">${steps[n]}</div>
-    <div class="btn-row">${n > 1 ? `<button class="btn" data-act="obBack">${t('btn.back')}</button>` : ''}<button class="btn primary" data-act="obNext">${n === 5 ? esc(C.start) : t('btn.next')}</button></div>
-    </div></main>`;
+  if (ONB.step >= ONB_REVIEW) {
+    // The review needs every answer; send the person to the first one that's missing
+    const fi = firstInvalid(); if (fi <= 10) { ONB.step = fi + 1; s.onbStep = ONB.step; return renderQuestion(fi); }
+    return renderReview();
+  }
+  return renderQuestion(Math.min(10, ONB.step - 1));
 }
-function obCapture() {
-  const s = S.settings; const n = ONB.step;
-  if (n === 2) { const wd = getPick('obWd'), we = getPick('obWe'); for (const d of [1, 2, 3, 4, 5]) s.availability[d] = wd ? Number(wd) : null; for (const d of [0, 6]) s.availability[d] = we ? Number(we) : null; s.workdayNote = val('obNote'); }
-  if (n === 3) s.checkinTime = val('obCi') || '21:00';
-  if (n === 4) s.focus = getPick('obFocus') || 'money';
-  return true;
-}
-A.obBack = () => { obCapture(); ONB.step--; S.settings.onbStep = ONB.step; save(); render(); window.scrollTo(0, 0); };
-A.obNext = () => {
-  if (!obCapture()) return;
-  if (ONB.step < 5) { ONB.step++; S.settings.onbStep = ONB.step; save(); render(); window.scrollTo(0, 0); return; }
-  const td = today();
-  S.settings.areasConfirmed = true; S.settings.onboarded = true; S.settings.calibrationStart = td; S.settings.lastOpened = td;
-  S.weeks[weekStart(td)] = { main: S.settings.focus, mainOutcome: '', maintain: AREAS.filter((a) => a !== S.settings.focus), confirmedAt: nowISO() };
-  if (!S.business.block.versions.length) pushVersion(S.business.block, { days: [1, 2, 3, 4, 5], minutes: 15 }, td);
-  if (!S.tasks.some((x) => x.area === 'art')) { const a = { id: uid('task'), area: 'art', createdAt: nowISO(), versions: [] }; const AT = OC().art; pushVersion(a, { title: AT[0], finish: AT[1], minutes: 5, minTitle: AT[2], minMinutes: 1, medium: 'drawing', days: [0, 1, 2, 3, 4, 5, 6], date: null, cue: '' }, td); S.tasks.push(a); }
-  save(); TAB = 'today'; render(); window.scrollTo(0, 0);
-};
 
 /* ---------- Demo data (only ever stored under the separate demo key) ---------- */
 function demoState() {
@@ -243,7 +212,7 @@ function onClick(e) {
   el._last = now;
   fn(el, e);
 }
-const NO_GUARD = new Set(['pick', 'ciStep', 'tab', 'planWeek', 'progWeek', 'progRange', 'progMonth', 'chartTip', 'pinShow', 'obNext', 'obBack', 'closeSheet']);
+const NO_GUARD = new Set(['pick', 'ciStep', 'tab', 'planWeek', 'progWeek', 'progRange', 'progMonth', 'chartTip', 'pinShow', 'oqNext', 'oqBack', 'oqPick', 'oqAllDays', 'rvToggle', 'rvReplace', 'rvSwap', 'rvEdit', 'closeSheet']);
 let lastDay = null;
 async function boot() {
   await Store.open();

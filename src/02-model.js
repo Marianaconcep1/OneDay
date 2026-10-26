@@ -89,21 +89,22 @@ function itemsFor(ds) {
   const entries = txOn(ds).length;
   // The daily spending record starts on the setup day; earlier days were never scheduled
   const started = !S.settings.calibrationStart || ds >= S.settings.calibrationStart || ss || entries;
-  if (started) items.push({
-    key: 'spend', area: 'money', kind: 'spend', title: t('spend.title'), finish: 'Every purchase entered, or “No spending today”.',
+  // People who set up with the ten questions only get the spending record if they chose it
+  if (started && (S.settings.trackSpend !== false || ss || entries)) items.push({
+    key: 'spend', area: 'money', focus: S.settings.onbVersion === 2 ? 'money' : undefined, kind: 'spend', title: t('spend.title'), finish: 'Every purchase entered, or “No spending today”.',
     minutes: 2, status: ss === 'complete' || ss === 'none' ? 'done' : ss === 'incomplete' ? 'modified' : entries ? 'started' : 'scheduled'
   });
   for (const task of S.tasks) {
     const key = 't:' + task.id + '@' + ds;
     const o = S.occ[key];
     if (!taskScheduled(task, ds)) {
-      if (o && o.extra) items.push({ key, area: task.area, kind: 'task', taskId: task.id, unplanned: true, title: o.planned.title, plannedTitle: o.planned.title, minutes: o.minutes || 0, status: o.status, occ: o });
+      if (o && o.extra) items.push({ key, area: task.area, focus: task.focus, kind: 'task', taskId: task.id, unplanned: true, title: o.planned.title, plannedTitle: o.planned.title, minutes: o.minutes || 0, status: o.status, occ: o });
       continue;
     }
     const p = (o && o.planned) || taskPlan(task, ds);
     const small = !!smaller[key];
     items.push({
-      key, area: task.area, kind: 'task', taskId: task.id, title: small && p.minTitle ? p.minTitle : p.title, finish: p.finish, plannedTitle: p.title,
+      key, area: task.area, focus: task.focus, kind: 'task', taskId: task.id, title: small && p.minTitle ? p.minTitle : p.title, finish: p.finish, plannedTitle: p.title,
       minutes: small ? (p.minMinutes || 1) : p.minutes, fullMinutes: p.minutes, minTitle: p.minTitle, minMinutes: p.minMinutes, cue: p.cue,
       status: o ? o.status : 'scheduled', occ: o, smaller: small
     });
