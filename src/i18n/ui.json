@@ -6431,7 +6431,7 @@
 ],
 "{0} left before a short wait.": [
 "Quedan {0} antes de una breve espera.",
-"Ne restano {0} prima di una breve attesa.",
+"Restano {0} prima di una breve attesa.",
 "Encore {0} avant une courte attente."
 ],
 "Unlock": [
@@ -8383,5 +8383,65 @@
 "Cuando pausas todo, puedes pedir una nota dentro de la app cuando llegue tu regreso previsto. Aparece una sola vez, la primera vez que abras la app en esa fecha o después, y se cancela si vuelves antes. Los avisos por correo, SMS o del teléfono no están disponibles en esta versión; necesitan un servidor, y esta app no lo tiene.",
 "Quando metti in pausa tutto, puoi chiedere una nota nell’app quando arriva il rientro previsto. Appare una sola volta, la prima volta che apri l’app in quella data o dopo, e viene annullata se torni prima. Le notifiche via email, SMS o telefono non sono disponibili in questa versione; richiedono un server, che questa app non ha.",
 "Quand tu mets tout en pause, tu peux demander une note dans l’app quand arrive ton retour prévu. Elle apparaît une seule fois, la première fois que tu ouvres l’app à cette date ou après, et elle est annulée si tu reviens avant. Les notifications par e-mail, SMS ou téléphone ne sont pas disponibles dans cette version ; elles nécessitent un serveur, que cette app n’a pas."
+],
+"Forgot your PIN?": [
+"¿Olvidaste tu PIN?",
+"Hai dimenticato il PIN?",
+"Tu as oublié ton code PIN ?"
+],
+"This PIN locks One Day on this device. It isn’t an online account: it hides the app from casual viewing but doesn’t encrypt your records or protect them from someone with full access to the phone.": [
+"Este PIN bloquea One Day en este dispositivo. No es una cuenta en línea: oculta la app de miradas casuales, pero no cifra tus registros ni los protege de alguien con acceso completo al teléfono.",
+"Questo PIN blocca One Day su questo dispositivo. Non è un account online: nasconde l’app agli sguardi occasionali, ma non cifra i tuoi dati né li protegge da chi ha pieno accesso al telefono.",
+"Ce code PIN verrouille One Day sur cet appareil. Ce n’est pas un compte en ligne : il cache l’app des regards indiscrets, mais ne chiffre pas tes données et ne les protège pas de quelqu’un qui a un accès complet au téléphone."
+],
+"Open One Day from its secure address": [
+"Abre One Day desde su dirección segura",
+"Apri One Day dal suo indirizzo sicuro",
+"Ouvre One Day depuis son adresse sécurisée"
+],
+"This browser can’t create a secure PIN hash here (it needs a secure https page). One Day needs a PIN before it opens, so use its https address.": [
+"Este navegador no puede crear aquí un hash seguro del PIN (necesita una página https segura). One Day necesita un PIN antes de abrirse, así que usa su dirección https.",
+"Questo browser non può creare qui un hash sicuro del PIN (serve una pagina https sicura). One Day richiede un PIN prima di aprirsi, quindi usa il suo indirizzo https.",
+"Ce navigateur ne peut pas créer ici une empreinte sécurisée du code PIN (il faut une page https sécurisée). One Day demande un code PIN avant de s’ouvrir : utilise son adresse https."
+],
+"Create your PIN": [
+"Crea tu PIN",
+"Crea il tuo PIN",
+"Crée ton code PIN"
+],
+"You’ll use this code to unlock One Day whenever you return.": [
+"Usarás este código para desbloquear One Day cada vez que vuelvas.",
+"Userai questo codice per sbloccare One Day ogni volta che torni.",
+"Tu utiliseras ce code pour déverrouiller One Day chaque fois que tu reviens."
+],
+"6-digit PIN": [
+"PIN de 6 dígitos",
+"PIN di 6 cifre",
+"Code PIN à 6 chiffres"
+],
+"Confirm PIN": [
+"Confirma el PIN",
+"Conferma il PIN",
+"Confirme le code PIN"
+],
+"Save PIN and continue": [
+"Guardar PIN y continuar",
+"Salva il PIN e continua",
+"Enregistrer le code PIN et continuer"
+],
+"Only when I leave or reopen the app": [
+"Solo cuando salgo o vuelvo a abrir la app",
+"Solo quando esco o riapro l’app",
+"Seulement quand je quitte ou rouvre l’app"
+],
+"One Day asks for your PIN every time it’s opened, refreshed or brought back from the background.": [
+"One Day te pide el PIN cada vez que se abre, se recarga o vuelve del segundo plano.",
+"One Day ti chiede il PIN ogni volta che viene aperta, ricaricata o riportata in primo piano.",
+"One Day te demande ton code PIN à chaque ouverture, actualisation ou retour au premier plan."
+],
+"Also lock after no activity for": [
+"Bloquear también tras inactividad de",
+"Blocca anche dopo inattività di",
+"Verrouiller aussi après une inactivité de"
 ]
 }

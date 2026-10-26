@@ -11,7 +11,7 @@ const QUOTES = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'src', 'res
 
 (async () => {
   await new Promise((r) => srv.listen(8768, r));
-  const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome' });
+  const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome' }).catch(() => chromium.launch());
   const ctx = await browser.newContext({ ...devices['iPhone SE'], timezoneId: 'America/New_York' });
   await ctx.addInitScript(() => { const v = localStorage.getItem('__now'); if (v) window.__oneDayNow = Number(v); });
   const page = await ctx.newPage();
@@ -20,7 +20,9 @@ const QUOTES = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'src', 'res
   const setNow = async (iso) => { await page.evaluate((n) => { localStorage.setItem('__now', String(n)); window.__oneDayNow = n; }, Date.parse(iso)); };
   const shot = (n) => page.screenshot({ path: path.join(OUT, n + '.png') });
   const click = async (sel) => { await page.locator(sel).first().click(); await page.waitForTimeout(250); };
-  const reload = async (hash) => { await page.goto('http://localhost:8768/' + (hash || '')); await page.waitForTimeout(500); };
+  // Every open asks for the PIN; these checks unlock with the test PIN unless asked not to
+  const unlockP = async (pg) => { if (await pg.evaluate(() => typeof LOCKED !== 'undefined' && LOCKED)) { await pg.fill('#lkPin', '204816'); await pg.locator('[data-act="lockTry"]').click(); await pg.waitForFunction(() => !LOCKED, null, { timeout: 15000 }); await pg.waitForTimeout(250); } };
+  const reload = async (hash, keepLocked) => { await page.goto('http://localhost:8768/' + (hash || '')); await page.waitForTimeout(500); if (!keepLocked) await unlockP(page); };
 
   await page.goto('http://localhost:8768/'); await setNow('2026-10-22T14:00:00Z');
   // A set-up user with some earned growth
@@ -28,7 +30,7 @@ const QUOTES = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'src', 'res
     S = defaultState(); Object.assign(S.settings, { onboarded: true, welcomeDone: true, languageChosen: true, language: 'en', name: 'Mari', timezone: 'America/Puerto_Rico', calibrationStart: '2026-09-01', reminders: true, checkinTime: '08:00' });
     growthInit(); S.growth.enabled = true; S.growth.animations = true; S.growth.kind = 'garden'; S.growth.chapters[0].kind = 'garden';
     for (let i = 1; i <= 25; i++) S.growth.ledger['day:2026-10-' + String(i).padStart(2, '0') + ':' + S.growth.chapters[0].id] = { pts: 5, type: 'day', date: '2026-10-' + String(i).padStart(2, '0'), ch: S.growth.chapters[0].id };
-    await flush();
+    await flush(); await createPin('204816');
   });
   await reload('#plan');
   ok('R0 Bookmarked view opens normally without a pause', (await page.locator('.tabbar').count()) === 1 && (await st('TAB')) === 'plan');
@@ -113,8 +115,11 @@ const QUOTES = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'src', 'res
   await setNow('2026-10-26T15:00:00Z'); await reload();
   ok('R22 The note is not repeated', (await page.locator('main.rest').count()) === 1 && (await page.locator('.rest-note').count()) === 0 && (await st('pauseOn("2026-10-26","money")')) !== null);
 
-  // PIN lock and unlock keep Rest Mode (stands in for sign-in)
-  ok('R23 Rest Mode survives lock and unlock', await st(async () => { const a = AUTH; AUTH = { hash: 'x', user: 'Mari', fails: 0 }; LOCKED = true; render(); const locked = !document.querySelector('main.rest'); LOCKED = false; AUTH = a; render(); return locked && !!document.querySelector('main.rest'); }));
+  // Rest Mode is locked like every other screen, and comes back after unlocking
+  await page.reload(); await page.waitForTimeout(500);
+  ok('R23 Reopening during Rest Mode shows the lock first', (await st('LOCKED')) && (await page.locator('#lkPin').count()) === 1 && (await page.locator('main.rest, .rest-scene').count()) === 0);
+  await unlockP(page);
+  ok('R23b Unlocking returns to Rest Mode', (await page.locator('main.rest').count()) === 1);
 
   // Return
   await click('[data-act="restReturn"]');

@@ -8,7 +8,7 @@ A personal, local-first accountability app: one clear next action, quick logging
 
 ## First open
 
-A first-time visitor chooses a language first (English, Español, Italiano or Français; nothing is preselected). The sealed envelope, Mariana's letter and every onboarding step then appear in that language, with a small language switch on each screen that keeps your answers. Next comes name (required, never prefilled) and timezone (Puerto Rico by default, any IANA zone searchable), then time available, check-in time, weekly focus and the five areas. Language never changes timezone or currency (always USD). Progress survives a refresh, and returning users go straight to Today. The letter can be reread from Settings › About. The whole app follows the chosen language: every screen, question, message, notification and exported report, with dates and numbers formatted for that language. Anything you type stays as you wrote it, and outside resources in Mindset keep their original language with a label saying which one. City names in the timezone list and the typed DELETE/ERASE confirmations stay in English. The language preference is saved on this device (there is no account step yet).
+A first-time visitor chooses a language first (English, Español, Italiano or Français; nothing is preselected). The sealed envelope, Mariana's letter and every onboarding step then appear in that language, with a small language switch on each screen that keeps your answers. Next comes name (required, never prefilled) and timezone (Puerto Rico by default, any IANA zone searchable), then time available, check-in time, weekly focus and the five areas. Language never changes timezone or currency (always USD). Progress survives a refresh, and returning users go straight to Today. The letter can be reread from Settings › About. The whole app follows the chosen language: every screen, question, message, notification and exported report, with dates and numbers formatted for that language. Anything you type stays as you wrote it, and outside resources in Mindset keep their original language with a label saying which one. City names in the timezone list and the typed DELETE/ERASE confirmations stay in English. The language preference is saved on this device. Setup then asks for a 6-digit PIN (see PIN lock below); there is no online account.
 
 ## Put it on your iPhone
 
@@ -79,9 +79,13 @@ The envelope, letter and scenes use the browser's own animation tools (CSS and t
 
 ## PIN lock
 
-Settings › Profile and security › Set up a PIN. It's a 6-digit convenience lock for this device. Only a salted PBKDF2 hash is stored, never the PIN. After 5 wrong tries it waits 30 seconds, then longer. It auto-locks after inactivity (1–30 minutes) and when you leave the app. A recovery code, shown once, resets a forgotten PIN.
+A 6-digit PIN is required. It's created right after name and timezone during setup (anyone who set up the app before this change is asked to create one the next time they open it), and there is no way to skip it or turn it off. Leading zeros work (`048213` is a valid PIN). The digits are masked, with a Show/Hide button.
 
-The PIN does **not** encrypt your records, and it is not an online account. Real accounts (passkey or verified email sign-in), sync between devices and multi-user admin roles all need a backend.
+One Day asks for the PIN every time it is opened, refreshed, or brought back from the background, and nothing personal is drawn before the PIN is accepted: not Today, Rest Mode, My Companion, reports, sheets, or a bookmarked page such as `#plan`. Moving between tabs during the same visit doesn't ask again, and unlocking returns to the page you were on. It can also lock after 1–30 minutes without activity (Settings › Profile and security). The lock screen follows your saved language.
+
+Only a salted PBKDF2-SHA256 hash is stored, never the PIN, and it isn't in backups. After 5 wrong tries it waits 30 seconds, then twice as long after each further miss, up to 15 minutes, and the wait survives a reload. “Forgot your PIN?” takes the recovery code shown once at setup and lets you choose a new PIN without touching any records. Changing the PIN needs the current PIN (or the recovery code from the lock screen).
+
+**What this is not.** The check runs in this browser, so it is a device lock that keeps the app private from casual viewing. It is not secure authentication: the records are not encrypted, and someone with full access to the phone's browser data could read them or clear the attempt counter. There is no account, no server-side PIN check and no verified recovery. Those need a backend: account sign-in (passkey or verified email), PIN verification and attempt limits on the server, verified account recovery, and encryption of the records on the device with a key the server only releases after a correct PIN.
 
 ## Mindset editions (for the app owner)
 

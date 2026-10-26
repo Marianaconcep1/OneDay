@@ -15,6 +15,8 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
   // Thursday Oct 22 2026, 10:00 in Puerto Rico (UTC-4)
   let NOW = Date.parse('2026-10-22T14:00:00Z');
   await ctx.addInitScript(() => { const v = localStorage.getItem('__now'); if (v) window.__oneDayNow = Number(v); });
+  // Record the first screen the app draws after loading, to catch any flash of personal content before the lock
+  await ctx.addInitScript(() => { window.__firstApp = null; new MutationObserver((m, o) => { const a = document.getElementById('app'); if (a && !a.textContent.includes('Loading One Day')) { window.__firstApp = a.querySelector('#lkPin') ? 'lock' : a.querySelector('#psPin') ? 'setup' : 'other'; o.disconnect(); } }).observe(document, { childList: true, subtree: true }); });
   const page = await ctx.newPage();
   const errors = []; const external = [];
   page.on('pageerror', (e) => errors.push(e.message)); page.on("console", (m) => { if (m.type() === "error" && !m.text().includes("status of 500")) errors.push(m.text()); });
@@ -24,6 +26,14 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
   const click = async (sel) => { await page.locator(sel).first().click(); await page.waitForTimeout(260); };
   const noHScroll = async (label) => { const w = await page.evaluate(() => [document.documentElement.scrollWidth, window.innerWidth]); if (w[0] > w[1]) ok('No horizontal scroll: ' + label, false, w.join('>')); return w[0] <= w[1]; };
   const shot = (n) => page.screenshot({ path: path.join(OUT, n + '.png'), fullPage: false });
+  // The app is locked on every open: note what the lock screen showed, then unlock with the current PIN
+  let PIN = null; const lockSeen = [];
+  const unlock = async () => {
+    if (!PIN || !(await st('LOCKED'))) return false;
+    lockSeen.push(await st('!!document.querySelector("#lkPin") && !document.querySelector(".tabbar, main.rest, .sheet, #main") && window.__firstApp === "lock"'));
+    await page.fill('#lkPin', PIN); await click('[data-act="lockTry"]'); await page.waitForFunction(() => !LOCKED, null, { timeout: 15000 }); await page.waitForTimeout(200);
+    return true;
+  };
 
   await page.goto('http://localhost:8765/');
   await setNow('2026-10-22T14:00:00Z'); await page.reload(); await page.waitForTimeout(400);
@@ -74,7 +84,36 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
   await shot('01f-setup-filled');
   await click('[data-act="setupSave"]');
   ok('W16 Continue goes to the next onboarding step and saves', (await st('ONB.step')) === 2 && (await st('S.settings.name')) === 'Mariana' && (await st('S.settings.timezone')) === 'America/Puerto_Rico' && (await st('S.settings.language')) === 'en');
+  // PIN setup is part of creating the profile and can't be skipped
+  ok('K1 PIN setup follows the profile step, with the explanation', (await page.locator('#psPin').count()) === 1 && (await page.locator('#psPin2').count()) === 1 && (await page.locator('text=You’ll use this code to unlock One Day whenever you return.').count()) === 1);
+  ok('K2 No way past it: no skip, no tabs, no other actions', (await st('[...new Set([...document.querySelectorAll("[data-act]")].map(e => e.dataset.act))].sort().join()')) === 'pinCreate,pinShow' && (await page.locator('.tabbar').count()) === 0);
+  await page.goto('http://localhost:8765/#plan'); await page.waitForTimeout(300);
+  ok('K3 A direct link doesn’t skip PIN setup', (await page.locator('#psPin').count()) === 1 && (await page.locator('#main').count()) === 0);
   await page.reload(); await page.waitForTimeout(500);
+  ok('K4 Refreshing doesn’t skip PIN setup', (await page.locator('#psPin').count()) === 1 && (await page.locator('[data-group="obWd"]').count()) === 0);
+  await shot('01g-pin-setup');
+  ok('K5 Digits are masked by default, numeric keypad', (await page.locator('#psPin[type="password"][inputmode="numeric"][maxlength="6"]').count()) === 1);
+  await click('[data-act="pinShow"][data-for="psPin"]');
+  ok('K6 Show/hide reveals the digits', (await page.locator('#psPin').getAttribute('type')) === 'text');
+  await click('[data-act="pinShow"][data-for="psPin"]');
+  await page.fill('#psPin', '12a34'); await page.dispatchEvent('#psPin', 'input');
+  ok('K7 Only digits can be typed', (await page.inputValue('#psPin')) === '1234');
+  await page.fill('#psPin', '12345'); await page.fill('#psPin2', '12345'); await click('[data-act="pinCreate"]');
+  ok('K8 Fewer than six digits is refused', (await page.locator('text=Use exactly 6 digits.').count()) === 1 && await st('!AUTH'));
+  await page.fill('#psPin', '123456'); await page.fill('#psPin2', '123456'); await click('[data-act="pinCreate"]');
+  ok('K9 Weak PINs are refused', (await page.locator('text=Avoid a straight run').count()) === 1 && await st('!AUTH'));
+  await page.fill('#psPin', '048213'); await page.fill('#psPin2', '048231'); await click('[data-act="pinCreate"]');
+  ok('K10 The confirmation must match', (await page.locator('text=The two PINs don’t match.').count()) === 1 && await st('!AUTH'));
+  await page.fill('#psPin', '048213'); await page.fill('#psPin2', '048213'); await click('[data-act="pinCreate"]');
+  await page.waitForSelector('#rcText', { timeout: 15000 }); const code = (await page.locator('#rcText').textContent()).trim(); await shot('01h-recovery-code');
+  PIN = '048213';
+  const stored = await st('Store.get("auth").then(a => JSON.stringify(a))');
+  ok('K11 A PIN with a leading zero is accepted; only a salted hash is stored', !stored.includes('048213') && !stored.includes('48213') && stored.includes('"hash"') && stored.includes('"salt"') && !(await st('JSON.stringify(S)')).includes('048213') && !(await st('JSON.stringify(S)')).includes('"recHash"'));
+  await page.check('#rcOk'); await click('[data-act="rcDone"]');
+  ok('K12 After saving the code, onboarding continues', (await page.locator('[data-group="obWd"]').count()) > 0);
+  await page.reload(); await page.waitForTimeout(500);
+  ok('K13 Refresh during onboarding locks first', (await page.locator('#lkPin').count()) === 1 && (await page.locator('[data-group="obWd"]').count()) === 0);
+  await unlock();
   ok('W17 Onboarding progress survives refresh', (await page.locator('[data-group="obWd"]').count()) > 0);
   // 1. Onboarding without race date or finances
   await click('[data-group="obWd"][data-val="60"]'); await click('[data-group="obWe"][data-val="90"]'); await click('[data-act="obNext"]');
@@ -128,7 +167,7 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
   await click('.sheet [data-act="closeSheet"]');
 
   // 5. Refresh preserves records
-  await page.reload(); await page.waitForTimeout(500);
+  await page.reload(); await page.waitForTimeout(500); await unlock();
   ok('5 Refresh preserves records', await st('Object.keys(S.occ).length >= 2 && !!S.checkins[today()] && S.money.spendDays[today()].status === "none"'));
 
   // 6. Editing a check-in does not duplicate
@@ -187,7 +226,7 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
 
   // 12. Return after several missed days
   await st('(() => { S.settings.lastOpened = dAdd(today(), -5); return flush(); })()');
-  await page.goto('http://localhost:8765/#today'); await page.reload(); await page.waitForTimeout(500);
+  await page.goto('http://localhost:8765/#today'); await page.reload(); await page.waitForTimeout(500); await unlock();
   const welcome = await page.locator('text=Welcome back. Start with today.').count();
   const occBefore = await st('Object.keys(S.occ).length');
   await shot('11-welcome-back');
@@ -203,7 +242,7 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
   await st('(() => { S.money.tx.push({id:"junk",date:today(),type:"expense",amount:999,category:"Other",createdAt:nowISO()}); save(); })()');
   await click('[data-act="importOpen"]'); await page.fill('#impText', text); await click('[data-act="importCheck"]');
   await click('[data-act="importDo"]'); await click('[data-act="confirmOk"]'); await page.waitForTimeout(300);
-  await page.reload(); await page.waitForTimeout(500);
+  await page.reload(); await page.waitForTimeout(500); await unlock();
   const restored = await st('JSON.stringify(Object.assign({}, S, { updatedAt: 0 }))');
   const a = JSON.parse(snapshot), b = JSON.parse(restored); delete a.settings.lastOpened; delete b.settings.lastOpened; delete a.lastBackup; delete b.lastBackup;
   ok('15 Backup export and restore preserve records exactly', JSON.stringify(a) === JSON.stringify(b) && !(await st('S.money.tx.some(x => x.id === "junk")')));
@@ -345,7 +384,7 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
   await openSet('look'); await click('[data-act="lookOpen"]');
   await click('[data-group="lkBg"][data-val="plain-paper"]'); await click('[data-group="lkFont"][data-val="lora"]'); await click('[data-group="lkInk"][data-val="midnight"]');
   await page.locator('#lkSize').fill('120'); await page.waitForTimeout(100); await click('[data-act="lookApply"]');
-  await page.reload(); await page.waitForTimeout(600);
+  await page.reload(); await page.waitForTimeout(600); await unlock();
   ok('P2 Applied look persists after reload', await st('S.settings.look.bg === "plain-paper" && S.settings.look.font === "lora" && getComputedStyle(document.documentElement).getPropertyValue("--zoom").trim() === "1.2"'));
   ok('P3 Every offered text color keeps 7:1 contrast in light and dark', await st('INKS.every(inkOk)'));
   await click('[data-act="tab"][data-tab="today"]'); await shot('38-today-120'); await noHScroll('today at 120% text');
@@ -366,35 +405,61 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
   await openSet('companion'); 
 
   // PIN lock
-  await click('[data-act="tab"][data-tab="settings"]'); await click('[data-act="pinSetup"]');
-  await page.fill('#pfUser', 'Mari'); await page.fill('#pfNew', '123456'); await page.fill('#pfNew2', '123456'); await click('[data-act="pinSave"]');
-  ok('L1 Weak PINs are refused', (await page.locator('text=Avoid a straight run').count()) === 1 && await st('!AUTH'));
-  await page.waitForTimeout(450); await page.fill('#pfNew', '493817'); await page.fill('#pfNew2', '493817'); await click('[data-act="pinSave"]'); await page.waitForTimeout(600);
-  await page.waitForSelector('#rcText', { timeout: 15000 }).catch(async () => { await shot('dbg-pin'); console.log('DBG', await st('JSON.stringify([!!AUTH, ($("#pfMsg")||{}).textContent, SH.pinMode, !!$(".sheet")])')); }); const code = (await page.locator('#rcText').textContent()).trim(); await shot('40-recovery-code');
-  await page.check('#rcOk'); await click('[data-act="rcDone"]');
-  const stored = await st('Store.get("auth").then(a => JSON.stringify(a))');
-  const backup = await st('JSON.stringify(S)');
-  ok('L2 Only a salted hash is stored, outside backups', !stored.includes('493817') && stored.includes('"hash"') && !backup.includes('493817') && !backup.includes('"recHash"'));
+  await click('[data-act="tab"][data-tab="plan"]'); await click('[data-act="tab"][data-tab="progress"]'); await click('[data-act="tab"][data-tab="settings"]');
+  ok('L1 Moving between tabs in the same visit doesn’t ask for the PIN', await st('!LOCKED') && (await page.locator('#lkPin').count()) === 0);
+  ok('L2 The PIN can’t be turned off', (await page.locator('[data-act="pinOff"], [data-act="pinSetup"]').count()) === 0 && (await page.locator('[data-act="pinChange"]').count()) === 1);
   await click('[data-act="lockNowBtn"]'); await shot('41-lock');
-  ok('L3 Lock screen with masked PIN entry and show/hide', (await page.locator('#lkPin[type="password"][inputmode="numeric"]').count()) === 1 && (await page.locator('.tabbar').count()) === 0);
+  ok('L3 Lock screen with masked PIN entry and show/hide', (await page.locator('#lkPin[type="password"][inputmode="numeric"]').count()) === 1 && (await page.locator('.tabbar').count()) === 0 && (await page.locator('text=Forgot your PIN?').count()) === 1);
   await click('[data-act="pinShow"]'); const shown = await page.locator('#lkPin').getAttribute('type'); await click('[data-act="pinShow"]');
-  for (let i = 0; i < 5; i++) { await page.fill('#lkPin', '000000'); await click('[data-act="lockTry"]'); await page.waitForTimeout(500); }
+  await page.fill('#lkPin', '48213'); await click('[data-act="lockTry"]'); await page.waitForTimeout(300);
+  await page.fill('#lkPin', '482130'); await click('[data-act="lockTry"]'); await page.waitForTimeout(500);
+  ok('L3b Dropping or moving the leading zero doesn’t unlock', await st('LOCKED') && (await st('AUTH.fails')) === 1);
+  for (let i = 0; i < 4; i++) { await page.fill('#lkPin', '000000'); await click('[data-act="lockTry"]'); await page.waitForTimeout(500); }
   await shot('42-lockout');
-  ok('L4 Five wrong PINs trigger a timed wait', shown === 'text' && await st('lockoutLeft() > 0 && LOCKED') && (await page.locator('[data-act="lockTry"][disabled]').count()) === 1);
-  await setNow(new Date(NOW + 31000).toISOString());
+  const wait1 = await st('lockoutLeft()');
+  ok('L4 Five wrong PINs trigger a timed wait', shown === 'text' && wait1 > 0 && await st('LOCKED') && (await page.locator('[data-act="lockTry"][disabled]').count()) === 1);
+  await page.reload(); await page.waitForTimeout(600);
+  ok('L4b The wait survives a reload', await st('LOCKED && lockoutLeft() > 0') && (await page.locator('[data-act="lockTry"][disabled]').count()) === 1);
+  await setNow(new Date(NOW + 31000).toISOString()); await page.reload(); await page.waitForTimeout(600);
+  await page.fill('#lkPin', '000000'); await click('[data-act="lockTry"]'); await page.waitForTimeout(500);
+  ok('L4c Each further miss waits longer', await st('lockoutLeft()') > wait1 && await st('LOCKED'));
+  await setNow(new Date(NOW + 61000).toISOString());
+  const recBefore0 = await st('JSON.stringify([S.tasks.length, Object.keys(S.checkins).length, Object.keys(S.occ).length])');
   await click('[data-act="lockMode"][data-mode="recover"]'); await page.fill('#lkCode', code.toLowerCase()); await page.fill('#lkNew', '582039'); await page.fill('#lkNew2', '582039'); await click('[data-act="lockRecover"]'); await page.waitForSelector('#rcText', { timeout: 15000 }).catch(() => {});
-  ok('L5 Recovery code resets the PIN and issues a new code', await st('!LOCKED') && (await page.locator('#rcText').count()) === 1);
+  ok('L5 Forgot your PIN: the recovery code resets it, keeps progress and issues a new code', await st('!LOCKED') && (await page.locator('#rcText').count()) === 1 && (await st('JSON.stringify([S.tasks.length, Object.keys(S.checkins).length, Object.keys(S.occ).length])')) === recBefore0);
+  const code2 = (await page.locator('#rcText').textContent()).trim();
+  await st('(() => { AUTH.autoLockMin = 1; lastActivity = Date.now() - 120000; autoLockTick(); })()'); await page.waitForTimeout(300);
+  ok('L5b A code not yet confirmed comes back after unlocking', await st('LOCKED') && (await page.locator('#rcText').count()) === 0);
+  PIN = '582039'; await unlock();
+  ok('L5c …and is shown again', (await page.locator('#rcText').count()) === 1 && (await page.locator('#rcText').textContent()).trim() === code2);
   await page.check('#rcOk'); await click('[data-act="rcDone"]');
   await st('(() => { AUTH.autoLockMin = 1; lastActivity = Date.now() - 120000; autoLockTick(); })()'); await page.waitForTimeout(200);
   ok('L6 Auto-lock after inactivity', await st('LOCKED') && (await page.locator('#lkPin').count()) === 1);
   await page.fill('#lkPin', '582039'); await click('[data-act="lockTry"]'); await page.waitForTimeout(700);
   ok('L7 Correct PIN unlocks', await st('!LOCKED'));
+  await click('[data-act="tab"][data-tab="plan"]');
+  await page.evaluate(() => { Object.defineProperty(document, 'hidden', { configurable: true, get: () => true }); document.dispatchEvent(new Event('visibilitychange')); });
+  await page.waitForTimeout(200);
+  ok('L7b Leaving the app locks it at once', await st('LOCKED') && (await page.locator('#lkPin').count()) === 1 && (await page.locator('#main, .tabbar').count()) === 0);
+  await page.evaluate(() => { Object.defineProperty(document, 'hidden', { configurable: true, get: () => false }); document.dispatchEvent(new Event('visibilitychange')); });
+  await unlock();
+  ok('L7c Unlocking returns to the same tab', await st('TAB') === 'plan' && (await page.locator('#main').count()) === 1);
   await page.reload(); await page.waitForTimeout(600);
   ok('L8 The lock survives a reload', await st('LOCKED') && (await page.locator('#lkPin').count()) === 1);
-  await page.fill('#lkPin', '582039'); await click('[data-act="lockTry"]'); await page.waitForTimeout(700);
+  await unlock();
+  ok('L8b After a reload, unlocking restores the bookmarked tab', await st('TAB') === 'plan' && (await page.evaluate(() => location.hash)) === '#plan');
+  await page.goto('http://localhost:8765/#progress'); await page.reload(); await page.waitForTimeout(600);
+  const deepLocked = await st('LOCKED') && (await page.locator('#main, .tabbar').count()) === 0;
+  await unlock();
+  ok('L8c A direct link to an internal page shows the lock first, then that page', deepLocked && await st('TAB') === 'progress');
+  ok('L8d The page served before the app starts holds only “Loading”', (await (await fetch('http://localhost:8765/')).text()).includes('<div id="app"><main class="wrap"><p style="padding:24px 0">Loading One Day…</p></main></div>'));
   await click('[data-act="tab"][data-tab="settings"]'); await shot('43-settings-sections'); await noHScroll('settings');
-  await click('[data-act="pinOff"]'); await page.fill('#pfCur', '582039'); await click('[data-act="pinSave"]'); await page.waitForTimeout(600);
-  ok('L9 PIN can be turned off with the current PIN', await st('!AUTH'));
+  await click('[data-act="pinChange"]'); await page.fill('#pfCur', '048213'); await page.fill('#pfNew', '007341'); await page.fill('#pfNew2', '007341'); await click('[data-act="pinSave"]'); await page.waitForTimeout(700);
+  ok('L9 Changing the PIN needs the current PIN', (await page.locator('text=The current PIN didn’t match.').count()) === 1);
+  await page.fill('#pfCur', '582039'); await click('[data-act="pinSave"]'); await page.waitForTimeout(700);
+  PIN = '007341'; await click('[data-act="lockNowBtn"]'); await unlock();
+  ok('L9b The new PIN (with leading zeros) unlocks', await st('!LOCKED'));
+  ok('L10 Every reload and return showed only the lock screen first', lockSeen.length >= 8 && lockSeen.every(Boolean), lockSeen.length + ' locks');
 
   // Pause
   await openSet('pause'); await click('[data-act="pauseForm"]');
@@ -407,11 +472,11 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
   const occN = await st('Object.keys(S.occ).length');
   await click('[data-act="restMenu"]'); await click('.sheet [data-act="pauseForm"]'); await page.fill('#psEd', await st('dAdd(today(), 4)')); await click('[data-act="pauseSave"]');
   ok('V3 Extending a pause from the Rest Mode menu updates the end time', await st('S.pauses[0].end.startsWith(dAdd(today(), 4))') && (await page.locator('main.rest').count()) === 1);
-  await setNow(new Date(Date.parse(td0 + 'T14:00:00Z') + 6 * 86400000).toISOString()); await page.reload(); await page.waitForTimeout(600);
+  await setNow(new Date(Date.parse(td0 + 'T14:00:00Z') + 6 * 86400000).toISOString()); await page.reload(); await page.waitForTimeout(600); await unlock();
   await shot('46-still-resting');
   ok('V4 After the planned end it waits in Rest Mode until you choose', (await page.locator('main.rest').count()) === 1 && await st('pauseState(S.pauses[0]) === "ended" && pausedAll(today())'));
   ok('V5 No backlog from paused days, records preserved', await st(`itemsFor(dAdd(today(), -2)).filter(i => !i.paused).length === 0`) && (await st('Object.keys(S.occ).length')) === occN);
-  await page.reload(); await page.waitForTimeout(500);
+  await page.reload(); await page.waitForTimeout(500); await unlock();
   ok('V6 Without confirmation it stays paused, no repeated prompts', (await page.locator('main.rest').count()) === 1 && (await page.locator('.toast').count()) === 0);
   await click('[data-act="restReturn"]');
   ok('V7 Resuming needs your choice, then opens Today', await st('S.pauses[0].resumedOn === today() && pauseState(S.pauses[0]) === "over"') && (await page.locator('#restBack').count()) === 1 && (await page.locator('.tabbar').count()) === 1);
@@ -433,7 +498,7 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
   ok('E4 Ended (not completed), linked tasks stop, history and growth kept', await st(`goalById("${gid}").status === "ended" && goalById("${gid}").endReason === null && !itemsFor(dAdd(today(), 2)).some(i => i.title === "Read 20 pages") && goalById("${gid}").manual.length >= 1`) && (await st('chapterPoints(chapter().id)')) >= growthBeforeEnd && (await page.locator('text=Reopen with a fresh schedule').count()) === 1);
   await click('.sheet [data-act="closeSheet"]');
   ok('E5 Ended projects move to Archived projects', (await page.locator('text=Archived projects').count()) === 1);
-  await setNow(new Date(NOW + 3 * 86400000).toISOString()); await page.reload(); await page.waitForTimeout(500);
+  await setNow(new Date(NOW + 3 * 86400000).toISOString()); await page.reload(); await page.waitForTimeout(500); await unlock();
   await click('[data-act="tab"][data-tab="plan"]'); await page.evaluate(() => { OPEN_SECTS.add('sect-goals'); render(); });
   await page.locator(`[data-act="goalOpen"][data-id="${gid}"]`).first().click(); await page.waitForTimeout(250); await click('[data-act="goalReopen"]');
   ok('E6 Reopening starts fresh with no backlog', await st(`goalById("${gid}").status === "active" && !goalEndedOn(goalById("${gid}"), today()) && goalEndedOn(goalById("${gid}"), dAdd(today(), -1))`));
@@ -453,7 +518,7 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
   ok('M8 Paid items are rejected', await st('validateEdition({ app: "one-day-mindset", edition: { id: "x", updatedAt: nowISO(), items: [{ id: "a", creator: "James Clear", type: "course", title: "t", url: "https://example.com/a", published: "2026-10-01", access: "paid", summary: "s" }] } }).length > 0'));
   await page.locator('.ms-card [data-act="msSave"]').first().click(); await page.waitForTimeout(200);
   await page.locator('.ms-card [data-act="msHide"]').last().click(); await page.waitForTimeout(200);
-  await page.reload(); await page.waitForTimeout(500);
+  await page.reload(); await page.waitForTimeout(500); await unlock();
   ok('M9 Saved and hidden items persist', await st('Object.keys(S.mindset.saved).length === 1 && Object.keys(S.mindset.hidden).length === 1'));
   await page.route('**/mindset.json*', (r) => r.fulfill({ status: 500, body: 'error' }));
   await click('[data-act="tab"][data-tab="mindset"]'); await click('[data-act="msCheck"]'); await page.waitForTimeout(600); await shot('52-mindset-failed');
@@ -466,7 +531,7 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
   ok('M11 Items repeated in a later edition aren’t shown as new again', (await page.locator('.ms-card .pill.started').count()) === 0 && (await page.locator('text=No relevant new resources this week').count()) === 1);
   await click('[data-act="tab"][data-tab="today"]');
   const bannerN = await page.locator('text=A new Mindset edition is ready.').count();
-  await click('[data-act="msNoticeDismiss"]'); await page.reload(); await page.waitForTimeout(500);
+  await click('[data-act="msNoticeDismiss"]'); await page.reload(); await page.waitForTimeout(500); await unlock();
   ok('M12 Opt-in notice appears once per edition', bannerN === 1 && (await page.locator('text=A new Mindset edition is ready.').count()) === 0);
   await page.unroute('**/mindset.json*');
   await click('[data-act="tab"][data-tab="mindset"]');
@@ -481,7 +546,7 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
   await noHScroll('mindset');
 
   // W. Returning users, language switch, letter in Settings
-  await page.goto('http://localhost:8765/#today'); await page.reload(); await page.waitForTimeout(500);
+  await page.goto('http://localhost:8765/#today'); await page.reload(); await page.waitForTimeout(500); await unlock();
   ok('W18 Returning users skip the welcome', (await page.locator('.envelope').count()) === 0 && (await page.locator('.date-h').count()) === 1);
   const recBefore = await st('JSON.stringify([S.tasks.length, Object.keys(S.checkins).length, S.money.tx.length, S.goals.length])');
   await click('[data-act="tab"][data-tab="settings"]');
@@ -533,6 +598,10 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
     await p.screenshot({ path: path.join(OUT, `71-setup-${lng}.png`) });
     await p.locator('#suTzList .tz-opt').first().click(); await p.waitForTimeout(100);
     await step('[data-act="setupSave"]');
+    await p.screenshot({ path: path.join(OUT, `71b-pin-${lng}.png`) });
+    leaks.push(...(await p.evaluate(() => document.body.innerText)).split('\n').filter((x) => lng !== 'en' && ['Create your PIN', 'You’ll use this code to unlock One Day whenever you return.', 'Confirm PIN', 'Save PIN and continue', '6-digit PIN'].includes(x.trim())));
+    await p.fill('#psPin', '019283'); await p.fill('#psPin2', '019283'); await step('[data-act="pinCreate"]', 300);
+    await p.waitForSelector('#rcText', { timeout: 15000 }); await p.check('#rcOk'); await step('[data-act="rcDone"]');
     await p.locator('[data-group="obWd"][data-val="60"]').click(); await p.waitForTimeout(150);
     await p.screenshot({ path: path.join(OUT, `72-time-${lng}.png`) });
     await step('[data-act="obNext"]'); await step('[data-act="obNext"]'); await step('[data-act="obNext"]');
@@ -544,6 +613,9 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
     ok(`W29-${lng} No English text on any onboarding screen`, leaks.length === 0, leaks.slice(0, 4).join(' / '));
     await p.reload(); await p.waitForTimeout(500);
     ok(`W30-${lng} Returning user is not asked for language again`, (await p.locator('[data-act="langPick"]').count()) === 0 && (await p.locator('.envelope').count()) === 0);
+    const lockTxt = await p.locator('main').innerText(); await p.screenshot({ path: path.join(OUT, `74-lock-${lng}.png`) });
+    const UNL = { es: 'Desbloquear', it: 'Sblocca', fr: 'Déverrouiller', en: 'Unlock' }[lng];
+    ok(`W30b-${lng} The lock screen opens in the saved language`, (await p.locator('#lkPin').count()) === 1 && lockTxt.includes(UNL) && (lng === 'en' || (!lockTxt.includes('Forgot your PIN?') && !lockTxt.includes('Unlock'))), lockTxt.replace(/\n/g, ' / ').slice(0, 160));
     ok(`W31-${lng} No script errors`, errs.length === 0, errs.join(' | '));
     await c.close();
   }
