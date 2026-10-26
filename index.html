@@ -3447,14 +3447,22 @@ function renderLock() {
       <label class="f">Type ERASE to confirm<input class="inp" id="lkErase" autocomplete="off" autocapitalize="characters"></label>
       <button class="btn accent" data-act="lockErase">Erase everything</button><button class="btn ghost sm" data-act="lockMode" data-mode="pin">Cancel</button>`;
   } else {
-    body = `<div class="brand">One Day<br><em>${esc(AUTH.user || S.settings.name || '')}</em></div>
+    body = `<div class="brand">One Day<br><em>Beta</em></div>
       ${pinField('lkPin', 'PIN', true, 'lockMsg')}
       ${wait}<div id="lockMsg" class="small" aria-live="polite">${esc(LOCK_UI.msg || (AUTH.fails && !left ? plural(tries, 'attempt') + ' left before a short wait.' : ''))}</div>
       <button class="btn primary" data-act="lockTry" ${left ? 'disabled' : ''}>Unlock</button>
       <button class="btn ghost sm" data-act="lockMode" data-mode="recover">Forgot your PIN?</button>
       <p class="tiny muted">${esc(DEVICE_LOCK_NOTE)}</p>`;
   }
-  if (left) setTimeout(() => { if (LOCKED && !$('.sheet')) { const v = $('#lkCode') ? val('lkCode') : null; render(); if (v && $('#lkCode')) $('#lkCode').value = v; } }, Math.min(left, 1000) + 50);
+  // Count the wait down once a second, keeping whatever has been typed so far
+  if (left) setTimeout(() => {
+    if (!LOCKED || $('.sheet')) return;
+    const typed = [...document.querySelectorAll('#app input[id]')].map((i) => [i.id, i.value]);
+    const focus = document.activeElement && document.activeElement.id;
+    render();
+    for (const [id, v] of typed) { const i = document.getElementById(id); if (i) i.value = v; }
+    const f = focus && document.getElementById(focus); if (f) f.focus();
+  }, Math.min(left, 1000) + 50);
   return `<main class="wrap"><div class="onb lock stack">${body}</div></main>`;
 }
 A.pinShow = (el) => { const i = document.getElementById(el.dataset.for); if (!i) return; const on = i.type === 'password'; i.type = on ? 'text' : 'password'; el.textContent = on ? 'Hide' : 'Show'; el.setAttribute('aria-pressed', on ? 'true' : 'false'); };
@@ -3552,7 +3560,7 @@ function pinForm(title, needCurrent, needUser) {
     <button class="btn primary" data-act="pinSave">${SH.pinMode === 'code' ? 'Make a new code' : 'Save PIN'}</button>`);
 }
 A.pinSetup = () => { SH.pinMode = 'setup'; pinForm('Set up a PIN', false, true); };
-A.pinChange = () => { SH.pinMode = 'change'; pinForm('Change PIN', true, true); };
+A.pinChange = () => { SH.pinMode = 'change'; pinForm('Change PIN', true, false); };
 A.pinNewCode = () => { SH.pinMode = 'code'; pinForm('New recovery code', true, false); };
 A.pinSave = async () => {
   const msg = (m) => { const e = $('#pfMsg'); if (e) e.innerHTML = `<span class="pill skipped">${esc(m)}</span>`; };
@@ -3563,8 +3571,8 @@ A.pinSave = async () => {
     AUTH.fails = 0; AUTH.lockUntil = null;
   }
   if (mode === 'code') { const rc = newRecoveryCode(); AUTH.recSalt = newSalt(); AUTH.recHash = await pinHash(normCode(rc), AUTH.recSalt); await saveAuth(); showRecoveryCode(rc, 'Your old recovery code no longer works.'); return; }
-  const user = val('pfUser'); const p = val('pfNew');
-  if (!user) { msg('Add a username.'); return; }
+  const user = $('#pfUser') ? val('pfUser') : (AUTH && AUTH.user) || S.settings.name || ''; const p = val('pfNew');
+  if ($('#pfUser') && !user) { msg('Add a username.'); return; }
   const weak = weakPin(p); if (weak) { msg(weak); return; }
   if (p !== val('pfNew2')) { msg('The two PINs don’t match.'); return; }
   const base = AUTH || { autoLockMin: 5, createdAt: nowISO() };

@@ -410,6 +410,7 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
   ok('L2 The PIN can’t be turned off', (await page.locator('[data-act="pinOff"], [data-act="pinSetup"]').count()) === 0 && (await page.locator('[data-act="pinChange"]').count()) === 1);
   await click('[data-act="lockNowBtn"]'); await shot('41-lock');
   ok('L3 Lock screen with masked PIN entry and show/hide', (await page.locator('#lkPin[type="password"][inputmode="numeric"]').count()) === 1 && (await page.locator('.tabbar').count()) === 0 && (await page.locator('text=Forgot your PIN?').count()) === 1);
+  ok('L3a The lock screen says One Day Beta and shows no name', (await page.locator('.lock .brand').innerText()).replace(/\s+/g, ' ').trim() === 'One Day Beta' && !(await page.locator('main').innerText()).includes('Mariana'));
   await click('[data-act="pinShow"]'); const shown = await page.locator('#lkPin').getAttribute('type'); await click('[data-act="pinShow"]');
   await page.fill('#lkPin', '48213'); await click('[data-act="lockTry"]'); await page.waitForTimeout(300);
   await page.fill('#lkPin', '482130'); await click('[data-act="lockTry"]'); await page.waitForTimeout(500);
