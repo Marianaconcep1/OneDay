@@ -36,7 +36,7 @@ function mainOutcomeLine(td) {
   const w = weekPlan(weekStart(td));
   if (!w || !w.confirmedAt) return '';
   const g = w.goalId && goalById(w.goalId);
-  return `<div class="small muted mt-s">This week: <b>${esc(g ? g.title : AREA_GOAL[w.main] || w.main)}</b>${w.mainOutcome ? ' · ' + esc(w.mainOutcome) : ''}</div>`;
+  return `<div class="small muted mt-s">This week: <b>${esc(g ? g.title : w.focus ? focusLabel(w.focus) : AREA_GOAL[w.main] || w.main)}</b>${w.mainOutcome ? ' · ' + esc(w.mainOutcome) : ''}</div>`;
 }
 function renderWeekCard(ws) {
   const w = weekPlan(ws) || {};

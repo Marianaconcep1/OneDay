@@ -69,6 +69,7 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
   await page.fill('#suName', '   '); await click('[data-act="setupSave"]');
   ok('W10 Whitespace-only name is rejected inline', (await page.locator('#suNameErr').innerText()).length > 0 && !(await st('S.settings.onboarded')) && (await st('ONB.step')) === 1);
   ok('W11 Puerto Rico is the default zone', (await page.locator('#suTzCur').innerText()) === 'Puerto Rico — Atlantic Standard Time');
+  await click('#suTzBtn');
   await page.fill('#suTzQ', 'tokyo'); await page.waitForTimeout(150);
   const tokyo = await page.locator('#suTzList .tz-opt').allInnerTexts();
   ok('W12 Zones are searchable, with current offset', tokyo.length >= 1 && tokyo[0].includes('Tokyo') && tokyo[0].includes('UTC+9'));
@@ -76,7 +77,7 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
   await page.fill('#suTzQ', 'new york'); await page.waitForTimeout(150);
   const ny = await page.locator('#suTzList .tz-opt').first().innerText();
   ok('W12c DST-aware offset (New York in October is UTC−4)', ny.includes('UTC−4'), ny);
-  await page.fill('#suTzQ', ''); await page.waitForTimeout(150);
+  await page.keyboard.press('Escape'); await page.waitForTimeout(150);
   await page.fill('#suName', 'Mariana');
   await page.selectOption('#onbLang', 'it'); await page.waitForTimeout(200);
   ok('W13 Switching to Italian keeps the name and step', (await page.locator('text=Rendiamo questo spazio tuo.').count()) === 1 && (await page.inputValue('#suName')) === 'Mariana' && (await page.locator('#suTzCur').innerText()) === 'Porto Rico — Ora standard dell’Atlantico');
@@ -90,7 +91,7 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
   await page.goto('http://localhost:8765/#plan'); await page.waitForTimeout(300);
   ok('K3 A direct link doesn’t skip PIN setup', (await page.locator('#psPin').count()) === 1 && (await page.locator('#main').count()) === 0);
   await page.reload(); await page.waitForTimeout(500);
-  ok('K4 Refreshing doesn’t skip PIN setup', (await page.locator('#psPin').count()) === 1 && (await page.locator('[data-group="obWd"]').count()) === 0);
+  ok('K4 Refreshing doesn’t skip PIN setup', (await page.locator('#psPin').count()) === 1 && (await page.locator('#oqH').count()) === 0);
   await shot('01g-pin-setup');
   ok('K5 Digits are masked by default, numeric keypad', (await page.locator('#psPin[type="password"][inputmode="numeric"][maxlength="6"]').count()) === 1);
   await click('[data-act="pinShow"][data-for="psPin"]');
@@ -110,17 +111,20 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
   const stored = await st('Store.get("auth").then(a => JSON.stringify(a))');
   ok('K11 A PIN with a leading zero is accepted; only a salted hash is stored', !stored.includes('048213') && !stored.includes('48213') && stored.includes('"hash"') && stored.includes('"salt"') && !(await st('JSON.stringify(S)')).includes('048213') && !(await st('JSON.stringify(S)')).includes('"recHash"'));
   await page.check('#rcOk'); await click('[data-act="rcDone"]');
-  ok('K12 After saving the code, onboarding continues', (await page.locator('[data-group="obWd"]').count()) > 0);
+  ok('K12 After saving the code, onboarding continues', (await page.locator('#oqH').count()) > 0);
   await page.reload(); await page.waitForTimeout(500);
-  ok('K13 Refresh during onboarding locks first', (await page.locator('#lkPin').count()) === 1 && (await page.locator('[data-group="obWd"]').count()) === 0);
+  ok('K13 Refresh during onboarding locks first', (await page.locator('#lkPin').count()) === 1 && (await page.locator('#oqH').count()) === 0);
   await unlock();
-  ok('W17 Onboarding progress survives refresh', (await page.locator('[data-group="obWd"]').count()) > 0);
+  ok('W17 Onboarding progress survives refresh', (await page.locator('#oqH').count()) > 0);
   // 1. Onboarding without race date or finances
-  await click('[data-group="obWd"][data-val="60"]'); await click('[data-group="obWe"][data-val="90"]'); await click('[data-act="obNext"]');
-  await click('[data-act="obNext"]');
-  await click('[data-act="obNext"]');
-  await shot('02-onboarding-areas');
-  await click('[data-act="obNext"]');
+  for (const [q, v] of [['reason', 'routine'], ['obstacles', 'nextstep'], ['helps', 'small'], ['focus', 'money'], ['result', 'bills'], ['secMode', 'keep'], ['time', '60']]) { await click(`[data-act="oqPick"][data-q="${q}"][data-v="${v}"]`); await click('[data-act="oqNext"]'); }
+  await click('[data-act="oqAllDays"]'); await click('[data-act="oqNext"]');
+  await click('[data-act="oqPick"][data-q="window"][data-v="morning"]'); await click('[data-act="oqNext"]');
+  await click('[data-act="oqPick"][data-q="checkin"][data-v="21:00"]'); await click('[data-act="oqNext"]');
+  await shot('02-onboarding-review');
+  await click('[data-act="rvStart"]');
+  // The checks below were written for the original five-area setup; give this profile that setup too
+  await st(async () => { const td = today(); const s = S.settings; delete s.onbVersion; delete s.foci; delete s.focusKey; s.trackSpend = true; s.checkinAnytime = false; s.availability = { 0: 90, 1: 60, 2: 60, 3: 60, 4: 60, 5: 60, 6: 90 }; S.tasks = []; pushVersion(S.business.block, { days: [1, 2, 3, 4, 5], minutes: 15 }, td); const a = { id: uid('task'), area: 'art', createdAt: nowISO(), versions: [] }; pushVersion(a, { title: '5 minutes of drawing', finish: 'Any marks made. Unfinished is fine.', minutes: 5, minTitle: '1 minute of drawing', minMinutes: 1, medium: 'drawing', days: [0, 1, 2, 3, 4, 5, 6], date: null, cue: '' }, td); S.tasks.push(a); S.weeks[weekStart(td)].maintain = AREAS.filter((x) => x !== 'money'); delete S.weeks[weekStart(td)].focus; await flush(); render(); });
   ok('1 Onboarding completes without marathon date or finances', await page.locator('.date-h').count() && await st('S.settings.onboarded && S.training.profile.raceDate === "" && S.money.balances.length === 0'));
   ok('Timezone default America/Puerto_Rico', await st('S.settings.timezone') === 'America/Puerto_Rico');
   await shot('03-today-fresh'); await noHScroll('today');
@@ -566,16 +570,16 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
   await click('.sheet [data-act="closeSheet"]');
   await page.fill('#stName', '  '); await click('[data-act="settingsSave"]');
   ok('W23 Settings also rejects an empty name', (await st('S.settings.name')) === 'Mariana');
-  await page.fill('#stTzQ', 'madrid'); await page.waitForTimeout(150); await click('#stTzList .tz-opt'); await page.fill('#stName', 'Mariana'); await click('[data-act="settingsSave"]');
+  await click('#stTzBtn'); await page.fill('#stTzQ', 'madrid'); await page.waitForTimeout(150); await click('#stTzList .tz-opt'); await page.fill('#stName', 'Mariana'); await click('[data-act="settingsSave"]');
   ok('W24 Timezone changeable later in Settings', (await st('S.settings.timezone')) === 'Europe/Madrid');
-  await page.fill('#stTzQ', 'puerto'); await page.waitForTimeout(150); await click('#stTzList .tz-opt'); await page.selectOption('#stLang', 'en'); await click('[data-act="settingsSave"]');
+  await click('#stTzBtn'); await page.fill('#stTzQ', 'puerto'); await page.waitForTimeout(150); await click('#stTzList .tz-opt'); await page.selectOption('#stLang', 'en'); await click('[data-act="settingsSave"]');
   ok('W25 Back to Puerto Rico and English', (await st('S.settings.timezone')) === 'America/Puerto_Rico' && (await st('S.settings.language')) === 'en');
   // Full onboarding in each language: nothing reverts to English
   const englishLeaks = async (p, lng) => p.evaluate((lng) => {
     if (lng === 'en') return [];
     const flat = (o) => (typeof o === 'string' ? [o] : Array.isArray(o) ? o.flatMap(flat) : o && typeof o === 'object' ? Object.values(o).flatMap(flat) : []);
-    const tr = new Set([...flat(ONBC[lng]), ...flat(SETUP[lng]), ...flat(ENV[lng]), ...flat(LETTER[lng]), ...flat(STRINGS[lng])]);
-    const en = [...flat(ONBC.en), ...flat(SETUP.en), ...flat(ENV.en), ...flat(LETTER.en), ...flat(STRINGS.en), 'Next', 'Back', 'Tap to open'].filter((x) => x.length > 3 && !tr.has(x));
+    const tr = new Set([...flat(OQ[lng]), ...flat(SETUP[lng]), ...flat(ENV[lng]), ...flat(LETTER[lng]), ...flat(STRINGS[lng])]);
+    const en = [...flat(OQ.en), ...flat(SETUP.en), ...flat(ENV.en), ...flat(LETTER.en), ...flat(STRINGS.en), 'Next', 'Back', 'Tap to open'].filter((x) => x.length > 3 && !tr.has(x));
     const body = document.body.innerText;
     const esc2 = (x) => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     return [...new Set(en.filter((x) => new RegExp('(^|[^\\p{L}])' + esc2(x) + '($|[^\\p{L}])', 'u').test(body)))];
@@ -595,7 +599,7 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
     ok(`W27-${lng} Letter complete in ${lng}`, L.paras.every((x) => lt.includes(x)) && lt.includes(L.closing) && lt.includes(L.role) && lt.includes(L.go) && lt.includes('Mariana') && lt.includes('One Day'), envTxt);
     await p.screenshot({ path: path.join(OUT, `70-letter-${lng}.png`) });
     await step('[data-act="welBegin"]');
-    await p.fill('#suName', 'Ana'); await p.fill('#suTzQ', lng === 'fr' ? 'paris' : lng === 'it' ? 'rome' : 'puerto'); await p.waitForTimeout(150);
+    await p.fill('#suName', 'Ana'); await p.locator('#suTzBtn').click(); await p.fill('#suTzQ', lng === 'fr' ? 'paris' : lng === 'it' ? 'rome' : 'puerto'); await p.waitForTimeout(150);
     await p.screenshot({ path: path.join(OUT, `71-setup-${lng}.png`) });
     await p.locator('#suTzList .tz-opt').first().click(); await p.waitForTimeout(100);
     await step('[data-act="setupSave"]');
@@ -603,11 +607,13 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
     leaks.push(...(await p.evaluate(() => document.body.innerText)).split('\n').filter((x) => lng !== 'en' && ['Create your PIN', 'You’ll use this code to unlock One Day whenever you return.', 'Confirm PIN', 'Save PIN and continue', '6-digit PIN'].includes(x.trim())));
     await p.fill('#psPin', '019283'); await p.fill('#psPin2', '019283'); await step('[data-act="pinCreate"]', 300);
     await p.waitForSelector('#rcText', { timeout: 15000 }); await p.check('#rcOk'); await step('[data-act="rcDone"]');
-    await p.locator('[data-group="obWd"][data-val="60"]').click(); await p.waitForTimeout(150);
-    await p.screenshot({ path: path.join(OUT, `72-time-${lng}.png`) });
-    await step('[data-act="obNext"]'); await step('[data-act="obNext"]'); await step('[data-act="obNext"]');
-    await p.screenshot({ path: path.join(OUT, `73-areas-${lng}.png`) });
-    await step('[data-act="obNext"]');
+    for (const [q, v] of [['reason', 'putoff'], ['obstacles', 'toobig'], ['helps', 'scheduled'], ['focus', 'creativity'], ['result', 'start'], ['secMode', 'keep'], ['time', '15'], ['days', '1'], ['window', 'evening'], ['checkin', '20:00']]) {
+      await p.locator(`[data-act="oqPick"][data-q="${q}"][data-v="${v}"]`).click(); await p.waitForTimeout(80);
+      if (q === 'time') await p.screenshot({ path: path.join(OUT, `72-time-${lng}.png`) });
+      await step('[data-act="oqNext"]', 150);
+    }
+    await p.screenshot({ path: path.join(OUT, `73-review-${lng}.png`) });
+    await step('[data-act="rvStart"]');
     const st2 = await p.evaluate(() => [S.settings.onboarded, S.settings.language, S.settings.timezone, S.tasks.find((x) => x.area === 'art').versions[0].title, document.documentElement.lang]);
     const tz2 = { es: 'America/Puerto_Rico', it: 'Europe/Rome', fr: 'Europe/Paris', en: 'America/Puerto_Rico' }[lng];
     ok(`W28-${lng} Onboarding completes in ${lng}; timezone chosen separately`, st2[0] && st2[1] === lng && st2[2] === tz2 && st2[4] === lng, st2.join(' | '));

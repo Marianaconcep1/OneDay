@@ -136,13 +136,15 @@ const VAGUE = /^(work on|do|think about|start|business|stuff|things|plan)\b/i;
 /* ---------- Today ---------- */
 function calibrationDay() { const c = S.settings.calibrationStart; if (!c) return null; const n = dDiff(c, today()) + 1; return n >= 1 && n <= 7 ? n : null; }
 function featuredItem(items) {
-  if (nowHM() >= S.settings.checkinTime && !S.checkins[today()] && !pausedAll(today())) return { checkin: true };
+  if (!S.settings.checkinAnytime && nowHM() >= S.settings.checkinTime && !S.checkins[today()] && !pausedAll(today())) return { checkin: true };
   const open = items.filter((it) => !isClosed(it.status) && !it.unplanned && !it.paused && !(it.kind === 'train' && it.session && it.session.type === 'rest'));
   if (!open.length) return null;
   const focus = S.settings.focus;
   const order = { business: 1, training: 2, money: 3, art: 4 };
   open.sort((a, b) => {
     if ((a.status === 'started') !== (b.status === 'started')) return a.status === 'started' ? -1 : 1;
+    const fk = S.settings.focusKey;
+    if (fk && (a.focus === fk) !== (b.focus === fk)) return a.focus === fk ? -1 : 1;
     if ((a.area === focus) !== (b.area === focus)) return a.area === focus ? -1 : 1;
     if (a.kind === 'spend' && b.area === 'money') return 1;
     if (b.kind === 'spend' && a.area === 'money') return -1;
@@ -209,14 +211,14 @@ function renderToday() {
   if (cd) h += `<section class="banner"><div class="row-between"><div class="h3">Calibration · day ${cd} of 7</div></div><p class="small">${t('calib')} Log what actually happens. Targets stay where they are this week.</p>${firstWeekQuestions()}</section>`;
   const justBack = S.pauses.some((p) => p.resumedOn === td && p.scope === 'all');  // no reviews or catching up on the day you return
   if (!justBack) h += firstWeekBanner(td) + renderDueToday(td);
-  if (S.settings.reminders && !currentPause() && nowHM() >= S.settings.checkinTime && !S.checkins[td]) h += `<section class="banner pink"><div class="h3">${esc(t('ci.reminder', { time: fmtTime(S.settings.checkinTime) }))}</div></section>`;
+  if (S.settings.reminders && !S.settings.checkinAnytime && !currentPause() && nowHM() >= S.settings.checkinTime && !S.checkins[td]) h += `<section class="banner pink"><div class="h3">${esc(t('ci.reminder', { time: fmtTime(S.settings.checkinTime) }))}</div></section>`;
   if (reviewDue() && !justBack) h += `<section class="banner"><div class="h3">Weekly review is ready</div><p class="small">10–15 minutes to adjust next week. One change at most.</p><div><button class="btn primary sm" data-act="openReview">Start review</button></div></section>`;
 
   // Featured next action
   if (f && f.checkin) {
     h += `<section class="featured" aria-label="${t('today.next')}"><div class="eyebrow">${t('today.next')}</div><div class="ft-title">Evening check-in</div><div class="ft-meta">About two minutes. Everything you logged today is already filled in.</div><div class="btn-row"><button class="btn primary" data-act="openCheckin">Start check-in</button></div></section>`;
   } else if (f) {
-    h += `<section class="featured" aria-label="${t('today.next')}"><div class="eyebrow">${t('today.next')} · ${t('area.' + f.area)}</div><div class="ft-title">${esc(f.title)}</div>
+    h += `<section class="featured" aria-label="${t('today.next')}"><div class="eyebrow">${t('today.next')} · ${f.focus ? esc(focusLabel(f.focus)) : t('area.' + f.area)}</div><div class="ft-title">${esc(f.title)}</div>
       ${f.finish ? `<div class="ft-meta">Done when: ${esc(f.finish)}</div>` : ''}<div class="ft-meta">${itemMeta(f) || (f.kind === 'spend' ? 'About 2 min' : '')}${f.status === 'started' ? ' · Started' : ''}</div>
       ${f.cue ? `<div class="ft-meta">Cue: ${esc(f.cue)}</div>` : ''}${towardLine(f, true)}
       <div class="btn-row">${itemButtons(f, true)}</div>${f.kind === 'spend' || (f.session && f.session.type === 'rest') ? '' : `<div class="row"><button class="btn sm ghost-light" data-act="feelFirst" data-key="${esc(f.key)}" data-date="${f.date}">How am I feeling?</button><button class="btn sm ghost-light" data-act="stuck" data-key="${esc(f.key)}" data-date="${f.date}">I’m stuck</button></div>`}</section>`;
@@ -232,11 +234,19 @@ function renderToday() {
     ${dm.over ? `<div class="banner warn"><div class="h3">Your plan needs an adjustment.</div><p class="small">Planned time is ${minsLabel(dm.total - dm.avail)} over what you have today. Nothing changes until you choose.</p><div><button class="btn sm" data-act="openAdjust">See adjustments</button></div></div>` : ''}</section>`;
   }
 
-  // Five area cards
+  // Area cards: the five original areas, or, after the ten-question setup, the chosen focuses first
   h += renderLifeToday(td);
   h += '<section class="area-list" aria-label="Areas">';
+  const foci = S.settings.onbVersion === 2 && Array.isArray(S.settings.foci) ? S.settings.foci : [];
+  for (const fk of foci) {
+    const list = items.filter((i) => i.focus === fk);
+    h += `<article class="area"><span class="dot ${focusArea(fk)}"></span><div class="area-body"><div class="row-between"><span class="area-name">${esc(focusLabel(fk))}</span></div>`;
+    h += list.length ? list.map(areaItemHtml).join('<hr style="border:0;border-top:1px solid var(--line);margin:4px 0">') : `<div class="muted small">${t('today.focusEmpty')}</div>`;
+    h += '</div></article>';
+  }
   for (const area of AREAS) {
-    const list = items.filter((i) => i.area === area);
+    const list = items.filter((i) => i.area === area && !(i.focus && foci.includes(i.focus)));
+    if (foci.length && area !== 'mind' && !list.length) continue;
     h += `<article class="area"><span class="dot ${area}"></span><div class="area-body"><div class="row-between"><span class="area-name">${t('area.' + area)}</span>${area === 'mind' ? (S.checkins[td] ? '<span class="pill done">Check-in saved</span>' : '') : ''}</div>`;
     if (area === 'mind') {
       h += `<div class="muted small">${t('mind.part')}</div>`;
@@ -245,11 +255,7 @@ function renderToday() {
     } else if (!list.length) {
       h += areaEmpty(area, td);
     } else {
-      h += list.map((it) => `<div class="stack-s"><div class="area-title">${esc(it.title)}</div><div>${pill(it)}</div>
-        ${it.finish && it.kind !== 'spend' ? `<div class="small muted">Done when: ${esc(it.finish)}</div>` : ''}
-        ${itemMeta(it) ? `<div class="tiny muted">${itemMeta(it)}</div>` : ''}${it.paused ? '<div class="tiny muted">Logged during a pause. Kept, not counted.</div>' : towardLine(it)}
-        ${it.kind === 'spend' && txOn(td).length ? `<div class="tiny muted">${plural(txOn(td).length, 'entry', 'entries')} today</div>` : ''}
-        ${it.unplanned ? '' : `<div class="area-actions">${itemButtons(it, false)}</div>`}</div>`).join('<hr style="border:0;border-top:1px solid var(--line);margin:4px 0">');
+      h += list.map(areaItemHtml).join('<hr style="border:0;border-top:1px solid var(--line);margin:4px 0">');
     }
     h += '</div></article>';
   }
@@ -265,6 +271,13 @@ function renderToday() {
   h += renderSetupNudge();
   h += '</div>';
   return h;
+}
+function areaItemHtml(it) {
+  return `<div class="stack-s"><div class="area-title">${esc(it.title)}</div><div>${pill(it)}</div>
+    ${it.finish && it.kind !== 'spend' ? `<div class="small muted">Done when: ${esc(it.finish)}</div>` : ''}
+    ${itemMeta(it) ? `<div class="tiny muted">${itemMeta(it)}</div>` : ''}${it.paused ? '<div class="tiny muted">Logged during a pause. Kept, not counted.</div>' : towardLine(it)}
+    ${it.kind === 'spend' && txOn(it.date).length ? `<div class="tiny muted">${plural(txOn(it.date).length, 'entry', 'entries')} today</div>` : ''}
+    ${it.unplanned ? '' : `<div class="area-actions">${itemButtons(it, false)}</div>`}</div>`;
 }
 function areaEmpty(area, td) {
   if (area === 'training') {
@@ -291,6 +304,9 @@ function renderSetupNudge() {
   if (!S.money.accounts.length && !S.money.bills.length) steps.push(['money', 'Money: confirm what’s available and what’s due before payday']);
   if (!S.business.outcome4w) steps.push(['business', 'Business: who you help, and one outcome for the next four weeks']);
   if (!S.training.templates.length) steps.push(['training', 'Training: what you know so far, and the plan you’re following']);
+  // After the ten-question setup, only nudge for areas the person chose to focus on
+  const FOC = { money: 'money', business: 'business', training: 'fitness' };
+  if (S.settings.onbVersion === 2) for (let i = steps.length - 1; i >= 0; i--) if (!(S.settings.foci || []).includes(FOC[steps[i][0]])) steps.splice(i, 1);
   if (!steps.length) return '';
   const s = steps[0];
   return `<section class="card flat"><div class="eyebrow">Set up one area at a time</div><p class="mt-s">${esc(s[1])}</p><p class="tiny muted mt-s">Unknown values can stay unknown.</p><div class="mt-s"><button class="btn sm" data-act="goPlan" data-open="${s[0]}">Set up ${t('area.' + s[0]).toLowerCase()}</button></div></section>`;

@@ -125,12 +125,17 @@ function tzMatches(q) {
   if (qq) hits.sort((a, b) => (n(b.label + ' ' + b.alias).includes(qq) ? 1 : 0) - (n(a.label + ' ' + a.alias).includes(qq) ? 1 : 0));  // name matches before long-name matches
   return hits.slice(0, 80);
 }
-/* Searchable timezone picker: a search box over a listbox of buttons */
+/* Compact timezone dropdown: a button showing the chosen zone; tapping it opens a search box
+   over a short scrolling list. Picking a zone, tapping outside or pressing Escape closes it. */
+const TZ_SEL = {};
 function tzPicker(id, selected, L) {
+  TZ_SEL[id] = { sel: selected, L };
   return `<div class="tzpick" id="${id}">
-    <div class="tz-current small"><span class="muted">${esc(L.current)}:</span> <b id="${id}Cur">${esc(tzLabel(selected))}</b> <span class="muted num">${esc(tzOffset(selected))}</span></div>
-    <input class="inp" id="${id}Q" type="search" placeholder="${esc(L.tzSearch)}" aria-label="${esc(L.tzSearch)}" aria-controls="${id}List" autocomplete="off" spellcheck="false">
-    <div class="tz-list" id="${id}List" role="listbox" aria-label="${esc(L.tz)}">${tzListHtml(id, '', selected, L)}</div></div>`;
+    <button type="button" class="tz-btn" id="${id}Btn" data-act="tzToggle" data-picker="${id}" aria-haspopup="listbox" aria-expanded="false" aria-controls="${id}Panel">
+      <span class="tz-btn-label" id="${id}Cur">${esc(tzLabel(selected))}</span><span class="muted num" id="${id}Off">${esc(tzOffset(selected))}</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <div class="tz-panel" id="${id}Panel" hidden>
+      <input class="inp" id="${id}Q" type="search" placeholder="${esc(L.tzSearch)}" aria-label="${esc(L.tzSearch)}" aria-controls="${id}List" autocomplete="off" spellcheck="false">
+      <div class="tz-list" id="${id}List" role="listbox" aria-label="${esc(L.tz)}"></div></div></div>`;
 }
 function tzListHtml(id, q, selected, L) {
   let m = tzMatches(q);
@@ -140,14 +145,47 @@ function tzListHtml(id, q, selected, L) {
 }
 function bindTzPicker(id, getSel, L) {
   const q = document.getElementById(id + 'Q'); if (!q) return;
-  q.addEventListener('input', () => { document.getElementById(id + 'List').innerHTML = tzListHtml(id, q.value, getSel(), L); });
+  TZ_SEL[id] = { sel: getSel(), L };
+  q.addEventListener('input', () => { document.getElementById(id + 'List').innerHTML = tzListHtml(id, q.value, TZ_SEL[id].sel, L); });
+  q.addEventListener('keydown', (e) => { if (e.key === 'ArrowDown') { const f = $(`#${id}List .tz-opt`); if (f) { e.preventDefault(); f.focus(); } } });
+  document.getElementById(id + 'List').addEventListener('keydown', (e) => {
+    if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
+    const opts = $$(`#${id}List .tz-opt`); const i = opts.indexOf(document.activeElement); if (i < 0) return;
+    e.preventDefault(); const n = opts[i + (e.key === 'ArrowDown' ? 1 : -1)];
+    if (n) n.focus(); else if (e.key === 'ArrowUp') q.focus();
+  });
 }
+function tzOpen(id) {
+  const P = TZ_SEL[id]; const panel = document.getElementById(id + 'Panel'); if (!P || !panel) return;
+  tzCloseAll(id);
+  const q = document.getElementById(id + 'Q'); q.value = '';
+  document.getElementById(id + 'List').innerHTML = tzListHtml(id, '', P.sel, P.L);
+  panel.hidden = false; document.getElementById(id + 'Btn').setAttribute('aria-expanded', 'true');
+  q.focus();
+}
+function tzClose(id, refocus) {
+  const panel = document.getElementById(id + 'Panel'); if (!panel || panel.hidden) return;
+  panel.hidden = true;
+  const b = document.getElementById(id + 'Btn'); b.setAttribute('aria-expanded', 'false'); if (refocus) b.focus();
+}
+function tzCloseAll(except) { $$('.tz-panel:not([hidden])').forEach((p) => { const id = p.id.replace(/Panel$/, ''); if (id !== except) tzClose(id); }); }
+A.tzToggle = (el) => { const id = el.dataset.picker; const panel = document.getElementById(id + 'Panel'); if (panel && panel.hidden) tzOpen(id); else tzClose(id, true); };
 A.tzPick = (el) => {
   const id = el.dataset.picker; const z = el.dataset.z;
   if (id === 'suTz') SETUP_DRAFT.tz = z; else SH.tzSel = z;
-  $$(`#${id}List .tz-opt`).forEach((b) => b.setAttribute('aria-selected', b.dataset.z === z ? 'true' : 'false'));
-  const c = document.getElementById(id + 'Cur'); if (c) { c.textContent = tzLabel(z); c.nextElementSibling.textContent = tzOffset(z); }
+  if (TZ_SEL[id]) TZ_SEL[id].sel = z;
+  const c = document.getElementById(id + 'Cur'); if (c) c.textContent = tzLabel(z);
+  const o = document.getElementById(id + 'Off'); if (o) o.textContent = tzOffset(z);
+  tzClose(id, true);
 };
+document.addEventListener('pointerdown', (e) => { const p = e.target && e.target.closest ? e.target.closest('.tzpick') : null; tzCloseAll(p ? p.id : null); });
+document.addEventListener('focusin', (e) => { const p = e.target && e.target.closest ? e.target.closest('.tzpick') : null; tzCloseAll(p ? p.id : null); });
+document.addEventListener('keydown', (e) => {
+  if (e.key !== 'Escape') return;
+  const p = e.target && e.target.closest ? e.target.closest('.tzpick') : null;
+  const open = p ? document.getElementById(p.id + 'Panel') : $('.tz-panel:not([hidden])');
+  if (open && !open.hidden) { e.stopPropagation(); tzClose(open.id.replace(/Panel$/, ''), true); }
+}, true);
 
 /* ----- Screen 1: the envelope ----- */
 const SEAL = '<svg viewBox="0 0 64 64" aria-hidden="true"><defs><radialGradient id="sealG" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#B0566E"/><stop offset="1" stop-color="#7A2E45"/></radialGradient></defs><path d="M32 3c5 2 8 0 12 3s4 7 8 9 3 7 5 11-1 8 0 12-4 6-5 10-6 4-9 7-8 2-11 4-8-1-12-2-6-4-10-6-3-7-6-10-1-8-2-12 3-7 3-11 5-6 8-9 7-3 11-5 6 0 8-1z" fill="url(#sealG)"/><circle cx="32" cy="32" r="18" fill="none" stroke="#E9B7C6" stroke-opacity=".55" stroke-width="1.5"/><path d="M32 45V24" stroke="#F4D6DF" stroke-width="1.8" stroke-linecap="round"/><path d="M32 30c-5-1-8-5-8-9 5 0 8 4 8 9zM32 34c5-1 8-5 8-9-5 0-8 4-8 9zM32 39c-4 0-7-3-7-6 4 0 7 3 7 6z" fill="#F4D6DF" fill-opacity=".9"/></svg>';
@@ -160,33 +198,6 @@ const ENV = {
 };
 const PICK_Q = [['en', 'Choose your language'], ['es', 'Elige tu idioma'], ['it', 'Scegli la tua lingua'], ['fr', 'Choisis ta langue']];
 const LANG_WORD = { en: 'Language', es: 'Idioma', it: 'Lingua', fr: 'Langue' };
-const ONBC = {
-  en: { timeH: 'How much time do you usually have?', timeSub: 'For all five areas together, training included. A rough guess is fine, and you can set each day later.', wd: 'Workdays (Mon–Fri)', we: 'Weekends', note: 'Anything about your workday?', opt: 'Optional', notePh: 'e.g. Work 8–5, free after 6', notSure: 'Not sure',
-    ciH: 'When should the evening check-in be?', ciSub: 'About two minutes. It’s a time to aim for, not a deadline.', ciLab: 'Check-in time',
-    focusH: 'Choose a first weekly focus', focusSub: 'It decides which action is shown first. The other areas stay visible.', focus: { money: 'Financial clarity (suggested)', business: 'Business', training: 'Training consistency', art: 'Art', mind: 'Mind' },
-    areasH: 'Confirm your five areas', areasSub: 'Small starting commitments, all editable. Nothing here is a fixed target, and nothing rises automatically.',
-    areas: { money: 'Record spending, about 2 minutes a day. “No spending today” is one tap.', business: 'A 15-minute block, Monday to Friday, with one specific next action.', training: 'Nothing scheduled until you enter the plan you’re following.', art: 'A 5-minute invitation each day. One minute counts.', mind: 'A few short prompts inside the evening check-in.' },
-    calib: 'The first seven days are a calibration period.', start: 'Confirm and start', art: ['5 minutes of drawing', 'Any marks made. Unfinished is fine.', '1 minute of drawing'] },
-  es: { timeH: '¿Cuánto tiempo sueles tener?', timeSub: 'Para las cinco áreas juntas, incluido el entrenamiento. Un cálculo aproximado basta, y luego puedes ajustar cada día.', wd: 'Días laborables (lun–vie)', we: 'Fines de semana', note: '¿Algo sobre tu jornada laboral?', opt: 'Opcional', notePh: 'p. ej., trabajo de 8 a 5, libre después de las 6', notSure: 'No sé',
-    ciH: '¿A qué hora quieres la revisión de la noche?', ciSub: 'Unos dos minutos. Es una hora orientativa, no una fecha límite.', ciLab: 'Hora de la revisión',
-    focusH: 'Elige un primer enfoque semanal', focusSub: 'Decide qué acción se muestra primero. Las demás áreas siguen visibles.', focus: { money: 'Claridad financiera (sugerido)', business: 'Negocio', training: 'Constancia en el entrenamiento', art: 'Arte', mind: 'Mente' },
-    areasH: 'Confirma tus cinco áreas', areasSub: 'Compromisos pequeños para empezar, todos editables. Nada aquí es una meta fija y nada aumenta automáticamente.',
-    areas: { money: 'Registrar gastos, unos 2 minutos al día. “Hoy no gasté” es un solo toque.', business: 'Un bloque de 15 minutos, de lunes a viernes, con una próxima acción concreta.', training: 'Nada programado hasta que ingreses el plan que sigues.', art: 'Una invitación de 5 minutos cada día. Un minuto cuenta.', mind: 'Algunas preguntas breves dentro de la revisión de la noche.' },
-    calib: 'Los primeros siete días son un periodo de calibración.', start: 'Confirmar y empezar', art: ['5 minutos de dibujo', 'Cualquier trazo cuenta. Sin terminar está bien.', '1 minuto de dibujo'] },
-  it: { timeH: 'Quanto tempo hai di solito?', timeSub: 'Per tutte e cinque le aree insieme, allenamento compreso. Va bene una stima, e potrai impostare ogni giorno più tardi.', wd: 'Giorni lavorativi (lun–ven)', we: 'Fine settimana', note: 'Qualcosa sulla tua giornata lavorativa?', opt: 'Facoltativo', notePh: 'es. lavoro dalle 8 alle 17, tempo libero dopo le 18', notSure: 'Non so',
-    ciH: 'A che ora vuoi il check-in serale?', ciSub: 'Circa due minuti. È un orario a cui puntare, non una scadenza.', ciLab: 'Ora del check-in',
-    focusH: 'Scegli un primo obiettivo della settimana', focusSub: 'Decide quale azione vedi per prima. Le altre aree restano visibili.', focus: { money: 'Chiarezza finanziaria (consigliato)', business: 'Attività', training: 'Costanza negli allenamenti', art: 'Arte', mind: 'Mente' },
-    areasH: 'Conferma le tue cinque aree', areasSub: 'Piccoli impegni per iniziare, tutti modificabili. Niente qui è un traguardo fisso e niente aumenta da solo.',
-    areas: { money: 'Registrare le spese, circa 2 minuti al giorno. “Oggi nessuna spesa” è un solo tocco.', business: 'Un blocco di 15 minuti, dal lunedì al venerdì, con un’azione successiva precisa.', training: 'Nulla in programma finché non inserisci il piano che stai seguendo.', art: 'Un invito di 5 minuti ogni giorno. Anche un minuto conta.', mind: 'Qualche breve domanda dentro il check-in serale.' },
-    calib: 'I primi sette giorni sono un periodo di calibrazione.', start: 'Conferma e inizia', art: ['5 minuti di disegno', 'Qualsiasi segno va bene. Anche non finito.', '1 minuto di disegno'] },
-  fr: { timeH: 'Combien de temps as-tu en général ?', timeSub: 'Pour les cinq domaines ensemble, entraînement compris. Une estimation suffit, et tu pourras régler chaque jour plus tard.', wd: 'Jours de semaine (lun–ven)', we: 'Week-ends', note: 'Quelque chose à dire sur ta journée de travail ?', opt: 'Facultatif', notePh: 'ex. travail de 8 h à 17 h, libre après 18 h', notSure: 'Je ne sais pas',
-    ciH: 'À quelle heure veux-tu faire le bilan du soir ?', ciSub: 'Environ deux minutes. C’est une heure à viser, pas une échéance.', ciLab: 'Heure du bilan',
-    focusH: 'Choisis un premier objectif de la semaine', focusSub: 'Il décide quelle action s’affiche en premier. Les autres domaines restent visibles.', focus: { money: 'Clarté financière (suggéré)', business: 'Entreprise', training: 'Régularité de l’entraînement', art: 'Art', mind: 'Esprit' },
-    areasH: 'Confirme tes cinq domaines', areasSub: 'De petits engagements pour commencer, tous modifiables. Rien ici n’est un objectif fixe, et rien n’augmente automatiquement.',
-    areas: { money: 'Noter tes dépenses, environ 2 minutes par jour. « Aucune dépense aujourd’hui » se fait en un geste.', business: 'Un créneau de 15 minutes, du lundi au vendredi, avec une prochaine action précise.', training: 'Rien de prévu tant que tu n’as pas saisi le programme que tu suis.', art: 'Une invitation de 5 minutes chaque jour. Une minute compte.', mind: 'Quelques questions courtes dans le bilan du soir.' },
-    calib: 'Les sept premiers jours sont une période de calibrage.', start: 'Confirmer et commencer', art: ['5 minutes de dessin', 'N’importe quel trait compte. Inachevé, c’est très bien.', '1 minute de dessin'] }
-};
-const OC = () => ONBC[lang()] || ONBC.en;
 const SC = () => SETUP[lang()] || SETUP.en;
 
 /* A discreet language switch, kept on every onboarding screen after the first */
@@ -204,10 +215,9 @@ document.addEventListener('change', (e) => {
 /* Changing language mid-onboarding keeps every answer and the current step */
 A.onbLangChange = (l) => {
   if (!SETUP[l]) return;
-  if (S.settings.welcomeDone) { if (ONB.step <= 1) setupCapture(); else obCapture(); }
-  const q = val('suTzQ');
+  if (S.settings.welcomeDone && ONB.step <= 1) setupCapture();
+  if (ONB.step === 11) { const t = $('#oqCiTime'); if (t) onbAns().checkinCustom = t.value; }
   S.settings.language = l; S.settings.languageChosen = true; S.settings.letterLang = l; applyLangAttr(); save(); render();
-  const qi = $('#suTzQ'); if (qi && q) { qi.value = q; qi.dispatchEvent(new Event('input')); }
   const sw = $('#onbLang'); if (sw) sw.focus();
 };
 function applyLangAttr() { document.documentElement.lang = lang(); }
