@@ -24,7 +24,7 @@ const INFO_EN = [
 
 (async () => {
   await new Promise((r) => srv.listen(8769, r));
-  const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome' });
+  const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome' }).catch(() => chromium.launch());
   const mk = async (opts) => {
     const ctx = await browser.newContext({ ...devices['iPhone SE'], timezoneId: 'Asia/Tokyo', ...(opts || {}) });
     await ctx.route(/fonts\.(googleapis|gstatic)/, (r) => r.abort());
@@ -37,7 +37,9 @@ const INFO_EN = [
   const setNow = async (iso) => { await page.evaluate((n) => { localStorage.setItem('__now', String(n)); window.__oneDayNow = n; }, Date.parse(iso)); };
   const shot = (n) => page.screenshot({ path: path.join(OUT, n + '.png') });
   const click = async (sel) => { await page.locator(sel).first().click(); await page.waitForTimeout(250); };
-  const reload = async (hash) => { await page.goto('http://localhost:8769/' + (hash || '')); await page.waitForTimeout(500); };
+  // Every open asks for the PIN; these checks unlock with the test PIN unless asked not to
+  const unlockP = async (pg) => { if (await pg.evaluate(() => typeof LOCKED !== 'undefined' && LOCKED)) { await pg.fill('#lkPin', '204816'); await pg.locator('[data-act="lockTry"]').click(); await pg.waitForFunction(() => !LOCKED, null, { timeout: 15000 }); await pg.waitForTimeout(250); } };
+  const reload = async (hash, keepLocked) => { await page.goto('http://localhost:8769/' + (hash || '')); await page.waitForTimeout(500); if (!keepLocked) await unlockP(page); };
   const svgAttr = (sel, a) => page.locator(sel + ' svg.scene').last().getAttribute(a);
   const sync = () => st(() => { sceneSync(); return new Promise((r) => setTimeout(r, 2100)); });
   const growthSnap = () => st(() => JSON.stringify({ l: S.growth.ledger, c: S.growth.chapters.map((c) => [c.id, c.startedOn, c.seed, c.endedOn || null]), p: S.pauses, o: S.occ, k: S.checkins }));
@@ -48,7 +50,7 @@ const INFO_EN = [
     growthInit(); S.growth.kind = 'bonsai'; S.growth.chapters[0].kind = 'bonsai';
     for (let i = 1; i <= 14; i++) { const d = '2026-10-' + String(i).padStart(2, '0'); S.growth.ledger['day:' + d + ':' + S.growth.chapters[0].id] = { pts: 5, type: 'day', date: d, ch: S.growth.chapters[0].id }; S.checkins[d] = { mood: 3 }; }
     S.growth.ledger['ms:x'] = { pts: 8, type: 'milestone', date: '2026-10-10', ch: S.growth.chapters[0].id };
-    await flush();
+    await flush(); await createPin('204816');
   });
   await reload('#today');
   const snap0 = await growthSnap(); const pts0 = await st('chapterPoints(chapter().id)'); const stage0 = await st('stageOf(chapterPoints(chapter().id))');
@@ -214,9 +216,9 @@ const INFO_EN = [
   ok('C11d Coming back to the app recalculates the scene', (await svgAttr('.cp-scene', 'data-tod')) === 'night');
   await page.close();
   page = await ctx.newPage(); page.on('pageerror', (e) => errors.push(e.message));
-  await page.goto('http://localhost:8769/#companion'); await page.waitForTimeout(500);
+  await page.goto('http://localhost:8769/#companion'); await page.waitForTimeout(500); await unlockP(page);
   await page.evaluate((n) => { localStorage.setItem('__now', String(n)); }, Date.parse('2026-10-25T11:00:00Z')); // 07:00 next morning
-  await page.reload(); await page.waitForTimeout(600);
+  await page.reload(); await page.waitForTimeout(600); await unlockP(page);
   ok('C12 Reopening the app after it was closed shows the right scene straight away', (await page.locator('.cp-scene svg.scene').last().getAttribute('data-tod')) === 'dawn' && (await page.locator('.cp-scene svg.scene').count()) === 1, await page.evaluate(() => [TAB, location.hash, window.__oneDayNow, localNow(tz())].join()));
 
   // 14. Nothing visual changes growth
@@ -251,9 +253,9 @@ const INFO_EN = [
   await rp.goto('http://localhost:8769/'); await rp.evaluate((n) => { localStorage.setItem('__now', String(n)); window.__oneDayNow = n; }, Date.parse('2026-10-24T13:00:00Z'));
   await rp.evaluate(async () => {
     S = defaultState(); Object.assign(S.settings, { onboarded: true, welcomeDone: true, languageChosen: true, language: 'en', timezone: 'America/Puerto_Rico', calibrationStart: '2026-09-01' });
-    growthInit(); Object.assign(S.growth.scenery, { seasons: 'manual', season: 'spring' }); await flush();
+    growthInit(); Object.assign(S.growth.scenery, { seasons: 'manual', season: 'spring' }); await flush(); await createPin('204816');
   });
-  await rp.goto('http://localhost:8769/#companion'); await rp.waitForTimeout(500);
+  await rp.goto('http://localhost:8769/#companion'); await rp.waitForTimeout(500); await unlockP(rp);
   const still = await rp.evaluate(() => { const s = document.querySelector('.cp-scene svg.scene'); return !s.classList.contains('anim') && !s.querySelector('.sc-fall') && document.getAnimations().length === 0; });
   await rp.locator('[data-group="scSeason"][data-val="fall"]').click(); await rp.waitForTimeout(60);
   const instant = await rp.evaluate(() => document.querySelectorAll('.cp-scene svg.scene').length === 1 && document.querySelector('.cp-scene svg.scene').dataset.season === 'fall');

@@ -17,6 +17,7 @@ const ICONS = {
 function render() {
   const root = $('#app');
   if (LOCKED) { root.innerHTML = renderLock(); return; }
+  if (pinRequired()) { root.innerHTML = renderPinSetup(); return; }
   if (!S.settings.onboarded) { root.innerHTML = renderOnboarding(); bindSetup(); return; }
   if (restPause()) { closeSheetIfStale(); root.innerHTML = renderRest(); syncHash(true); restWas = true; return; }
   const views = { today: renderToday, companion: renderCompanion, plan: renderPlan, progress: renderProgress, mindset: renderMindset, settings: renderSettings };

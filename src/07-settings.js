@@ -264,9 +264,11 @@ async function boot() {
   applyTheme(); render();
   document.addEventListener('click', onClick);
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && $('.sheet')) A.closeSheet(); });
-  document.addEventListener('visibilitychange', () => { if (document.hidden) { flush(); if (AUTH && AUTH.hash && AUTH.lockOnHide && !LOCKED) lockNow(); } else dayCheck(); });
+  // Leaving the app always locks it; a page restored from the back/forward cache locks too
+  document.addEventListener('visibilitychange', () => { if (document.hidden) { flush(); if (AUTH && AUTH.hash && !LOCKED) lockNow(); } else dayCheck(); });
+  window.addEventListener('pageshow', (e) => { if (e.persisted && AUTH && AUTH.hash && !LOCKED) lockNow(); });
   for (const ev of ['pointerdown', 'keydown', 'scroll']) document.addEventListener(ev, () => { lastActivity = Date.now(); }, { passive: true, capture: true });
-  document.addEventListener('keydown', (e) => { if (LOCKED && e.key === 'Enter' && e.target && e.target.id === 'lkPin') A.lockTry(); });
+  document.addEventListener('keydown', (e) => { if (e.key !== 'Enter' || !e.target) return; if (LOCKED && e.target.id === 'lkPin') A.lockTry(); else if (e.target.id === 'psPin2') A.pinCreate(); });
   setInterval(autoLockTick, 15000);
   if (window.matchMedia) { try { matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => applyLook(LOOK_DRAFT || undefined)); } catch (e) { } }
   window.addEventListener('pagehide', () => flush());

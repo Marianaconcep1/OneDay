@@ -11,7 +11,7 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond]); c
 
 (async () => {
   await new Promise((r) => srv.listen(8770, r));
-  const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome' });
+  const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome' }).catch(() => chromium.launch());
   const mk = async (opts) => {
     const ctx = await browser.newContext({ ...devices['iPhone SE'], timezoneId: 'Asia/Tokyo', ...(opts || {}) });
     await ctx.route(/fonts\.(googleapis|gstatic)/, (r) => r.abort());
@@ -24,7 +24,9 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond]); c
   const setNow = async (iso) => { await page.evaluate((n) => { localStorage.setItem('__now', String(n)); window.__oneDayNow = n; }, Date.parse(iso)); };
   const shot = (n) => page.screenshot({ path: path.join(OUT, n + '.png') });
   const click = async (sel) => { await page.evaluate(() => { const a = document.activeElement; if (a && a.matches('input, textarea')) a.blur(); }); await page.waitForTimeout(60); await page.locator(sel).first().click(); await page.waitForTimeout(420); };
-  const reload = async (hash) => { await page.goto('http://localhost:8770/' + (hash || '')); await page.waitForTimeout(500); };
+  // Every open asks for the PIN; these checks unlock with the test PIN unless asked not to
+  const unlockP = async (pg) => { if (await pg.evaluate(() => typeof LOCKED !== 'undefined' && LOCKED)) { await pg.fill('#lkPin', '204816'); await pg.locator('[data-act="lockTry"]').click(); await pg.waitForFunction(() => !LOCKED, null, { timeout: 15000 }); await pg.waitForTimeout(250); } };
+  const reload = async (hash, keepLocked) => { await page.goto('http://localhost:8770/' + (hash || '')); await page.waitForTimeout(500); if (!keepLocked) await unlockP(page); };
   const noH = () => st(() => document.documentElement.scrollWidth <= window.innerWidth + 1 && (!document.querySelector('.sheet') || document.querySelector('.sheet').scrollWidth <= document.querySelector('.sheet').clientWidth + 1));
   const fillDate = (sel, v) => page.evaluate(([sel, v]) => { const e = document.querySelector(sel); e.value = v; e.dispatchEvent(new Event('input', { bubbles: true })); e.dispatchEvent(new Event('change', { bubbles: true })); }, [sel, v]);
   const medals = () => st('(S.medals || []).length');
@@ -32,7 +34,7 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond]); c
   await page.goto('http://localhost:8770/'); await setNow('2026-10-24T02:00:00Z'); // Oct 23, 22:00 in Puerto Rico; Oct 24 in Tokyo
   await st(async () => {
     S = defaultState(); Object.assign(S.settings, { onboarded: true, welcomeDone: true, languageChosen: true, language: 'en', name: 'Mari', timezone: 'America/Puerto_Rico', calibrationStart: '2026-09-01' });
-    growthInit(); await flush();
+    growthInit(); await flush(); await createPin('204816');
   });
   await reload('#plan');
   const openGoals = async () => { await st(() => { TAB = 'plan'; OPEN_SECTS.add('sect-goals'); closeSheet(true); render(); }); await page.waitForTimeout(150); };
@@ -201,9 +203,9 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond]); c
   await rp.goto('http://localhost:8770/'); await rp.evaluate((n) => { localStorage.setItem('__now', String(n)); window.__oneDayNow = n; }, Date.parse('2026-12-03T15:00:00Z'));
   await rp.evaluate(async () => {
     S = defaultState(); Object.assign(S.settings, { onboarded: true, welcomeDone: true, languageChosen: true, language: 'en', timezone: 'America/Puerto_Rico', calibrationStart: '2026-09-01' });
-    growthInit(); S.goals.push({ id: 'g9', title: 'Read twelve books', area: 'mind', kind: 'milestones', milestones: [], status: 'active', startedOn: '2026-01-01', targetDate: '2026-12-31', criteria: 'Twelve finished', manual: [] }); await flush();
+    growthInit(); S.goals.push({ id: 'g9', title: 'Read twelve books', area: 'mind', kind: 'milestones', milestones: [], status: 'active', startedOn: '2026-01-01', targetDate: '2026-12-31', criteria: 'Twelve finished', manual: [] }); await flush(); await createPin('204816');
   });
-  await rp.goto('http://localhost:8770/#plan'); await rp.waitForTimeout(400);
+  await rp.goto('http://localhost:8770/#plan'); await rp.waitForTimeout(400); await unlockP(rp);
   await rp.evaluate(() => { SH.goalId = 'g9'; A.goalCompleteYes(); }); await rp.waitForTimeout(200);
   const still = await rp.evaluate(() => getComputedStyle(document.querySelector('.giftbox')).animationName === 'none');
   await rp.waitForTimeout(600); await rp.locator('.gift-btn').click(); await rp.waitForTimeout(80);
