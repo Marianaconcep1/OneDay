@@ -435,6 +435,10 @@ html:not([lang="en"]) .tab span { overflow: visible; text-overflow: clip; white-
 .letter-page .lang-switch { background: transparent; border-color: rgba(46, 38, 32, .25); color: #2E2620; }
 .letter-page .lang-switch svg { color: #6A5D52; }
 .lang-pick { width: 100%; max-width: 380px; text-align: center; align-items: stretch; }
+.logo { display: flex; justify-content: center; }
+.logo svg { width: 120px; height: auto; display: block; }
+.lock .logo { justify-content: flex-start; }
+.lock .logo svg { width: 88px; }
 .brand-mark { font-family: var(--f-display); font-size: 40px; font-style: italic; color: var(--pink-ink); }
 .pick-q { display: flex; flex-direction: column; gap: 2px; margin: 0; font-family: var(--f-display); font-weight: 500; font-size: 22px; line-height: 1.3; }
 .pick-q span + span { font-size: 17px; color: var(--muted); font-style: italic; }
