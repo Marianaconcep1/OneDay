@@ -19,11 +19,16 @@ function renderPlan() {
     <p class="tiny muted">Minutes planned each day, in amber when it’s more than your available time. Tap a day to adjust just that day.</p></section>`;
   h += renderWeekCard(ws);
   h += sect('goals', 'Goals', S.goals.length ? plural(activeGoals().length, 'active or maintained goal') : 'Savings, revenue, distance, milestones', renderGoals());
-  h += sect('business', t('area.business'), esc(S.business.stage ? 'Stage: ' + S.business.stage : 'Direction, schedule and next actions'), renderBizPlan());
-  h += sect('training', t('area.training'), S.training.templates.length ? 'Weekly plan entered' : 'Not set up yet', renderTrainPlan());
-  h += sect('money', t('area.money'), S.money.accounts.length ? 'Payday plan, bills and savings' : 'Not set up yet', renderMoneyPlan());
-  h += sect('art', t('area.art'), 'Small, private, allowed to be unfinished', renderArtPlan());
+  // Areas you chose come first; the others wait under "Other areas", one tap away
+  const areaSects = [
+    ['business', () => sect('business', t('area.business'), esc(S.business.stage ? 'Stage: ' + S.business.stage : 'Direction, schedule and next actions'), renderBizPlan())],
+    ['training', () => sect('training', t('area.training'), S.training.templates.length ? 'Weekly plan entered' : 'Not set up yet', renderTrainPlan())],
+    ['money', () => sect('money', t('area.money'), S.money.accounts.length ? 'Payday plan, bills and savings' : 'Not set up yet', renderMoneyPlan())],
+    ['art', () => sect('art', t('area.art'), 'Small, private, allowed to be unfinished', renderArtPlan())]];
+  const hiddenAreas = areaSects.filter(([a]) => !areaOn(a) && PLAN_OPEN !== a);
+  for (const [a, fn] of areaSects) if (!hiddenAreas.some(([b]) => b === a)) h += fn();
   h += sect('tasks', 'Other scheduled tasks', 'Recurring or one-off', renderTaskList());
+  if (hiddenAreas.length) h += `<details class="more other-areas"><summary>Other areas: ${hiddenAreas.map(([a]) => esc(t('area.' + a))).join(', ')}</summary><div class="stack mt-s">${hiddenAreas.map(([, fn]) => fn()).join('')}</div></details>`;
   h += '</div>';
   PLAN_OPEN = null;
   return h;

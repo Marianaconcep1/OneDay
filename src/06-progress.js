@@ -25,33 +25,35 @@ function renderProgressWeek() {
     <p>Modified: ${a.modified}. Skipped: ${a.skipped}.${a.norecord ? ' No record: ' + a.norecord + '.' : ''}</p>
     <p class="tiny muted mt-s">Unscheduled days aren’t counted. A followed rest day counts as following the plan.${st.pausedDays ? ' ' + plural(st.pausedDays, 'paused day') + ' left out.' : ''}</p></section>`;
 
+  // Only the areas this person uses get rows
+  const on = { money: areaOn('money'), business: areaOn('business'), training: areaOn('training'), art: areaOn('art') };
   h += `<section class="stack-s"><div class="h2">Actions</div><div class="card flat"><div class="kv">
-    <span>Spending logs completed</span><span>${sp.complete + sp.none} of ${sp.days} days</span>
+    ${on.money ? `<span>Spending logs completed</span><span>${sp.complete + sp.none} of ${sp.days} days</span>
     ${sp.incomplete ? `<span>Marked incomplete</span><span>${sp.incomplete}</span>` : ''}
     ${sp.partial ? `<span>Entries, not confirmed complete</span><span>${sp.partial}</span>` : ''}
-    ${sp.missing ? `<span>Not recorded</span><span>${sp.missing}</span>` : ''}
-    <span>Business sessions as planned</span><span>${bz.done} of ${bz.scheduled}</span>
+    ${sp.missing ? `<span>Not recorded</span><span>${sp.missing}</span>` : ''}` : ''}
+    ${on.business ? `<span>Business sessions as planned</span><span>${bz.done} of ${bz.scheduled}</span>
     ${bz.modified ? `<span>Five-minute versions</span><span>${bz.modified}</span>` : ''}
     <span>Business outputs noted</span><span>${bz.outputs}</span>
-    ${(() => { const ps = planningStats(ws); return ps.sessions ? `<span>Planning sessions → scheduled action → done</span><span>${ps.sessions} → ${ps.led} → ${ps.executed}</span>` : ''; })()}
-    <span>Training sessions followed</span><span>${tr.completed + tr.rest} of ${tr.scheduled}</span>
+    ${(() => { const ps = planningStats(ws); return ps.sessions ? `<span>Planning sessions → scheduled action → done</span><span>${ps.sessions} → ${ps.led} → ${ps.executed}</span>` : ''; })()}` : ''}
+    ${on.training ? `<span>Training sessions followed</span><span>${tr.completed + tr.rest} of ${tr.scheduled}</span>
     ${tr.modified ? `<span>Modified sessions</span><span>${tr.modified}</span>` : ''}
-    ${tr.skipped ? `<span>Skipped sessions</span><span>${tr.skipped}</span>` : ''}
-    <span>Art</span><span>${st.art.participated} of ${st.art.scheduled} days${st.art.extra ? ' + ' + st.art.extra + ' extra' : ''}</span>
+    ${tr.skipped ? `<span>Skipped sessions</span><span>${tr.skipped}</span>` : ''}` : ''}
+    ${on.art ? `<span>Art</span><span>${st.art.participated} of ${st.art.scheduled} days${st.art.extra ? ' + ' + st.art.extra + ' extra' : ''}</span>` : ''}
     <span>Check-ins submitted</span><span>${st.checkins} of ${st.days} days</span></div></div></section>`;
 
-  h += `<section class="stack-s"><div class="h2">Outcomes</div><div class="card flat"><div class="kv">
-    <span>Confirmed savings change</span><span>${svNow.value != null && svBefore.value != null ? (svNow.value - svBefore.value >= 0 ? '+' : '') + money(svNow.value - svBefore.value) : 'Not enough confirmed data'}</span>
+  if (on.money || on.business || on.training) h += `<section class="stack-s"><div class="h2">Outcomes</div><div class="card flat"><div class="kv">
+    ${on.money ? `<span>Confirmed savings change</span><span>${svNow.value != null && svBefore.value != null ? (svNow.value - svBefore.value >= 0 ? '+' : '') + money(svNow.value - svBefore.value) : 'Not enough confirmed data'}</span>
     <span>Confirmed savings now</span><span>${svNow.value == null ? 'Not confirmed' : money(svNow.value)}</span>
-    <span>Bills marked paid</span><span>${paid.length}</span>
-    <span>Business results</span><span>${results.length ? results.filter((r) => r.type !== 'Revenue').map((r) => r.type).join(', ') || '—' : 'None entered'}</span>
-    ${rev ? `<span>Revenue entered</span><span>${money(rev)}</span>` : ''}
-    <span>Running distance</span><span>${fmtD(tr.distActual)} ${unit}${tr.distPlanned ? ' of ' + fmtD(tr.distPlanned) + ' planned' : ''}</span>
-    <span>Rest days followed</span><span>${tr.rest} of ${tr.restPlanned}</span></div>
-    ${tr.distMissing ? `<p class="tiny muted mt-s">${plural(tr.distMissing, 'run')} logged without a distance, so the total is incomplete.</p>` : ''}
+    <span>Bills marked paid</span><span>${paid.length}</span>` : ''}
+    ${on.business ? `<span>Business results</span><span>${results.length ? results.filter((r) => r.type !== 'Revenue').map((r) => r.type).join(', ') || '—' : 'None entered'}</span>
+    ${rev ? `<span>Revenue entered</span><span>${money(rev)}</span>` : ''}` : ''}
+    ${on.training ? `<span>Running distance</span><span>${fmtD(tr.distActual)} ${unit}${tr.distPlanned ? ' of ' + fmtD(tr.distPlanned) + ' planned' : ''}</span>
+    <span>Rest days followed</span><span>${tr.rest} of ${tr.restPlanned}</span>` : ''}</div>
+    ${on.training && tr.distMissing ? `<p class="tiny muted mt-s">${plural(tr.distMissing, 'run')} logged without a distance, so the total is incomplete.</p>` : ''}
     <p class="tiny muted mt-s">Logged effort doesn’t automatically produce these outcomes, and time spent isn’t revenue. Both are shown so you can see each honestly.</p></div></section>`;
 
-  h += `<section class="stack-s"><div class="h2">Training by day</div><div class="card flat">${trainingChart(st, unit)}</div></section>`;
+  if (on.training) h += `<section class="stack-s"><div class="h2">Training by day</div><div class="card flat">${trainingChart(st, unit)}</div></section>`;
   h += `<section class="stack-s"><div class="h2">Mood and energy</div><div class="card flat stack-s">
     <div class="mood-row">${st.dates.map((d) => `<span class="tiny muted">${DOW_LETTER[dDow(d)]}</span>`).join('')}</div>
     <div class="mood-row" aria-label="Mood">${st.mood.map((m) => `<span class="mv ${m == null ? 'missing' : ''}">${m === undefined ? '' : m == null ? '—' : m}</span>`).join('')}</div>
@@ -182,7 +184,9 @@ A.openReview = () => {
   const sug = reviewSuggestions(ws, nextWs);
   const exp = S.experiments.find((x) => x.ws === ws);
   const groups = changeGroups(ws);
-  const nw = weekPlan(nextWs) || {}; const nMain = nw.main || 'money';
+  const nw = weekPlan(nextWs) || {};
+  const onList = AREAS.filter(areaOn); const nSug = onList.includes('money') ? 'money' : onList[0]; const nMain = nw.main || nSug;
+  const nShown = AREAS.filter((a) => onList.includes(a) || a === nMain);
   SH.rev = { ws, nextWs, sug, groups, exp };
   const pre = rv.adjustmentId || (sug[0] ? sug[0].id : 'none');
   const fill = (id) => { const s = sug.find((x) => x.id === id); return s ? { noticed: s.why, change: s.label } : null; };
@@ -207,8 +211,8 @@ A.openReview = () => {
       ${groups.map((g, i) => `<div class="card flat stack-s"><b>${esc(g.title)}</b><div class="tiny muted">${g.items.map((c) => esc(CHANGE_KIND[c.kind] || c.kind) + (c.from || c.to ? ' (' + esc([c.from, c.to].filter(Boolean).join(' → ')) + ')' : '')).join(' · ')}${g.postponed4w >= 3 ? ` · moved or dropped ${g.postponed4w} times in four weeks` : ''}</div><div data-toggleable>${chips('chg' + i, EXPLAIN, g.explanation)}</div></div>`).join('')}</div>` : ''}
     <label class="f">What should become smaller, clearer, or better scheduled?<textarea class="inp" id="rvAdjust" maxlength="600">${esc(rv.adjust || '')}</textarea></label>
     <label class="f">What financial obligations are coming? <span class="hint">${bills.length ? 'Due in the next two weeks: ' + bills.map((o) => esc(o.bill.name) + ' ' + esc(dMD(o.due))).join(', ') : 'No bills entered for the next two weeks.'}</span><textarea class="inp" id="rvMoney" maxlength="600">${esc(rv.money || '')}</textarea></label>
-    <div class="stack-s"><div class="h3">Next week’s one main outcome</div>${nw.confirmedAt ? '' : '<p class="tiny muted">Suggested: financial clarity. Confirm it or pick another.</p>'}${chips('rvMain', Object.entries(AREA_GOAL).map(([a, l]) => [a, l]), nMain)}<input class="inp" id="rvMainOut" maxlength="160" value="${esc(nw.mainOutcome || '')}" placeholder="What will exist by the end of next week?" aria-label="Main outcome"></div>
-    <div class="stack-s"><div class="h3">Keep going at a maintenance level</div>${chips('rvKeep', AREAS.map((a) => [a, t('area.' + a)]), nw.maintain || AREAS.filter((a) => a !== nMain), true)}</div>
+    <div class="stack-s"><div class="h3">Next week’s one main outcome</div>${nw.confirmedAt ? '' : `<p class="tiny muted">Suggested: ${esc(AREA_GOAL[nSug].toLowerCase())}. Confirm it or pick another.</p>`}${chips('rvMain', nShown.map((a) => [a, AREA_GOAL[a]]), nMain)}<input class="inp" id="rvMainOut" maxlength="160" value="${esc(nw.mainOutcome || '')}" placeholder="What will exist by the end of next week?" aria-label="Main outcome"></div>
+    <div class="stack-s"><div class="h3">Keep going at a maintenance level</div>${chips('rvKeep', nShown.map((a) => [a, t('area.' + a)]), nw.maintain || nShown.filter((a) => a !== nMain), true)}</div>
     <label class="f">Next week’s one business outcome<input class="inp" id="rvBiz" maxlength="160" value="${esc(S.business.weekly[nextWs] || rv.bizOutcome || '')}" placeholder="One visible result, e.g. Offer draft shared with one person"></label>
     <div class="stack-s"><div class="h3">Training scheduled next week</div>${trainNext.length ? `<p class="small">${trainNext.map(([d, s]) => DOW_SHORT[dDow(d)] + ': ' + esc(sessionLabel(s))).join(' · ')}</p>` : '<p class="small muted">No sessions entered.</p>'}<div><button class="btn ghost sm" data-act="goPlanClose">Edit training plan</button></div></div>
     <label class="f">Where is time for art, people and enjoyment?<textarea class="inp" id="rvArt" maxlength="600">${esc(rv.art || '')}</textarea></label>

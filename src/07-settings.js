@@ -28,13 +28,14 @@ function renderSettings() {
       ${DOW_ORDER.map((d) => `<label class="row-between"><span>${DOW_SHORT[d]}</span><input class="inp num" style="max-width:140px" id="av${d}" type="number" min="0" max="900" placeholder="Unknown" value="${esc(s.availability[d] == null ? '' : s.availability[d])}"></label>`).join('')}
       <label class="f">Typical workday notes<input class="inp" id="avNote" maxlength="200" value="${esc(s.workdayNote)}" placeholder="e.g. Work 8–5, free after 6"></label>
       <button class="btn sm" data-act="availSave">Save available time</button></div>
-      <div class="row-between"><span class="small">${plural(activeGoals().length, 'active goal')}. Areas: ${AREAS.map((a) => t('area.' + a)).join(' · ')}</span><button class="btn sm" data-act="goPlan" data-open="goals">Goals</button></div>`);
+      <div class="row-between"><span class="small">${plural(activeGoals().length, 'active goal')}. Areas: ${AREAS.filter(areaOn).map((a) => t('area.' + a)).join(' · ')}</span><button class="btn sm" data-act="goPlan" data-open="goals">Goals</button></div>`);
   h += setSect('notify', t('set.notify'), s.reminders ? 'In-app check-in reminder on' : 'Off', `
       <label class="row" style="min-height:44px;gap:10px"><input type="checkbox" id="stRem" ${s.reminders ? 'checked' : ''} style="width:22px;height:22px" data-act="remToggle"> Show a check-in reminder inside the app</label>
       <p class="small">This reminder appears only while the app is open, and never during a pause. The app can’t notify you when it’s closed; for that, set a repeating iPhone alarm or Reminder for ${esc(fmtTime(s.checkinTime))}.</p>
       <p class="tiny muted">Email and text reminders aren’t available in this version. They need a server and a verified address, so none are set or simulated.</p>`);
   h += setSect('look', t('set.look'), esc(lookSummary()), `<p class="small">Background, font, text color, theme, dimming, blur, text size and motion. You see a preview before anything is saved.</p><button class="btn primary sm" data-act="lookOpen">Personalize</button>`);
   h += setSect('companion', t('set.companion'), S.growth.enabled ? esc(KINDS[chapter().kind]) + ' on Today' : 'Hidden', renderCompanionSettings());
+  h += `<button class="sect-link" data-act="tab" data-tab="mindset"><span class="grow"><b>${esc(t('tab.mindset'))}</b><br><span class="small muted">Free resources, updated weekly</span></span></button>`;
   h += setSect('pause', t('set.pause'), currentPause() ? 'Paused now' : upcomingPause() ? 'Pause scheduled' : 'For trips, illness or a break', renderPauseSettings());
   h += setSect('data', t('set.data'), 'Backup, restore and exports', `
       <div class="small stack-s"><p><b>Where it lives:</b> ${esc(modeText)}${DEMO ? ' (demo data, kept separately)' : ''}.</p>

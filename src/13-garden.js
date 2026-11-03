@@ -175,7 +175,7 @@ function renderCompanionSettings() {
     ${box('cpOn', g.enabled, 'Show the companion on Today')}
     <div class="stack-s"><div class="h3">Kind for this chapter</div>${seg('cpKind', Object.entries(KINDS), ch.kind)}</div>
     ${box('cpMsg', g.messages, 'Show a daily message')}${box('cpAnim', g.animations, 'Gentle movement')}
-    <button class="btn sm" data-act="compSave">Save companion</button>`;
+    <div class="btn-row"><button class="btn sm" data-act="compSave">Save companion</button><button class="btn ghost sm" data-act="tab" data-tab="companion">Open My Companion</button></div>`;
 }
 A.compSave = (el) => {
   setTimeout(() => {

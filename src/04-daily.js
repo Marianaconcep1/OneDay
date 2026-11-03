@@ -97,10 +97,27 @@ A.openCheckin = () => openCheckin(checkinDefaultDate());
 function openCheckin(ds) {
   const ex = S.checkins[ds]; const dr = S.drafts[ds];
   const base = Object.assign({}, ex || {}, (!ex && dr) || {});
-  SH.ci = { ds, step: 1, base, done: false };
+  SH.ci = { ds, base, done: false, flow: ciFlow(ds) };
+  SH.ci.step = SH.ci.flow[0];
   SH.onPick = ciPick;
   openSheet(checkinSheet, { full: true, noFocus: true });
   const sh = $('.sheet'); sh.addEventListener('input', ciDraft); sh.addEventListener('change', ciDraft);
+}
+/* The check-in's main steps: what happened (only if something was scheduled), spending (only if
+   spending is tracked), then mood, energy and one win. Planning tomorrow (step 5) is optional. */
+function ciFlow(ds) {
+  const items = itemsFor(ds);
+  const f = [];
+  if (items.some((i) => i.kind !== 'spend' && !i.unplanned && !(i.kind === 'biz' && i.needsAction))) f.push(1);
+  if (items.some((i) => i.kind === 'spend')) f.push(2);
+  f.push(3);
+  return f;
+}
+const ciTomorrowOn = (ds) => areaOn('business') || !!sessionFor(dAdd(ds, 1));
+function ciButtons(c) {
+  const i = c.flow.indexOf(c.step);
+  show('ciBack', c.step === 5 || i > 0); show('ciNext', c.step !== 3 && c.step !== 5); show('ciSave', c.step === 3 || c.step === 5);
+  show('ciTomorrow', c.step === 3 && ciTomorrowOn(c.ds));
 }
 function ciDraft() { if (!SH.ci || SH.ci.done) return; S.drafts[SH.ci.ds] = Object.assign(collectCi(), { draftAt: nowISO() }); save(); }
 function ciPick(g, v, el) {
@@ -155,19 +172,20 @@ function checkinSheet() {
   const scale = (g, v, lo, hi) => `<div data-toggleable><div class="scale">${[1, 2, 3, 4, 5].map((n) => `<button type="button" class="chip" data-act="pick" data-group="${g}" data-val="${n}" aria-pressed="${v === n ? 'true' : 'false'}">${n}</button>`).join('')}</div><div class="scale-labels"><span>1 · ${lo}</span><span>5 · ${hi}</span></div></div>`;
   const step = (n, title, body) => `<section class="stack" data-step="${n}" ${c.step === n ? '' : 'hidden'}><div class="h2">${title}</div>${body}</section>`;
   return `${sheetHead(t('checkin'), esc(dLong(ds)) + (S.checkins[ds] ? ' · editing saved check-in' : ''))}
-    <div class="steps" aria-hidden="true">${[1, 2, 3, 4, 5].map((n) => `<span class="${n <= c.step ? 'on' : ''}" data-bar="${n}"></span>`).join('')}</div>
+    <div class="steps" aria-hidden="true">${c.flow.map((n, i) => `<span class="${i <= (c.step === 5 ? c.flow.length : c.flow.indexOf(c.step)) ? 'on' : ''}" data-bar="${i}"></span>`).join('')}</div>
     ${nowHM() < '04:00' && ds !== td ? `<div class="stack-s"><span class="small muted">Checking in for</span>${seg('cidate', [[y, 'Yesterday · ' + dMD(y)], [td, 'Today · ' + dMD(td)]], ds)}</div>` : ''}
     ${step(1, 'What happened today', items.length ? `<p class="small muted">Already-logged items are filled in. Change anything that’s off.</p><div class="stack">${items.map((it) => `<div class="card flat stack-s"><div class="row-between"><b class="grow">${esc(it.plannedTitle || it.title)}</b><span class="tiny muted">${t('area.' + it.area)}</span></div>${it.smaller ? `<div class="tiny muted">Planned smaller today: ${esc(it.title)}</div>` : ''}${seg('cs|' + it.key, ciRowOptions(it), ciRowValue(it))}<div id="cr|${esc(it.key)}" class="stack-s" ${['modified', 'skipped'].includes(ciRowValue(it)) ? '' : 'hidden'}><span class="tiny muted">Reason (optional)</span>${chips('cr|' + it.key, REASONS, (it.occ && it.occ.reason) || (it.log && it.log.reason) || null)}</div></div>`).join('')}</div>` : '<p class="muted">Nothing besides the spending log was scheduled. An unscheduled day is not a missed one.</p>')}
     ${step(2, 'Spending', `<p>${list.length ? `${plural(list.length, 'entry', 'entries')} recorded${hasExp ? ': ' + money(expTotal) + ' in expenses' : ''}.` : 'Nothing recorded yet for this day.'}</p>
       <div class="card flat stack-s"><div class="h3">Add an expense</div><div class="grid2"><input class="inp num" id="ciAmt" inputmode="decimal" placeholder="0.00" aria-label="Amount"><select class="inp" id="ciCat" aria-label="Category">${EXP_CATS.map((x) => `<option>${x}</option>`).join('')}</select></div><button class="btn sm" data-act="ciAddExp">Add</button><div id="ciExpList" class="tiny muted"></div></div>
       ${seg('cspend', [['complete', 'That’s everything'], ...(hasExp ? [] : [['none', 'No spending']]), ['incomplete', 'Incomplete']], spendStatus(ds) || null)}
       <p class="tiny muted">If you’re not sure, mark it incomplete. Missing days are shown as missing, not $0.</p>`)}
-    ${step(3, 'Mood and energy', `<p class="small muted">Both optional. A low number is as useful as a high one.</p><div class="stack-s"><div class="h3">Mood</div>${scale('cmood', b.mood, 'very low', 'very good')}</div><div class="stack-s"><div class="h3">Energy</div>${scale('cenergy', b.energy, 'depleted', 'energized')}</div>`)}
-    ${step(4, 'A brief reflection', `<div class="stack-s"><div class="h3">What am I feeling?</div>${chips('cemo', EMOTIONS.map((e) => [e, e]), b.emotions || [], true, 'pinkc')}</div>
+    ${step(3, 'How was today?', `<p class="small muted">Everything here is optional. A low number is as useful as a high one.</p><div class="stack-s"><div class="h3">Mood</div>${scale('cmood', b.mood, 'very low', 'very good')}</div><div class="stack-s"><div class="h3">Energy</div>${scale('cenergy', b.energy, 'depleted', 'energized')}</div>
+      <label class="f">One thing I give myself credit for today <span class="hint">Optional</span><input class="inp" id="ciCredit" maxlength="200" value="${esc(b.credit || '')}"></label>
+      <details class="more ci-more" ${(b.emotions && b.emotions.length) || b.contributed || b.responseChoice || b.response ? 'open' : ''}><summary>Add more (optional)</summary><div class="stack mt-s">
+      <div class="stack-s"><div class="h3">What am I feeling?</div>${chips('cemo', EMOTIONS.map((e) => [e, e]), b.emotions || [], true, 'pinkc')}</div>
       <label class="f">What contributed? <span class="hint">Optional, one sentence</span><input class="inp" id="ciContrib" maxlength="200" value="${esc(b.contributed || '')}"></label>
       <div class="stack-s"><div class="h3">What would be a kind and useful response?</div><div data-toggleable>${chips('cresp', RESPONSES.map((r) => [r, r]), b.responseChoice || null)}</div><input class="inp" id="ciResp" maxlength="200" placeholder="Or write your own" value="${esc(b.response || '')}" aria-label="Your own response"></div>
-      <label class="f">One thing I give myself credit for today <span class="hint">Optional</span><input class="inp" id="ciCredit" maxlength="200" value="${esc(b.credit || '')}"></label>
-      <button class="btn accent block" data-act="ciStep" data-to="5">${t('enough')}</button>`)}
+      </div></details>`)}
     ${step(5, 'Tomorrow · ' + esc(dShort(tm)), `<div class="stack-s"><div class="h3">Next business action</div>${tmBiz || acts.length ? '' : ''}
       ${!bizBlockDay(tm) && !S.business.nextFor[tm] ? '<p class="small muted">Business isn’t scheduled tomorrow. Choosing an action here schedules it.</p>' : ''}
       <div class="stack-s">${chips('cbiz', [...acts.map((a) => [a.id, a.title]), ['__new', 'Write a new action'], ...(bizBlockDay(tm) ? [] : [['__none', 'Leave tomorrow unscheduled']])], bizBlockDay(tm) || S.business.nextFor[tm] ? curNext : '__none')}</div>
@@ -175,19 +193,22 @@ function checkinSheet() {
       <div class="stack-s"><div class="h3">Scheduled training</div><p>${esc(sessionLabel(tmTrain))}${tmTrain && tmTrain.detail ? ' · ' + esc(tmTrain.detail) : ''}</p>
       <label class="f">Change tomorrow’s session <span class="hint">Only if your plan calls for it</span><select class="inp" id="ciTrain"><option value="">Keep as planned</option>${Object.entries(SESSION_TYPES).map(([k, l]) => `<option value="${k}">${l}</option>`).join('')}</select></label></div>`)}
     <div class="btn-row" style="position:sticky;bottom:0;background:var(--bg);padding-block:10px">
-      <button class="btn" data-act="ciStep" data-dir="-1" id="ciBack" ${c.step === 1 ? 'hidden' : ''}>${t('btn.back')}</button>
-      <button class="btn primary" data-act="ciStep" data-dir="1" id="ciNext" ${c.step === 5 ? 'hidden' : ''}>${t('btn.next')}</button>
-      <button class="btn primary" data-act="ciSave" id="ciSave" ${c.step === 5 ? '' : 'hidden'}>Save check-in</button>
-      ${c.step < 5 ? '' : ''}
+      <button class="btn" data-act="ciStep" data-dir="-1" id="ciBack" ${c.step === 5 || c.flow.indexOf(c.step) > 0 ? '' : 'hidden'}>${t('btn.back')}</button>
+      <button class="btn primary" data-act="ciStep" data-dir="1" id="ciNext" ${c.step === 3 || c.step === 5 ? 'hidden' : ''}>${t('btn.next')}</button>
+      <button class="btn primary" data-act="ciSave" id="ciSave" ${c.step === 3 || c.step === 5 ? '' : 'hidden'}>Save check-in</button>
+      <button class="btn" data-act="ciStep" data-to="5" id="ciTomorrow" ${c.step === 3 && ciTomorrowOn(ds) ? '' : 'hidden'}>Plan tomorrow</button>
     </div>
     <p class="tiny muted">Drafts save automatically. Optional fields can stay empty.</p>`;
 }
 A.ciStep = (el) => {
   const c = SH.ci;
-  c.step = el.dataset.to ? Number(el.dataset.to) : Math.min(5, Math.max(1, c.step + Number(el.dataset.dir)));
+  if (el.dataset.to) c.step = Number(el.dataset.to);
+  else if (c.step === 5) c.step = 3;  // back from planning tomorrow
+  else c.step = c.flow[Math.min(c.flow.length - 1, Math.max(0, c.flow.indexOf(c.step) + Number(el.dataset.dir)))];
   $$('[data-step]').forEach((s) => { s.hidden = Number(s.dataset.step) !== c.step; });
-  $$('[data-bar]').forEach((s) => s.classList.toggle('on', Number(s.dataset.bar) <= c.step));
-  show('ciBack', c.step > 1); show('ciNext', c.step < 5); show('ciSave', c.step === 5);
+  const at = c.step === 5 ? c.flow.length : c.flow.indexOf(c.step);
+  $$('[data-bar]').forEach((s) => s.classList.toggle('on', Number(s.dataset.bar) <= at));
+  ciButtons(c);
   $('.sheet').scrollTop = 0;
   ciDraft();
 };

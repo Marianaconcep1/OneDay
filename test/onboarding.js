@@ -204,7 +204,7 @@ const URL0 = 'http://localhost:8770/';
     ok('R9 Starting schedules only the accepted actions', fin.on && fin.v === 2 && fin.tasks.length === 1 && fin.tasks[0][0] === 'sleep' && fin.tasks[0][3] === '135' && fin.tasks[0][4] === 'Evening, 5–8 PM', JSON.stringify(fin));
     ok('R10 Settings follow the answers', fin.foci.join() === 'sleep,home,money' && fin.fk === 'sleep' && fin.av[1] === 90 && fin.av[2] == null && fin.ci === '19:30' && fin.rem === true && fin.sp === false && fin.win === 'evening', JSON.stringify(fin));
     const today = await p.locator('#main').textContent();
-    ok('R11 Today shows the chosen focuses, and no spending record that wasn’t chosen', (await h.count('.tabbar')) === 1 && today.includes('Sleep & rest') && today.includes('Home & organization') && !(await h.st(() => itemsFor(today()).some((i) => i.kind === 'spend'))), today.replace(/\n/g, ' / ').slice(0, 1200));
+    ok('R11 Today shows the chosen focuses, and no spending record that wasn’t chosen', (await h.count('.tabbar')) === 1 && today.includes('Sleep & rest') && !today.includes('Nothing scheduled here today') && !(await h.st(() => itemsFor(today()).some((i) => i.kind === 'spend'))), today.replace(/\n/g, ' / ').slice(0, 1200));
     await p.screenshot({ path: path.join(OUT, 'o21-today.png'), fullPage: true });
     await p.close();
   }

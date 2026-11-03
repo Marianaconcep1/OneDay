@@ -40,8 +40,11 @@ function mainOutcomeLine(td) {
 }
 function renderWeekCard(ws) {
   const w = weekPlan(ws) || {};
-  const main = w.main || 'money';
-  const maintain = w.maintain || AREAS.filter((a) => a !== main);
+  const onList = AREAS.filter(areaOn);  // only the areas this person uses
+  const suggested = onList.includes('money') ? 'money' : onList[0];
+  const main = w.main || suggested;
+  const shown = AREAS.filter((a) => onList.includes(a) || a === main);
+  const maintain = w.maintain || shown.filter((a) => a !== main);
   const lives = S.life.filter((l) => l.date >= ws && l.date <= dAdd(ws, 6) && l.status !== 'let-go').sort((a, b) => (a.date + (a.time || '') < b.date + (b.time || '') ? -1 : 1));
   const later = S.later.filter((x) => x.kind === 'idea');
   return `<section class="card stack"><div class="eyebrow">${PLAN_WEEK === 0 ? 'This week' : 'Week of ' + esc(dMD(ws))} · in this order</div>
@@ -49,11 +52,11 @@ function renderWeekCard(ws) {
       ${lives.map((l) => `<div class="row-between small"><span class="grow">${esc(l.title)} <span class="muted">· ${esc(dShort(l.date))}${l.time ? ' ' + esc(fmtTime(l.time)) : ''}</span></span><button class="btn ghost sm" data-act="lifeChange" data-id="${l.id}">Change</button></div>`).join('')}
       <div><button class="btn sm" data-act="lifeForm" data-ws="${ws}">Add a personal commitment</button></div></div>
     <div class="stack-s"><div class="h3">2 · One main outcome to move forward</div>
-      ${w.confirmedAt ? '' : '<p class="small">Suggested: <b>financial clarity</b>. Confirm it or pick another.</p>'}
-      ${chips('wkMain', Object.entries(AREA_GOAL).map(([a, l]) => [a, l + (a === 'money' && !w.confirmedAt ? ' (suggested)' : '')]), main)}
+      ${w.confirmedAt ? '' : `<p class="small">Suggested: <b>${esc(AREA_GOAL[suggested].toLowerCase())}</b>. Confirm it or pick another.</p>`}
+      ${chips('wkMain', shown.map((a) => [a, AREA_GOAL[a] + (a === suggested && !w.confirmedAt ? ' (suggested)' : '')]), main)}
       <input class="inp" id="wkMainOut" maxlength="160" value="${esc(w.mainOutcome || '')}" placeholder="What will exist by the end of the week?" aria-label="Main outcome"></div>
-    <div class="stack-s"><div class="h3">3 · Keep going at a maintenance level</div>${chips('wkKeep', AREAS.map((a) => [a, t('area.' + a)]), maintain, true)}<p class="tiny muted">${AREAS.filter((a) => a !== main).map((a) => esc(t('area.' + a)) + ': ' + esc(MAINTAIN[a].toLowerCase())).join(' · ')}</p></div>
-    <label class="f">This week’s one business outcome<input class="inp" id="wkOutcome" maxlength="160" value="${esc(S.business.weekly[ws] || '')}" placeholder="e.g. Three offer bullets I could send"></label>
+    <div class="stack-s"><div class="h3">3 · Keep going at a maintenance level</div>${chips('wkKeep', shown.map((a) => [a, t('area.' + a)]), maintain, true)}<p class="tiny muted">${shown.filter((a) => a !== main).map((a) => esc(t('area.' + a)) + ': ' + esc(MAINTAIN[a].toLowerCase())).join(' · ')}</p></div>
+    ${areaOn('business') ? `<label class="f">This week’s one business outcome<input class="inp" id="wkOutcome" maxlength="160" value="${esc(S.business.weekly[ws] || '')}" placeholder="e.g. Three offer bullets I could send"></label>` : ''}
     <div class="stack-s"><div class="h3">4 · Later</div><p class="tiny muted">Ideas you’re deliberately postponing. They’re never scheduled and never overdue.</p>
       ${later.map((x) => `<div class="row-between small"><span class="grow">${esc(x.text)}</span><button class="btn ghost sm" data-act="laterDel" data-id="${x.id}" aria-label="Remove">×</button></div>`).join('')}
       <div class="row"><input class="inp grow" id="laterIdea" maxlength="140" placeholder="Postpone an idea" aria-label="Postpone an idea"><button class="btn sm" data-act="laterAdd" data-kind="idea" data-src="laterIdea">Add</button></div></div>
@@ -64,7 +67,7 @@ A.saveWeekly = (el) => {
   const main = getPick('wkMain') || 'money';
   S.weeks[ws] = Object.assign({}, S.weeks[ws] || {}, { main, mainOutcome: val('wkMainOut'), maintain: getPicks('wkKeep').filter((a) => a !== main), confirmedAt: nowISO() });
   if (ws === weekStart(today())) S.settings.focus = main;
-  const v = val('wkOutcome'); if (v) S.business.weekly[ws] = v; else delete S.business.weekly[ws];
+  if ($('#wkOutcome')) { const v = val('wkOutcome'); if (v) S.business.weekly[ws] = v; else delete S.business.weekly[ws]; }
   save(); render(); toast('Week saved.');
   openNextActionPrompt({ area: main === 'mind' ? 'business' : main, from: 'weekly plan' });
 };
