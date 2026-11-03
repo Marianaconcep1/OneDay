@@ -76,7 +76,7 @@ function renderLock() {
       <label class="f">Type ERASE to confirm<input class="inp" id="lkErase" autocomplete="off" autocapitalize="characters"></label>
       <button class="btn accent" data-act="lockErase">Erase everything</button><button class="btn ghost sm" data-act="lockMode" data-mode="pin">Cancel</button>`;
   } else {
-    body = `<div class="brand">One Day<br><em>Beta</em></div>
+    body = `<div class="logo">${LOGO_SVG}</div><div class="brand">One Day<br><em>Beta</em></div>
       ${pinField('lkPin', 'PIN', true, 'lockMsg')}
       ${wait}<div id="lockMsg" class="small" aria-live="polite">${esc(LOCK_UI.msg || (AUTH.fails && !left ? plural(tries, 'attempt') + ' left before a short wait.' : ''))}</div>
       <button class="btn primary" data-act="lockTry" ${left ? 'disabled' : ''}>Unlock</button>

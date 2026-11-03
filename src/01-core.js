@@ -2,6 +2,8 @@
 /* One Day — Mariana. Local-first personal accountability app.
    All data stays in this browser (IndexedDB, falling back to localStorage). */
 
+// The One Day logo: an amethyst with the sun behind it (drawn by tools/logo.js)
+const LOGO_SVG = '__LOGO__';
 const SCHEMA = 1;
 const DB_NAME = 'oneday';
 const REAL_KEY = 'state';

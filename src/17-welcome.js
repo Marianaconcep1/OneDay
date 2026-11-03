@@ -225,7 +225,7 @@ function applyLangAttr() { document.documentElement.lang = lang(); }
 /* ----- Screen 0: language, before anything else (nothing preselected) ----- */
 function renderLangPick() {
   return `<main class="wrap welcome" aria-labelledby="pickQ"><div class="lang-pick stack">
-    <div class="brand-mark">One Day</div>
+    <div class="logo">${LOGO_SVG}</div><div class="brand-mark">One Day</div>
     <h1 id="pickQ" class="pick-q">${PICK_Q.map(([k, q]) => `<span lang="${k}">${esc(q)}</span>`).join('')}</h1>
     <div class="pick-list" role="group" aria-labelledby="pickQ">${APP_LANGS.map(([k, n]) => `<button class="btn pick-btn" data-act="langPick" data-l="${k}" lang="${k}">${n}</button>`).join('')}</div></div></main>`;
 }

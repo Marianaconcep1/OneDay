@@ -10,6 +10,8 @@ i18n = {}
 for f in sorted(glob.glob(os.path.join(ROOT, 'src', 'i18n', '*.json'))):
     i18n.update(json.load(open(f, encoding='utf-8')))
 js = js.replace('__REST_QUOTES__', json.dumps([q for q in json.load(open(os.path.join(ROOT, 'src', 'rest-quotes.json'), encoding='utf-8'))['quotes'] if q.get('status') == 'approved'], ensure_ascii=False, separators=(',', ':'))).replace('__I18N__', json.dumps(i18n, ensure_ascii=False, separators=(',', ':')))
+LOGO = src('logo.svg').strip()  # drawn by tools/logo.js
+js = js.replace('__LOGO__', LOGO)
 FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&family=Dancing+Script:wght@600&display=swap">'
 BODY = '<div id="app"><main class="wrap"><p style="padding:24px 0">Loading One Day…</p></main></div><noscript>One Day needs JavaScript.</noscript>'
 TITLE = 'One Day — Mariana'
@@ -34,6 +36,7 @@ index = f'''<!doctype html>
 <meta name="apple-mobile-web-app-title" content="One Day">
 <meta name="referrer" content="no-referrer">
 <link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/logo.svg" type="image/svg+xml">
 <link rel="icon" href="icons/icon-192.png" type="image/png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 {FONTS}
@@ -70,6 +73,6 @@ shutil.copy(os.path.join(ROOT, 'src', 'sw.js'), os.path.join(dist, 'sw.js'))
 pv = os.path.join(ROOT, 'src', 'preview', 'preview.js')
 if os.path.exists(pv):
     core = '\n'.join(open(f, encoding='utf-8').read() for f in sorted(glob.glob(os.path.join(ROOT, 'src', '[0-9][0-9]-*.js'))) if not f.endswith('99-boot.js'))
-    core = core.replace('__REST_QUOTES__', '[]').replace('__I18N__', json.dumps(i18n, ensure_ascii=False, separators=(',', ':')))
+    core = core.replace('__LOGO__', LOGO).replace('__REST_QUOTES__', '[]').replace('__I18N__', json.dumps(i18n, ensure_ascii=False, separators=(',', ':')))
     open(os.path.join(ROOT, 'preview.html'), 'w', encoding='utf-8').write(f'<meta charset="utf-8">\n<title>One Day animation preview</title>\n{FONTS}\n<style>\n{css}\n.pv-env {{ display: flex; justify-content: center; padding: 70px 0 10px; min-height: 300px; }}\n</style>\n{BODY}\n<script>\n{core}\n{open(pv, encoding="utf-8").read()}\n</script>\n')
 print('built', len(index), 'bytes')
