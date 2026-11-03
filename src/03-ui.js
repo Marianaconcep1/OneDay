@@ -23,12 +23,21 @@ function render() {
   const views = { today: renderToday, companion: renderCompanion, plan: renderPlan, progress: renderProgress, mindset: renderMindset, settings: renderSettings };
   root.innerHTML =
     (DEMO ? '<div class="wrap" style="padding-bottom:0"><div class="demo-flag">Demo mode: sample data only. Your real data is untouched. <button class="btn ghost sm" data-act="exitDemo" style="min-height:32px;color:inherit;text-decoration:underline">Exit demo</button></div></div>' : '') +
-    '<main class="wrap" id="main">' + views[TAB]() + '</main>' +
-    '<nav class="tabbar" aria-label="Main">' + ['today', 'companion', 'plan', 'progress', 'mindset', 'settings'].map((k) =>
-      `<button class="tab" data-act="tab" data-tab="${k}" ${TAB === k ? 'aria-current="page"' : ''}>${ICONS[k]}<span>${t('tab.' + k)}</span></button>`).join('') + '</nav>' +
+    '<main class="wrap" id="main">' + subPageBack() + views[TAB]() + '</main>' +
+    '<nav class="tabbar" aria-label="Main">' + MAIN_TABS.map((k) =>
+      `<button class="tab" data-act="tab" data-tab="${k}" ${tabHome(TAB) === k ? 'aria-current="page"' : ''}>${ICONS[k]}<span>${t('tab.' + k)}</span></button>`).join('') + '</nav>' +
     renderTimerBar();
   if (TAB === 'settings') bindTzPicker('stTz', () => SH.tzSel, SETUP[S.settings.language] || SETUP.en);
   syncHash(false); restWas = false;
+}
+/* Four main tabs. My Companion opens from its card on Today and Mindset from Settings;
+   both keep their own address (#companion, #mindset) and show a way back. */
+const MAIN_TABS = ['today', 'plan', 'progress', 'settings'];
+const SUB_PAGES = { companion: 'today', mindset: 'settings' };
+const tabHome = (k) => SUB_PAGES[k] || k;
+function subPageBack() {
+  const home = SUB_PAGES[TAB]; if (!home) return '';
+  return `<button class="btn ghost sm back-link" data-act="tab" data-tab="${home}"><span aria-hidden="true">‹</span> ${esc(t('tab.' + home))}</button>`;
 }
 /* Sheets from the regular app don't stay open over Rest Mode */
 function closeSheetIfStale() { if (restWas === false && $('.sheet')) closeSheet(true); }
@@ -210,7 +219,7 @@ function renderToday() {
   const cd = calibrationDay();
   if (cd) h += `<section class="banner"><div class="row-between"><div class="h3">Calibration · day ${cd} of 7</div></div><p class="small">${t('calib')} Log what actually happens. Targets stay where they are this week.</p>${firstWeekQuestions()}</section>`;
   const justBack = S.pauses.some((p) => p.resumedOn === td && p.scope === 'all');  // no reviews or catching up on the day you return
-  if (!justBack) h += firstWeekBanner(td) + renderDueToday(td);
+  if (!justBack) h += renderDueToday(td);
   if (S.settings.reminders && !S.settings.checkinAnytime && !currentPause() && nowHM() >= S.settings.checkinTime && !S.checkins[td]) h += `<section class="banner pink"><div class="h3">${esc(t('ci.reminder', { time: fmtTime(S.settings.checkinTime) }))}</div></section>`;
   if (reviewDue() && !justBack) h += `<section class="banner"><div class="h3">Weekly review is ready</div><p class="small">10–15 minutes to adjust next week. One change at most.</p><div><button class="btn primary sm" data-act="openReview">Start review</button></div></section>`;
 
@@ -226,70 +235,70 @@ function renderToday() {
     h += `<section class="featured"><div class="eyebrow">${t('today.next')}</div><div class="ft-title">${items.length > 1 ? t('today.allset') : t('today.available')}</div><div class="ft-meta">${S.checkins[td] ? 'Check-in saved. Tomorrow is previewed below.' : 'When you’re ready, close the day with the check-in.'}</div></section>`;
   }
 
-  // Time budget
-  if (!fullPause) {
+  // The evening check-in sits right under the next action (unless the next action is the check-in)
+  if (!(f && f.checkin)) h += checkinButton(td);
+
+  // Time budget, once available time is known (Settings › Goals and schedules)
+  if (!fullPause && dm.avail != null) {
   const pct = dm.avail ? Math.min(100, Math.round(dm.total / dm.avail * 100)) : 0;
   h += `<section class="budget"><div class="row-between small"><span><b class="num">${minsLabel(dm.total)}${dm.unknown ? '+' : ''}</b> planned today${dm.unknown ? ' (some times not set)' : ''}</span><span class="muted num">${dm.avail == null ? `<button class="btn ghost sm" data-act="setAvail" data-dow="${dDow(td)}">Set available time</button>` : minsLabel(dm.avail) + ' available'}</span></div>
     ${dm.avail != null ? `<div class="meter ${dm.over ? 'over' : ''}"><span style="width:${pct}%"></span></div>` : ''}
     ${dm.over ? `<div class="banner warn"><div class="h3">Your plan needs an adjustment.</div><p class="small">Planned time is ${minsLabel(dm.total - dm.avail)} over what you have today. Nothing changes until you choose.</p><div><button class="btn sm" data-act="openAdjust">See adjustments</button></div></div>` : ''}</section>`;
   }
 
-  // Area cards: the five original areas, or, after the ten-question setup, the chosen focuses first
+  // Everything else on today's list, minus the next action already shown above.
+  // Areas with nothing scheduled today stay hidden: an unscheduled day is not a missed one.
   h += renderLifeToday(td);
-  h += '<section class="area-list" aria-label="Areas">';
+  const fkey = f && !f.checkin ? f.key : null;
+  const rest = items.filter((i) => i.key !== fkey);
   const foci = S.settings.onbVersion === 2 && Array.isArray(S.settings.foci) ? S.settings.foci : [];
+  const cards = [];
   for (const fk of foci) {
-    const list = items.filter((i) => i.focus === fk);
-    h += `<article class="area"><span class="dot ${focusArea(fk)}"></span><div class="area-body"><div class="row-between"><span class="area-name">${esc(focusLabel(fk))}</span></div>`;
-    h += list.length ? list.map(areaItemHtml).join('<hr style="border:0;border-top:1px solid var(--line);margin:4px 0">') : `<div class="muted small">${t('today.focusEmpty')}</div>`;
-    h += '</div></article>';
+    const list = rest.filter((i) => i.focus === fk);
+    if (list.length) cards.push(areaCard('dot ' + focusArea(fk), esc(focusLabel(fk)), list));
   }
   for (const area of AREAS) {
-    const list = items.filter((i) => i.area === area && !(i.focus && foci.includes(i.focus)));
-    if (foci.length && area !== 'mind' && !list.length) continue;
-    h += `<article class="area"><span class="dot ${area}"></span><div class="area-body"><div class="row-between"><span class="area-name">${t('area.' + area)}</span>${area === 'mind' ? (S.checkins[td] ? '<span class="pill done">Check-in saved</span>' : '') : ''}</div>`;
-    if (area === 'mind') {
-      h += `<div class="muted small">${t('mind.part')}</div>`;
-    } else if (!list.length && pauseOn(td, area)) {
-      h += `<div class="muted small">Paused. Nothing is scheduled or owed.</div>`;
-    } else if (!list.length) {
-      h += areaEmpty(area, td);
-    } else {
-      h += list.map(areaItemHtml).join('<hr style="border:0;border-top:1px solid var(--line);margin:4px 0">');
-    }
-    h += '</div></article>';
+    if (area === 'mind') continue;
+    const list = rest.filter((i) => i.area === area && !(i.focus && foci.includes(i.focus)));
+    if (list.length) cards.push(areaCard('dot ' + area, t('area.' + area), list));
   }
-  h += '</section>';
+  if (cards.length) h += `<section class="area-list stack-s" aria-label="${esc(t('today.also'))}"><div class="eyebrow">${esc(t('today.also'))}</div>${cards.join('')}</section>`;
 
   h += renderCompanionToday();
-  h += `<button class="checkin-btn" data-act="openCheckin"><span>${S.checkins[td] ? t('checkin.edit') : t('checkin')}<span class="sub">${S.checkins[td] ? 'Saved. Edits replace it, never duplicate it.' : 'About 2 minutes · usually around ' + esc(fmtTime(S.settings.checkinTime))}</span></span><span aria-hidden="true">→</span></button>`;
-
-  if (!fullPause) h += `<div class="btn-row"><button class="btn ghost sm" data-act="clearWay">Clear the way (2–5 min)</button>${!(S.dayPlans[td] && S.dayPlans[td].smallerAll) ? `<button class="btn ghost sm" data-act="makeSmaller">${t('btn.smaller')}</button>` : ''}</div>`;
+  if (!fullPause) h += `<button class="btn ghost sm hard-day" data-act="hardDay">${esc(t('today.hardDay'))}</button>`;
   if (S.prep[td] && S.prep[td].length) h += `<p class="tiny muted">Cleared today: ${S.prep[td].map(esc).join(', ')}.</p>`;
 
   if (S.checkins[td]) h += renderTomorrowPreview();
   h += renderSetupNudge();
+  if (!justBack) h += firstWeekBanner(td);
   h += '</div>';
   return h;
 }
+function areaCard(dot, name, list) {
+  return `<article class="area"><span class="${dot}"></span><div class="area-body"><div class="row-between"><span class="area-name">${name}</span></div>${list.map(areaItemHtml).join('<hr style="border:0;border-top:1px solid var(--line);margin:4px 0">')}</div></article>`;
+}
+function checkinButton(td) {
+  return `<button class="checkin-btn" data-act="openCheckin"><span>${S.checkins[td] ? t('checkin.edit') : t('checkin')}<span class="sub">${S.checkins[td] ? 'Saved. Edits replace it, never duplicate it.' : 'About 2 minutes · usually around ' + esc(fmtTime(S.settings.checkinTime))}</span></span><span aria-hidden="true">→</span></button>`;
+}
+/* Having a hard day? One place for the setback tools: shrink today, prepare, or pause */
+A.hardDay = () => {
+  const td = today(); const smaller = S.dayPlans[td] && S.dayPlans[td].smallerAll;
+  openSheet(() => `${sheetHead(t('today.hardDay'), 'Pick whatever helps. Nothing here counts against you.')}
+    <div class="stack">
+      ${smaller ? '' : `<button class="card flat hd-opt" data-act="hdSmaller"><b>${esc(t('btn.smaller'))}</b><span class="small muted">Use the smaller version of each task today. The original plan stays on record.</span></button>`}
+      <button class="card flat hd-opt" data-act="clearWay"><b>Clear the way (2–5 min)</b><span class="small muted">One small bit of preparation, so starting is easier.</span></button>
+      <button class="card flat hd-opt" data-act="hdPause"><b>Take a break</b><span class="small muted">Pause for a trip, illness or rest. Nothing is owed while paused.</span></button>
+    </div>
+    <button class="btn block" data-act="closeSheet">${t('btn.done')}</button>`);
+};
+A.hdSmaller = () => { closeSheet(true); A.makeSmaller(); };
+A.hdPause = () => { closeSheet(true); TAB = 'settings'; SET_OPEN.add('pause'); render(); const s = document.getElementById('set-pause'); if (s) s.scrollIntoView({ block: 'start' }); };
 function areaItemHtml(it) {
   return `<div class="stack-s"><div class="area-title">${esc(it.title)}</div><div>${pill(it)}</div>
     ${it.finish && it.kind !== 'spend' ? `<div class="small muted">Done when: ${esc(it.finish)}</div>` : ''}
     ${itemMeta(it) ? `<div class="tiny muted">${itemMeta(it)}</div>` : ''}${it.paused ? '<div class="tiny muted">Logged during a pause. Kept, not counted.</div>' : towardLine(it)}
     ${it.kind === 'spend' && txOn(it.date).length ? `<div class="tiny muted">${plural(txOn(it.date).length, 'entry', 'entries')} today</div>` : ''}
     ${it.unplanned ? '' : `<div class="area-actions">${itemButtons(it, false)}</div>`}</div>`;
-}
-function areaEmpty(area, td) {
-  if (area === 'training') {
-    if (!S.training.templates.length && !Object.keys(S.training.overrides).length) return `<div class="muted small">No training plan entered yet.</div><div class="area-actions"><button class="btn sm" data-act="goPlan" data-open="training">Add your plan</button><button class="btn ghost sm" data-act="trainLog" data-date="${td}">Log an activity</button></div>`;
-    return `<div class="muted small">${t('st.unscheduled')}. An unscheduled day is not a missed one.</div><div class="area-actions"><button class="btn ghost sm" data-act="trainLog" data-date="${td}">Log an activity anyway</button></div>`;
-  }
-  if (area === 'art') {
-    const art = S.tasks.find((x) => x.area === 'art' && !x.endedOn);
-    return `<div class="muted small">${t('st.unscheduled')}.</div>${art ? `<div class="area-actions"><button class="btn ghost sm" data-act="artExtra" data-id="${art.id}" data-date="${td}">Made art anyway</button></div>` : ''}`;
-  }
-  if (area === 'business') return `<div class="muted small">${t('st.unscheduled')}.</div>`;
-  return `<div class="muted small">${t('st.unscheduled')}.</div>`;
 }
 function fmtTime(hm) { const [h, m] = hm.split(':').map(Number); return new Intl.DateTimeFormat(locale(), { hour: 'numeric', minute: '2-digit', timeZone: 'UTC' }).format(new Date(Date.UTC(2020, 0, 1, h, m))); }
 

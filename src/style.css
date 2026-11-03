@@ -219,6 +219,9 @@ details.sect > summary { cursor: pointer; list-style: none; padding: 14px 16px; 
 details.sect > summary::-webkit-details-marker { display: none; }
 details.sect > summary::after { content: "›"; margin-left: auto; font-size: 22px; color: var(--muted); transition: transform .2s ease; }
 details.sect[open] > summary::after { transform: rotate(90deg); }
+button.sect-link { -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 14px 16px; display: flex; gap: 10px; align-items: center; min-height: 56px; width: 100%; text-align: left; font: inherit; color: inherit; cursor: pointer; }
+button.sect-link::after { content: "›"; margin-left: auto; font-size: 22px; color: var(--muted); }
+.back-link { margin: 0 0 4px -8px; }
 details.sect > .sect-body { padding: 0 16px 16px; display: flex; flex-direction: column; gap: 12px; }
 
 .list { display: flex; flex-direction: column; }
@@ -621,3 +624,6 @@ html:not(.reduce-motion) .gift-btn:not([aria-busy]) .giftbox { animation: giftBo
 .rv-row .grow { flex: 1; min-width: 0; }
 .rv-act { display: flex; flex-direction: column; gap: 6px; }
 .rv-act.off { opacity: .6; border-style: dashed; }
+/* Today: one link for the setback tools */
+.hard-day { align-self: center; }
+button.hd-opt { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; width: 100%; text-align: left; font: inherit; color: inherit; cursor: pointer; }

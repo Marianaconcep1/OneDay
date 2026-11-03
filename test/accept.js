@@ -142,7 +142,12 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
   // 3. Today shows only today's scheduled work
   const areas = await page.locator('.area').count();
   const dated = await st('(() => { const a = newAction({ title: "Send one outreach message", finish: "Sent", minutes: 15, date: dAdd(today(), 2) }); render(); return itemsFor(today()).some(i => i.actionId === a.id); })()');
-  ok('3 Today shows five compact area cards and excludes other days\' tasks', areas === 5 && !dated);
+  const emptyCards = await page.locator('.area', { hasText: 'Not scheduled' }).count();
+  ok('3 Today lists only areas with something scheduled, no Mind card, and excludes other days\' tasks', areas >= 1 && areas <= 4 && emptyCards === 0 && (await page.locator('.area .dot.mind').count()) === 0 && !dated, areas + ' cards');
+
+  await click('[data-act="hardDay"]');
+  ok('3b "Having a hard day?" gathers the setback tools in one place', (await page.locator('.sheet [data-act="hdSmaller"], .sheet [data-act="clearWay"], .sheet [data-act="hdPause"]').count()) === 3 && (await page.locator('main [data-act="clearWay"], main [data-act="makeSmaller"]').count()) === 0);
+  await click('.sheet [data-act="closeSheet"]');
 
   // 4. Logging during the day prefills the check-in
   await click('[data-act="quickDone"]');
@@ -159,7 +164,7 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
   await tap('[data-group="cspend"][data-val="none"]');
   await tap('#ciNext');
   await tap('[data-group="cmood"][data-val="2"]'); await tap('[data-group="cenergy"][data-val="3"]');
-  await tap('#ciNext');
+  await tap('.ci-more summary');
   await tap('[data-group="cemo"][data-val="Tired"]');
   await shot('06-checkin-mind');
   await tap('[data-act="ciStep"][data-to="5"]');
@@ -175,7 +180,7 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
   ok('5 Refresh preserves records', await st('Object.keys(S.occ).length >= 2 && !!S.checkins[today()] && S.money.spendDays[today()].status === "none"'));
 
   // 6. Editing a check-in does not duplicate
-  await click('.checkin-btn'); await click('#ciNext'); await click('#ciNext'); await click('[data-group="cmood"][data-val="4"]'); await click('#ciNext'); await click('[data-act="ciStep"][data-to="5"]'); await click('#ciSave'); await click('.sheet [data-act="closeSheet"]');
+  await click('.checkin-btn'); await click('#ciNext'); await click('#ciNext'); await click('[data-group="cmood"][data-val="4"]'); await click('[data-act="ciStep"][data-to="5"]'); await click('#ciSave'); await click('.sheet [data-act="closeSheet"]');
   ok('6 Editing a check-in replaces it (one record, mood updated)', await st('Object.keys(S.checkins).length === 1 && S.checkins[today()].mood === 4 && S.checkins[today()].editCount === 1'));
 
   // 7. Savings transfer doesn't inflate income or spending; no double count with balance
@@ -510,7 +515,7 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
   await click('.sheet [data-act="closeSheet"]');
 
   // ---------- Mindset ----------
-  await click('[data-act="tab"][data-tab="mindset"]'); await shot('50-mindset-empty');
+  await click('.tabbar [data-tab="settings"]'); await click('[data-act="tab"][data-tab="mindset"]'); await shot('50-mindset-empty');
   ok('M1 Mindset says “Updated weekly”, shows no fake update or schedule', (await page.locator('text=Updated weekly').count()) === 1 && (await page.locator('text=None yet').count()) === 1 && (await page.locator('text=Not scheduled.').count()) === 1);
   ok('M2 Notifications start off', await st('S.mindset.notify === false'));
   await click('[data-act="msCheck"]'); await page.waitForTimeout(800); await shot('51-mindset-edition');
@@ -526,7 +531,7 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
   await page.reload(); await page.waitForTimeout(500); await unlock();
   ok('M9 Saved and hidden items persist', await st('Object.keys(S.mindset.saved).length === 1 && Object.keys(S.mindset.hidden).length === 1'));
   await page.route('**/mindset.json*', (r) => r.fulfill({ status: 500, body: 'error' }));
-  await click('[data-act="tab"][data-tab="mindset"]'); await click('[data-act="msCheck"]'); await page.waitForTimeout(600); await shot('52-mindset-failed');
+  await click('.tabbar [data-tab="settings"]'); await click('[data-act="tab"][data-tab="mindset"]'); await click('[data-act="msCheck"]'); await page.waitForTimeout(600); await shot('52-mindset-failed');
   ok('M10 A failed update keeps the previous edition and its real timestamp', await st(`S.mindset.lastSuccess === "${ed.updatedAt}" && S.mindset.editions.length === 1 && S.mindset.lastCheck.ok === false`) && (await page.locator('text=Last check failed').count()) === 1);
   await page.unroute('**/mindset.json*');
   const n2 = JSON.parse(JSON.stringify({ app: 'one-day-mindset', version: 1, edition: ed })); n2.edition.id = '2026-10-26'; n2.edition.weekOf = '2026-10-26'; n2.edition.updatedAt = '2026-10-29T19:00:00Z';
@@ -539,7 +544,7 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
   await click('[data-act="msNoticeDismiss"]'); await page.reload(); await page.waitForTimeout(500); await unlock();
   ok('M12 Opt-in notice appears once per edition', bannerN === 1 && (await page.locator('text=A new Mindset edition is ready.').count()) === 0);
   await page.unroute('**/mindset.json*');
-  await click('[data-act="tab"][data-tab="mindset"]');
+  await click('.tabbar [data-tab="settings"]'); await click('[data-act="tab"][data-tab="mindset"]');
   const tasksN = await st('S.tasks.length');
   await page.locator('#tryOne').scrollIntoViewIfNeeded(); await page.fill('#tryApply', 'Do the first 10 minutes with music'); await click('[data-act="tryPlan"]');
   const asked = await page.locator('text=Please confirm').count(); const tasksBefore = await st("S.tasks.length");
@@ -561,7 +566,7 @@ const results = []; const ok = (n, cond, info) => { results.push([n, !!cond, inf
   await shot('60-settings-fr');
   await page.selectOption('#stLang', 'it'); await click('[data-act="settingsSave"]');
   ok('W20 Italian applies to settings', (await page.locator('text=Profilo e sicurezza').count()) === 1);
-  await click('[data-act="tab"][data-tab="mindset"]');
+  await click('.tabbar [data-tab="settings"]'); await click('[data-act="tab"][data-tab="mindset"]');
   ok('W21 External resources labeled as original language', (await page.locator('.ms-orig').count()) === 1);
   await click('[data-act="tab"][data-tab="settings"]');
   await page.locator('[data-act="openLetter"]').scrollIntoViewIfNeeded(); await click('[data-act="openLetter"]');

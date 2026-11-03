@@ -57,7 +57,7 @@ const INFO_EN = [
 
   // 1. Navigation
   const tabs = await page.locator('.tabbar .tab').allTextContents();
-  ok('C1 My Companion is in the main navigation', tabs.length === 6 && tabs[1].trim() === 'Companion', tabs.join(' | '));
+  ok('C1 Four main tabs; My Companion opens from its card on Today', tabs.map((x) => x.trim()).join() === 'Today,Plan,Progress,Settings' && (await page.locator('.comp-btn[data-tab="companion"]').count()) === 1, tabs.join(' | '));
   await click('[data-act="tab"][data-tab="companion"]');
   ok('C1b The tab opens My Companion with its scene, quote, info button and change option',
     (await page.locator('h1.view-h').textContent()) === 'My Companion' && (await st('location.hash')) === '#companion'

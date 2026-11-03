@@ -241,6 +241,9 @@ details.sect > summary { cursor: pointer; list-style: none; padding: 14px 16px; 
 details.sect > summary::-webkit-details-marker { display: none; }
 details.sect > summary::after { content: "›"; margin-left: auto; font-size: 22px; color: var(--muted); transition: transform .2s ease; }
 details.sect[open] > summary::after { transform: rotate(90deg); }
+button.sect-link { -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 14px 16px; display: flex; gap: 10px; align-items: center; min-height: 56px; width: 100%; text-align: left; font: inherit; color: inherit; cursor: pointer; }
+button.sect-link::after { content: "›"; margin-left: auto; font-size: 22px; color: var(--muted); }
+.back-link { margin: 0 0 4px -8px; }
 details.sect > .sect-body { padding: 0 16px 16px; display: flex; flex-direction: column; gap: 12px; }
 
 .list { display: flex; flex-direction: column; }
@@ -643,6 +646,9 @@ html:not(.reduce-motion) .gift-btn:not([aria-busy]) .giftbox { animation: giftBo
 .rv-row .grow { flex: 1; min-width: 0; }
 .rv-act { display: flex; flex-direction: column; gap: 6px; }
 .rv-act.off { opacity: .6; border-style: dashed; }
+/* Today: one link for the setback tools */
+.hard-day { align-self: center; }
+button.hd-opt { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; width: 100%; text-align: left; font: inherit; color: inherit; cursor: pointer; }
 
 </style>
 </head>
@@ -673,6 +679,7 @@ const STRINGS = {
     'unknown': 'Unknown', 'notset': 'Not set yet',
     'today.available': 'Today is available.',
     'today.allset': 'Everything scheduled today has a record.', 'today.focusEmpty': 'Nothing scheduled here today. That’s part of the plan.',
+    'today.also': 'Also today', 'today.hardDay': 'Having a hard day?',
     'today.next': 'Next action',
     'calib': 'We’re finding a routine that fits your actual life.',
     'welcome.back': 'Welcome back. Start with today.',
@@ -700,6 +707,7 @@ const STRINGS = {
     'unknown': 'Desconocido', 'notset': 'Sin definir',
     'today.available': 'Hoy está disponible.',
     'today.allset': 'Todo lo programado hoy tiene registro.', 'today.focusEmpty': 'Hoy no hay nada programado aquí. Es parte del plan.',
+    'today.also': 'También hoy', 'today.hardDay': '¿Un día difícil?',
     'today.next': 'Próxima acción',
     'calib': 'Estamos encontrando una rutina que encaje con tu vida real.',
     'welcome.back': 'Bienvenida de nuevo. Empieza por hoy.',
@@ -724,6 +732,7 @@ const STRINGS = {
     'st.scheduled': 'In programma', 'st.started': 'Iniziato', 'st.done': 'Completato come previsto', 'st.modified': 'Versione minima',
     'st.skipped': 'Saltato', 'st.unscheduled': 'Non in programma', 'st.rest': 'Giorno di riposo rispettato', 'st.norecord': 'Non registrato',
     'st.trainmod': 'Sessione modificata', 'unknown': 'Sconosciuto', 'notset': 'Non ancora impostato',
+    'today.also': 'Anche oggi', 'today.hardDay': 'Una giornata difficile?',
     'today.available': 'Oggi è libero.', 'today.allset': 'Tutto ciò che era previsto oggi è registrato.', 'today.focusEmpty': 'Oggi qui non c’è niente in programma. Fa parte del piano.', 'today.next': 'Prossima azione',
     'calib': 'Stiamo trovando una routine adatta alla tua vita reale.', 'welcome.back': 'Bentornata. Inizia da oggi.',
     'tagline': 'Abbastanza piccolo per iniziare. Abbastanza chiaro per finire.', 'spend.title': 'Registra le spese di oggi', 'spend.none': 'Oggi nessuna spesa',
@@ -742,6 +751,7 @@ const STRINGS = {
     'st.scheduled': 'Prévu', 'st.started': 'Commencé', 'st.done': 'Fait comme prévu', 'st.modified': 'Version minimale',
     'st.skipped': 'Sauté', 'st.unscheduled': 'Non prévu', 'st.rest': 'Jour de repos respecté', 'st.norecord': 'Non noté',
     'st.trainmod': 'Séance modifiée', 'unknown': 'Inconnu', 'notset': 'Pas encore défini',
+    'today.also': 'Aussi aujourd’hui', 'today.hardDay': 'Une journée difficile ?',
     'today.available': 'La journée est libre.', 'today.allset': 'Tout ce qui était prévu aujourd’hui est noté.', 'today.focusEmpty': 'Rien de prévu ici aujourd’hui. Ça fait partie du plan.', 'today.next': 'Prochaine action',
     'calib': 'Nous cherchons une routine adaptée à ta vraie vie.', 'welcome.back': 'Bon retour. Commence par aujourd’hui.',
     'tagline': 'Assez petit pour commencer. Assez clair pour finir.', 'spend.title': 'Noter les dépenses du jour', 'spend.none': 'Aucune dépense aujourd’hui',
@@ -1059,6 +1069,19 @@ function sessionLabel(s) {
 function spendStatus(ds) { const d = S.money.spendDays[ds]; return d ? d.status : null; }
 function txOn(ds) { return S.money.tx.filter((x) => x.date === ds); }
 
+/* Areas this person uses. After the ten-question setup that's the areas behind their chosen focuses,
+   plus any area they've since set up or scheduled. Earlier setups used all five areas. */
+function areaOn(area) {
+  if (area === 'mind') return true;
+  const foci = S.settings.onbVersion === 2 && Array.isArray(S.settings.foci) ? S.settings.foci : null;
+  if (!foci) return true;
+  if (foci.some((f) => focusArea(f) === area)) return true;
+  if (S.tasks.some((x) => x.area === area && !x.endedOn)) return true;
+  if (area === 'training') return S.training.templates.length > 0;
+  if (area === 'money') return S.money.accounts.length > 0 || S.money.bills.length > 0;
+  if (area === 'business') return !!S.business.outcome4w;
+  return false;
+}
 function itemsFor(ds) {
   const items = [];
   const smaller = (S.dayPlans[ds] && S.dayPlans[ds].smaller) || {};
@@ -1382,12 +1405,21 @@ function render() {
   const views = { today: renderToday, companion: renderCompanion, plan: renderPlan, progress: renderProgress, mindset: renderMindset, settings: renderSettings };
   root.innerHTML =
     (DEMO ? '<div class="wrap" style="padding-bottom:0"><div class="demo-flag">Demo mode: sample data only. Your real data is untouched. <button class="btn ghost sm" data-act="exitDemo" style="min-height:32px;color:inherit;text-decoration:underline">Exit demo</button></div></div>' : '') +
-    '<main class="wrap" id="main">' + views[TAB]() + '</main>' +
-    '<nav class="tabbar" aria-label="Main">' + ['today', 'companion', 'plan', 'progress', 'mindset', 'settings'].map((k) =>
-      `<button class="tab" data-act="tab" data-tab="${k}" ${TAB === k ? 'aria-current="page"' : ''}>${ICONS[k]}<span>${t('tab.' + k)}</span></button>`).join('') + '</nav>' +
+    '<main class="wrap" id="main">' + subPageBack() + views[TAB]() + '</main>' +
+    '<nav class="tabbar" aria-label="Main">' + MAIN_TABS.map((k) =>
+      `<button class="tab" data-act="tab" data-tab="${k}" ${tabHome(TAB) === k ? 'aria-current="page"' : ''}>${ICONS[k]}<span>${t('tab.' + k)}</span></button>`).join('') + '</nav>' +
     renderTimerBar();
   if (TAB === 'settings') bindTzPicker('stTz', () => SH.tzSel, SETUP[S.settings.language] || SETUP.en);
   syncHash(false); restWas = false;
+}
+/* Four main tabs. My Companion opens from its card on Today and Mindset from Settings;
+   both keep their own address (#companion, #mindset) and show a way back. */
+const MAIN_TABS = ['today', 'plan', 'progress', 'settings'];
+const SUB_PAGES = { companion: 'today', mindset: 'settings' };
+const tabHome = (k) => SUB_PAGES[k] || k;
+function subPageBack() {
+  const home = SUB_PAGES[TAB]; if (!home) return '';
+  return `<button class="btn ghost sm back-link" data-act="tab" data-tab="${home}"><span aria-hidden="true">‹</span> ${esc(t('tab.' + home))}</button>`;
 }
 /* Sheets from the regular app don't stay open over Rest Mode */
 function closeSheetIfStale() { if (restWas === false && $('.sheet')) closeSheet(true); }
@@ -1569,7 +1601,7 @@ function renderToday() {
   const cd = calibrationDay();
   if (cd) h += `<section class="banner"><div class="row-between"><div class="h3">Calibration · day ${cd} of 7</div></div><p class="small">${t('calib')} Log what actually happens. Targets stay where they are this week.</p>${firstWeekQuestions()}</section>`;
   const justBack = S.pauses.some((p) => p.resumedOn === td && p.scope === 'all');  // no reviews or catching up on the day you return
-  if (!justBack) h += firstWeekBanner(td) + renderDueToday(td);
+  if (!justBack) h += renderDueToday(td);
   if (S.settings.reminders && !S.settings.checkinAnytime && !currentPause() && nowHM() >= S.settings.checkinTime && !S.checkins[td]) h += `<section class="banner pink"><div class="h3">${esc(t('ci.reminder', { time: fmtTime(S.settings.checkinTime) }))}</div></section>`;
   if (reviewDue() && !justBack) h += `<section class="banner"><div class="h3">Weekly review is ready</div><p class="small">10–15 minutes to adjust next week. One change at most.</p><div><button class="btn primary sm" data-act="openReview">Start review</button></div></section>`;
 
@@ -1585,70 +1617,70 @@ function renderToday() {
     h += `<section class="featured"><div class="eyebrow">${t('today.next')}</div><div class="ft-title">${items.length > 1 ? t('today.allset') : t('today.available')}</div><div class="ft-meta">${S.checkins[td] ? 'Check-in saved. Tomorrow is previewed below.' : 'When you’re ready, close the day with the check-in.'}</div></section>`;
   }
 
-  // Time budget
-  if (!fullPause) {
+  // The evening check-in sits right under the next action (unless the next action is the check-in)
+  if (!(f && f.checkin)) h += checkinButton(td);
+
+  // Time budget, once available time is known (Settings › Goals and schedules)
+  if (!fullPause && dm.avail != null) {
   const pct = dm.avail ? Math.min(100, Math.round(dm.total / dm.avail * 100)) : 0;
   h += `<section class="budget"><div class="row-between small"><span><b class="num">${minsLabel(dm.total)}${dm.unknown ? '+' : ''}</b> planned today${dm.unknown ? ' (some times not set)' : ''}</span><span class="muted num">${dm.avail == null ? `<button class="btn ghost sm" data-act="setAvail" data-dow="${dDow(td)}">Set available time</button>` : minsLabel(dm.avail) + ' available'}</span></div>
     ${dm.avail != null ? `<div class="meter ${dm.over ? 'over' : ''}"><span style="width:${pct}%"></span></div>` : ''}
     ${dm.over ? `<div class="banner warn"><div class="h3">Your plan needs an adjustment.</div><p class="small">Planned time is ${minsLabel(dm.total - dm.avail)} over what you have today. Nothing changes until you choose.</p><div><button class="btn sm" data-act="openAdjust">See adjustments</button></div></div>` : ''}</section>`;
   }
 
-  // Area cards: the five original areas, or, after the ten-question setup, the chosen focuses first
+  // Everything else on today's list, minus the next action already shown above.
+  // Areas with nothing scheduled today stay hidden: an unscheduled day is not a missed one.
   h += renderLifeToday(td);
-  h += '<section class="area-list" aria-label="Areas">';
+  const fkey = f && !f.checkin ? f.key : null;
+  const rest = items.filter((i) => i.key !== fkey);
   const foci = S.settings.onbVersion === 2 && Array.isArray(S.settings.foci) ? S.settings.foci : [];
+  const cards = [];
   for (const fk of foci) {
-    const list = items.filter((i) => i.focus === fk);
-    h += `<article class="area"><span class="dot ${focusArea(fk)}"></span><div class="area-body"><div class="row-between"><span class="area-name">${esc(focusLabel(fk))}</span></div>`;
-    h += list.length ? list.map(areaItemHtml).join('<hr style="border:0;border-top:1px solid var(--line);margin:4px 0">') : `<div class="muted small">${t('today.focusEmpty')}</div>`;
-    h += '</div></article>';
+    const list = rest.filter((i) => i.focus === fk);
+    if (list.length) cards.push(areaCard('dot ' + focusArea(fk), esc(focusLabel(fk)), list));
   }
   for (const area of AREAS) {
-    const list = items.filter((i) => i.area === area && !(i.focus && foci.includes(i.focus)));
-    if (foci.length && area !== 'mind' && !list.length) continue;
-    h += `<article class="area"><span class="dot ${area}"></span><div class="area-body"><div class="row-between"><span class="area-name">${t('area.' + area)}</span>${area === 'mind' ? (S.checkins[td] ? '<span class="pill done">Check-in saved</span>' : '') : ''}</div>`;
-    if (area === 'mind') {
-      h += `<div class="muted small">${t('mind.part')}</div>`;
-    } else if (!list.length && pauseOn(td, area)) {
-      h += `<div class="muted small">Paused. Nothing is scheduled or owed.</div>`;
-    } else if (!list.length) {
-      h += areaEmpty(area, td);
-    } else {
-      h += list.map(areaItemHtml).join('<hr style="border:0;border-top:1px solid var(--line);margin:4px 0">');
-    }
-    h += '</div></article>';
+    if (area === 'mind') continue;
+    const list = rest.filter((i) => i.area === area && !(i.focus && foci.includes(i.focus)));
+    if (list.length) cards.push(areaCard('dot ' + area, t('area.' + area), list));
   }
-  h += '</section>';
+  if (cards.length) h += `<section class="area-list stack-s" aria-label="${esc(t('today.also'))}"><div class="eyebrow">${esc(t('today.also'))}</div>${cards.join('')}</section>`;
 
   h += renderCompanionToday();
-  h += `<button class="checkin-btn" data-act="openCheckin"><span>${S.checkins[td] ? t('checkin.edit') : t('checkin')}<span class="sub">${S.checkins[td] ? 'Saved. Edits replace it, never duplicate it.' : 'About 2 minutes · usually around ' + esc(fmtTime(S.settings.checkinTime))}</span></span><span aria-hidden="true">→</span></button>`;
-
-  if (!fullPause) h += `<div class="btn-row"><button class="btn ghost sm" data-act="clearWay">Clear the way (2–5 min)</button>${!(S.dayPlans[td] && S.dayPlans[td].smallerAll) ? `<button class="btn ghost sm" data-act="makeSmaller">${t('btn.smaller')}</button>` : ''}</div>`;
+  if (!fullPause) h += `<button class="btn ghost sm hard-day" data-act="hardDay">${esc(t('today.hardDay'))}</button>`;
   if (S.prep[td] && S.prep[td].length) h += `<p class="tiny muted">Cleared today: ${S.prep[td].map(esc).join(', ')}.</p>`;
 
   if (S.checkins[td]) h += renderTomorrowPreview();
   h += renderSetupNudge();
+  if (!justBack) h += firstWeekBanner(td);
   h += '</div>';
   return h;
 }
+function areaCard(dot, name, list) {
+  return `<article class="area"><span class="${dot}"></span><div class="area-body"><div class="row-between"><span class="area-name">${name}</span></div>${list.map(areaItemHtml).join('<hr style="border:0;border-top:1px solid var(--line);margin:4px 0">')}</div></article>`;
+}
+function checkinButton(td) {
+  return `<button class="checkin-btn" data-act="openCheckin"><span>${S.checkins[td] ? t('checkin.edit') : t('checkin')}<span class="sub">${S.checkins[td] ? 'Saved. Edits replace it, never duplicate it.' : 'About 2 minutes · usually around ' + esc(fmtTime(S.settings.checkinTime))}</span></span><span aria-hidden="true">→</span></button>`;
+}
+/* Having a hard day? One place for the setback tools: shrink today, prepare, or pause */
+A.hardDay = () => {
+  const td = today(); const smaller = S.dayPlans[td] && S.dayPlans[td].smallerAll;
+  openSheet(() => `${sheetHead(t('today.hardDay'), 'Pick whatever helps. Nothing here counts against you.')}
+    <div class="stack">
+      ${smaller ? '' : `<button class="card flat hd-opt" data-act="hdSmaller"><b>${esc(t('btn.smaller'))}</b><span class="small muted">Use the smaller version of each task today. The original plan stays on record.</span></button>`}
+      <button class="card flat hd-opt" data-act="clearWay"><b>Clear the way (2–5 min)</b><span class="small muted">One small bit of preparation, so starting is easier.</span></button>
+      <button class="card flat hd-opt" data-act="hdPause"><b>Take a break</b><span class="small muted">Pause for a trip, illness or rest. Nothing is owed while paused.</span></button>
+    </div>
+    <button class="btn block" data-act="closeSheet">${t('btn.done')}</button>`);
+};
+A.hdSmaller = () => { closeSheet(true); A.makeSmaller(); };
+A.hdPause = () => { closeSheet(true); TAB = 'settings'; SET_OPEN.add('pause'); render(); const s = document.getElementById('set-pause'); if (s) s.scrollIntoView({ block: 'start' }); };
 function areaItemHtml(it) {
   return `<div class="stack-s"><div class="area-title">${esc(it.title)}</div><div>${pill(it)}</div>
     ${it.finish && it.kind !== 'spend' ? `<div class="small muted">Done when: ${esc(it.finish)}</div>` : ''}
     ${itemMeta(it) ? `<div class="tiny muted">${itemMeta(it)}</div>` : ''}${it.paused ? '<div class="tiny muted">Logged during a pause. Kept, not counted.</div>' : towardLine(it)}
     ${it.kind === 'spend' && txOn(it.date).length ? `<div class="tiny muted">${plural(txOn(it.date).length, 'entry', 'entries')} today</div>` : ''}
     ${it.unplanned ? '' : `<div class="area-actions">${itemButtons(it, false)}</div>`}</div>`;
-}
-function areaEmpty(area, td) {
-  if (area === 'training') {
-    if (!S.training.templates.length && !Object.keys(S.training.overrides).length) return `<div class="muted small">No training plan entered yet.</div><div class="area-actions"><button class="btn sm" data-act="goPlan" data-open="training">Add your plan</button><button class="btn ghost sm" data-act="trainLog" data-date="${td}">Log an activity</button></div>`;
-    return `<div class="muted small">${t('st.unscheduled')}. An unscheduled day is not a missed one.</div><div class="area-actions"><button class="btn ghost sm" data-act="trainLog" data-date="${td}">Log an activity anyway</button></div>`;
-  }
-  if (area === 'art') {
-    const art = S.tasks.find((x) => x.area === 'art' && !x.endedOn);
-    return `<div class="muted small">${t('st.unscheduled')}.</div>${art ? `<div class="area-actions"><button class="btn ghost sm" data-act="artExtra" data-id="${art.id}" data-date="${td}">Made art anyway</button></div>` : ''}`;
-  }
-  if (area === 'business') return `<div class="muted small">${t('st.unscheduled')}.</div>`;
-  return `<div class="muted small">${t('st.unscheduled')}.</div>`;
 }
 function fmtTime(hm) { const [h, m] = hm.split(':').map(Number); return new Intl.DateTimeFormat(locale(), { hour: 'numeric', minute: '2-digit', timeZone: 'UTC' }).format(new Date(Date.UTC(2020, 0, 1, h, m))); }
 
@@ -2019,10 +2051,27 @@ A.openCheckin = () => openCheckin(checkinDefaultDate());
 function openCheckin(ds) {
   const ex = S.checkins[ds]; const dr = S.drafts[ds];
   const base = Object.assign({}, ex || {}, (!ex && dr) || {});
-  SH.ci = { ds, step: 1, base, done: false };
+  SH.ci = { ds, base, done: false, flow: ciFlow(ds) };
+  SH.ci.step = SH.ci.flow[0];
   SH.onPick = ciPick;
   openSheet(checkinSheet, { full: true, noFocus: true });
   const sh = $('.sheet'); sh.addEventListener('input', ciDraft); sh.addEventListener('change', ciDraft);
+}
+/* The check-in's main steps: what happened (only if something was scheduled), spending (only if
+   spending is tracked), then mood, energy and one win. Planning tomorrow (step 5) is optional. */
+function ciFlow(ds) {
+  const items = itemsFor(ds);
+  const f = [];
+  if (items.some((i) => i.kind !== 'spend' && !i.unplanned && !(i.kind === 'biz' && i.needsAction))) f.push(1);
+  if (items.some((i) => i.kind === 'spend')) f.push(2);
+  f.push(3);
+  return f;
+}
+const ciTomorrowOn = (ds) => areaOn('business') || !!sessionFor(dAdd(ds, 1));
+function ciButtons(c) {
+  const i = c.flow.indexOf(c.step);
+  show('ciBack', c.step === 5 || i > 0); show('ciNext', c.step !== 3 && c.step !== 5); show('ciSave', c.step === 3 || c.step === 5);
+  show('ciTomorrow', c.step === 3 && ciTomorrowOn(c.ds));
 }
 function ciDraft() { if (!SH.ci || SH.ci.done) return; S.drafts[SH.ci.ds] = Object.assign(collectCi(), { draftAt: nowISO() }); save(); }
 function ciPick(g, v, el) {
@@ -2077,19 +2126,20 @@ function checkinSheet() {
   const scale = (g, v, lo, hi) => `<div data-toggleable><div class="scale">${[1, 2, 3, 4, 5].map((n) => `<button type="button" class="chip" data-act="pick" data-group="${g}" data-val="${n}" aria-pressed="${v === n ? 'true' : 'false'}">${n}</button>`).join('')}</div><div class="scale-labels"><span>1 · ${lo}</span><span>5 · ${hi}</span></div></div>`;
   const step = (n, title, body) => `<section class="stack" data-step="${n}" ${c.step === n ? '' : 'hidden'}><div class="h2">${title}</div>${body}</section>`;
   return `${sheetHead(t('checkin'), esc(dLong(ds)) + (S.checkins[ds] ? ' · editing saved check-in' : ''))}
-    <div class="steps" aria-hidden="true">${[1, 2, 3, 4, 5].map((n) => `<span class="${n <= c.step ? 'on' : ''}" data-bar="${n}"></span>`).join('')}</div>
+    <div class="steps" aria-hidden="true">${c.flow.map((n, i) => `<span class="${i <= (c.step === 5 ? c.flow.length : c.flow.indexOf(c.step)) ? 'on' : ''}" data-bar="${i}"></span>`).join('')}</div>
     ${nowHM() < '04:00' && ds !== td ? `<div class="stack-s"><span class="small muted">Checking in for</span>${seg('cidate', [[y, 'Yesterday · ' + dMD(y)], [td, 'Today · ' + dMD(td)]], ds)}</div>` : ''}
     ${step(1, 'What happened today', items.length ? `<p class="small muted">Already-logged items are filled in. Change anything that’s off.</p><div class="stack">${items.map((it) => `<div class="card flat stack-s"><div class="row-between"><b class="grow">${esc(it.plannedTitle || it.title)}</b><span class="tiny muted">${t('area.' + it.area)}</span></div>${it.smaller ? `<div class="tiny muted">Planned smaller today: ${esc(it.title)}</div>` : ''}${seg('cs|' + it.key, ciRowOptions(it), ciRowValue(it))}<div id="cr|${esc(it.key)}" class="stack-s" ${['modified', 'skipped'].includes(ciRowValue(it)) ? '' : 'hidden'}><span class="tiny muted">Reason (optional)</span>${chips('cr|' + it.key, REASONS, (it.occ && it.occ.reason) || (it.log && it.log.reason) || null)}</div></div>`).join('')}</div>` : '<p class="muted">Nothing besides the spending log was scheduled. An unscheduled day is not a missed one.</p>')}
     ${step(2, 'Spending', `<p>${list.length ? `${plural(list.length, 'entry', 'entries')} recorded${hasExp ? ': ' + money(expTotal) + ' in expenses' : ''}.` : 'Nothing recorded yet for this day.'}</p>
       <div class="card flat stack-s"><div class="h3">Add an expense</div><div class="grid2"><input class="inp num" id="ciAmt" inputmode="decimal" placeholder="0.00" aria-label="Amount"><select class="inp" id="ciCat" aria-label="Category">${EXP_CATS.map((x) => `<option>${x}</option>`).join('')}</select></div><button class="btn sm" data-act="ciAddExp">Add</button><div id="ciExpList" class="tiny muted"></div></div>
       ${seg('cspend', [['complete', 'That’s everything'], ...(hasExp ? [] : [['none', 'No spending']]), ['incomplete', 'Incomplete']], spendStatus(ds) || null)}
       <p class="tiny muted">If you’re not sure, mark it incomplete. Missing days are shown as missing, not $0.</p>`)}
-    ${step(3, 'Mood and energy', `<p class="small muted">Both optional. A low number is as useful as a high one.</p><div class="stack-s"><div class="h3">Mood</div>${scale('cmood', b.mood, 'very low', 'very good')}</div><div class="stack-s"><div class="h3">Energy</div>${scale('cenergy', b.energy, 'depleted', 'energized')}</div>`)}
-    ${step(4, 'A brief reflection', `<div class="stack-s"><div class="h3">What am I feeling?</div>${chips('cemo', EMOTIONS.map((e) => [e, e]), b.emotions || [], true, 'pinkc')}</div>
+    ${step(3, 'How was today?', `<p class="small muted">Everything here is optional. A low number is as useful as a high one.</p><div class="stack-s"><div class="h3">Mood</div>${scale('cmood', b.mood, 'very low', 'very good')}</div><div class="stack-s"><div class="h3">Energy</div>${scale('cenergy', b.energy, 'depleted', 'energized')}</div>
+      <label class="f">One thing I give myself credit for today <span class="hint">Optional</span><input class="inp" id="ciCredit" maxlength="200" value="${esc(b.credit || '')}"></label>
+      <details class="more ci-more" ${(b.emotions && b.emotions.length) || b.contributed || b.responseChoice || b.response ? 'open' : ''}><summary>Add more (optional)</summary><div class="stack mt-s">
+      <div class="stack-s"><div class="h3">What am I feeling?</div>${chips('cemo', EMOTIONS.map((e) => [e, e]), b.emotions || [], true, 'pinkc')}</div>
       <label class="f">What contributed? <span class="hint">Optional, one sentence</span><input class="inp" id="ciContrib" maxlength="200" value="${esc(b.contributed || '')}"></label>
       <div class="stack-s"><div class="h3">What would be a kind and useful response?</div><div data-toggleable>${chips('cresp', RESPONSES.map((r) => [r, r]), b.responseChoice || null)}</div><input class="inp" id="ciResp" maxlength="200" placeholder="Or write your own" value="${esc(b.response || '')}" aria-label="Your own response"></div>
-      <label class="f">One thing I give myself credit for today <span class="hint">Optional</span><input class="inp" id="ciCredit" maxlength="200" value="${esc(b.credit || '')}"></label>
-      <button class="btn accent block" data-act="ciStep" data-to="5">${t('enough')}</button>`)}
+      </div></details>`)}
     ${step(5, 'Tomorrow · ' + esc(dShort(tm)), `<div class="stack-s"><div class="h3">Next business action</div>${tmBiz || acts.length ? '' : ''}
       ${!bizBlockDay(tm) && !S.business.nextFor[tm] ? '<p class="small muted">Business isn’t scheduled tomorrow. Choosing an action here schedules it.</p>' : ''}
       <div class="stack-s">${chips('cbiz', [...acts.map((a) => [a.id, a.title]), ['__new', 'Write a new action'], ...(bizBlockDay(tm) ? [] : [['__none', 'Leave tomorrow unscheduled']])], bizBlockDay(tm) || S.business.nextFor[tm] ? curNext : '__none')}</div>
@@ -2097,19 +2147,22 @@ function checkinSheet() {
       <div class="stack-s"><div class="h3">Scheduled training</div><p>${esc(sessionLabel(tmTrain))}${tmTrain && tmTrain.detail ? ' · ' + esc(tmTrain.detail) : ''}</p>
       <label class="f">Change tomorrow’s session <span class="hint">Only if your plan calls for it</span><select class="inp" id="ciTrain"><option value="">Keep as planned</option>${Object.entries(SESSION_TYPES).map(([k, l]) => `<option value="${k}">${l}</option>`).join('')}</select></label></div>`)}
     <div class="btn-row" style="position:sticky;bottom:0;background:var(--bg);padding-block:10px">
-      <button class="btn" data-act="ciStep" data-dir="-1" id="ciBack" ${c.step === 1 ? 'hidden' : ''}>${t('btn.back')}</button>
-      <button class="btn primary" data-act="ciStep" data-dir="1" id="ciNext" ${c.step === 5 ? 'hidden' : ''}>${t('btn.next')}</button>
-      <button class="btn primary" data-act="ciSave" id="ciSave" ${c.step === 5 ? '' : 'hidden'}>Save check-in</button>
-      ${c.step < 5 ? '' : ''}
+      <button class="btn" data-act="ciStep" data-dir="-1" id="ciBack" ${c.step === 5 || c.flow.indexOf(c.step) > 0 ? '' : 'hidden'}>${t('btn.back')}</button>
+      <button class="btn primary" data-act="ciStep" data-dir="1" id="ciNext" ${c.step === 3 || c.step === 5 ? 'hidden' : ''}>${t('btn.next')}</button>
+      <button class="btn primary" data-act="ciSave" id="ciSave" ${c.step === 3 || c.step === 5 ? '' : 'hidden'}>Save check-in</button>
+      <button class="btn" data-act="ciStep" data-to="5" id="ciTomorrow" ${c.step === 3 && ciTomorrowOn(ds) ? '' : 'hidden'}>Plan tomorrow</button>
     </div>
     <p class="tiny muted">Drafts save automatically. Optional fields can stay empty.</p>`;
 }
 A.ciStep = (el) => {
   const c = SH.ci;
-  c.step = el.dataset.to ? Number(el.dataset.to) : Math.min(5, Math.max(1, c.step + Number(el.dataset.dir)));
+  if (el.dataset.to) c.step = Number(el.dataset.to);
+  else if (c.step === 5) c.step = 3;  // back from planning tomorrow
+  else c.step = c.flow[Math.min(c.flow.length - 1, Math.max(0, c.flow.indexOf(c.step) + Number(el.dataset.dir)))];
   $$('[data-step]').forEach((s) => { s.hidden = Number(s.dataset.step) !== c.step; });
-  $$('[data-bar]').forEach((s) => s.classList.toggle('on', Number(s.dataset.bar) <= c.step));
-  show('ciBack', c.step > 1); show('ciNext', c.step < 5); show('ciSave', c.step === 5);
+  const at = c.step === 5 ? c.flow.length : c.flow.indexOf(c.step);
+  $$('[data-bar]').forEach((s) => s.classList.toggle('on', Number(s.dataset.bar) <= at));
+  ciButtons(c);
   $('.sheet').scrollTop = 0;
   ciDraft();
 };
@@ -2259,11 +2312,16 @@ function renderPlan() {
     <p class="tiny muted">Minutes planned each day, in amber when it’s more than your available time. Tap a day to adjust just that day.</p></section>`;
   h += renderWeekCard(ws);
   h += sect('goals', 'Goals', S.goals.length ? plural(activeGoals().length, 'active or maintained goal') : 'Savings, revenue, distance, milestones', renderGoals());
-  h += sect('business', t('area.business'), esc(S.business.stage ? 'Stage: ' + S.business.stage : 'Direction, schedule and next actions'), renderBizPlan());
-  h += sect('training', t('area.training'), S.training.templates.length ? 'Weekly plan entered' : 'Not set up yet', renderTrainPlan());
-  h += sect('money', t('area.money'), S.money.accounts.length ? 'Payday plan, bills and savings' : 'Not set up yet', renderMoneyPlan());
-  h += sect('art', t('area.art'), 'Small, private, allowed to be unfinished', renderArtPlan());
+  // Areas you chose come first; the others wait under "Other areas", one tap away
+  const areaSects = [
+    ['business', () => sect('business', t('area.business'), esc(S.business.stage ? 'Stage: ' + S.business.stage : 'Direction, schedule and next actions'), renderBizPlan())],
+    ['training', () => sect('training', t('area.training'), S.training.templates.length ? 'Weekly plan entered' : 'Not set up yet', renderTrainPlan())],
+    ['money', () => sect('money', t('area.money'), S.money.accounts.length ? 'Payday plan, bills and savings' : 'Not set up yet', renderMoneyPlan())],
+    ['art', () => sect('art', t('area.art'), 'Small, private, allowed to be unfinished', renderArtPlan())]];
+  const hiddenAreas = areaSects.filter(([a]) => !areaOn(a) && PLAN_OPEN !== a);
+  for (const [a, fn] of areaSects) if (!hiddenAreas.some(([b]) => b === a)) h += fn();
   h += sect('tasks', 'Other scheduled tasks', 'Recurring or one-off', renderTaskList());
+  if (hiddenAreas.length) h += `<details class="more other-areas"><summary>Other areas: ${hiddenAreas.map(([a]) => esc(t('area.' + a))).join(', ')}</summary><div class="stack mt-s">${hiddenAreas.map(([, fn]) => fn()).join('')}</div></details>`;
   h += '</div>';
   PLAN_OPEN = null;
   return h;
@@ -2629,33 +2687,35 @@ function renderProgressWeek() {
     <p>Modified: ${a.modified}. Skipped: ${a.skipped}.${a.norecord ? ' No record: ' + a.norecord + '.' : ''}</p>
     <p class="tiny muted mt-s">Unscheduled days aren’t counted. A followed rest day counts as following the plan.${st.pausedDays ? ' ' + plural(st.pausedDays, 'paused day') + ' left out.' : ''}</p></section>`;
 
+  // Only the areas this person uses get rows
+  const on = { money: areaOn('money'), business: areaOn('business'), training: areaOn('training'), art: areaOn('art') };
   h += `<section class="stack-s"><div class="h2">Actions</div><div class="card flat"><div class="kv">
-    <span>Spending logs completed</span><span>${sp.complete + sp.none} of ${sp.days} days</span>
+    ${on.money ? `<span>Spending logs completed</span><span>${sp.complete + sp.none} of ${sp.days} days</span>
     ${sp.incomplete ? `<span>Marked incomplete</span><span>${sp.incomplete}</span>` : ''}
     ${sp.partial ? `<span>Entries, not confirmed complete</span><span>${sp.partial}</span>` : ''}
-    ${sp.missing ? `<span>Not recorded</span><span>${sp.missing}</span>` : ''}
-    <span>Business sessions as planned</span><span>${bz.done} of ${bz.scheduled}</span>
+    ${sp.missing ? `<span>Not recorded</span><span>${sp.missing}</span>` : ''}` : ''}
+    ${on.business ? `<span>Business sessions as planned</span><span>${bz.done} of ${bz.scheduled}</span>
     ${bz.modified ? `<span>Five-minute versions</span><span>${bz.modified}</span>` : ''}
     <span>Business outputs noted</span><span>${bz.outputs}</span>
-    ${(() => { const ps = planningStats(ws); return ps.sessions ? `<span>Planning sessions → scheduled action → done</span><span>${ps.sessions} → ${ps.led} → ${ps.executed}</span>` : ''; })()}
-    <span>Training sessions followed</span><span>${tr.completed + tr.rest} of ${tr.scheduled}</span>
+    ${(() => { const ps = planningStats(ws); return ps.sessions ? `<span>Planning sessions → scheduled action → done</span><span>${ps.sessions} → ${ps.led} → ${ps.executed}</span>` : ''; })()}` : ''}
+    ${on.training ? `<span>Training sessions followed</span><span>${tr.completed + tr.rest} of ${tr.scheduled}</span>
     ${tr.modified ? `<span>Modified sessions</span><span>${tr.modified}</span>` : ''}
-    ${tr.skipped ? `<span>Skipped sessions</span><span>${tr.skipped}</span>` : ''}
-    <span>Art</span><span>${st.art.participated} of ${st.art.scheduled} days${st.art.extra ? ' + ' + st.art.extra + ' extra' : ''}</span>
+    ${tr.skipped ? `<span>Skipped sessions</span><span>${tr.skipped}</span>` : ''}` : ''}
+    ${on.art ? `<span>Art</span><span>${st.art.participated} of ${st.art.scheduled} days${st.art.extra ? ' + ' + st.art.extra + ' extra' : ''}</span>` : ''}
     <span>Check-ins submitted</span><span>${st.checkins} of ${st.days} days</span></div></div></section>`;
 
-  h += `<section class="stack-s"><div class="h2">Outcomes</div><div class="card flat"><div class="kv">
-    <span>Confirmed savings change</span><span>${svNow.value != null && svBefore.value != null ? (svNow.value - svBefore.value >= 0 ? '+' : '') + money(svNow.value - svBefore.value) : 'Not enough confirmed data'}</span>
+  if (on.money || on.business || on.training) h += `<section class="stack-s"><div class="h2">Outcomes</div><div class="card flat"><div class="kv">
+    ${on.money ? `<span>Confirmed savings change</span><span>${svNow.value != null && svBefore.value != null ? (svNow.value - svBefore.value >= 0 ? '+' : '') + money(svNow.value - svBefore.value) : 'Not enough confirmed data'}</span>
     <span>Confirmed savings now</span><span>${svNow.value == null ? 'Not confirmed' : money(svNow.value)}</span>
-    <span>Bills marked paid</span><span>${paid.length}</span>
-    <span>Business results</span><span>${results.length ? results.filter((r) => r.type !== 'Revenue').map((r) => r.type).join(', ') || '—' : 'None entered'}</span>
-    ${rev ? `<span>Revenue entered</span><span>${money(rev)}</span>` : ''}
-    <span>Running distance</span><span>${fmtD(tr.distActual)} ${unit}${tr.distPlanned ? ' of ' + fmtD(tr.distPlanned) + ' planned' : ''}</span>
-    <span>Rest days followed</span><span>${tr.rest} of ${tr.restPlanned}</span></div>
-    ${tr.distMissing ? `<p class="tiny muted mt-s">${plural(tr.distMissing, 'run')} logged without a distance, so the total is incomplete.</p>` : ''}
+    <span>Bills marked paid</span><span>${paid.length}</span>` : ''}
+    ${on.business ? `<span>Business results</span><span>${results.length ? results.filter((r) => r.type !== 'Revenue').map((r) => r.type).join(', ') || '—' : 'None entered'}</span>
+    ${rev ? `<span>Revenue entered</span><span>${money(rev)}</span>` : ''}` : ''}
+    ${on.training ? `<span>Running distance</span><span>${fmtD(tr.distActual)} ${unit}${tr.distPlanned ? ' of ' + fmtD(tr.distPlanned) + ' planned' : ''}</span>
+    <span>Rest days followed</span><span>${tr.rest} of ${tr.restPlanned}</span>` : ''}</div>
+    ${on.training && tr.distMissing ? `<p class="tiny muted mt-s">${plural(tr.distMissing, 'run')} logged without a distance, so the total is incomplete.</p>` : ''}
     <p class="tiny muted mt-s">Logged effort doesn’t automatically produce these outcomes, and time spent isn’t revenue. Both are shown so you can see each honestly.</p></div></section>`;
 
-  h += `<section class="stack-s"><div class="h2">Training by day</div><div class="card flat">${trainingChart(st, unit)}</div></section>`;
+  if (on.training) h += `<section class="stack-s"><div class="h2">Training by day</div><div class="card flat">${trainingChart(st, unit)}</div></section>`;
   h += `<section class="stack-s"><div class="h2">Mood and energy</div><div class="card flat stack-s">
     <div class="mood-row">${st.dates.map((d) => `<span class="tiny muted">${DOW_LETTER[dDow(d)]}</span>`).join('')}</div>
     <div class="mood-row" aria-label="Mood">${st.mood.map((m) => `<span class="mv ${m == null ? 'missing' : ''}">${m === undefined ? '' : m == null ? '—' : m}</span>`).join('')}</div>
@@ -2786,7 +2846,9 @@ A.openReview = () => {
   const sug = reviewSuggestions(ws, nextWs);
   const exp = S.experiments.find((x) => x.ws === ws);
   const groups = changeGroups(ws);
-  const nw = weekPlan(nextWs) || {}; const nMain = nw.main || 'money';
+  const nw = weekPlan(nextWs) || {};
+  const onList = AREAS.filter(areaOn); const nSug = onList.includes('money') ? 'money' : onList[0]; const nMain = nw.main || nSug;
+  const nShown = AREAS.filter((a) => onList.includes(a) || a === nMain);
   SH.rev = { ws, nextWs, sug, groups, exp };
   const pre = rv.adjustmentId || (sug[0] ? sug[0].id : 'none');
   const fill = (id) => { const s = sug.find((x) => x.id === id); return s ? { noticed: s.why, change: s.label } : null; };
@@ -2811,8 +2873,8 @@ A.openReview = () => {
       ${groups.map((g, i) => `<div class="card flat stack-s"><b>${esc(g.title)}</b><div class="tiny muted">${g.items.map((c) => esc(CHANGE_KIND[c.kind] || c.kind) + (c.from || c.to ? ' (' + esc([c.from, c.to].filter(Boolean).join(' → ')) + ')' : '')).join(' · ')}${g.postponed4w >= 3 ? ` · moved or dropped ${g.postponed4w} times in four weeks` : ''}</div><div data-toggleable>${chips('chg' + i, EXPLAIN, g.explanation)}</div></div>`).join('')}</div>` : ''}
     <label class="f">What should become smaller, clearer, or better scheduled?<textarea class="inp" id="rvAdjust" maxlength="600">${esc(rv.adjust || '')}</textarea></label>
     <label class="f">What financial obligations are coming? <span class="hint">${bills.length ? 'Due in the next two weeks: ' + bills.map((o) => esc(o.bill.name) + ' ' + esc(dMD(o.due))).join(', ') : 'No bills entered for the next two weeks.'}</span><textarea class="inp" id="rvMoney" maxlength="600">${esc(rv.money || '')}</textarea></label>
-    <div class="stack-s"><div class="h3">Next week’s one main outcome</div>${nw.confirmedAt ? '' : '<p class="tiny muted">Suggested: financial clarity. Confirm it or pick another.</p>'}${chips('rvMain', Object.entries(AREA_GOAL).map(([a, l]) => [a, l]), nMain)}<input class="inp" id="rvMainOut" maxlength="160" value="${esc(nw.mainOutcome || '')}" placeholder="What will exist by the end of next week?" aria-label="Main outcome"></div>
-    <div class="stack-s"><div class="h3">Keep going at a maintenance level</div>${chips('rvKeep', AREAS.map((a) => [a, t('area.' + a)]), nw.maintain || AREAS.filter((a) => a !== nMain), true)}</div>
+    <div class="stack-s"><div class="h3">Next week’s one main outcome</div>${nw.confirmedAt ? '' : `<p class="tiny muted">Suggested: ${esc(AREA_GOAL[nSug].toLowerCase())}. Confirm it or pick another.</p>`}${chips('rvMain', nShown.map((a) => [a, AREA_GOAL[a]]), nMain)}<input class="inp" id="rvMainOut" maxlength="160" value="${esc(nw.mainOutcome || '')}" placeholder="What will exist by the end of next week?" aria-label="Main outcome"></div>
+    <div class="stack-s"><div class="h3">Keep going at a maintenance level</div>${chips('rvKeep', nShown.map((a) => [a, t('area.' + a)]), nw.maintain || nShown.filter((a) => a !== nMain), true)}</div>
     <label class="f">Next week’s one business outcome<input class="inp" id="rvBiz" maxlength="160" value="${esc(S.business.weekly[nextWs] || rv.bizOutcome || '')}" placeholder="One visible result, e.g. Offer draft shared with one person"></label>
     <div class="stack-s"><div class="h3">Training scheduled next week</div>${trainNext.length ? `<p class="small">${trainNext.map(([d, s]) => DOW_SHORT[dDow(d)] + ': ' + esc(sessionLabel(s))).join(' · ')}</p>` : '<p class="small muted">No sessions entered.</p>'}<div><button class="btn ghost sm" data-act="goPlanClose">Edit training plan</button></div></div>
     <label class="f">Where is time for art, people and enjoyment?<textarea class="inp" id="rvArt" maxlength="600">${esc(rv.art || '')}</textarea></label>
@@ -2877,13 +2939,14 @@ function renderSettings() {
       ${DOW_ORDER.map((d) => `<label class="row-between"><span>${DOW_SHORT[d]}</span><input class="inp num" style="max-width:140px" id="av${d}" type="number" min="0" max="900" placeholder="Unknown" value="${esc(s.availability[d] == null ? '' : s.availability[d])}"></label>`).join('')}
       <label class="f">Typical workday notes<input class="inp" id="avNote" maxlength="200" value="${esc(s.workdayNote)}" placeholder="e.g. Work 8–5, free after 6"></label>
       <button class="btn sm" data-act="availSave">Save available time</button></div>
-      <div class="row-between"><span class="small">${plural(activeGoals().length, 'active goal')}. Areas: ${AREAS.map((a) => t('area.' + a)).join(' · ')}</span><button class="btn sm" data-act="goPlan" data-open="goals">Goals</button></div>`);
+      <div class="row-between"><span class="small">${plural(activeGoals().length, 'active goal')}. Areas: ${AREAS.filter(areaOn).map((a) => t('area.' + a)).join(' · ')}</span><button class="btn sm" data-act="goPlan" data-open="goals">Goals</button></div>`);
   h += setSect('notify', t('set.notify'), s.reminders ? 'In-app check-in reminder on' : 'Off', `
       <label class="row" style="min-height:44px;gap:10px"><input type="checkbox" id="stRem" ${s.reminders ? 'checked' : ''} style="width:22px;height:22px" data-act="remToggle"> Show a check-in reminder inside the app</label>
       <p class="small">This reminder appears only while the app is open, and never during a pause. The app can’t notify you when it’s closed; for that, set a repeating iPhone alarm or Reminder for ${esc(fmtTime(s.checkinTime))}.</p>
       <p class="tiny muted">Email and text reminders aren’t available in this version. They need a server and a verified address, so none are set or simulated.</p>`);
   h += setSect('look', t('set.look'), esc(lookSummary()), `<p class="small">Background, font, text color, theme, dimming, blur, text size and motion. You see a preview before anything is saved.</p><button class="btn primary sm" data-act="lookOpen">Personalize</button>`);
   h += setSect('companion', t('set.companion'), S.growth.enabled ? esc(KINDS[chapter().kind]) + ' on Today' : 'Hidden', renderCompanionSettings());
+  h += `<button class="sect-link" data-act="tab" data-tab="mindset"><span class="grow"><b>${esc(t('tab.mindset'))}</b><br><span class="small muted">Free resources, updated weekly</span></span></button>`;
   h += setSect('pause', t('set.pause'), currentPause() ? 'Paused now' : upcomingPause() ? 'Pause scheduled' : 'For trips, illness or a break', renderPauseSettings());
   h += setSect('data', t('set.data'), 'Backup, restore and exports', `
       <div class="small stack-s"><p><b>Where it lives:</b> ${esc(modeText)}${DEMO ? ' (demo data, kept separately)' : ''}.</p>
@@ -3142,8 +3205,11 @@ function mainOutcomeLine(td) {
 }
 function renderWeekCard(ws) {
   const w = weekPlan(ws) || {};
-  const main = w.main || 'money';
-  const maintain = w.maintain || AREAS.filter((a) => a !== main);
+  const onList = AREAS.filter(areaOn);  // only the areas this person uses
+  const suggested = onList.includes('money') ? 'money' : onList[0];
+  const main = w.main || suggested;
+  const shown = AREAS.filter((a) => onList.includes(a) || a === main);
+  const maintain = w.maintain || shown.filter((a) => a !== main);
   const lives = S.life.filter((l) => l.date >= ws && l.date <= dAdd(ws, 6) && l.status !== 'let-go').sort((a, b) => (a.date + (a.time || '') < b.date + (b.time || '') ? -1 : 1));
   const later = S.later.filter((x) => x.kind === 'idea');
   return `<section class="card stack"><div class="eyebrow">${PLAN_WEEK === 0 ? 'This week' : 'Week of ' + esc(dMD(ws))} · in this order</div>
@@ -3151,11 +3217,11 @@ function renderWeekCard(ws) {
       ${lives.map((l) => `<div class="row-between small"><span class="grow">${esc(l.title)} <span class="muted">· ${esc(dShort(l.date))}${l.time ? ' ' + esc(fmtTime(l.time)) : ''}</span></span><button class="btn ghost sm" data-act="lifeChange" data-id="${l.id}">Change</button></div>`).join('')}
       <div><button class="btn sm" data-act="lifeForm" data-ws="${ws}">Add a personal commitment</button></div></div>
     <div class="stack-s"><div class="h3">2 · One main outcome to move forward</div>
-      ${w.confirmedAt ? '' : '<p class="small">Suggested: <b>financial clarity</b>. Confirm it or pick another.</p>'}
-      ${chips('wkMain', Object.entries(AREA_GOAL).map(([a, l]) => [a, l + (a === 'money' && !w.confirmedAt ? ' (suggested)' : '')]), main)}
+      ${w.confirmedAt ? '' : `<p class="small">Suggested: <b>${esc(AREA_GOAL[suggested].toLowerCase())}</b>. Confirm it or pick another.</p>`}
+      ${chips('wkMain', shown.map((a) => [a, AREA_GOAL[a] + (a === suggested && !w.confirmedAt ? ' (suggested)' : '')]), main)}
       <input class="inp" id="wkMainOut" maxlength="160" value="${esc(w.mainOutcome || '')}" placeholder="What will exist by the end of the week?" aria-label="Main outcome"></div>
-    <div class="stack-s"><div class="h3">3 · Keep going at a maintenance level</div>${chips('wkKeep', AREAS.map((a) => [a, t('area.' + a)]), maintain, true)}<p class="tiny muted">${AREAS.filter((a) => a !== main).map((a) => esc(t('area.' + a)) + ': ' + esc(MAINTAIN[a].toLowerCase())).join(' · ')}</p></div>
-    <label class="f">This week’s one business outcome<input class="inp" id="wkOutcome" maxlength="160" value="${esc(S.business.weekly[ws] || '')}" placeholder="e.g. Three offer bullets I could send"></label>
+    <div class="stack-s"><div class="h3">3 · Keep going at a maintenance level</div>${chips('wkKeep', shown.map((a) => [a, t('area.' + a)]), maintain, true)}<p class="tiny muted">${shown.filter((a) => a !== main).map((a) => esc(t('area.' + a)) + ': ' + esc(MAINTAIN[a].toLowerCase())).join(' · ')}</p></div>
+    ${areaOn('business') ? `<label class="f">This week’s one business outcome<input class="inp" id="wkOutcome" maxlength="160" value="${esc(S.business.weekly[ws] || '')}" placeholder="e.g. Three offer bullets I could send"></label>` : ''}
     <div class="stack-s"><div class="h3">4 · Later</div><p class="tiny muted">Ideas you’re deliberately postponing. They’re never scheduled and never overdue.</p>
       ${later.map((x) => `<div class="row-between small"><span class="grow">${esc(x.text)}</span><button class="btn ghost sm" data-act="laterDel" data-id="${x.id}" aria-label="Remove">×</button></div>`).join('')}
       <div class="row"><input class="inp grow" id="laterIdea" maxlength="140" placeholder="Postpone an idea" aria-label="Postpone an idea"><button class="btn sm" data-act="laterAdd" data-kind="idea" data-src="laterIdea">Add</button></div></div>
@@ -3166,7 +3232,7 @@ A.saveWeekly = (el) => {
   const main = getPick('wkMain') || 'money';
   S.weeks[ws] = Object.assign({}, S.weeks[ws] || {}, { main, mainOutcome: val('wkMainOut'), maintain: getPicks('wkKeep').filter((a) => a !== main), confirmedAt: nowISO() });
   if (ws === weekStart(today())) S.settings.focus = main;
-  const v = val('wkOutcome'); if (v) S.business.weekly[ws] = v; else delete S.business.weekly[ws];
+  if ($('#wkOutcome')) { const v = val('wkOutcome'); if (v) S.business.weekly[ws] = v; else delete S.business.weekly[ws]; }
   save(); render(); toast('Week saved.');
   openNextActionPrompt({ area: main === 'mind' ? 'business' : main, from: 'weekly plan' });
 };
@@ -4337,7 +4403,7 @@ function renderCompanionSettings() {
     ${box('cpOn', g.enabled, 'Show the companion on Today')}
     <div class="stack-s"><div class="h3">Kind for this chapter</div>${seg('cpKind', Object.entries(KINDS), ch.kind)}</div>
     ${box('cpMsg', g.messages, 'Show a daily message')}${box('cpAnim', g.animations, 'Gentle movement')}
-    <button class="btn sm" data-act="compSave">Save companion</button>`;
+    <div class="btn-row"><button class="btn sm" data-act="compSave">Save companion</button><button class="btn ghost sm" data-act="tab" data-tab="companion">Open My Companion</button></div>`;
 }
 A.compSave = (el) => {
   setTimeout(() => {

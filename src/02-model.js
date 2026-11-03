@@ -81,6 +81,19 @@ function sessionLabel(s) {
 function spendStatus(ds) { const d = S.money.spendDays[ds]; return d ? d.status : null; }
 function txOn(ds) { return S.money.tx.filter((x) => x.date === ds); }
 
+/* Areas this person uses. After the ten-question setup that's the areas behind their chosen focuses,
+   plus any area they've since set up or scheduled. Earlier setups used all five areas. */
+function areaOn(area) {
+  if (area === 'mind') return true;
+  const foci = S.settings.onbVersion === 2 && Array.isArray(S.settings.foci) ? S.settings.foci : null;
+  if (!foci) return true;
+  if (foci.some((f) => focusArea(f) === area)) return true;
+  if (S.tasks.some((x) => x.area === area && !x.endedOn)) return true;
+  if (area === 'training') return S.training.templates.length > 0;
+  if (area === 'money') return S.money.accounts.length > 0 || S.money.bills.length > 0;
+  if (area === 'business') return !!S.business.outcome4w;
+  return false;
+}
 function itemsFor(ds) {
   const items = [];
   const smaller = (S.dayPlans[ds] && S.dayPlans[ds].smaller) || {};
